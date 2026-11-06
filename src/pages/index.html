@@ -1,27 +1,34 @@
 <!--meta {"title": "Homéopathe à Pully/Lausanne & Fribourg – HOMEOMED, Paola Orlando", "description": "Paola Orlando, homéopathe diplômée fédérale à Pully/Lausanne et Fribourg. Homéopathie classique pour l’enfant, la femme, l’ORL, les allergies, la peau, les soins de support en oncologie, le TDAH et le sommeil.", "path": "", "nav": "home", "schema": true} -->
-
+<!-- 1. Héro avec portrait de Paola -->
 <section class="hero-full hero-home">
   <img class="hero-bg" src="{{root}}assets/img/hero-granules.webp" alt="" width="1800" height="1200" fetchpriority="high">
   <div class="container">
     <div class="hero-content">
-      <span class="eyebrow reveal">Homéopathe diplômée fédérale · Pully/Lausanne & Fribourg</span>
-      <h1 class="reveal d1 balance">Retrouver équilibre et stabilité grâce à <em>l’homéopathie</em></h1>
-      <p class="lead reveal d2">Une homéopathie classique, précise et structurée pour l’enfant, la femme et l’adulte — toujours en complément de votre suivi médical.</p>
-      <div class="btn-row reveal d3">
-        {{rdv:Je prends rendez-vous}}
-        <a class="btn btn-outline-light" href="#services">Voir mes services</a>
-      </div>
-      <div class="trust-row reveal d3">
-        <span class="trust-item">{{icon:shield}} Reconnue ASCA · RME · Visana · EGK</span>
-        <span class="trust-sep" aria-hidden="true"></span>
-        <span class="trust-item">{{icon:globe}} Français · English · Italiano</span>
-      </div>
+      <span class="eyebrow">Homéopathe diplômée fédérale · Pully/Lausanne & Fribourg</span>
+      <h1 class="balance">Retrouver équilibre et stabilité grâce à <em>l’homéopathie</em></h1>
+      <p class="lead">Une homéopathie classique, précise et structurée pour l’enfant, la femme et l’adulte — toujours en complément de votre suivi médical.</p>
+      <div class="btn-row">{{rdv}}<a class="btn btn-outline-light" href="#services">Voir mes services</a></div>
     </div>
   </div>
-  <a class="hero-badge reveal d3" href="{{google-reviews}}" target="_blank" rel="noopener">
-    <span class="num">4.9</span>
-    <span class="txt"><strong>★★★★★ Avis Google</strong>Basé sur 17 avis de patients · Cabinet HOMEOMED</span>
-  </a>
+  <div class="hello-card">
+    <img src="{{root}}assets/img/paola-portrait.webp" alt="Paola Orlando, homéopathe" width="1100" height="1465">
+    <div>
+      <strong>Bonjour, je suis Paola</strong>
+      <span>Homéopathe diplômée fédérale, formée en oncologie de support (Gustave Roussy) et en micronutrition.</span>
+      <a href="{{root}}qui-suis-je/">Mon parcours →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Bandeau de chiffres clés -->
+<section class="stats-strip">
+  <div class="container wide">
+    <div class="stat"><b>4.9<small>/5</small></b><span><span class="stars">★★★★★</span> 17 avis Google</span></div>
+    <div class="stat"><b>Dipl. féd.</b><span>Homéopathe diplômée fédérale</span></div>
+    <div class="stat"><b>2</b><span>cabinets · Pully & Fribourg</span></div>
+    <div class="stat"><b>Remboursé</b><span>ASCA · RME · Visana · EGK</span></div>
+    <div class="stat"><b>FR · EN · IT</b><span>langues de consultation</span></div>
+  </div>
 </section>
 
 <section class="section tight" style="padding-top:28px" id="services" aria-label="Mes services">
@@ -32,14 +39,64 @@
   </div>
 </section>
 
-<section class="section tight bg-ink">
-  <div class="container narrow center">
-    <p class="big-quote reveal">L’idéal thérapeutique consiste à rétablir la santé de manière rapide, douce et durable.</p>
-    <p class="quote-source reveal d1">Dr Samuel Hahnemann, fondateur de l’homéopathie — Organon de l’art de guérir, §2</p>
+<!-- 3. Premier rendez-vous + choix du cabinet -->
+<section class="section" id="premier-rdv">
+  <div class="container split">
+    <div>
+      <span class="eyebrow">Votre premier rendez-vous</span>
+      <h2 class="balance">Comment ça se passe&nbsp;?</h2>
+      <div class="steps" style="grid-template-columns:1fr;gap:26px;margin-top:24px">
+        <div class="step"><h3>Je réserve en ligne</h3><p>Sur OneDoc, 24h/24, ou par téléphone. Je choisis Pully ou Fribourg, au cabinet ou en visio.</p></div>
+        <div class="step"><h3>Première consultation (75 – 90 min)</h3><p>Nous prenons le temps de comprendre votre histoire, vos symptômes et votre terrain.</p></div>
+        <div class="step"><h3>Un suivi sur mesure</h3><p>Un traitement individualisé, puis un suivi toutes les 4 à 6 semaines. Remboursé par la plupart des complémentaires.</p></div>
+      </div>
+    </div>
+    <div class="grid" style="gap:16px">
+      <p class="pf-label" style="margin:0">Choisissez votre cabinet</p>
+      <a class="cab-pick" href="{{root}}prendre-rdv/"><img src="{{root}}assets/img/pully-1.webp" alt="" loading="lazy"><span><strong>Pully – Lausanne</strong><small>Lun, mar, mer, ven · Place Neuve 1</small></span><em>Réserver →</em></a>
+      <a class="cab-pick" href="{{root}}prendre-rdv/"><img src="{{root}}assets/img/fribourg-1.webp" alt="" loading="lazy"><span><strong>Fribourg</strong><small>Tous les jeudis · Centre ITS</small></span><em>Réserver →</em></a>
+      <a class="cab-pick" href="{{root}}prendre-rdv/"><span class="cab-ico">{{icon:video}}</span><span><strong>En visio</strong><small>Selon les circonstances, en Suisse et à l’étranger</small></span><em>Réserver →</em></a>
+    </div>
   </div>
 </section>
 
-{{include:apercus}}
+<!-- 4. Avis (défilent 3 par 3, filtres par thème) -->
 {{reviews}}
+
+<!-- 5. Mini-FAQ -->
+<section class="section bg-white" id="questions">
+  <div class="container split top">
+    <div><span class="eyebrow">Vos questions</span><h2 class="balance">Les 4 questions qu’on me pose le plus</h2><p class="muted">Pour lever les doutes avant le premier rendez-vous.</p><a class="btn btn-ghost mt-1" href="{{root}}faq/">Toutes les questions</a></div>
+    <div class="faq">
+      <details open><summary>Est-ce remboursé par mon assurance&nbsp;?</summary><div class="answer"><p>Oui, par la plupart des assurances complémentaires. Je suis reconnue ASCA, RME, Visana et EGK.</p></div></details>
+      <details><summary>Dois-je arrêter mes traitements médicaux&nbsp;?</summary><div class="answer"><p>Non. L’homéopathie est complémentaire et n’interfère pas avec vos médicaments.</p></div></details>
+      <details><summary>Est-ce adapté aux bébés et aux enfants&nbsp;?</summary><div class="answer"><p>Oui, dès la naissance, y compris pour les prématurés.</p></div></details>
+      <details><summary>Combien de temps dure une consultation&nbsp;?</summary><div class="answer"><p>75 à 90 minutes pour la première, puis 30 à 60 minutes pour les suivis.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Derniers articles du blog -->
+<section class="section">
+  <div class="container">
+    <div class="reviews-head"><div><span class="eyebrow">Blog Homeo’Conseils</span><h2 class="mb-0">Derniers articles</h2></div><a class="btn btn-ghost" href="{{root}}blog/">Tous les articles</a></div>
+    <div class="grid grid-2">
+      <a class="spec-card post-card" href="{{root}}tdah-homeopathie-accompagnement-individualise/"><div class="img"><img src="{{root}}assets/img/tdah.webp" alt="" loading="lazy"></div><div class="body"><div class="meta">16 octobre 2025 · TDAH</div><h3>TDAH & homéopathie&nbsp;: comprendre chaque personne pour mieux agir</h3><span class="link-arrow">Lire l’article</span></div></a>
+      <a class="spec-card post-card" href="{{root}}soin-de-support-en-oncologie-histoire-personnelle/"><div class="img"><img src="{{root}}assets/img/papa.webp" alt="" loading="lazy" style="object-position:50% 35%"></div><div class="body"><div class="meta">22 septembre 2025 · Oncologie</div><h3>Pourquoi j’ai choisi l’accompagnement du cancer&nbsp;: l’histoire de mon papa</h3><span class="link-arrow">Lire l’article</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Bandeau assurances & affiliations -->
+<section class="section tight bg-white">
+  <div class="container">
+    <p class="center small muted mb-2">Reconnue par les assurances complémentaires · Membre & formée auprès de</p>
+    <div class="logo-strip">
+      <img src="{{root}}assets/img/logos/asca.webp" alt="ASCA" loading="lazy"><img src="{{root}}assets/img/logos/rme.webp" alt="RME" loading="lazy"><img src="{{root}}assets/img/logos/visana.webp" alt="Visana" loading="lazy"><img src="{{root}}assets/img/logos/egk.webp" alt="EGK" loading="lazy"><img src="{{root}}assets/img/logos/gustave-roussy.webp" alt="Gustave Roussy" loading="lazy"><img src="{{root}}assets/img/logos/shisso.webp" alt="SHISSO" loading="lazy"><img src="{{root}}assets/img/logos/aspedah.webp" alt="ASPEDAH" loading="lazy">
+    </div>
+  </div>
+</section>
+
 {{cta}}
+
 {{contact}}

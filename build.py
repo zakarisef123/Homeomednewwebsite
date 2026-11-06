@@ -103,26 +103,31 @@ def icon(name, cls=""):
 # Avis Google (textes d'origine)
 # --------------------------------------------------------------------------
 REVIEWS = [
-    ("Nicole Klaus", "il y a 1 an", "Madame Paola Orlando, homéopathe, me suit depuis plusieurs années. Au mois de février de cette année 2025, on m’a diagnostiqué un cancer du sein. Madame Orlando a dressé un protocole précis et essentiel ciblé sur mon cancer. Au fur et à mesure que j’avance dans un traitement chimiothérapeutique, elle réadapte mon protocole afin que les médicaments qu’elle me prescrit correspondent à l’état sans cesse en mouvement de mon corps physique mais aussi de mon état psychique. Sur ce parcours, Madame Orlando ne m’a jamais dissuadée de suivre le protocole allopathique classique ; au contraire, elle m’y a encouragée et continue de le faire. Aujourd’hui je tiens vraiment et de tout mon cœur à remercier Madame Orlando de son professionnalisme, de ses formidables compétences, mais aussi de sa disponibilité, de sa générosité d’écoute, de son attention profonde et sincère. Elle est passionnée par son métier."),
-    ("Isabelle Blatter", "il y a 10 mois", "Arrivée chez Madame Orlando tout par hasard et on dit : le hasard fait bien les choses. Je ne peux que confirmer cela. J’ai été curieuse de voir ce que l’homéopathie pourrait apporter à notre fille de 7 ans. Madame Orlando s’est montrée très à l’écoute, toujours disponible et très professionnelle. On connaît tous l’arnica ;-), mais l’homéopathie est bien plus complexe que cela, surtout personnalisée pour chacun d’entre nous et EFFICACE ! Enfin, une adresse que je vais précieusement garder. Merci Madame Orlando d’être d’une bienveillance rare et de vos conseils !"),
-    ("Julian S.", "il y a 11 mois", "Paola est une femme bienveillante, à l’écoute, passionnée et investie. Très à l’aise avec les enfants, elle permet un complément parfait au suivi pédiatrique. Très disponible et prenant son travail très à cœur, je ne peux que la recommander !"),
-    ("Solene Montloin", "il y a 11 mois", "Paola Orlando me suit depuis 1 an et demi maintenant et je vois une nette amélioration sur mes angoisses et mon stress, qui étaient très présents. Elle est très à l’écoute et prend son rôle à cœur. Elle trouve le traitement parfait pour chaque besoin. Je la recommande vivement."),
-    ("Mallika Nadesan", "il y a 12 mois", "Mme Orlando a pris en charge la santé de mon bébé, un grand prématuré né à 29 semaines, avec beaucoup de bienveillance, d’écoute et de sérieux. Elle a su le guérir de maux de ventre, dont il souffrait depuis la naissance. Aussi, je vous recommande sincèrement cette homéopathe solaire et intelligente."),
-    ("Sophie Castex", "il y a 12 mois", "J’ai eu la grande chance d’être suivie par Mme Orlando Paola avant de devoir débuter une chimiothérapie. Cet accompagnement (sur la base d’une anamnèse complète et détaillée de votre parcours de santé et votre vécu) a fait pour moi toute la différence et m’a permis de traverser cette étape sans les effets secondaires connus tels les nausées/vomissements, paresthésies etc… de ce traitement lourd. Ça a été pour moi un accompagnement important et efficace que je conseille vivement ! Et dès le premier moment, vous savez que vous avez affaire à quelqu’un d’extrêmement professionnelle, consciencieuse et humaine."),
-    ("Laurianne Demarliere", "il y a 1 an", "Une praticienne exceptionnelle, à l’écoute et bienveillante. Elle prend vraiment le temps de comprendre, sans jugement, avec une grande humanité. Ses conseils m’ont énormément aidée à retrouver un équilibre dans ma santé de femme. Je la recommande du fond du cœur. Merci à vous Paola !!!"),
-    ("Cécile Theumann", "il y a 5 ans", "J’ai beaucoup apprécié la grande écoute de Paola, et son empathie. Elle cherche tous les détails auxquels on ne penserait pas dans une approche globale du problème, qui s’est avéré dans mon cas très utile et bénéfique. Mille mercis Paola, je vais vraiment mieux."),
-    ("Hardy Virdee", "il y a 5 ans", "Paola est vraiment professionnelle. Elle a écouté attentivement mes besoins et a abordé mon problème dans sa globalité, en examinant tous les détails de ma vie, ce qui m’a aidée à trouver la solution la plus adaptée à mes besoins. Merci beaucoup, Paola."),
+    ("Nicole Klaus", "Oncologie", "onco", "il y a 1 an", "Madame Paola Orlando, homéopathe, me suit depuis plusieurs années. Au mois de février de cette année 2025, on m’a diagnostiqué un cancer du sein. Madame Orlando a dressé un protocole précis et essentiel ciblé sur mon cancer. Au fur et à mesure que j’avance dans un traitement chimiothérapeutique, elle réadapte mon protocole afin que les médicaments qu’elle me prescrit correspondent à l’état sans cesse en mouvement de mon corps physique mais aussi de mon état psychique. Sur ce parcours, Madame Orlando ne m’a jamais dissuadée de suivre le protocole allopathique classique ; au contraire, elle m’y a encouragée et continue de le faire. Aujourd’hui je tiens vraiment et de tout mon cœur à remercier Madame Orlando de son professionnalisme, de ses formidables compétences, mais aussi de sa disponibilité, de sa générosité d’écoute, de son attention profonde et sincère. Elle est passionnée par son métier."),
+    ("Isabelle Blatter", "Enfant", "enfant", "il y a 10 mois", "Arrivée chez Madame Orlando tout par hasard et on dit : le hasard fait bien les choses. Je ne peux que confirmer cela. J’ai été curieuse de voir ce que l’homéopathie pourrait apporter à notre fille de 7 ans. Madame Orlando s’est montrée très à l’écoute, toujours disponible et très professionnelle. On connaît tous l’arnica ;-), mais l’homéopathie est bien plus complexe que cela, surtout personnalisée pour chacun d’entre nous et EFFICACE ! Enfin, une adresse que je vais précieusement garder. Merci Madame Orlando d’être d’une bienveillance rare et de vos conseils !"),
+    ("Julian S.", "Enfant", "enfant", "il y a 11 mois", "Paola est une femme bienveillante, à l’écoute, passionnée et investie. Très à l’aise avec les enfants, elle permet un complément parfait au suivi pédiatrique. Très disponible et prenant son travail très à cœur, je ne peux que la recommander !"),
+    ("Solene Montloin", "Stress & angoisses", "stress", "il y a 11 mois", "Paola Orlando me suit depuis 1 an et demi maintenant et je vois une nette amélioration sur mes angoisses et mon stress, qui étaient très présents. Elle est très à l’écoute et prend son rôle à cœur. Elle trouve le traitement parfait pour chaque besoin. Je la recommande vivement."),
+    ("Mallika Nadesan", "Bébé prématuré", "enfant", "il y a 12 mois", "Mme Orlando a pris en charge la santé de mon bébé, un grand prématuré né à 29 semaines, avec beaucoup de bienveillance, d’écoute et de sérieux. Elle a su le guérir de maux de ventre, dont il souffrait depuis la naissance. Aussi, je vous recommande sincèrement cette homéopathe solaire et intelligente."),
+    ("Sophie Castex", "Oncologie", "onco", "il y a 12 mois", "J’ai eu la grande chance d’être suivie par Mme Orlando Paola avant de devoir débuter une chimiothérapie. Cet accompagnement (sur la base d’une anamnèse complète et détaillée de votre parcours de santé et votre vécu) a fait pour moi toute la différence et m’a permis de traverser cette étape sans les effets secondaires connus tels les nausées/vomissements, paresthésies etc… de ce traitement lourd. Ça a été pour moi un accompagnement important et efficace que je conseille vivement ! Et dès le premier moment, vous savez que vous avez affaire à quelqu’un d’extrêmement professionnelle, consciencieuse et humaine."),
+    ("Laurianne Demarliere", "Santé de la femme", "femme", "il y a 1 an", "Une praticienne exceptionnelle, à l’écoute et bienveillante. Elle prend vraiment le temps de comprendre, sans jugement, avec une grande humanité. Ses conseils m’ont énormément aidée à retrouver un équilibre dans ma santé de femme. Je la recommande du fond du cœur. Merci à vous Paola !!!"),
+    ("Cécile Theumann", "Adulte", "adulte", "il y a 5 ans", "J’ai beaucoup apprécié la grande écoute de Paola, et son empathie. Elle cherche tous les détails auxquels on ne penserait pas dans une approche globale du problème, qui s’est avéré dans mon cas très utile et bénéfique. Mille mercis Paola, je vais vraiment mieux."),
+    ("Hardy Virdee", "Adulte", "adulte", "il y a 5 ans", "Paola est vraiment professionnelle. Elle a écouté attentivement mes besoins et a abordé mon problème dans sa globalité, en examinant tous les détails de ma vie, ce qui m’a aidée à trouver la solution la plus adaptée à mes besoins. Merci beaucoup, Paola."),
 ]
 
 
-def review_card(name, when, text):
+REVIEW_FILTERS = [("all", "Tous"), ("enfant", "Enfant & bébé"), ("femme", "Femme"), ("onco", "Oncologie"),
+                  ("stress", "Stress & émotions"), ("adulte", "Adulte")]
+
+
+def review_card(name, tag, cat, when, text):
     initials = "".join(p[0] for p in name.replace(".", "").split()[:2]).upper()
     if len(text) > 330:
         cut = text.rfind(". ", 0, 300) + 1 or 300
         body = (f"<p>{text[:cut]}</p><details><summary>Lire la suite</summary><p>{text[cut:].strip()}</p></details>")
     else:
         body = f"<p>{text}</p>"
-    return f"""<article class="review">
+    return f"""<article class="review" data-cat="{cat}">
+  <span class="rev-tag">{tag}</span>
   <div class="stars" aria-label="5 étoiles sur 5">★★★★★</div>
   {body}
   <div class="who"><span class="avatar" aria-hidden="true">{initials}</span><div><strong>{name}</strong><span>Avis Google · {when}</span></div></div>
@@ -131,30 +136,35 @@ def review_card(name, when, text):
 
 def reviews_block():
     cards = "\n".join(review_card(*r) for r in REVIEWS)
+    filters = "".join(
+        f'<button type="button" class="pf-btn" data-rev-filter="{k}" aria-pressed="{"true" if k == "all" else "false"}">{t}</button>'
+        for k, t in REVIEW_FILTERS)
     return f"""<section class="section bg-sand" aria-labelledby="avis-title">
   <div class="container">
     <div class="carousel" data-carousel>
       <div class="reviews-head">
         <div>
           <span class="eyebrow">Témoignages</span>
-          <h2 id="avis-title" class="mb-0">Ce qu’ils en pensent</h2>
+          <h2 id="avis-title" class="mb-0">Ils m’ont fait confiance</h2>
         </div>
-        <div class="btn-row">
-          <a class="rating-box" href="{GOOGLE_REVIEWS}" target="_blank" rel="noopener" style="text-decoration:none">
-            {icon("google", "g-logo")}
-            <span class="score">4.9</span>
-            <span class="meta"><span class="stars">★★★★★</span><br>Basé sur 17 avis Google</span>
-          </a>
-          <div class="carousel-nav">
-            <button type="button" data-prev aria-label="Avis précédents">{icon("arrow-left")}</button>
-            <button type="button" data-next aria-label="Avis suivants">{icon("arrow")}</button>
-          </div>
-        </div>
+        <a class="rating-box" href="{GOOGLE_REVIEWS}" target="_blank" rel="noopener" style="text-decoration:none">
+          {icon("google", "g-logo")}
+          <span class="score">4.9</span>
+          <span class="meta"><span class="stars">★★★★★</span><br>Basé sur 17 avis Google</span>
+        </a>
       </div>
+      <div class="pf-btns rev-filters" role="group" aria-label="Filtrer les avis">{filters}</div>
       <div class="carousel-track" tabindex="0" aria-label="Avis de patients">
 {cards}
       </div>
-      <p class="small muted mt-1"><a href="{GOOGLE_WRITE_REVIEW}" target="_blank" rel="noopener">Donner votre avis sur Google</a></p>
+      <div class="carousel-foot">
+        <div class="carousel-dots" aria-hidden="true"></div>
+        <div class="carousel-nav">
+          <button type="button" data-prev aria-label="Avis précédents">{icon("arrow-left")}</button>
+          <button type="button" data-next aria-label="Avis suivants">{icon("arrow")}</button>
+        </div>
+      </div>
+      <p class="center mt-1"><a class="btn btn-ghost btn-sm" href="{GOOGLE_REVIEWS}" target="_blank" rel="noopener">{icon("google")}Voir les 17 avis Google</a> <a class="small muted" style="margin-left:12px" href="{GOOGLE_WRITE_REVIEW}" target="_blank" rel="noopener">Donner votre avis</a></p>
     </div>
   </div>
 </section>"""
@@ -661,8 +671,8 @@ def page(meta, body):
 <link rel="icon" type="image/png" sizes="32x32" href="{root}assets/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="{root}assets/img/favicon-192.png">
 <link rel="apple-touch-icon" href="{root}assets/img/apple-touch-icon.png">
-<link rel="preload" href="{root}assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="{root}assets/fonts/dm-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{root}assets/fonts/dm-serif-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{root}assets/fonts/nunito-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{root}assets/css/style.css">
 {schema}{faq_schema}
 </head>
