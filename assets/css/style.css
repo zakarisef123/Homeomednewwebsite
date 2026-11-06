@@ -1292,3 +1292,25 @@ body { font-synthesis-weight: none; }
 .site-header .header-inner { position: relative; z-index: 3; }
 .site-header .svc-bar { position: relative; z-index: 2; }
 .main-nav .submenu { z-index: 140; }
+
+/* ---------- Deux cabinets : liens croisés & services par ville ---------- */
+.lieux { background: var(--cream); }
+.lieux-head { margin-bottom: 22px; }
+.lieux-head h2 { font-size: clamp(1.6rem, 2.8vw, 2.2rem); margin-bottom: .3em; }
+.lieux-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.lieu-card { display: grid; grid-template-columns: 120px 1fr; gap: 6px 18px; align-items: center; padding: 14px; background: #fff; border: 1px solid var(--line); border-radius: 22px; text-decoration: none; color: var(--text); transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+.lieu-card:hover { border-color: var(--teal); box-shadow: var(--shadow); transform: translateY(-2px); color: var(--text); }
+.lieu-card img { grid-row: span 2; width: 120px; height: 100px; object-fit: cover; border-radius: 16px; }
+.lieu-card strong { display: block; font-family: var(--font-serif); font-weight: 400; font-size: 1.25rem; color: var(--ink); }
+.lieu-card small { display: block; color: var(--muted); font-size: .88rem; }
+.lieu-days { display: inline-block; margin-bottom: 4px; padding: .15em .7em; border-radius: 999px; background: var(--teal-50); color: var(--teal-600); font-size: .75rem; font-weight: 700; }
+.lieu-card em { font-style: normal; font-weight: 700; font-size: .85rem; color: var(--teal-600); }
+@media (max-width: 760px) { .lieux-grid { grid-template-columns: 1fr; } .lieu-card { grid-template-columns: 90px 1fr; } .lieu-card img { width: 90px; height: 90px; } }
+.ville-services { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.ville-services a { display: flex; align-items: center; gap: 12px; height: 100%; padding: 16px; background: var(--cream); border: 1px solid var(--line); border-radius: 18px; text-decoration: none; color: var(--ink); transition: border-color .2s ease, background .2s ease; }
+.ville-services a:hover { border-color: var(--teal); background: #fff; }
+.ville-services svg { width: 24px; height: 24px; color: var(--teal-600); flex: none; }
+.ville-services strong { display: block; font-size: .95rem; line-height: 1.3; }
+.ville-services small { color: var(--muted); font-size: .8rem; }
+@media (max-width: 1000px) { .ville-services { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .ville-services { grid-template-columns: 1fr; } }
