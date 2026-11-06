@@ -496,6 +496,82 @@ def svc_catalog(root):
     return '<div class="catalog">' + "".join(rows) + "</div>"
 
 
+# --------------------------------------------------------------------------
+# Tunnel de conversion « Rendez-vous express » (3 étapes)
+# --------------------------------------------------------------------------
+AGES = [("bebe", "child", "Bébé", "0 – 2 ans"), ("enfant", "users", "Enfant", "3 – 11 ans"),
+        ("ado", "spark", "Adolescent", "12 – 17 ans"), ("adulte", "user", "Adulte", "18 – 64 ans"),
+        ("senior", "leaf", "Senior", "65 ans et +")]
+MOTIFS = [
+    ("Coliques, reflux, sommeil, dentition", "bebe", "enfant-et-adolescent/#bebe"),
+    ("Allaitement & sommeil de bébé", "bebe", "bebe-allaitement-sommeil/"),
+    ("Sommeil, digestion, fatigue de l’enfant", "enfant", "enfant-et-adolescent/#enfant"),
+    ("TDAH, concentration, agitation", "enfant ado adulte", "accompagnement-tdah/"),
+    ("Acné, confiance, émotions de l’ado", "ado", "enfant-et-adolescent/#ado"),
+    ("Otites, rhumes, infections ORL à répétition", "bebe enfant ado adulte senior", "orl-allergies-peau/#infections-orl"),
+    ("Eczéma, psoriasis, urticaire", "bebe enfant ado adulte senior", "orl-allergies-peau/#peau"),
+    ("Allergies, asthme, rhume des foins", "enfant ado adulte senior", "orl-allergies-peau/#allergies"),
+    ("Règles douloureuses, SOPK, endométriose", "ado adulte", "equilibre-feminin-et-hormonal/#cycles"),
+    ("Désir de grossesse, grossesse, post-partum", "adulte", "equilibre-feminin-et-hormonal/#fertilite"),
+    ("Ménopause, thyroïde", "adulte senior", "equilibre-feminin-et-hormonal/#menopause"),
+    ("Accompagnement pendant ou après un cancer", "ado adulte senior", "homeopathie-soins-support-oncologie/"),
+    ("Insomnie, troubles du sommeil (TCC)", "ado adulte senior", "tcc-sommeil/"),
+    ("Stress, anxiété, fatigue chronique", "ado adulte senior", "mes-specialites/#complementaires"),
+    ("Migraines, vertiges, troubles neurologiques", "adulte senior", "mes-specialites/#complementaires"),
+    ("Urgence : fièvre, infection aiguë", "bebe enfant ado adulte senior", "tarifs-remboursements/"),
+    ("Autre motif", "bebe enfant ado adulte senior", ""),
+]
+
+
+def funnel(root, preset="", title="Trouvez le bon rendez-vous en 3 clics", compact=False):
+    ages = "".join(f'<button type="button" class="fn-opt" data-age="{k}">{icon(ic)}<strong>{t}</strong><small>{r}</small></button>'
+                   for k, ic, t, r in AGES)
+    motifs = "".join(f'<button type="button" class="fn-opt fn-motif" data-ages="{a}" data-href="{h}">{t}</button>'
+                     for t, a, h in MOTIFS)
+    cabs = (f'<button type="button" class="fn-opt" data-cab="pully">{icon("pin")}<strong>Pully – Lausanne</strong><small>Lun, mar, mer, ven</small></button>'
+            f'<button type="button" class="fn-opt" data-cab="fribourg">{icon("pin")}<strong>Fribourg</strong><small>Tous les jeudis</small></button>'
+            f'<button type="button" class="fn-opt" data-cab="visio">{icon("video")}<strong>En visio</strong><small>Selon les circonstances</small></button>')
+    types = ('<button type="button" class="fn-opt fn-type" data-type="premiere"><strong>Première consultation</strong></button>'
+             '<button type="button" class="fn-opt fn-type" data-type="suivi"><strong>Consultation de suivi</strong></button>'
+             '<button type="button" class="fn-opt fn-type" data-type="urgence"><strong>Urgence homéo</strong></button>')
+    return f"""<div class="funnel{' compact' if compact else ''}" data-funnel data-preset="{preset}" data-root="{root}" data-phone="{PHONE}" data-tel="{PHONE_LINK}" data-wa="{WHATSAPP}" data-mail="{EMAIL}">
+  <div class="fn-head">
+    <span class="eyebrow">Rendez-vous express</span>
+    <h2 class="fn-title">{title}</h2>
+    <ol class="fn-progress" aria-hidden="true"><li class="on">Pour qui</li><li>Motif</li><li>Cabinet</li></ol>
+  </div>
+  <div class="fn-step" data-step="1">
+    <p class="fn-q">Pour qui est la consultation&nbsp;?</p>
+    <div class="fn-grid ages">{ages}</div>
+  </div>
+  <div class="fn-step" data-step="2" hidden>
+    <p class="fn-q">Pour quel motif&nbsp;?</p>
+    <div class="fn-grid motifs">{motifs}</div>
+  </div>
+  <div class="fn-step" data-step="3" hidden>
+    <p class="fn-q">Où souhaitez-vous consulter&nbsp;?</p>
+    <div class="fn-grid cabs">{cabs}</div>
+    <p class="fn-q fn-q2">Type de rendez-vous</p>
+    <div class="fn-grid types">{types}</div>
+  </div>
+  <div class="fn-step fn-result" data-step="4" hidden>
+    <div class="fn-summary"></div>
+    <div class="btn-row fn-actions"></div>
+    <p class="small muted fn-note">Reconnue ASCA · RME · Visana · EGK — remboursé par la plupart des assurances complémentaires.</p>
+  </div>
+  <div class="fn-foot"><button type="button" class="fn-back" hidden>{icon("arrow-left")}Retour</button><span class="fn-count">Étape 1 sur 3</span></div>
+  <noscript><p>{rdv_btn(root)}</p></noscript>
+</div>"""
+
+
+def funnel_section(root, preset="", title="Trouvez le bon rendez-vous en 3 clics"):
+    return f"""<section class="section funnel-section" id="rdv-express">
+  <div class="container fn-wrap">
+    {funnel(root, preset, title)}
+  </div>
+</section>"""
+
+
 def header(root, nav, path=""):
     def cur(key):
         return ' aria-current="page"' if nav == key else ""
@@ -710,6 +786,12 @@ def expand(body, root):
             return reviews_block()
         if key.startswith("include:"):
             return (ROOT / "src" / "partials" / f"{key[8:]}.html").read_text(encoding="utf-8")
+        if key == "funnel" or key.startswith("funnel:"):
+            preset = key.split(":", 1)[1] if ":" in key else ""
+            return funnel_section(root, preset)
+        if key == "funnel-card" or key.startswith("funnel-card:"):
+            preset = key.split(":", 1)[1] if ":" in key else ""
+            return funnel(root, preset, "Votre rendez-vous en 3 clics", compact=True)
         if key == "svc-filter":
             return svc_filter(root)
         if key == "svc-tiles":

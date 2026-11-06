@@ -207,3 +207,120 @@
     });
   });
 })();
+
+/* Tunnel « Rendez-vous express » : âge → motif → cabinet & type → récapitulatif */
+(function () {
+  var AGE = { bebe: "mon bébé (0 – 2 ans)", enfant: "mon enfant (3 – 11 ans)", ado: "mon adolescent·e (12 – 17 ans)", adulte: "moi (adulte)", senior: "moi (senior)" };
+  var AGE_SHORT = { bebe: "Bébé", enfant: "Enfant", ado: "Adolescent", adulte: "Adulte", senior: "Senior" };
+  var CAB = { pully: "Pully – Lausanne (Place Neuve 1)", fribourg: "Fribourg (Centre ITS, jeudi)", visio: "en visio" };
+  var CAB_SHORT = { pully: "Pully", fribourg: "Fribourg", visio: "Visio" };
+  var TYPE = { premiere: "première consultation", suivi: "consultation de suivi", urgence: "urgence homéo" };
+
+  function price(type, age) {
+    var minor = age === "bebe" || age === "enfant" || age === "ado";
+    if (type === "premiere") return ["CHF 230.–", "75 – 90 min"];
+    if (type === "urgence") return ["CHF 150.–", "forfait"];
+    return minor ? ["CHF 90.–", "30 min"] : ["CHF 150.–", "45 – 60 min"];
+  }
+
+  document.querySelectorAll("[data-funnel]").forEach(function (box) {
+    var root = box.getAttribute("data-root") || "";
+    var preset = box.getAttribute("data-preset") || "";
+    var st = { step: 1, age: null, motif: null, href: "", cab: null, type: null };
+    var steps = box.querySelectorAll(".fn-step");
+    var prog = box.querySelectorAll(".fn-progress li");
+    var back = box.querySelector(".fn-back");
+    var count = box.querySelector(".fn-count");
+
+    /* Sur une page service, ses motifs passent en tête et sont signalés */
+    if (preset) {
+      var grid = box.querySelector(".motifs");
+      Array.prototype.slice.call(grid.children).reverse().forEach(function (b) {
+        if ((b.getAttribute("data-href") || "").indexOf(preset) === 0) { b.classList.add("featured"); grid.insertBefore(b, grid.firstChild); }
+      });
+    }
+
+    function show(n) {
+      st.step = n;
+      steps.forEach(function (s) { s.hidden = +s.getAttribute("data-step") !== n; });
+      prog.forEach(function (li, i) { li.classList.toggle("on", i < Math.min(n, 3)); li.classList.toggle("done", i < n - 1); });
+      back.hidden = n === 1;
+      count.textContent = n <= 3 ? "Étape " + n + " sur 3" : "Récapitulatif";
+      if (n > 1) {
+        var r = box.getBoundingClientRect();
+        if (r.top < 80 || r.top > window.innerHeight * 0.5) box.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+    function select(group, btn) {
+      box.querySelectorAll(group).forEach(function (b) { b.classList.toggle("sel", b === btn); b.setAttribute("aria-pressed", b === btn ? "true" : "false"); });
+    }
+
+    box.querySelectorAll("[data-age]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        st.age = b.getAttribute("data-age");
+        select("[data-age]", b);
+        box.querySelectorAll(".fn-motif").forEach(function (m) {
+          m.hidden = (" " + m.getAttribute("data-ages") + " ").indexOf(" " + st.age + " ") < 0;
+        });
+        show(2);
+      });
+    });
+    box.querySelectorAll(".fn-motif").forEach(function (b) {
+      b.addEventListener("click", function () {
+        st.motif = b.textContent.trim(); st.href = b.getAttribute("data-href");
+        select(".fn-motif", b);
+        if (st.motif.indexOf("Urgence") === 0) { st.type = "urgence"; select(".fn-type", box.querySelector('[data-type="urgence"]')); }
+        show(3);
+      });
+    });
+    function maybeDone() { if (st.cab && st.type) result(); }
+    box.querySelectorAll("[data-cab]").forEach(function (b) {
+      b.addEventListener("click", function () { st.cab = b.getAttribute("data-cab"); select("[data-cab]", b); maybeDone(); });
+    });
+    box.querySelectorAll(".fn-type").forEach(function (b) {
+      b.addEventListener("click", function () { st.type = b.getAttribute("data-type"); select(".fn-type", b); maybeDone(); });
+    });
+    back.addEventListener("click", function () { show(Math.max(1, st.step - 1)); });
+
+    function result() {
+      var p = price(st.type, st.age);
+      var msg = "Bonjour Madame Orlando, je souhaite prendre rendez-vous pour " + AGE[st.age] +
+        " — motif : " + st.motif + " — " + TYPE[st.type] + ", " + CAB[st.cab] + ". Merci !";
+      var q = "?cab=" + st.cab + "&age=" + st.age + "&type=" + st.type + "&motif=" + encodeURIComponent(st.motif);
+      box.querySelector(".fn-summary").innerHTML =
+        '<p class="fn-q">Votre rendez-vous</p>' +
+        '<ul class="fn-recap">' +
+        "<li><span>Pour</span><strong>" + AGE_SHORT[st.age] + "</strong></li>" +
+        "<li><span>Motif</span><strong>" + st.motif + "</strong></li>" +
+        "<li><span>Lieu</span><strong>" + CAB_SHORT[st.cab] + "</strong></li>" +
+        "<li><span>Type</span><strong>" + TYPE[st.type].charAt(0).toUpperCase() + TYPE[st.type].slice(1) + "</strong></li>" +
+        '<li class="fn-price"><span>Tarif indicatif</span><strong>' + p[0] + " <small>· " + p[1] + "</small></strong></li>" +
+        "</ul>" +
+        (st.type === "urgence" ? '<p class="small fn-warn">En cas d’urgence médicale, contactez votre médecin ou le 144.</p>' : "");
+      var a = box.querySelector(".fn-actions");
+      a.innerHTML =
+        '<a class="btn btn-primary" href="' + root + "prendre-rdv/" + q + '#calendrier">Réserver en ligne</a>' +
+        '<a class="btn btn-wa" href="' + box.getAttribute("data-wa") + "?text=" + encodeURIComponent(msg) + '" target="_blank" rel="noopener">WhatsApp</a>' +
+        '<a class="btn btn-ghost" href="' + box.getAttribute("data-tel") + '">Appeler</a>' +
+        '<a class="btn btn-ghost" href="mailto:' + box.getAttribute("data-mail") + "?subject=" + encodeURIComponent("Demande de rendez-vous") + "&body=" + encodeURIComponent(msg) + '">E-mail</a>' +
+        (st.href ? '<a class="link-arrow fn-more" href="' + root + st.href + '">En savoir plus sur cet accompagnement</a>' : "");
+      show(4);
+    }
+  });
+
+  /* Page Prendre RDV : rappel du choix fait dans le tunnel */
+  var banner = document.querySelector("[data-rdv-summary]");
+  if (banner && window.URLSearchParams) {
+    var q = new URLSearchParams(location.search);
+    var cab = q.get("cab");
+    if (cab && CAB[cab]) {
+      var age = AGE_SHORT[q.get("age")] || "", type = TYPE[q.get("type")] || "", motif = q.get("motif") || "";
+      var tip = cab === "visio" ? "Dans le calendrier, choisissez une consultation en visio (ou appelez-moi pour l’organiser)."
+        : "Dans le calendrier ci-dessous, sélectionnez le cabinet de <strong>" + CAB_SHORT[cab] + "</strong>.";
+      banner.innerHTML = "<strong>Votre demande&nbsp;:</strong> " + [age, motif, type, CAB_SHORT[cab]].filter(Boolean).map(function (x) {
+        return x.replace(/[<>&]/g, "");
+      }).join(" · ") + "<br>" + tip;
+      banner.hidden = false;
+    }
+  }
+})();

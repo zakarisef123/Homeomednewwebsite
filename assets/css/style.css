@@ -1220,3 +1220,70 @@ body { font-synthesis-weight: none; }
 @media (max-width: 640px) { .carousel-track { grid-auto-columns: 100%; } }
 /* Menu des services : photo un peu plus haute, cadrage réglé par service */
 .svc-panel-intro img { height: 175px; }
+
+/* ==========================================================================
+   Tunnel de conversion « Rendez-vous express »
+   ========================================================================== */
+.funnel-section { background: linear-gradient(180deg, var(--teal-50), var(--cream)); }
+.fn-wrap { max-width: 920px; }
+.funnel { background: #fff; border: 1px solid var(--teal-100); border-radius: var(--radius-xl); box-shadow: var(--shadow); padding: clamp(22px, 4vw, 40px); scroll-margin-top: 150px; }
+.funnel.compact { border-radius: var(--radius-l); padding: clamp(18px, 3vw, 28px); }
+.fn-head { text-align: center; margin-bottom: 22px; }
+.fn-head .eyebrow { justify-content: center; }
+.fn-title { font-size: clamp(1.6rem, 3vw, 2.3rem); margin-bottom: .6em; }
+.funnel.compact .fn-head { text-align: left; }
+.funnel.compact .fn-head .eyebrow { justify-content: flex-start; }
+.funnel.compact .fn-title { font-size: clamp(1.4rem, 2.4vw, 1.8rem); }
+.fn-progress { list-style: none; padding: 0; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-width: 520px; counter-reset: fn; }
+.fn-progress li { counter-increment: fn; position: relative; padding-top: 10px; font-size: .8rem; font-weight: 700; color: var(--muted); text-align: center; border-top: 4px solid var(--sand-2); border-radius: 2px; transition: border-color .3s ease, color .3s ease; }
+.fn-progress li::before { content: counter(fn) ". "; }
+.fn-progress li.on { border-color: var(--teal); color: var(--ink); }
+.fn-progress li.done { border-color: var(--teal-600); }
+.fn-q { font-family: var(--font-serif); font-size: 1.3rem; color: var(--ink); margin: 6px 0 14px; }
+.fn-q2 { margin-top: 22px; }
+.fn-grid { display: grid; gap: 10px; }
+.fn-grid.ages { grid-template-columns: repeat(5, 1fr); }
+.fn-grid.motifs { grid-template-columns: repeat(2, 1fr); }
+.fn-grid.cabs, .fn-grid.types { grid-template-columns: repeat(3, 1fr); }
+.funnel.compact .fn-grid.ages { grid-template-columns: repeat(3, 1fr); }
+.funnel.compact .fn-grid.motifs, .funnel.compact .fn-grid.cabs, .funnel.compact .fn-grid.types { grid-template-columns: 1fr; }
+.fn-opt { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center; padding: 16px 12px; border: 1.5px solid var(--line); border-radius: 16px; background: var(--cream); color: var(--ink); font: inherit; cursor: pointer; transition: border-color .2s ease, background .2s ease, transform .2s ease, box-shadow .2s ease; }
+.fn-opt:hover { border-color: var(--teal); background: #fff; transform: translateY(-2px); box-shadow: var(--shadow-s); }
+.fn-opt.sel { border-color: var(--ink); background: var(--ink); color: #fff; }
+.fn-opt.sel small { color: #b5c8d4; }
+.fn-opt.sel svg { color: #8fd3db; }
+.fn-opt svg { width: 26px; height: 26px; color: var(--teal-600); }
+.fn-opt strong { font-weight: 700; font-size: .98rem; }
+.fn-opt small { font-size: .8rem; color: var(--muted); }
+.fn-motif { flex-direction: row; justify-content: flex-start; text-align: left; font-weight: 600; font-size: .94rem; padding: 14px 16px; }
+.fn-motif[hidden] { display: none; }
+.fn-motif.featured { border-color: var(--teal-100); background: var(--teal-50); }
+.fn-motif.featured::after { content: "Recommandé"; margin-left: auto; padding: .15em .6em; border-radius: 999px; background: #fff; color: var(--teal-600); font-size: .7rem; font-weight: 700; white-space: nowrap; }
+.fn-motif.featured.sel::after { background: rgba(255,255,255,.15); color: #fff; }
+.fn-recap { list-style: none; padding: 0; margin: 0 0 16px; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.fn-recap li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 16px; border-top: 1px solid var(--line); font-size: .95rem; }
+.fn-recap li:first-child { border-top: 0; }
+.fn-recap span { color: var(--muted); }
+.fn-recap strong { color: var(--ink); text-align: right; }
+.fn-recap .fn-price { background: var(--teal-50); }
+.fn-recap .fn-price strong { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 400; }
+.fn-recap small { font-family: var(--font-sans); font-size: .82rem; color: var(--muted); }
+.fn-warn { color: #8a5a2b; background: #fff7ec; border: 1px solid #f1dfc4; padding: 10px 14px; border-radius: 12px; }
+.fn-actions { gap: 10px; }
+.btn-wa { --bg: #1fa855; }
+.btn-wa:hover { --bg: #178a45; }
+.fn-more { width: 100%; margin-top: 6px; }
+.fn-note { margin-top: 14px; }
+.fn-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 18px; min-height: 40px; }
+.fn-back { display: inline-flex; align-items: center; gap: 6px; border: 0; background: none; color: var(--ink); font-weight: 700; padding: 8px 0; }
+.fn-back svg { width: 16px; height: 16px; }
+.fn-count { margin-left: auto; font-size: .82rem; color: var(--muted); font-weight: 600; }
+@media (max-width: 760px) {
+  .fn-grid.ages { grid-template-columns: repeat(2, 1fr); }
+  .fn-grid.ages .fn-opt:last-child { grid-column: 1 / -1; }
+  .fn-grid.motifs, .fn-grid.cabs, .fn-grid.types { grid-template-columns: 1fr; }
+  .fn-cab-row { grid-template-columns: 1fr; }
+  .fn-actions .btn { flex: 1 1 45%; }
+}
+.rdv-summary { margin-bottom: 18px; padding: 16px 20px; border-radius: var(--radius); background: var(--teal-50); border: 1px solid var(--teal-100); color: var(--ink); }
+.fn-back[hidden], .fn-step[hidden] { display: none; }
