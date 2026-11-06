@@ -1218,3 +1218,5 @@ body { font-synthesis-weight: none; }
 .carousel-track { grid-auto-columns: calc((100% - 48px) / 3); }
 @media (max-width: 1000px) { .carousel-track { grid-auto-columns: calc((100% - 24px) / 2); } }
 @media (max-width: 640px) { .carousel-track { grid-auto-columns: 100%; } }
+/* Menu des services : photo un peu plus haute, cadrage réglé par service */
+.svc-panel-intro img { height: 175px; }

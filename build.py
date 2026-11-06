@@ -252,7 +252,7 @@ def disclaimer():
 # dans la page ou autres pages) et services liés.
 SERVICES = [
     dict(path="enfant-et-adolescent/", short="Enfant & Ado", title="Bébé, enfant & adolescent", icon="child",
-         img="spec-enfant.webp", tagline="Dès la naissance, jusqu’à 18 ans",
+         img="spec-enfant.webp", pos="50% 30%", panel_img="enfant-enfants.webp", panel_pos="50% 30%", tagline="Dès la naissance, jusqu’à 18 ans",
          desc="Otites à répétition, sommeil, digestion, eczéma, dentition, comportement, acné et troubles hormonaux de l’ado.",
          subs=[("Nouveau-né & bébé", "#bebe", "Coliques, reflux, sommeil, dentition"),
                ("Enfant", "#enfant", "ORL, peau, sommeil, digestion, concentration"),
@@ -260,7 +260,7 @@ SERVICES = [
                ("Questions fréquentes", "#faq", "")],
          related=[("Accompagnement TDAH", "accompagnement-tdah/"), ("Bébé : allaitement & sommeil", "bebe-allaitement-sommeil/")]),
     dict(path="equilibre-feminin-et-hormonal/", short="Femme & hormones", title="Équilibre féminin & hormonal", icon="flower",
-         img="spec-femme.webp", tagline="Toutes les étapes de la vie hormonale",
+         img="spec-femme.webp", pos="50% 35%", panel_pos="50% 30%", tagline="Toutes les étapes de la vie hormonale",
          desc="Cycles douloureux, SOPK, endométriose, fertilité, grossesse, post-partum, ménopause, thyroïde.",
          subs=[("Cycles & douleurs menstruelles", "#cycles", "Règles douloureuses, SPM, cycles irréguliers"),
                ("SOPK & endométriose", "#sopk", "Douleurs pelviennes, cycles longs"),
@@ -270,7 +270,7 @@ SERVICES = [
                ("Thyroïde & métabolisme", "#thyroide", "Hypo/hyperthyroïdie, poids, fatigue")],
          related=[("Bébé : allaitement & sommeil", "bebe-allaitement-sommeil/"), ("TCC du sommeil", "tcc-sommeil/")]),
     dict(path="orl-allergies-peau/", short="ORL · Allergies · Peau", title="ORL, allergies, peau", icon="wind",
-         img="spec-orl.webp", tagline="Chez l’enfant et l’adulte",
+         img="spec-orl.webp", pos="50% 50%", panel_img="orl-allergies.webp", panel_pos="50% 35%", tagline="Chez l’enfant et l’adulte",
          desc="Eczéma, psoriasis, urticaire, rhume des foins, asthme, otites, sinusites.",
          subs=[("Peau : eczéma, psoriasis, urticaire", "#peau", "Démangeaisons, poussées, sommeil perturbé"),
                ("Allergies saisonnières", "#allergies", "Pollen, acariens, animaux, conjonctivites"),
@@ -279,7 +279,7 @@ SERVICES = [
                ("Questions fréquentes", "#faq", "")],
          related=[("Enfant & adolescent", "enfant-et-adolescent/")]),
     dict(path="homeopathie-soins-support-oncologie/", short="Oncologie", title="Soins de support en oncologie", icon="ribbon",
-         img="spec-onco.webp", tagline="En complément de l’équipe médicale",
+         img="spec-onco.webp", pos="50% 45%", tagline="En complément de l’équipe médicale",
          desc="Pendant et après les traitements contre le cancer, pour mieux traverser les effets secondaires.",
          subs=[("Pendant les traitements", "#pendant", "Chimio, radio, hormonothérapie, immunothérapie"),
                ("Après les traitements", "#apres", "Récupération, énergie, retour au quotidien"),
@@ -287,7 +287,7 @@ SERVICES = [
                ("Questions fréquentes", "#faq", "")],
          related=[("Mon histoire : mon papa, mon héros", "soin-de-support-en-oncologie-histoire-personnelle/"), ("TCC du sommeil", "tcc-sommeil/")]),
     dict(path="accompagnement-tdah/", short="TDAH", title="Accompagnement TDAH", icon="brain", new=True,
-         img="tdah-accompagnement.webp", tagline="Enfant, parents & famille",
+         img="tdah-accompagnement.webp", pos="50% 12%", tagline="Enfant, parents & famille",
          desc="Un accompagnement en trois volets : l’enfant, les parents et toute la famille.",
          subs=[("Pour l’enfant", "#enfant", "Attention, agitation, sommeil, émotions"),
                ("Pour les parents", "#parents", "Écoute, repères concrets, fatigue"),
@@ -295,21 +295,21 @@ SERVICES = [
                ("Questions fréquentes", "#faq", "")],
          related=[("Article : TDAH & homéopathie", "tdah-homeopathie-accompagnement-individualise/"), ("Enfant & adolescent", "enfant-et-adolescent/")]),
     dict(path="tcc-sommeil/", short="Sommeil", title="TCC du sommeil", icon="moon", new=True,
-         img="onco-apres.webp", tagline="Thérapie comportementale et cognitive de l’insomnie",
+         img="onco-apres.webp", pos="50% 30%", tagline="Thérapie comportementale et cognitive de l’insomnie",
          desc="Endormissement difficile, réveils nocturnes : retrouver des nuits réparatrices durablement.",
          subs=[("Pour qui ?", "#pour-qui", "Insomnie, réveils nocturnes, fatigue"),
                ("La méthode en 3 étapes", "#methode", "Évaluer, ajuster, apaiser le mental"),
                ("Questions fréquentes", "#faq", "")],
          related=[("Bébé : allaitement & sommeil", "bebe-allaitement-sommeil/"), ("Équilibre féminin & hormonal", "equilibre-feminin-et-hormonal/")]),
     dict(path="bebe-allaitement-sommeil/", short="Bébé & allaitement", title="Bébé : allaitement & sommeil", icon="heart", new=True,
-         img="enfant-bebe.webp", tagline="Soutien aux mamans et aux tout-petits",
+         img="enfant-bebe.webp", pos="50% 45%", tagline="Soutien aux mamans et aux tout-petits",
          desc="Soutenir les mamans dans l’allaitement et accompagner le sommeil du tout-petit.",
          subs=[("Allaitement", "#allaitement", "Douleurs, production de lait, tétées, sevrage"),
                ("Sommeil de bébé", "#sommeil-bebe", "Réveils, endormissement, rituels"),
                ("Questions fréquentes", "#faq", "")],
          related=[("Nouveau-né & bébé", "enfant-et-adolescent/#bebe"), ("Grossesse & post-partum", "equilibre-feminin-et-hormonal/#grossesse")]),
     dict(path="mes-specialites/#complementaires", short="Autres troubles", title="Autres accompagnements", icon="bolt",
-         img="famille.webp", tagline="Chronique, neurologique, urgences",
+         img="famille.webp", pos="50% 35%", tagline="Chronique, neurologique, urgences",
          desc="Fatigue et stress chroniques, troubles digestifs, migraines, vertiges, urgences homéopathiques.",
          subs=[("Déséquilibres métaboliques chroniques", "", "Fatigue, stress, digestion, auto-immunité"),
                ("Troubles neurologiques", "", "Migraines, vertiges, tremblements"),
@@ -342,7 +342,7 @@ def services_bar(root, nav_path):
   <a class="svc-link" href="{root}{s['path']}"{cur}>{icon(s['icon'])}<span>{s['short']}</span>{new}{icon('chevron', 'chev')}</a>
   <div class="svc-panel" role="group" aria-label="{s['title']}">
     <div class="svc-panel-intro">
-      <img src="{root}assets/img/{s['img']}" alt="" loading="lazy">
+      <img src="{root}assets/img/{s.get('panel_img', s['img'])}" alt="" loading="lazy" style="object-position:{s.get('panel_pos', s.get('pos', '50% 50%'))}">
       <span class="eyebrow">{s['tagline']}</span>
       <h3>{s['title']}{' <span class="badge-new">Nouveau</span>' if s.get('new') else ''}</h3>
       <p>{s['desc']}</p>
@@ -412,7 +412,7 @@ def svc_tiles(root):
                         for t, h, _ in s["subs"] if t != "Questions fréquentes")
         new = '<span class="badge-new">Nouveau</span>' if s.get("new") else ""
         out.append(f"""<article class="svc-tile reveal d{i % 4}" data-profiles="{SVC_PROFILES.get(s['path'], '')}">
-  <a class="svc-tile-img" href="{root}{s['path']}" tabindex="-1" aria-hidden="true"><img src="{root}assets/img/{s['img']}" alt="" loading="lazy">{new}</a>
+  <a class="svc-tile-img" href="{root}{s['path']}" tabindex="-1" aria-hidden="true"><img src="{root}assets/img/{s['img']}" alt="" loading="lazy" style="object-position:{s.get('pos', '50% 50%')}">{new}</a>
   <div class="svc-tile-body">
     <h3><a href="{root}{s['path']}">{icon(s['icon'])}{s['title']}</a></h3>
     <p>{s['desc']}</p>
