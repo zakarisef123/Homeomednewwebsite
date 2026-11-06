@@ -32,8 +32,8 @@ GOOGLE_REVIEWS = "https://search.google.com/local/reviews?placeid=ChIJa587Df0vjE
 GOOGLE_WRITE_REVIEW = "https://search.google.com/local/writereview?placeid=ChIJa587Df0vjEcR69Y_1lnVHkU"
 MAP_PULLY = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2745.8486027979893!2d6.657421112157884!3d46.51110716286125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c2ffd0d3b9f6b%3A0x451ed559d63fd6eb!2sCabinet%20HOMEOMED%20-%20Paola%20ORLANDO!5e0!3m2!1sfr!2sch!4v1752832729991!5m2!1sfr!2sch"
 MAP_FRIBOURG = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10924.077428576657!2d7.1357336871582016!3d46.8039246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478e6934385efac9%3A0xbee923e2c28ae666!2sCabinet%20HOMEOMED%20Paola%20Orlando%20Hom%C3%A9opathe%20Fribourg!5e0!3m2!1sfr!2sch!4v1781771720679!5m2!1sfr!2sch"
-GMAPS_PULLY = "https://www.google.com/maps/search/?api=1&query=Place+Neuve+1+1009+Pully"
-GMAPS_FRIBOURG = "https://www.google.com/maps/search/?api=1&query=Rue+de+la+Banque+4+1700+Fribourg"
+GMAPS_PULLY = "https://maps.google.com/?cid=4980652819741660907"  # fiche Google Business Pully
+GMAPS_FRIBOURG = "https://maps.google.com/?cid=13756565993613354598"  # fiche Google Business Fribourg
 FACEBOOK = "https://www.facebook.com/profile.php?id=61577642218751"
 INSTAGRAM = "https://www.instagram.com/paolaorlando_homeopathe/"
 LINKEDIN = "https://www.linkedin.com/in/paola-orlando-560369a1/"
@@ -179,7 +179,7 @@ def rdv_btn(root, label="Je prends rendez-vous", cls="btn btn-primary"):
 
 def hours_list():
     rows = [("Lundi", "8h – 18h"), ("Mardi", "8h – 18h"), ("Mercredi", "8h – 18h"),
-            ("Jeudi", "8h – 18h <small>(Fribourg)</small>"), ("Vendredi", "8h – 13h"),
+            ("Jeudi", "9h – 18h <small>(Fribourg)</small>"), ("Vendredi", "8h – 13h"),
             ("Samedi", None), ("Dimanche", None)]
     out = []
     for d, h in rows:
@@ -233,7 +233,7 @@ def contact_block(root):
       <div class="contact-item reveal d3">
         <div class="icon-badge">{icon("clock")}</div>
         <h4>Horaires</h4>
-        <p>Lun – Jeu&nbsp;: 8h – 18h<br>Vendredi&nbsp;: 8h – 13h<br><span class="muted">Sur rendez-vous uniquement</span></p>
+        <p>Pully&nbsp;: lun – mer 8h – 18h, ven 8h – 13h<br>Fribourg&nbsp;: jeudi 9h – 18h<br><span class="muted">Sur rendez-vous uniquement</span></p>
       </div>
     </div>
   </div>
@@ -523,7 +523,7 @@ MOTIFS = [
 ]
 
 
-def funnel(root, preset="", title="Trouvez le bon rendez-vous en 3 clics", compact=False):
+def funnel(root, preset="", title="Trouvez le bon rendez-vous en 3 clics", compact=False, cab=""):
     ages = "".join(f'<button type="button" class="fn-opt" data-age="{k}">{icon(ic)}<strong>{t}</strong><small>{r}</small></button>'
                    for k, ic, t, r in AGES)
     motifs = "".join(f'<button type="button" class="fn-opt fn-motif" data-ages="{a}" data-href="{h}">{t}</button>'
@@ -534,7 +534,7 @@ def funnel(root, preset="", title="Trouvez le bon rendez-vous en 3 clics", compa
     types = ('<button type="button" class="fn-opt fn-type" data-type="premiere"><strong>Première consultation</strong></button>'
              '<button type="button" class="fn-opt fn-type" data-type="suivi"><strong>Consultation de suivi</strong></button>'
              '<button type="button" class="fn-opt fn-type" data-type="urgence"><strong>Urgence homéo</strong></button>')
-    return f"""<div class="funnel{' compact' if compact else ''}" data-funnel data-preset="{preset}" data-root="{root}" data-phone="{PHONE}" data-tel="{PHONE_LINK}" data-wa="{WHATSAPP}" data-mail="{EMAIL}">
+    return f"""<div class="funnel{' compact' if compact else ''}" data-funnel data-preset="{preset}" data-cab-preset="{cab}" data-root="{root}" data-phone="{PHONE}" data-tel="{PHONE_LINK}" data-wa="{WHATSAPP}" data-mail="{EMAIL}">
   <div class="fn-head">
     <span class="eyebrow">Rendez-vous express</span>
     <h2 class="fn-title">{title}</h2>
@@ -564,10 +564,37 @@ def funnel(root, preset="", title="Trouvez le bon rendez-vous en 3 clics", compa
 </div>"""
 
 
-def funnel_section(root, preset="", title="Trouvez le bon rendez-vous en 3 clics"):
+def funnel_section(root, preset="", title="Trouvez le bon rendez-vous en 3 clics", cab=""):
     return f"""<section class="section funnel-section" id="rdv-express">
   <div class="container fn-wrap">
-    {funnel(root, preset, title)}
+    {funnel(root, preset, title, cab=cab)}
+  </div>
+</section>"""
+
+
+def lieux_block(root):
+    """Encart « Consulter à Pully ou à Fribourg » (liens croisés services → cabinets)."""
+    cards = "".join(f"""<a class="lieu-card" href="{root}{l['page']}">
+  <img src="{root}assets/img/{l['img']}" alt="Cabinet HOMEOMED à {l['city']}" loading="lazy">
+  <span><span class="lieu-days">{l['days']}</span><strong>Homéopathe à {l['short']}</strong><small>{l['street']}, {l['zip']} {l['city']} · {l['detail']}</small></span>
+  <em>Infos & accès →</em>
+</a>""" for l in LOCATIONS.values())
+    return f"""<section class="section tight lieux">
+  <div class="container">
+    <div class="lieux-head"><span class="eyebrow">Deux cabinets</span><h2>Consulter à Pully ou à Fribourg</h2><p class="muted">Cet accompagnement est proposé dans les deux cabinets, et en visio selon les circonstances.</p></div>
+    <div class="lieux-grid">{cards}</div>
+  </div>
+</section>"""
+
+
+def services_ville(root, key):
+    l = LOCATIONS[key]
+    items = "".join(f'<li><a href="{root}{sv["path"]}">{icon(sv["icon"])}<span><strong>{sv["title"]}</strong><small>à {l["short"]}</small></span></a></li>'
+                    for sv in SERVICES)
+    return f"""<section class="section bg-white">
+  <div class="container">
+    <div class="section-head"><span class="eyebrow center">Accompagnements</span><h2>Mes services à {l['short']}</h2><p>Tous mes accompagnements sont proposés au cabinet de {l['city']}.</p></div>
+    <ul class="ville-services">{items}</ul>
   </div>
 </section>"""
 
@@ -648,8 +675,8 @@ def footer(root):
         <ul>
           <li><a href="{PHONE_LINK}">{PHONE}</a></li>
           <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
-          <li>Place Neuve 1, 1009 Pully</li>
-          <li>Centre ITS – Rue de la Banque 4, 1700 Fribourg</li>
+          <li><a href="{root}cabinet-pully/">Place Neuve 1, 1009 Pully</a></li>
+          <li><a href="{root}cabinet-fribourg/">Centre ITS – Rue de la Banque 4, 1700 Fribourg</a></li>
         </ul>
         <p class="mt-1">{rdv_btn(root, "Prendre rendez-vous", "btn btn-light btn-sm")}</p>
       </div>
@@ -673,32 +700,71 @@ def footer(root):
 </div>"""
 
 
-SCHEMA = {
-    "@context": "https://schema.org",
-    "@type": "MedicalBusiness",
-    "name": "Cabinet HOMEOMED – Paola Orlando, Homéopathe",
-    "url": SITE_URL,
-    "logo": SITE_URL + "assets/img/logo.png",
-    "image": SITE_URL + "assets/img/paola-portrait.webp",
-    "telephone": "+41215661815",
-    "email": EMAIL,
-    "priceRange": "CHF 90 – 230",
-    "medicalSpecialty": "Homeopathic",
-    "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "17"},
-    "address": [
-        {"@type": "PostalAddress", "streetAddress": "Place Neuve 1", "postalCode": "1009",
-         "addressLocality": "Pully", "addressRegion": "VD", "addressCountry": "CH"},
-        {"@type": "PostalAddress", "streetAddress": "Rue de la Banque 4 (Centre ITS)", "postalCode": "1700",
-         "addressLocality": "Fribourg", "addressRegion": "FR", "addressCountry": "CH"},
-    ],
-    "openingHoursSpecification": [
-        {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
-         "opens": "08:00", "closes": "18:00"},
-        {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "08:00", "closes": "13:00"},
-    ],
-    "founder": {"@type": "Person", "name": "Paola Orlando", "jobTitle": "Homéopathe diplômée fédérale"},
-    "sameAs": [FACEBOOK, INSTAGRAM, LINKEDIN],
+# Deux cabinets = deux établissements distincts pour Google (adresse, horaires, page propre)
+LOCATIONS = {
+    "pully": dict(
+        id="pully", name="Cabinet HOMEOMED Pully – Paola Orlando, Homéopathe", city="Pully", short="Pully – Lausanne",
+        page="cabinet-pully/", street="Place Neuve 1", zip="1009", region="VD",
+        days="Lundi, mardi, mercredi, vendredi", detail="1er étage, bâtiment Visilab",
+        hours=[(["Monday", "Tuesday", "Wednesday"], "08:00", "18:00"), (["Friday"], "08:00", "13:00")],
+        area=["Pully", "Lausanne", "Lutry", "Paudex", "Belmont-sur-Lausanne", "Épalinges", "Lavaux", "Vevey", "Riviera"],
+        maps=GMAPS_PULLY, img="pully-1.webp"),
+    "fribourg": dict(
+        id="fribourg", name="Cabinet HOMEOMED Fribourg – Paola Orlando, Homéopathe", city="Fribourg", short="Fribourg",
+        page="cabinet-fribourg/", street="Rue de la Banque 4", zip="1700", region="FR",
+        days="Tous les jeudis", detail="Centre ITS, 3e étage",
+        hours=[(["Thursday"], "09:00", "18:00")],
+        area=["Fribourg", "Villars-sur-Glâne", "Givisiez", "Marly", "Bulle", "Romont", "Morat", "Payerne", "Estavayer-le-Lac"],
+        maps=GMAPS_FRIBOURG, img="fribourg-1.webp"),
 }
+
+
+def location_schema(loc):
+    return {
+        "@type": "MedicalBusiness",
+        "@id": f"{SITE_URL}{loc['page']}#cabinet",
+        "name": loc["name"],
+        "url": SITE_URL + loc["page"],
+        "image": SITE_URL + "assets/img/" + loc["img"],
+        "logo": SITE_URL + "assets/img/logo.png",
+        "telephone": "+41215661815",
+        "email": EMAIL,
+        "priceRange": "CHF 90 – 230",
+        "medicalSpecialty": "Homeopathic",
+        "currenciesAccepted": "CHF",
+        "paymentAccepted": "Espèces, TWINT",
+        "availableLanguage": ["fr", "en", "it"],
+        "address": {"@type": "PostalAddress", "streetAddress": f"{loc['street']} ({loc['detail']})", "postalCode": loc["zip"],
+                    "addressLocality": loc["city"], "addressRegion": loc["region"], "addressCountry": "CH"},
+        "hasMap": loc["maps"],
+        "areaServed": [{"@type": "City", "name": c} for c in loc["area"]],
+        "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": d, "opens": o, "closes": c}
+                                      for d, o, c in loc["hours"]],
+        "parentOrganization": {"@id": SITE_URL + "#organisation"},
+        "employee": {"@id": SITE_URL + "#paola"},
+    }
+
+
+PERSON = {"@type": "Person", "@id": SITE_URL + "#paola", "name": "Paola Orlando",
+          "jobTitle": "Homéopathe diplômée fédérale", "url": SITE_URL + "qui-suis-je/",
+          "image": SITE_URL + "assets/img/paola-portrait.webp", "knowsLanguage": ["fr", "en", "it", "es"]}
+ORGANISATION = {"@type": "MedicalOrganization", "@id": SITE_URL + "#organisation", "name": "HOMEOMED – Paola Orlando, Homéopathe",
+                "url": SITE_URL, "logo": SITE_URL + "assets/img/logo.png", "telephone": "+41215661815", "email": EMAIL,
+                "founder": {"@id": SITE_URL + "#paola"}, "sameAs": [FACEBOOK, INSTAGRAM, LINKEDIN],
+                "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "17"},
+                "subOrganization": [{"@id": f"{SITE_URL}{l['page']}#cabinet"} for l in LOCATIONS.values()]}
+
+
+def schema_for(kind, title, path):
+    if kind in LOCATIONS:
+        loc = LOCATIONS[kind]
+        graph = [location_schema(loc), ORGANISATION, PERSON,
+                 {"@type": "BreadcrumbList", "itemListElement": [
+                     {"@type": "ListItem", "position": 1, "name": "Accueil", "item": SITE_URL},
+                     {"@type": "ListItem", "position": 2, "name": f"Homéopathe {loc['short']}", "item": SITE_URL + path}]}]
+    else:
+        graph = [ORGANISATION, PERSON] + [location_schema(l) for l in LOCATIONS.values()]
+    return {"@context": "https://schema.org", "@graph": graph}
 
 
 def page(meta, body):
@@ -713,7 +779,8 @@ def page(meta, body):
     og_img = SITE_URL + "assets/img/" + meta.get("image", "hero-granules.webp")
     schema = ""
     if meta.get("schema"):
-        schema = f'<script type="application/ld+json">{json.dumps(SCHEMA, ensure_ascii=False)}</script>'
+        kind = meta["schema"] if isinstance(meta["schema"], str) else "home"
+        schema = f'<script type="application/ld+json">{json.dumps(schema_for(kind, title, path), ensure_ascii=False)}</script>'
     faq_schema = ""
     if meta.get("faq_schema"):
         qa = re.findall(r'<details>\s*<summary>(.*?)</summary>\s*<div class="answer">(.*?)</div>\s*</details>', body, re.S)
@@ -786,6 +853,12 @@ def expand(body, root):
             return reviews_block()
         if key.startswith("include:"):
             return (ROOT / "src" / "partials" / f"{key[8:]}.html").read_text(encoding="utf-8")
+        if key.startswith("funnel-cab:"):
+            return funnel_section(root, "", "Votre rendez-vous à " + LOCATIONS[key[11:]]["short"], cab=key[11:])
+        if key == "lieux":
+            return lieux_block(root)
+        if key.startswith("services-ville:"):
+            return services_ville(root, key[15:])
         if key == "funnel" or key.startswith("funnel:"):
             preset = key.split(":", 1)[1] if ":" in key else ""
             return funnel_section(root, preset)

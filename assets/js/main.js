@@ -274,6 +274,12 @@
       });
     });
     function maybeDone() { if (st.cab && st.type) result(); }
+    /* Sur une page cabinet, le lieu est présélectionné */
+    var cabPreset = box.getAttribute("data-cab-preset");
+    if (cabPreset) {
+      var cb = box.querySelector('[data-cab="' + cabPreset + '"]');
+      if (cb) { st.cab = cabPreset; cb.classList.add("sel"); cb.setAttribute("aria-pressed", "true"); }
+    }
     box.querySelectorAll("[data-cab]").forEach(function (b) {
       b.addEventListener("click", function () { st.cab = b.getAttribute("data-cab"); select("[data-cab]", b); maybeDone(); });
     });

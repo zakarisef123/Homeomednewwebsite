@@ -37,3 +37,16 @@ Gabarits utilisables dans les pages : `{{rdv}}` (bouton rendez-vous), `{{cta}}`,
 - **Nouveaux services** (textes rédigés, à relire) : `accompagnement-tdah`, `tcc-sommeil`, `bebe-allaitement-sommeil` — formations, format/durée des séances et **tarifs**.
 - **Mentions légales & CGU** réécrites pour le nouveau site (l’ancien texte des CGU citait « Marie Pascale Rumeau » et l’ancienne déclaration de confidentialité un autre numéro : +41 21 566 16 25).
 - FAQ : durée de la 1ère consultation harmonisée sur 75–90 min (l’ancienne FAQ indiquait « 1h30 » et des suivis d’« 1h00 », la page tarifs 45–60 min).
+
+## Deux cabinets = deux établissements pour Google
+
+- Chaque page cabinet déclare son propre établissement (données structurées `MedicalBusiness`) : adresse, horaires, zone desservie, lien vers sa fiche Google Maps.
+  - Pully : `/cabinet-pully/` — lun, mar, mer 8h–18h, ven 8h–13h — fiche `maps.google.com/?cid=4980652819741660907`
+  - Fribourg : `/cabinet-fribourg/` — jeudi 9h–18h — fiche `maps.google.com/?cid=13756565993613354598`
+- Les deux sont reliés à l’organisation HOMEOMED et à Paola Orlando.
+
+**À régler dans Google Business Profile (par Paola) :**
+1. Fiche **Pully** → Modifier le profil → Site web : `https://homeomed.ch/cabinet-pully/`
+2. Fiche **Fribourg** → Site web : `https://homeomed.ch/cabinet-fribourg/`
+3. Sur chaque fiche, lien de prise de rendez-vous : `https://homeomed.ch/prendre-rdv/`
+4. Vérifier que les horaires des fiches sont identiques à ceux du site.
