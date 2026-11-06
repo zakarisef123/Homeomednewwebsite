@@ -3,32 +3,33 @@
    Design system & styles
    ========================================================================== */
 
-/* ---------- Fonts (auto-hébergées, aucun appel à Google) ---------- */
+/* ---------- Fonts (auto-hébergées, aucun appel à Google) ----------
+   Titres : DM Serif Display · Texte : Nunito Sans (licence SIL OFL) */
 @font-face {
-  font-family: "Fraunces";
-  src: url("../fonts/fraunces-latin-wght-normal.woff2") format("woff2-variations");
-  font-weight: 300 800;
+  font-family: "DM Serif Display";
+  src: url("../fonts/dm-serif-display-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Fraunces";
-  src: url("../fonts/fraunces-latin-wght-italic.woff2") format("woff2-variations");
-  font-weight: 300 800;
+  font-family: "DM Serif Display";
+  src: url("../fonts/dm-serif-display-latin-400-italic.woff2") format("woff2");
+  font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
-  font-family: "DM Sans";
-  src: url("../fonts/dm-sans-latin-wght-normal.woff2") format("woff2-variations");
-  font-weight: 300 800;
+  font-family: "Nunito Sans";
+  src: url("../fonts/nunito-sans-latin-wght-normal.woff2") format("woff2-variations");
+  font-weight: 200 1000;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "DM Sans";
-  src: url("../fonts/dm-sans-latin-wght-italic.woff2") format("woff2-variations");
-  font-weight: 300 800;
+  font-family: "Nunito Sans";
+  src: url("../fonts/nunito-sans-latin-wght-italic.woff2") format("woff2-variations");
+  font-weight: 200 1000;
   font-style: italic;
   font-display: swap;
 }
@@ -52,8 +53,8 @@
   --gold: #e3a83b;
   --rose: #c9806a;
 
-  --font-serif: "Fraunces", "Iowan Old Style", Georgia, serif;
-  --font-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "DM Serif Display", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Nunito Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   --radius-s: 10px;
   --radius: 18px;
@@ -108,7 +109,6 @@ h1, h2, h3, h4 {
   line-height: 1.15;
   letter-spacing: -0.015em;
   margin: 0 0 .5em;
-  font-variation-settings: "SOFT" 50, "opsz" 72;
 }
 h1 { font-size: clamp(2.3rem, 5.4vw, 4.1rem); }
 h2 { font-size: clamp(1.85rem, 3.6vw, 2.9rem); }
@@ -1172,3 +1172,49 @@ html { scroll-padding-top: 150px; }
   .hero-home .hero-bg { object-position: 62% 50%; }
   .hero-home h1, .hero-home .lead { text-shadow: 0 1px 12px rgba(10, 36, 54, .45); }
 }
+
+/* ---------- Accueil : portrait, chiffres clés, choix du cabinet, avis classés ---------- */
+.hello-card { position: absolute; right: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter))); bottom: 40px; display: flex; gap: 16px; align-items: center; max-width: 380px; padding: 14px 18px 14px 14px; background: rgba(255,255,255,.96); border-radius: 22px; box-shadow: var(--shadow-l); color: var(--text); }
+.hello-card img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; object-position: 50% 20%; flex: none; }
+.hello-card strong { display: block; font-family: var(--font-serif); font-size: 1.15rem; color: var(--ink); font-weight: 500; }
+.hello-card span { display: block; font-size: .84rem; color: var(--muted); line-height: 1.45; margin: 2px 0 4px; }
+.hello-card a { font-size: .85rem; font-weight: 700; color: var(--teal-600); text-decoration: none; }
+@media (max-width: 860px) { .hello-card { position: relative; right: auto; bottom: auto; margin: 24px var(--gutter) 0; } }
+.stats-strip { background: #fff; border-bottom: 1px solid var(--line); }
+.stats-strip .container { display: grid; grid-template-columns: repeat(5, 1fr); }
+.stat { padding: 22px 18px; text-align: center; border-left: 1px solid var(--line); }
+.stat:first-child { border-left: 0; }
+.stat b { display: block; font-family: var(--font-serif); font-weight: 500; font-size: 1.7rem; color: var(--ink); line-height: 1.1; }
+.stat b small { font-size: .9rem; color: var(--muted); }
+.stat > span { font-size: .85rem; color: var(--muted); }
+@media (max-width: 860px) { .stats-strip .container { grid-template-columns: repeat(2, 1fr); } .stat { border-left: 0; border-top: 1px solid var(--line); } }
+.cab-pick { display: grid; grid-template-columns: 96px 1fr auto; gap: 16px; align-items: center; padding: 12px; background: #fff; border: 1px solid var(--line); border-radius: 20px; text-decoration: none; color: var(--text); transition: border-color .2s ease, box-shadow .2s ease; }
+.cab-pick:hover { border-color: var(--teal); box-shadow: var(--shadow); color: var(--text); }
+.cab-pick img, .cab-ico { width: 96px; height: 72px; border-radius: 14px; object-fit: cover; }
+.cab-ico { display: grid; place-items: center; background: var(--teal-50); color: var(--teal-600); }
+.cab-ico svg { width: 30px; height: 30px; }
+.cab-pick strong { display: block; font-family: var(--font-serif); font-size: 1.2rem; color: var(--ink); font-weight: 500; }
+.cab-pick small { color: var(--muted); font-size: .88rem; }
+.cab-pick em { font-style: normal; font-weight: 700; font-size: .85rem; color: var(--teal-600); padding-right: 8px; white-space: nowrap; }
+.rev-tag { align-self: flex-start; padding: .25em .75em; border-radius: 999px; background: var(--teal-50); color: var(--teal-600); font-size: .75rem; font-weight: 700; letter-spacing: .04em; }
+
+/* ---------- Typographie : DM Serif Display n’existe qu’en 400 ---------- */
+h1, h2, h3, .float-card strong, .hello-card strong, .cab-pick strong, .stat b, .mini-rating b,
+.timeline h4, .catalog-title, .price, .big-quote, .pf-label, .svc-panel-intro h3, .m-svc summary,
+.symptom-card .who, .rating-box .score, .hero-badge .num, .article .signature { font-weight: 400; }
+h1, h2, h3, h4 { letter-spacing: -0.005em; }
+body { font-synthesis-weight: none; }
+
+/* ---------- Avis : 3 par 3, filtres, pagination ---------- */
+.rev-filters { margin: 0 0 22px; }
+.carousel-track > [hidden] { display: none; }
+.carousel-track { scroll-snap-type: x mandatory; }
+.carousel-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 6px; }
+.carousel-dots { display: flex; gap: 8px; }
+.carousel-dots span { width: 9px; height: 9px; border-radius: 50%; background: var(--sand-2); transition: background .2s ease, width .2s ease; }
+.carousel-dots span.on { width: 26px; border-radius: 999px; background: var(--teal-600); }
+.carousel-nav button:disabled { opacity: .35; pointer-events: none; }
+@media (max-width: 900px) { .rev-filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .rev-filters .pf-btn { flex: none; } }
+.carousel-track { grid-auto-columns: calc((100% - 48px) / 3); }
+@media (max-width: 1000px) { .carousel-track { grid-auto-columns: calc((100% - 24px) / 2); } }
+@media (max-width: 640px) { .carousel-track { grid-auto-columns: 100%; } }

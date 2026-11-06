@@ -12,7 +12,7 @@ build.py             ← en-tête, menu, pied de page, avis Google, blocs réuti
 assets/css/style.css ← design (couleurs, typographies, composants)
 assets/js/main.js    ← menu mobile, carrousel, animations, cartes au clic
 assets/img/          ← photos optimisées (WebP) et logos
-assets/fonts/        ← polices auto-hébergées (Fraunces, DM Sans — licence OFL)
+assets/fonts/        ← polices auto-hébergées (DM Serif Display, Nunito Sans — licence OFL)
 index.html, */index.html, sitemap.xml, robots.txt, _redirects  ← fichiers générés
 ```
 
