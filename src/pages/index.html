@@ -1,23 +1,30 @@
 <!--meta {"title": "Homéopathe à Pully/Lausanne & Fribourg – HOMEOMED, Paola Orlando", "description": "Paola Orlando, homéopathe diplômée fédérale à Pully/Lausanne et Fribourg. Homéopathie classique pour l’enfant, la femme, l’ORL, les allergies, la peau, les soins de support en oncologie, le TDAH et le sommeil.", "path": "", "nav": "home", "schema": true} -->
 
-<section class="hero-compact">
-  <div class="container wide">
-    <div class="row">
-      <div>
-        <span class="eyebrow reveal">Homéopathe diplômée fédérale · Pully/Lausanne & Fribourg</span>
-        <h1 class="reveal d1 balance">Retrouver équilibre et stabilité grâce à <em>l’homéopathie</em></h1>
-        <p class="lead reveal d2">Une homéopathie classique, précise et structurée pour l’enfant, la femme et l’adulte — toujours en complément de votre suivi médical. Choisissez votre accompagnement ci-dessous.</p>
+<section class="hero-full hero-home">
+  <img class="hero-bg" src="{{root}}assets/img/hero-granules.webp" alt="" width="1800" height="1200" fetchpriority="high">
+  <div class="container">
+    <div class="hero-content">
+      <span class="eyebrow reveal">Homéopathe diplômée fédérale · Pully/Lausanne & Fribourg</span>
+      <h1 class="reveal d1 balance">Retrouver équilibre et stabilité grâce à <em>l’homéopathie</em></h1>
+      <p class="lead reveal d2">Une homéopathie classique, précise et structurée pour l’enfant, la femme et l’adulte — toujours en complément de votre suivi médical.</p>
+      <div class="btn-row reveal d3">
+        {{rdv:Je prends rendez-vous}}
+        <a class="btn btn-outline-light" href="#services">Voir mes services</a>
       </div>
-      <div class="side reveal d2">
-        <a class="mini-rating" href="{{google-reviews}}" target="_blank" rel="noopener">{{icon:google}}<b>4.9</b><span><span class="stars">★★★★★</span><br>17 avis Google</span></a>
-        <div class="btn-row">{{rdv}}</div>
-        <span class="trust-item small muted">{{icon:shield}} Reconnue ASCA · RME · Visana · EGK</span>
+      <div class="trust-row reveal d3">
+        <span class="trust-item">{{icon:shield}} Reconnue ASCA · RME · Visana · EGK</span>
+        <span class="trust-sep" aria-hidden="true"></span>
+        <span class="trust-item">{{icon:globe}} Français · English · Italiano</span>
       </div>
     </div>
   </div>
+  <a class="hero-badge reveal d3" href="{{google-reviews}}" target="_blank" rel="noopener">
+    <span class="num">4.9</span>
+    <span class="txt"><strong>★★★★★ Avis Google</strong>Basé sur 17 avis de patients · Cabinet HOMEOMED</span>
+  </a>
 </section>
 
-<section class="section tight" style="padding-top:0" id="services" aria-label="Mes services">
+<section class="section tight" style="padding-top:28px" id="services" aria-label="Mes services">
   <div class="container wide">
     {{svc-filter}}
     {{svc-tiles}}

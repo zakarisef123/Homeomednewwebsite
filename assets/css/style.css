@@ -1149,3 +1149,26 @@ html { scroll-padding-top: 150px; }
   .hero-compact .side .trust-item { font-size: .8rem; }
   .hero-compact { padding-bottom: 20px; }
 }
+
+/* Accueil : héro photo un peu moins haut, pour garder les services proches */
+.hero-home { min-height: min(68vh, 600px); padding: 56px 0 84px; }
+.hero-home .hero-badge { bottom: 36px; }
+@media (max-width: 860px) {
+  .hero-home { min-height: 0; padding: 44px 0 32px; }
+  .hero-home .lead { font-size: 1.02rem; margin-bottom: 1.4rem; }
+  .hero-home .trust-row { margin-top: 1.4rem; }
+  .hero-home .hero-badge { margin-top: 24px; padding: 12px 16px; }
+  .hero-home .hero-badge .num { font-size: 2rem; }
+}
+@media (max-width: 760px) {
+  .hero-home .btn-row .btn-outline-light { display: none; }
+}
+@media (max-width: 860px) {
+  .hero-home .hero-badge { bottom: auto; }
+  .hero-home .trust-row .trust-sep, .hero-home .trust-row .trust-item:last-child { display: none; }
+}
+@media (max-width: 860px) {
+  .hero-home::after { background: linear-gradient(180deg, rgba(10, 36, 54, .5) 0%, rgba(10, 36, 54, .62) 55%, rgba(10, 36, 54, .78) 100%); }
+  .hero-home .hero-bg { object-position: 62% 50%; }
+  .hero-home h1, .hero-home .lead { text-shadow: 0 1px 12px rgba(10, 36, 54, .45); }
+}
