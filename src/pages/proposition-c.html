@@ -1,0 +1,39 @@
+<!--meta {"title": "Proposition C – Par profil | HOMEOMED", "description": "Proposition de page d’accueil : orientation par profil puis catalogue des services.", "path": "propositions/accueil-c/", "nav": "home", "noindex": true} -->
+
+<section class="hero-compact">
+  <div class="container">
+    <div class="row">
+      <div>
+        <span class="eyebrow reveal">Homéopathe diplômée fédérale · Pully/Lausanne & Fribourg</span>
+        <h1 class="reveal d1 balance">Pour qui consultez-vous <em>aujourd’hui&nbsp;?</em></h1>
+        <p class="lead reveal d2">Une homéopathie classique, précise et structurée, pour toute la famille — toujours en complément de votre suivi médical.</p>
+      </div>
+      <div class="side reveal d2">
+        <a class="mini-rating" href="{{google-reviews}}" target="_blank" rel="noopener">{{icon:google}}<b>4.9</b><span><span class="stars">★★★★★</span><br>17 avis Google</span></a>
+        <div class="btn-row">{{rdv}}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight" style="padding-top:8px" id="services">
+  <div class="container reveal">
+    {{svc-profiles}}
+  </div>
+</section>
+
+<section class="section bg-white">
+  <div class="container">
+    <div class="section-head left">
+      <span class="eyebrow">Tous mes services</span>
+      <h2>Mes accompagnements</h2>
+    </div>
+    {{svc-catalog}}
+    <div class="btn-row mt-3">{{rdv}}<a class="btn btn-ghost" href="{{root}}mes-specialites/">Toutes mes spécialités</a></div>
+  </div>
+</section>
+
+{{include:apercus}}
+{{reviews}}
+{{cta}}
+{{contact}}
