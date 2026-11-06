@@ -1287,3 +1287,8 @@ body { font-synthesis-weight: none; }
 }
 .rdv-summary { margin-bottom: 18px; padding: 16px 20px; border-radius: var(--radius); background: var(--teal-50); border: 1px solid var(--teal-100); color: var(--ink); }
 .fn-back[hidden], .fn-step[hidden] { display: none; }
+
+/* Le menu « Cabinets » doit passer devant la barre des services */
+.site-header .header-inner { position: relative; z-index: 3; }
+.site-header .svc-bar { position: relative; z-index: 2; }
+.main-nav .submenu { z-index: 140; }
