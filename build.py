@@ -237,30 +237,260 @@ def disclaimer():
 # --------------------------------------------------------------------------
 # Navigation
 # --------------------------------------------------------------------------
-SPECIALTIES = [
-    ("enfant-et-adolescent/", "Enfant & Adolescent", "Dès la naissance : ORL, sommeil, peau, TDAH…", "child"),
-    ("equilibre-feminin-et-hormonal/", "Équilibre féminin & hormonal", "Cycles, fertilité, grossesse, ménopause", "flower"),
-    ("orl-allergies-peau/", "ORL, allergies, peau", "Eczéma, asthme, rhinites, otites…", "wind"),
-    ("homeopathie-soins-support-oncologie/", "Soins de support en oncologie", "Pendant et après les traitements", "ribbon"),
+# Catalogue des services : source unique pour le menu, l'accueil et le pied de page.
+# Chaque service : page, libellés, description, icône, image, sous-services (ancres
+# dans la page ou autres pages) et services liés.
+SERVICES = [
+    dict(path="enfant-et-adolescent/", short="Enfant & Ado", title="Bébé, enfant & adolescent", icon="child",
+         img="spec-enfant.webp", tagline="Dès la naissance, jusqu’à 18 ans",
+         desc="Otites à répétition, sommeil, digestion, eczéma, dentition, comportement, acné et troubles hormonaux de l’ado.",
+         subs=[("Nouveau-né & bébé", "#bebe", "Coliques, reflux, sommeil, dentition"),
+               ("Enfant", "#enfant", "ORL, peau, sommeil, digestion, concentration"),
+               ("Adolescent", "#ado", "Acné, allergies, cycles, fatigue, émotions"),
+               ("Questions fréquentes", "#faq", "")],
+         related=[("Accompagnement TDAH", "accompagnement-tdah/"), ("Bébé : allaitement & sommeil", "bebe-allaitement-sommeil/")]),
+    dict(path="equilibre-feminin-et-hormonal/", short="Femme & hormones", title="Équilibre féminin & hormonal", icon="flower",
+         img="spec-femme.webp", tagline="Toutes les étapes de la vie hormonale",
+         desc="Cycles douloureux, SOPK, endométriose, fertilité, grossesse, post-partum, ménopause, thyroïde.",
+         subs=[("Cycles & douleurs menstruelles", "#cycles", "Règles douloureuses, SPM, cycles irréguliers"),
+               ("SOPK & endométriose", "#sopk", "Douleurs pelviennes, cycles longs"),
+               ("Fertilité & désir de grossesse", "#fertilite", "Projet bébé, PMA, stimulation"),
+               ("Grossesse & post-partum", "#grossesse", "Nausées, accouchement, baby-blues"),
+               ("Préménopause & ménopause", "#menopause", "Bouffées de chaleur, sommeil, humeur"),
+               ("Thyroïde & métabolisme", "#thyroide", "Hypo/hyperthyroïdie, poids, fatigue")],
+         related=[("Bébé : allaitement & sommeil", "bebe-allaitement-sommeil/"), ("TCC du sommeil", "tcc-sommeil/")]),
+    dict(path="orl-allergies-peau/", short="ORL · Allergies · Peau", title="ORL, allergies, peau", icon="wind",
+         img="spec-orl.webp", tagline="Chez l’enfant et l’adulte",
+         desc="Eczéma, psoriasis, urticaire, rhume des foins, asthme, otites, sinusites.",
+         subs=[("Peau : eczéma, psoriasis, urticaire", "#peau", "Démangeaisons, poussées, sommeil perturbé"),
+               ("Allergies saisonnières", "#allergies", "Pollen, acariens, animaux, conjonctivites"),
+               ("Infections ORL à répétition", "#infections-orl", "Otites, angines, sinusites, rhinites"),
+               ("Asthme & troubles respiratoires", "#asthme", "Toux nocturne, essoufflement"),
+               ("Questions fréquentes", "#faq", "")],
+         related=[("Enfant & adolescent", "enfant-et-adolescent/")]),
+    dict(path="homeopathie-soins-support-oncologie/", short="Oncologie", title="Soins de support en oncologie", icon="ribbon",
+         img="spec-onco.webp", tagline="En complément de l’équipe médicale",
+         desc="Pendant et après les traitements contre le cancer, pour mieux traverser les effets secondaires.",
+         subs=[("Pendant les traitements", "#pendant", "Chimio, radio, hormonothérapie, immunothérapie"),
+               ("Après les traitements", "#apres", "Récupération, énergie, retour au quotidien"),
+               ("Formations & recherche", "#formations", "Gustave Roussy, SHISSO, publications"),
+               ("Questions fréquentes", "#faq", "")],
+         related=[("Mon histoire : mon papa, mon héros", "soin-de-support-en-oncologie-histoire-personnelle/"), ("TCC du sommeil", "tcc-sommeil/")]),
+    dict(path="accompagnement-tdah/", short="TDAH", title="Accompagnement TDAH", icon="brain", new=True,
+         img="tdah-accompagnement.webp", tagline="Enfant, parents & famille",
+         desc="Un accompagnement en trois volets : l’enfant, les parents et toute la famille.",
+         subs=[("Pour l’enfant", "#enfant", "Attention, agitation, sommeil, émotions"),
+               ("Pour les parents", "#parents", "Écoute, repères concrets, fatigue"),
+               ("Pour la famille", "#famille", "Apaiser les tensions, retrouver un rythme"),
+               ("Questions fréquentes", "#faq", "")],
+         related=[("Article : TDAH & homéopathie", "tdah-homeopathie-accompagnement-individualise/"), ("Enfant & adolescent", "enfant-et-adolescent/")]),
+    dict(path="tcc-sommeil/", short="Sommeil", title="TCC du sommeil", icon="moon", new=True,
+         img="onco-apres.webp", tagline="Thérapie comportementale et cognitive de l’insomnie",
+         desc="Endormissement difficile, réveils nocturnes : retrouver des nuits réparatrices durablement.",
+         subs=[("Pour qui ?", "#pour-qui", "Insomnie, réveils nocturnes, fatigue"),
+               ("La méthode en 3 étapes", "#methode", "Évaluer, ajuster, apaiser le mental"),
+               ("Questions fréquentes", "#faq", "")],
+         related=[("Bébé : allaitement & sommeil", "bebe-allaitement-sommeil/"), ("Équilibre féminin & hormonal", "equilibre-feminin-et-hormonal/")]),
+    dict(path="bebe-allaitement-sommeil/", short="Bébé & allaitement", title="Bébé : allaitement & sommeil", icon="heart", new=True,
+         img="enfant-bebe.webp", tagline="Soutien aux mamans et aux tout-petits",
+         desc="Soutenir les mamans dans l’allaitement et accompagner le sommeil du tout-petit.",
+         subs=[("Allaitement", "#allaitement", "Douleurs, production de lait, tétées, sevrage"),
+               ("Sommeil de bébé", "#sommeil-bebe", "Réveils, endormissement, rituels"),
+               ("Questions fréquentes", "#faq", "")],
+         related=[("Nouveau-né & bébé", "enfant-et-adolescent/#bebe"), ("Grossesse & post-partum", "equilibre-feminin-et-hormonal/#grossesse")]),
+    dict(path="mes-specialites/#complementaires", short="Autres troubles", title="Autres accompagnements", icon="bolt",
+         img="famille.webp", tagline="Chronique, neurologique, urgences",
+         desc="Fatigue et stress chroniques, troubles digestifs, migraines, vertiges, urgences homéopathiques.",
+         subs=[("Déséquilibres métaboliques chroniques", "", "Fatigue, stress, digestion, auto-immunité"),
+               ("Troubles neurologiques", "", "Migraines, vertiges, tremblements"),
+               ("Urgences homéopathiques", "", "Fièvre, otites, cystites, gastro, toux")],
+         related=[("Toutes mes spécialités", "mes-specialites/"), ("Tarifs : urgence homéo", "tarifs-remboursements/")]),
 ]
-# Nouveaux accompagnements
-NEW_SERVICES = [
-    ("accompagnement-tdah/", "Accompagnement TDAH", "Enfant, parents & famille", "brain"),
-    ("tcc-sommeil/", "TCC du sommeil", "Thérapie comportementale et cognitive de l’insomnie", "moon"),
-    ("bebe-allaitement-sommeil/", "Bébé : allaitement & sommeil", "Soutien aux mamans et aux tout-petits", "heart"),
+# Compatibilité (pied de page, etc.)
+SPECIALTIES = [(s["path"], s["title"], s["tagline"], s["icon"]) for s in SERVICES[:4]]
+NEW_SERVICES = [(s["path"], s["title"], s["tagline"], s["icon"]) for s in SERVICES[4:7]]
+
+
+def svc_href(root, svc, href):
+    base = svc["path"].split("#")[0]
+    if href.startswith("#"):
+        return f"{root}{base}{href}"
+    return f"{root}{href or svc['path']}"
+
+
+def services_bar(root, nav_path):
+    items = []
+    for i, s in enumerate(SERVICES):
+        cur = ' aria-current="page"' if nav_path and s["path"].split("#")[0] == nav_path else ""
+        new = '<span class="dot-new" aria-label="nouveau"></span>' if s.get("new") else ""
+        subs = "".join(
+            f'<li><a href="{svc_href(root, s, h)}"><strong>{t}</strong>{f"<span>{d}</span>" if d else ""}</a></li>'
+            for t, h, d in s["subs"])
+        rel = "".join(f'<li><a href="{root}{h}">{icon("arrow")}{t}</a></li>' for t, h in s["related"])
+        align = " right" if i >= len(SERVICES) - 3 else ""
+        items.append(f"""<li class="svc-item{align}">
+  <a class="svc-link" href="{root}{s['path']}"{cur}>{icon(s['icon'])}<span>{s['short']}</span>{new}{icon('chevron', 'chev')}</a>
+  <div class="svc-panel" role="group" aria-label="{s['title']}">
+    <div class="svc-panel-intro">
+      <img src="{root}assets/img/{s['img']}" alt="" loading="lazy">
+      <span class="eyebrow">{s['tagline']}</span>
+      <h3>{s['title']}{' <span class="badge-new">Nouveau</span>' if s.get('new') else ''}</h3>
+      <p>{s['desc']}</p>
+      <a class="btn btn-primary btn-sm" href="{root}{s['path']}">Voir la page</a>
+    </div>
+    <div class="svc-panel-links">
+      <p class="svc-panel-label">Ce que j’accompagne</p>
+      <ul class="svc-subs">{subs}</ul>
+      <p class="svc-panel-label">Services liés</p>
+      <ul class="svc-related">{rel}</ul>
+    </div>
+  </div>
+</li>""")
+    return f"""<div class="svc-bar">
+  <div class="container wide">
+    <ul class="svc-list" aria-label="Mes services">
+      {''.join(items)}
+    </ul>
+  </div>
+</div>"""
+
+
+def mobile_services(root):
+    out = []
+    for s in SERVICES:
+        links = "".join(f'<li><a href="{svc_href(root, s, h)}">{t}</a></li>' for t, h, _ in s["subs"])
+        rel = "".join(f'<li><a class="rel" href="{root}{h}">{t}</a></li>' for t, h in s["related"])
+        new = ' <span class="badge-new">Nouveau</span>' if s.get("new") else ""
+        out.append(f"""<details class="m-svc">
+  <summary>{icon(s['icon'])}<span>{s['title']}{new}</span>{icon('chevron', 'chev')}</summary>
+  <ul><li><a class="all" href="{root}{s['path']}">Voir la page {s['title']}</a></li>{links}{rel}</ul>
+</details>""")
+    return '<div class="mobile-services"><p class="svc-panel-label">Mes services</p>' + "".join(out) + "</div>"
+
+
+# --------------------------------------------------------------------------
+# Blocs « services » pour les propositions d'accueil
+# --------------------------------------------------------------------------
+SVC_PROFILES = {
+    "enfant-et-adolescent/": "bebe enfant famille",
+    "equilibre-feminin-et-hormonal/": "femme",
+    "orl-allergies-peau/": "bebe enfant adulte",
+    "homeopathie-soins-support-oncologie/": "cancer",
+    "accompagnement-tdah/": "enfant famille",
+    "tcc-sommeil/": "femme adulte cancer",
+    "bebe-allaitement-sommeil/": "bebe femme famille",
+    "mes-specialites/#complementaires": "adulte",
+}
+FILTERS = [("bebe", "child", "Mon bébé"), ("enfant", "users", "Mon enfant, mon ado"), ("femme", "flower", "Moi, femme"),
+           ("adulte", "user", "Moi, adulte"), ("cancer", "ribbon", "Parcours cancer"), ("famille", "heart", "Toute la famille")]
+
+
+def svc_filter(root):
+    btns = "".join(f'<button type="button" class="pf-btn" data-filter="{k}" aria-pressed="false">{icon(ic)}{t}</button>'
+                   for k, ic, t in FILTERS)
+    return f"""<div class="pf-bar" data-filter-bar>
+  <span class="pf-label">Pour qui consultez-vous&nbsp;?</span>
+  <div class="pf-btns">{btns}<button type="button" class="pf-btn pf-all" data-filter="all" aria-pressed="true">Tous les services</button></div>
+</div>"""
+
+
+def svc_tiles(root):
+    """Accueil — mosaïque : chaque service en tuile photo + sous-services."""
+    out = []
+    for i, s in enumerate(SERVICES):
+        chips = "".join(f'<li><a href="{svc_href(root, s, h)}">{t}</a></li>'
+                        for t, h, _ in s["subs"] if t != "Questions fréquentes")
+        new = '<span class="badge-new">Nouveau</span>' if s.get("new") else ""
+        out.append(f"""<article class="svc-tile reveal d{i % 4}" data-profiles="{SVC_PROFILES.get(s['path'], '')}">
+  <a class="svc-tile-img" href="{root}{s['path']}" tabindex="-1" aria-hidden="true"><img src="{root}assets/img/{s['img']}" alt="" loading="lazy">{new}</a>
+  <div class="svc-tile-body">
+    <h3><a href="{root}{s['path']}">{icon(s['icon'])}{s['title']}</a></h3>
+    <p>{s['desc']}</p>
+    <ul class="svc-chips">{chips}</ul>
+    <a class="preview-link" href="{root}{s['path']}">Voir la page {icon('arrow')}</a>
+  </div>
+</article>""")
+    return '<div class="svc-tiles">' + "".join(out) + "</div>"
+
+
+def svc_tabs(root):
+    """Proposition B — explorateur : liste des services + panneau détaillé."""
+    tabs, panels = [], []
+    for i, s in enumerate(SERVICES):
+        sel = "true" if i == 0 else "false"
+        new = ' <span class="dot-new" aria-label="nouveau"></span>' if s.get("new") else ""
+        tabs.append(f'<button class="svc-tab" role="tab" id="tab-{i}" aria-controls="panel-{i}" aria-selected="{sel}" tabindex="{0 if i == 0 else -1}">{icon(s["icon"])}<span>{s["title"]}</span>{new}</button>')
+        subs = "".join(f'<li><a href="{svc_href(root, s, h)}"><strong>{t}</strong>{f"<span>{d}</span>" if d else ""}</a></li>'
+                       for t, h, d in s["subs"] if t != "Questions fréquentes")
+        rel = "".join(f'<a class="chip-link" href="{root}{h}">{t}</a>' for t, h in s["related"])
+        panels.append(f"""<div class="svc-tabpanel" role="tabpanel" id="panel-{i}" aria-labelledby="tab-{i}"{'' if i == 0 else ' hidden'}>
+  <div class="svc-tabpanel-media"><img src="{root}assets/img/{s['img']}" alt="" loading="{'eager' if i == 0 else 'lazy'}"></div>
+  <div class="svc-tabpanel-body">
+    <span class="eyebrow">{s['tagline']}</span>
+    <h3>{s['title']}{' <span class="badge-new">Nouveau</span>' if s.get('new') else ''}</h3>
+    <p class="muted">{s['desc']}</p>
+    <ul class="svc-subs two">{subs}</ul>
+    <div class="svc-rel"><span>Services liés&nbsp;:</span>{rel}</div>
+    <div class="btn-row mt-1"><a class="btn btn-primary" href="{root}{s['path']}">Voir la page</a>{rdv_btn(root, "Prendre rendez-vous", "btn btn-ghost")}</div>
+  </div>
+</div>""")
+    return f"""<div class="svc-explorer" data-tabs>
+  <div class="svc-tablist" role="tablist" aria-label="Mes services">{''.join(tabs)}</div>
+  <div class="svc-tabpanels">{''.join(panels)}</div>
+</div>"""
+
+
+PROFILES = [
+    ("child", "Mon bébé", "0 – 2 ans", ["enfant-et-adolescent/#bebe", "bebe-allaitement-sommeil/", "orl-allergies-peau/"]),
+    ("users", "Mon enfant, mon ado", "3 – 18 ans", ["enfant-et-adolescent/", "accompagnement-tdah/", "orl-allergies-peau/"]),
+    ("flower", "Moi, en tant que femme", "Cycles, grossesse, ménopause", ["equilibre-feminin-et-hormonal/", "bebe-allaitement-sommeil/", "tcc-sommeil/"]),
+    ("user", "Moi, adulte", "Peau, allergies, sommeil, chronique", ["orl-allergies-peau/", "tcc-sommeil/", "mes-specialites/#complementaires"]),
+    ("ribbon", "Un parcours contre le cancer", "Pendant et après les traitements", ["homeopathie-soins-support-oncologie/", "tcc-sommeil/"]),
+    ("heart", "Toute la famille", "Parents, fratrie, quotidien", ["accompagnement-tdah/#famille", "enfant-et-adolescent/", "bebe-allaitement-sommeil/"]),
 ]
 
 
-def header(root, nav):
+def svc_profiles(root):
+    """Proposition C — « Pour qui consultez-vous ? » puis catalogue complet."""
+    by_path = {s["path"].split("#")[0]: s for s in SERVICES}
+    cards = []
+    for ic, t, sub, links in PROFILES:
+        lis = []
+        for l in links:
+            sv = by_path.get(l.split("#")[0])
+            label = sv["title"] if sv else l
+            if l == "enfant-et-adolescent/#bebe":
+                label = "Nouveau-né & bébé"
+            if l == "accompagnement-tdah/#famille":
+                label = "Accompagnement TDAH – famille"
+            lis.append(f'<li><a href="{root}{l}">{label}</a></li>')
+        cards.append(f"""<div class="profile-card">
+  <div class="icon-badge">{icon(ic)}</div>
+  <h3>{t}</h3><p class="small muted">{sub}</p>
+  <ul>{''.join(lis)}</ul>
+</div>""")
+    return '<div class="profile-grid">' + "".join(cards) + "</div>"
+
+
+def svc_catalog(root):
+    rows = []
+    for i, s in enumerate(SERVICES):
+        subs = "".join(f'<li><a href="{svc_href(root, s, h)}">{t}</a></li>' for t, h, _ in s["subs"] if t != "Questions fréquentes")
+        new = ' <span class="badge-new">Nouveau</span>' if s.get("new") else ""
+        rows.append(f"""<a class="catalog-row reveal" href="{root}{s['path']}">
+  <span class="catalog-num">{i + 1:02d}</span>
+  <span class="catalog-img"><img src="{root}assets/img/{s['img']}" alt="" loading="lazy"></span>
+  <span class="catalog-main"><span class="catalog-title">{s['title']}{new}</span><span class="catalog-desc">{s['desc']}</span></span>
+  <span class="catalog-go">{icon('arrow')}</span>
+</a>""")
+    return '<div class="catalog">' + "".join(rows) + "</div>"
+
+
+def header(root, nav, path=""):
     def cur(key):
         return ' aria-current="page"' if nav == key else ""
 
-    spec_current = " is-current" if nav in ("specialites",) else ""
     cab_current = " is-current" if nav in ("cabinet",) else ""
-    sub_spec = "".join(
-        f'<li><a href="{root}{p}">{t}<span>{d}</span></a></li>' for p, t, d, _ in SPECIALTIES)
-    sub_spec += '<li class="submenu-label">Nouveau</li>' + "".join(
-        f'<li><a href="{root}{p}">{t}<span>{d}</span></a></li>' for p, t, d, _ in NEW_SERVICES)
     return f"""<a class="skip-link" href="#contenu">Aller au contenu</a>
 <header class="site-header">
   <div class="container wide header-inner">
@@ -268,15 +498,10 @@ def header(root, nav):
       <img src="{root}assets/img/logo.webp" alt="HOMEOMED – Paola Orlando Homéopathe" width="640" height="157">
     </a>
     <nav class="main-nav" id="menu" aria-label="Navigation principale">
+      {mobile_services(root)}
       <ul>
         <li><a href="{root}qui-suis-je/"{cur("about")}>Qui suis-je&nbsp;?</a></li>
-        <li class="has-sub{spec_current}">
-          <button class="nav-toggle-sub" type="button" aria-expanded="false">Spécialités {icon("chevron")}</button>
-          <ul class="submenu">
-            <li><a href="{root}mes-specialites/">Toutes mes spécialités<span>Vue d’ensemble des accompagnements</span></a></li>
-            {sub_spec}
-          </ul>
-        </li>
+        <li><a href="{root}mes-specialites/"{cur("specialites") if path == "mes-specialites/" else ""}>Spécialités</a></li>
         <li><a href="{root}tarifs-remboursements/"{cur("tarifs")}>Tarifs</a></li>
         <li class="has-sub{cab_current}">
           <button class="nav-toggle-sub" type="button" aria-expanded="false">Cabinets {icon("chevron")}</button>
@@ -293,11 +518,13 @@ def header(root, nav):
         <a class="btn btn-ghost" href="{PHONE_LINK}">{icon("phone")}{PHONE}</a>
       </div>
     </nav>
-    <div class="btn-row">
+    <div class="btn-row header-actions">
+      <a class="header-phone" href="{PHONE_LINK}">{icon("phone")}<span>{PHONE}</span></a>
       <a class="btn btn-primary btn-sm header-cta" href="{root}prendre-rdv/">{icon("calendar")}Prendre RDV</a>
       <button class="menu-btn" type="button" aria-controls="menu" aria-expanded="false" aria-label="Ouvrir le menu"><span></span></button>
     </div>
   </div>
+  {services_bar(root, path)}
 </header>"""
 
 
@@ -440,7 +667,7 @@ def page(meta, body):
 {schema}{faq_schema}
 </head>
 <body>
-{header(root, meta.get("nav", ""))}
+{header(root, meta.get("nav", ""), path)}
 <main id="contenu">
 {body}
 </main>
@@ -471,6 +698,18 @@ def expand(body, root):
             return contact_block(root)
         if key == "reviews":
             return reviews_block()
+        if key.startswith("include:"):
+            return (ROOT / "src" / "partials" / f"{key[8:]}.html").read_text(encoding="utf-8")
+        if key == "svc-filter":
+            return svc_filter(root)
+        if key == "svc-tiles":
+            return svc_tiles(root)
+        if key == "svc-tabs":
+            return svc_tabs(root)
+        if key == "svc-profiles":
+            return svc_profiles(root)
+        if key == "svc-catalog":
+            return svc_catalog(root)
         if key == "disclaimer":
             return disclaimer()
         if key == "hours":
@@ -484,7 +723,7 @@ def expand(body, root):
         raise KeyError(f"Gabarit inconnu : {{{{{key}}}}}")
 
     # deux passes : les blocs peuvent contenir eux-mêmes {{root}}
-    for _ in range(2):
+    for _ in range(3):
         body = re.sub(r"\{\{([^}]+)\}\}", repl, body)
     return body
 

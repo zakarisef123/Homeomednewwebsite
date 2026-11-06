@@ -1,129 +1,30 @@
 <!--meta {"title": "Homéopathe à Pully/Lausanne & Fribourg – HOMEOMED, Paola Orlando", "description": "Paola Orlando, homéopathe diplômée fédérale à Pully/Lausanne et Fribourg. Homéopathie classique pour l’enfant, la femme, l’ORL, les allergies, la peau, les soins de support en oncologie, le TDAH et le sommeil.", "path": "", "nav": "home", "schema": true} -->
 
-<!-- 1. HÉRO — accroche + valeur + appel à l’action -->
-<section class="hero-full">
-  <img class="hero-bg" src="{{root}}assets/img/hero-granules.webp" alt="" width="1800" height="1200" fetchpriority="high">
-  <div class="container">
-    <div class="hero-content">
-      <span class="eyebrow reveal">Homéopathe diplômée fédérale · Pully/Lausanne & Fribourg</span>
-      <h1 class="reveal d1 balance">Retrouver équilibre et stabilité grâce à <em>l’homéopathie</em></h1>
-      <p class="lead reveal d2">Une homéopathie classique, précise et structurée pour les troubles chroniques ou récurrents de l’enfant, de la femme et de l’adulte — toujours en complément de votre suivi médical.</p>
-      <div class="btn-row reveal d3">
-        {{rdv:Je prends rendez-vous}}
-        <a class="btn btn-outline-light" href="#services">Découvrir mes accompagnements</a>
+<section class="hero-compact">
+  <div class="container wide">
+    <div class="row">
+      <div>
+        <span class="eyebrow reveal">Homéopathe diplômée fédérale · Pully/Lausanne & Fribourg</span>
+        <h1 class="reveal d1 balance">Retrouver équilibre et stabilité grâce à <em>l’homéopathie</em></h1>
+        <p class="lead reveal d2">Une homéopathie classique, précise et structurée pour l’enfant, la femme et l’adulte — toujours en complément de votre suivi médical. Choisissez votre accompagnement ci-dessous.</p>
       </div>
-      <div class="trust-row reveal d3">
-        <span class="trust-item">{{icon:shield}} Reconnue ASCA · RME · Visana · EGK</span>
-        <span class="trust-sep" aria-hidden="true"></span>
-        <span class="trust-item">{{icon:globe}} Français · English · Italiano</span>
+      <div class="side reveal d2">
+        <a class="mini-rating" href="{{google-reviews}}" target="_blank" rel="noopener">{{icon:google}}<b>4.9</b><span><span class="stars">★★★★★</span><br>17 avis Google</span></a>
+        <div class="btn-row">{{rdv}}</div>
+        <span class="trust-item small muted">{{icon:shield}} Reconnue ASCA · RME · Visana · EGK</span>
       </div>
-    </div>
-  </div>
-  <a class="hero-badge reveal d3" href="{{google-reviews}}" target="_blank" rel="noopener">
-    <span class="num">4.9</span>
-    <span class="txt"><strong>★★★★★ Avis Google</strong>Basé sur 17 avis de patients · Cabinet HOMEOMED</span>
-  </a>
-</section>
-
-<!-- 2. BANDEAU DÉFILANT -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span>Enfant & Adolescent</span><span class="dot">·</span>
-    <span>Équilibre féminin & hormonal</span><span class="dot">·</span>
-    <span>ORL, allergies, peau</span><span class="dot">·</span>
-    <span>Soins de support en oncologie</span><span class="dot">·</span>
-    <span>Accompagnement TDAH</span><span class="dot">·</span>
-    <span>TCC du sommeil</span><span class="dot">·</span>
-    <span>Allaitement & sommeil de bébé</span><span class="dot">·</span>
-    <span>Pully – Lausanne</span><span class="dot">·</span>
-    <span>Fribourg</span><span class="dot">·</span>
-    <span>Enfant & Adolescent</span><span class="dot">·</span>
-    <span>Équilibre féminin & hormonal</span><span class="dot">·</span>
-    <span>ORL, allergies, peau</span><span class="dot">·</span>
-    <span>Soins de support en oncologie</span><span class="dot">·</span>
-    <span>Accompagnement TDAH</span><span class="dot">·</span>
-    <span>TCC du sommeil</span><span class="dot">·</span>
-    <span>Allaitement & sommeil de bébé</span><span class="dot">·</span>
-    <span>Pully – Lausanne</span><span class="dot">·</span>
-    <span>Fribourg</span><span class="dot">·</span>
-  </div>
-</div>
-
-<!-- 3. MES ACCOMPAGNEMENTS — liens vers les pages dédiées -->
-<section class="section" id="services">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow center">Mes accompagnements à Pully & Fribourg</span>
-      <h2 class="balance">Une homéopathie précise, pour chaque étape de la vie</h2>
-      <p>Chaque accompagnement est individualisé, structuré et évolutif. Cliquez sur un service pour en savoir plus.</p>
-    </div>
-    <div class="home-services-grid">
-      <a href="{{root}}enfant-et-adolescent/" class="home-service-card reveal">
-        <div class="icon-badge">{{icon:child}}</div>
-        <h3>Bébé, enfant & adolescent</h3>
-        <p>Dès la naissance&nbsp;: otites à répétition, sommeil, digestion, eczéma, dentition, comportement, acné, troubles hormonaux de l’ado.</p>
-        <span class="preview-link">Découvrir {{icon:arrow}}</span>
-      </a>
-      <a href="{{root}}equilibre-feminin-et-hormonal/" class="home-service-card reveal d1">
-        <div class="icon-badge">{{icon:flower}}</div>
-        <h3>Équilibre féminin & hormonal</h3>
-        <p>Cycles douloureux, SOPK, endométriose, fertilité, grossesse, post-partum, ménopause, thyroïde.</p>
-        <span class="preview-link">Découvrir {{icon:arrow}}</span>
-      </a>
-      <a href="{{root}}orl-allergies-peau/" class="home-service-card reveal d2">
-        <div class="icon-badge">{{icon:wind}}</div>
-        <h3>ORL, allergies, peau</h3>
-        <p>Eczéma, psoriasis, urticaire, rhume des foins, asthme, otites, sinusites — chez l’enfant comme chez l’adulte.</p>
-        <span class="preview-link">Découvrir {{icon:arrow}}</span>
-      </a>
-      <a href="{{root}}homeopathie-soins-support-oncologie/" class="home-service-card reveal">
-        <div class="icon-badge">{{icon:ribbon}}</div>
-        <h3>Soins de support en oncologie</h3>
-        <p>Pendant et après les traitements contre le cancer, pour mieux traverser les effets secondaires, en complément de l’équipe médicale.</p>
-        <span class="preview-link">Découvrir {{icon:arrow}}</span>
-      </a>
-      <a href="{{root}}accompagnement-tdah/" class="home-service-card reveal d1">
-        <span class="badge-new">Nouveau</span>
-        <div class="icon-badge">{{icon:brain}}</div>
-        <h3>Accompagnement TDAH</h3>
-        <p>Un accompagnement en trois volets&nbsp;: l’enfant, les parents et toute la famille, pour retrouver un équilibre au quotidien.</p>
-        <span class="preview-link">Découvrir {{icon:arrow}}</span>
-      </a>
-      <a href="{{root}}tcc-sommeil/" class="home-service-card reveal d2">
-        <span class="badge-new">Nouveau</span>
-        <div class="icon-badge">{{icon:moon}}</div>
-        <h3>TCC du sommeil</h3>
-        <p>La thérapie comportementale et cognitive de l’insomnie, pour retrouver des nuits réparatrices durablement.</p>
-        <span class="preview-link">Découvrir {{icon:arrow}}</span>
-      </a>
-      <a href="{{root}}bebe-allaitement-sommeil/" class="home-service-card reveal">
-        <span class="badge-new">Nouveau</span>
-        <div class="icon-badge">{{icon:heart}}</div>
-        <h3>Bébé : allaitement & sommeil</h3>
-        <p>Soutenir les mamans dans l’allaitement et accompagner le sommeil du tout-petit, avec douceur.</p>
-        <span class="preview-link">Découvrir {{icon:arrow}}</span>
-      </a>
-      <a href="{{root}}mes-specialites/#complementaires" class="home-service-card reveal d1">
-        <div class="icon-badge">{{icon:bolt}}</div>
-        <h3>Troubles chroniques & neurologiques</h3>
-        <p>Fatigue et stress chroniques, troubles digestifs, maladies inflammatoires, migraines, vertiges, troubles nerveux…</p>
-        <span class="preview-link">Découvrir {{icon:arrow}}</span>
-      </a>
-      <a href="{{root}}mes-specialites/#complementaires" class="home-service-card reveal d2">
-        <div class="icon-badge">{{icon:spark}}</div>
-        <h3>Urgences homéopathiques</h3>
-        <p>Fièvre, infections hivernales, otites, maux de gorge, cystites, gastro, toux — pour adultes et enfants.</p>
-        <span class="preview-link">Découvrir {{icon:arrow}}</span>
-      </a>
-    </div>
-    <div class="btn-row center mt-3">
-      {{rdv}}
-      <a class="btn btn-ghost" href="{{root}}mes-specialites/">Toutes mes spécialités</a>
     </div>
   </div>
 </section>
 
-<!-- CITATION -->
+<section class="section tight" style="padding-top:0" id="services" aria-label="Mes services">
+  <div class="container wide">
+    {{svc-filter}}
+    {{svc-tiles}}
+    <p class="pf-empty small muted center" hidden>Aucun service pour ce profil.</p>
+  </div>
+</section>
+
 <section class="section tight bg-ink">
   <div class="container narrow center">
     <p class="big-quote reveal">L’idéal thérapeutique consiste à rétablir la santé de manière rapide, douce et durable.</p>
@@ -131,80 +32,7 @@
   </div>
 </section>
 
-<!-- 4. APERÇUS — chaque partie renvoie vers sa page dédiée -->
-<section class="section">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow center">Découvrir le cabinet</span>
-      <h2>Mon approche, en détail</h2>
-      <p>Cliquez sur une partie pour en savoir plus.</p>
-    </div>
-    <div class="previews-list">
-
-      <a href="{{root}}qui-suis-je/" class="section-preview reveal">
-        <div class="section-preview-photo">
-          <img src="{{root}}assets/img/paola-portrait.webp" alt="Paola Orlando, homéopathe diplômée fédérale, dans son cabinet" loading="lazy" style="object-position:50% 25%">
-        </div>
-        <div class="section-preview-body">
-          <span class="eyebrow">Qui suis-je&nbsp;?</span>
-          <h3>Bonjour, je m’appelle Paola</h3>
-          <p>Homéopathe diplômée fédérale, formée en oncologie de support (Gustave Roussy) et en micronutrition, je me forme chaque année en Inde auprès des plus grands praticiens.</p>
-          <span class="preview-link">Découvrir {{icon:arrow}}</span>
-        </div>
-      </a>
-
-      <a href="{{root}}soin-de-support-en-oncologie-histoire-personnelle/" class="section-preview reveal">
-        <div class="section-preview-photo">
-          <img src="{{root}}assets/img/papa.webp" alt="Paola Orlando et son papa" loading="lazy" style="object-position:50% 35%">
-        </div>
-        <div class="section-preview-body">
-          <span class="eyebrow">Mon histoire</span>
-          <h3>Pourquoi j’ai choisi l’homéopathie</h3>
-          <p>«&nbsp;J’ai tout plaqué (ou presque) pour l’homéopathie&nbsp;!&nbsp;» L’histoire de mon papa, mon héros, qui m’a conduite sur ce chemin.</p>
-          <span class="preview-link">Lire l’article {{icon:arrow}}</span>
-        </div>
-      </a>
-
-      <a href="{{root}}faq/" class="section-preview reveal">
-        <div class="section-preview-photo">
-          <img src="{{root}}assets/img/pully-3.webp" alt="Bureau de consultation lumineux du cabinet HOMEOMED" loading="lazy">
-        </div>
-        <div class="section-preview-body">
-          <span class="eyebrow">Le déroulé du suivi</span>
-          <h3>Comment se déroule une consultation</h3>
-          <p>Une première consultation de 75 à 90 minutes pour comprendre votre terrain, puis un suivi toutes les 4 à 6 semaines, ajusté à votre évolution.</p>
-          <span class="preview-link">Découvrir {{icon:arrow}}</span>
-        </div>
-      </a>
-
-      <a href="{{root}}tarifs-remboursements/" class="section-preview reveal">
-        <div class="section-preview-photo">
-          <img src="{{root}}assets/img/pully-4.webp" alt="Salle d’attente du cabinet HOMEOMED à Pully" loading="lazy">
-        </div>
-        <div class="section-preview-body">
-          <span class="eyebrow">Tarifs & remboursements</span>
-          <h3>Reconnue par les assurances complémentaires</h3>
-          <p>Première consultation CHF 230.–, suivi adulte CHF 150.–, suivi enfant CHF 90.–. Reconnue ASCA, RME, Visana et EGK.</p>
-          <span class="preview-link">Découvrir {{icon:arrow}}</span>
-        </div>
-      </a>
-
-      <a href="{{root}}cabinet-pully/" class="section-preview reveal">
-        <div class="section-preview-photo">
-          <img src="{{root}}assets/img/fribourg-1.webp" alt="Cabinet HOMEOMED au Centre ITS à Fribourg" loading="lazy">
-        </div>
-        <div class="section-preview-body">
-          <span class="eyebrow">Deux cabinets</span>
-          <h3>Pully/Lausanne & Fribourg</h3>
-          <p>Place Neuve 1 à Pully (lundi, mardi, mercredi, vendredi) et Centre ITS à Fribourg (tous les jeudis). Consultations en visio possibles.</p>
-          <span class="preview-link">Infos & accès {{icon:arrow}}</span>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
+{{include:apercus}}
 {{reviews}}
 {{cta}}
 {{contact}}
