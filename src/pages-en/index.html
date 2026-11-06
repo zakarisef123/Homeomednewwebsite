@@ -1,0 +1,97 @@
+<!--meta {"title": "Homeopath in Pully/Lausanne & Fribourg – HOMEOMED, Paola Orlando", "description": "Paola Orlando, Swiss federally certified homeopath in Pully/Lausanne and Fribourg. Classical homeopathy for children, women, ENT, allergies, skin, supportive cancer care, ADHD and sleep. Consultations in English.", "path": "en/", "nav": "home", "schema": true} -->
+<!-- 1. Hero with Paola's portrait -->
+<section class="hero-full hero-home">
+  <img class="hero-bg" src="{{root}}assets/img/hero-granules.webp" alt="" width="1800" height="1200" fetchpriority="high">
+  <div class="container">
+    <div class="hero-content">
+      <span class="eyebrow">Swiss federally certified homeopath · Pully/Lausanne & Fribourg</span>
+      <h1 class="balance">Restore balance and stability with <em>homeopathy</em></h1>
+      <p class="lead">Classical, precise and structured homeopathy for children, women and adults — always alongside your medical care.</p>
+      <div class="btn-row">{{rdv}}<a class="btn btn-outline-light" href="#services">See my services</a></div>
+    </div>
+  </div>
+  <div class="hello-card">
+    <img src="{{root}}assets/img/paola-portrait.webp" alt="Paola Orlando, homeopath" width="1100" height="1465">
+    <div>
+      <strong>Hello, I’m Paola</strong>
+      <span>Swiss federally certified homeopath, trained in supportive cancer care (Gustave Roussy) and micronutrition.</span>
+      <a href="{{root}}qui-suis-je/">My background →</a>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Key figures -->
+<section class="stats-strip">
+  <div class="container wide">
+    <div class="stat"><b>4.9<small>/5</small></b><span><span class="stars">★★★★★</span> 17 Google reviews</span></div>
+    <div class="stat"><b>Federal dipl.</b><span>Swiss federally certified homeopath</span></div>
+    <div class="stat"><b>2</b><span>practices · Pully & Fribourg</span></div>
+    <div class="stat"><b>Covered</b><span>ASCA · RME · Visana · EGK</span></div>
+    <div class="stat"><b>EN · FR · IT</b><span>consultation languages</span></div>
+  </div>
+</section>
+
+<section class="section tight" style="padding-top:28px" id="services" aria-label="My services">
+  <div class="container wide">
+    {{svc-filter}}
+    {{svc-tiles}}
+    <p class="pf-empty small muted center" hidden>No service for this profile.</p>
+  </div>
+</section>
+
+<!-- 3. First appointment + practice choice -->
+<section class="section" id="premier-rdv">
+  <div class="container split top">
+    <div>
+      <span class="eyebrow">Your first appointment</span>
+      <h2 class="balance">How does it work?</h2>
+      <div class="steps" style="grid-template-columns:1fr;gap:26px;margin-top:24px">
+        <div class="step"><h3>Book online</h3><p>On OneDoc, 24/7, or by phone. Choose Pully or Fribourg, in person or by video call.</p></div>
+        <div class="step"><h3>First consultation (75 – 90 min)</h3><p>We take the time to understand your story, your symptoms and your overall constitution.</p></div>
+        <div class="step"><h3>Tailored follow-up</h3><p>A personalised treatment, then a follow-up every 4 to 6 weeks. Covered by most supplementary insurers.</p></div>
+      </div>
+    </div>
+    <div class="reveal">{{funnel-card}}</div>
+  </div>
+</section>
+
+<!-- 4. Reviews -->
+{{reviews}}
+
+<!-- 5. Mini FAQ -->
+<section class="section bg-white" id="questions">
+  <div class="container split top">
+    <div><span class="eyebrow">Your questions</span><h2 class="balance">The 4 questions I’m asked most often</h2><p class="muted">To clear up any doubts before your first appointment.</p><a class="btn btn-ghost mt-1" href="{{root}}faq/">All questions</a></div>
+    <div class="faq">
+      <details open><summary>Is it covered by my insurance?</summary><div class="answer"><p>Yes, by most Swiss supplementary health insurers. I am recognised by ASCA, RME, Visana and EGK.</p></div></details>
+      <details><summary>Do I need to stop my medical treatment?</summary><div class="answer"><p>No. Homeopathy is complementary and does not interfere with your medication.</p></div></details>
+      <details><summary>Is it suitable for babies and children?</summary><div class="answer"><p>Yes, from birth, including premature babies.</p></div></details>
+      <details><summary>How long does a consultation last?</summary><div class="answer"><p>75 to 90 minutes for the first one, then 30 to 60 minutes for follow-ups.</p></div></details>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Latest blog posts -->
+<section class="section">
+  <div class="container">
+    <div class="reviews-head"><div><span class="eyebrow">Homeo’Conseils blog</span><h2 class="mb-0">Latest articles</h2></div><a class="btn btn-ghost" href="{{root}}blog/">All articles</a></div>
+    <div class="grid grid-2">
+      <a class="spec-card post-card" href="{{root}}tdah-homeopathie-accompagnement-individualise/"><div class="img"><img src="{{root}}assets/img/tdah.webp" alt="" loading="lazy"></div><div class="body"><div class="meta">16 October 2025 · ADHD</div><h3>ADHD & homeopathy: understanding each person to help them better</h3><span class="link-arrow">Read the article</span></div></a>
+      <a class="spec-card post-card" href="{{root}}soin-de-support-en-oncologie-histoire-personnelle/"><div class="img"><img src="{{root}}assets/img/papa.webp" alt="" loading="lazy" style="object-position:50% 35%"></div><div class="body"><div class="meta">22 September 2025 · Oncology</div><h3>Why I chose to support people with cancer: the story of my father</h3><span class="link-arrow">Read the article</span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Insurers & affiliations -->
+<section class="section tight bg-white">
+  <div class="container">
+    <p class="center small muted mb-2">Recognised by Swiss supplementary insurers · Member of & trained with</p>
+    <div class="logo-strip">
+      <img src="{{root}}assets/img/logos/asca.webp" alt="ASCA" loading="lazy"><img src="{{root}}assets/img/logos/rme.webp" alt="RME" loading="lazy"><img src="{{root}}assets/img/logos/visana.webp" alt="Visana" loading="lazy"><img src="{{root}}assets/img/logos/egk.webp" alt="EGK" loading="lazy"><img src="{{root}}assets/img/logos/gustave-roussy.webp" alt="Gustave Roussy" loading="lazy"><img src="{{root}}assets/img/logos/shisso.webp" alt="SHISSO" loading="lazy"><img src="{{root}}assets/img/logos/aspedah.webp" alt="ASPEDAH" loading="lazy">
+    </div>
+  </div>
+</section>
+
+{{cta}}
+
+{{contact}}

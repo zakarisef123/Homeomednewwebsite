@@ -1314,3 +1314,14 @@ body { font-synthesis-weight: none; }
 .ville-services small { color: var(--muted); font-size: .8rem; }
 @media (max-width: 1000px) { .ville-services { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 520px) { .ville-services { grid-template-columns: 1fr; } }
+
+/* ---------- Sélecteur de langue FR | EN ---------- */
+.lang-switch { display: inline-flex; align-items: center; padding: 3px; border: 1px solid var(--line); border-radius: 999px; background: #fff; margin-right: 4px; }
+.lang-switch a { padding: .32em .7em; border-radius: 999px; font-size: .8rem; font-weight: 800; letter-spacing: .06em; color: var(--muted); text-decoration: none; line-height: 1.2; }
+.lang-switch a:hover { color: var(--ink); }
+.lang-switch a[aria-current="true"] { background: var(--ink); color: #fff; }
+.mobile-nav-cta .lang-switch { justify-self: start; margin: 0 0 4px; }
+@media (max-width: 1120px) { .header-actions .lang-switch { display: inline-flex; } }
+@media (max-width: 420px) { .header-actions .lang-switch a { padding: .3em .55em; } }
+html:lang(fr) .rev-note { display: none; }
+.rev-note { margin: -8px 0 18px; }
