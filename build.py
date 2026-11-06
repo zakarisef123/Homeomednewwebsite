@@ -252,7 +252,7 @@ def disclaimer():
 # dans la page ou autres pages) et services liés.
 SERVICES = [
     dict(path="enfant-et-adolescent/", short="Enfant & Ado", title="Bébé, enfant & adolescent", icon="child",
-         img="spec-enfant.webp", tagline="Dès la naissance, jusqu’à 18 ans",
+         img="spec-enfant.webp", pos="50% 30%", panel_img="enfant-enfants.webp", panel_pos="50% 30%", tagline="Dès la naissance, jusqu’à 18 ans",
          desc="Otites à répétition, sommeil, digestion, eczéma, dentition, comportement, acné et troubles hormonaux de l’ado.",
          subs=[("Nouveau-né & bébé", "#bebe", "Coliques, reflux, sommeil, dentition"),
                ("Enfant", "#enfant", "ORL, peau, sommeil, digestion, concentration"),
@@ -260,7 +260,7 @@ SERVICES = [
                ("Questions fréquentes", "#faq", "")],
          related=[("Accompagnement TDAH", "accompagnement-tdah/"), ("Bébé : allaitement & sommeil", "bebe-allaitement-sommeil/")]),
     dict(path="equilibre-feminin-et-hormonal/", short="Femme & hormones", title="Équilibre féminin & hormonal", icon="flower",
-         img="spec-femme.webp", tagline="Toutes les étapes de la vie hormonale",
+         img="spec-femme.webp", pos="50% 35%", panel_pos="50% 30%", tagline="Toutes les étapes de la vie hormonale",
          desc="Cycles douloureux, SOPK, endométriose, fertilité, grossesse, post-partum, ménopause, thyroïde.",
          subs=[("Cycles & douleurs menstruelles", "#cycles", "Règles douloureuses, SPM, cycles irréguliers"),
                ("SOPK & endométriose", "#sopk", "Douleurs pelviennes, cycles longs"),
@@ -270,7 +270,7 @@ SERVICES = [
                ("Thyroïde & métabolisme", "#thyroide", "Hypo/hyperthyroïdie, poids, fatigue")],
          related=[("Bébé : allaitement & sommeil", "bebe-allaitement-sommeil/"), ("TCC du sommeil", "tcc-sommeil/")]),
     dict(path="orl-allergies-peau/", short="ORL · Allergies · Peau", title="ORL, allergies, peau", icon="wind",
-         img="spec-orl.webp", tagline="Chez l’enfant et l’adulte",
+         img="spec-orl.webp", pos="50% 50%", panel_img="orl-allergies.webp", panel_pos="50% 35%", tagline="Chez l’enfant et l’adulte",
          desc="Eczéma, psoriasis, urticaire, rhume des foins, asthme, otites, sinusites.",
          subs=[("Peau : eczéma, psoriasis, urticaire", "#peau", "Démangeaisons, poussées, sommeil perturbé"),
                ("Allergies saisonnières", "#allergies", "Pollen, acariens, animaux, conjonctivites"),
@@ -279,7 +279,7 @@ SERVICES = [
                ("Questions fréquentes", "#faq", "")],
          related=[("Enfant & adolescent", "enfant-et-adolescent/")]),
     dict(path="homeopathie-soins-support-oncologie/", short="Oncologie", title="Soins de support en oncologie", icon="ribbon",
-         img="spec-onco.webp", tagline="En complément de l’équipe médicale",
+         img="spec-onco.webp", pos="50% 45%", tagline="En complément de l’équipe médicale",
          desc="Pendant et après les traitements contre le cancer, pour mieux traverser les effets secondaires.",
          subs=[("Pendant les traitements", "#pendant", "Chimio, radio, hormonothérapie, immunothérapie"),
                ("Après les traitements", "#apres", "Récupération, énergie, retour au quotidien"),
@@ -287,7 +287,7 @@ SERVICES = [
                ("Questions fréquentes", "#faq", "")],
          related=[("Mon histoire : mon papa, mon héros", "soin-de-support-en-oncologie-histoire-personnelle/"), ("TCC du sommeil", "tcc-sommeil/")]),
     dict(path="accompagnement-tdah/", short="TDAH", title="Accompagnement TDAH", icon="brain", new=True,
-         img="tdah-accompagnement.webp", tagline="Enfant, parents & famille",
+         img="tdah-accompagnement.webp", pos="50% 12%", tagline="Enfant, parents & famille",
          desc="Un accompagnement en trois volets : l’enfant, les parents et toute la famille.",
          subs=[("Pour l’enfant", "#enfant", "Attention, agitation, sommeil, émotions"),
                ("Pour les parents", "#parents", "Écoute, repères concrets, fatigue"),
@@ -295,21 +295,21 @@ SERVICES = [
                ("Questions fréquentes", "#faq", "")],
          related=[("Article : TDAH & homéopathie", "tdah-homeopathie-accompagnement-individualise/"), ("Enfant & adolescent", "enfant-et-adolescent/")]),
     dict(path="tcc-sommeil/", short="Sommeil", title="TCC du sommeil", icon="moon", new=True,
-         img="onco-apres.webp", tagline="Thérapie comportementale et cognitive de l’insomnie",
+         img="onco-apres.webp", pos="50% 30%", tagline="Thérapie comportementale et cognitive de l’insomnie",
          desc="Endormissement difficile, réveils nocturnes : retrouver des nuits réparatrices durablement.",
          subs=[("Pour qui ?", "#pour-qui", "Insomnie, réveils nocturnes, fatigue"),
                ("La méthode en 3 étapes", "#methode", "Évaluer, ajuster, apaiser le mental"),
                ("Questions fréquentes", "#faq", "")],
          related=[("Bébé : allaitement & sommeil", "bebe-allaitement-sommeil/"), ("Équilibre féminin & hormonal", "equilibre-feminin-et-hormonal/")]),
     dict(path="bebe-allaitement-sommeil/", short="Bébé & allaitement", title="Bébé : allaitement & sommeil", icon="heart", new=True,
-         img="enfant-bebe.webp", tagline="Soutien aux mamans et aux tout-petits",
+         img="enfant-bebe.webp", pos="50% 45%", tagline="Soutien aux mamans et aux tout-petits",
          desc="Soutenir les mamans dans l’allaitement et accompagner le sommeil du tout-petit.",
          subs=[("Allaitement", "#allaitement", "Douleurs, production de lait, tétées, sevrage"),
                ("Sommeil de bébé", "#sommeil-bebe", "Réveils, endormissement, rituels"),
                ("Questions fréquentes", "#faq", "")],
          related=[("Nouveau-né & bébé", "enfant-et-adolescent/#bebe"), ("Grossesse & post-partum", "equilibre-feminin-et-hormonal/#grossesse")]),
     dict(path="mes-specialites/#complementaires", short="Autres troubles", title="Autres accompagnements", icon="bolt",
-         img="famille.webp", tagline="Chronique, neurologique, urgences",
+         img="famille.webp", pos="50% 35%", tagline="Chronique, neurologique, urgences",
          desc="Fatigue et stress chroniques, troubles digestifs, migraines, vertiges, urgences homéopathiques.",
          subs=[("Déséquilibres métaboliques chroniques", "", "Fatigue, stress, digestion, auto-immunité"),
                ("Troubles neurologiques", "", "Migraines, vertiges, tremblements"),
@@ -342,7 +342,7 @@ def services_bar(root, nav_path):
   <a class="svc-link" href="{root}{s['path']}"{cur}>{icon(s['icon'])}<span>{s['short']}</span>{new}{icon('chevron', 'chev')}</a>
   <div class="svc-panel" role="group" aria-label="{s['title']}">
     <div class="svc-panel-intro">
-      <img src="{root}assets/img/{s['img']}" alt="" loading="lazy">
+      <img src="{root}assets/img/{s.get('panel_img', s['img'])}" alt="" loading="lazy" style="object-position:{s.get('panel_pos', s.get('pos', '50% 50%'))}">
       <span class="eyebrow">{s['tagline']}</span>
       <h3>{s['title']}{' <span class="badge-new">Nouveau</span>' if s.get('new') else ''}</h3>
       <p>{s['desc']}</p>
@@ -412,7 +412,7 @@ def svc_tiles(root):
                         for t, h, _ in s["subs"] if t != "Questions fréquentes")
         new = '<span class="badge-new">Nouveau</span>' if s.get("new") else ""
         out.append(f"""<article class="svc-tile reveal d{i % 4}" data-profiles="{SVC_PROFILES.get(s['path'], '')}">
-  <a class="svc-tile-img" href="{root}{s['path']}" tabindex="-1" aria-hidden="true"><img src="{root}assets/img/{s['img']}" alt="" loading="lazy">{new}</a>
+  <a class="svc-tile-img" href="{root}{s['path']}" tabindex="-1" aria-hidden="true"><img src="{root}assets/img/{s['img']}" alt="" loading="lazy" style="object-position:{s.get('pos', '50% 50%')}">{new}</a>
   <div class="svc-tile-body">
     <h3><a href="{root}{s['path']}">{icon(s['icon'])}{s['title']}</a></h3>
     <p>{s['desc']}</p>
@@ -494,6 +494,82 @@ def svc_catalog(root):
   <span class="catalog-go">{icon('arrow')}</span>
 </a>""")
     return '<div class="catalog">' + "".join(rows) + "</div>"
+
+
+# --------------------------------------------------------------------------
+# Tunnel de conversion « Rendez-vous express » (3 étapes)
+# --------------------------------------------------------------------------
+AGES = [("bebe", "child", "Bébé", "0 – 2 ans"), ("enfant", "users", "Enfant", "3 – 11 ans"),
+        ("ado", "spark", "Adolescent", "12 – 17 ans"), ("adulte", "user", "Adulte", "18 – 64 ans"),
+        ("senior", "leaf", "Senior", "65 ans et +")]
+MOTIFS = [
+    ("Coliques, reflux, sommeil, dentition", "bebe", "enfant-et-adolescent/#bebe"),
+    ("Allaitement & sommeil de bébé", "bebe", "bebe-allaitement-sommeil/"),
+    ("Sommeil, digestion, fatigue de l’enfant", "enfant", "enfant-et-adolescent/#enfant"),
+    ("TDAH, concentration, agitation", "enfant ado adulte", "accompagnement-tdah/"),
+    ("Acné, confiance, émotions de l’ado", "ado", "enfant-et-adolescent/#ado"),
+    ("Otites, rhumes, infections ORL à répétition", "bebe enfant ado adulte senior", "orl-allergies-peau/#infections-orl"),
+    ("Eczéma, psoriasis, urticaire", "bebe enfant ado adulte senior", "orl-allergies-peau/#peau"),
+    ("Allergies, asthme, rhume des foins", "enfant ado adulte senior", "orl-allergies-peau/#allergies"),
+    ("Règles douloureuses, SOPK, endométriose", "ado adulte", "equilibre-feminin-et-hormonal/#cycles"),
+    ("Désir de grossesse, grossesse, post-partum", "adulte", "equilibre-feminin-et-hormonal/#fertilite"),
+    ("Ménopause, thyroïde", "adulte senior", "equilibre-feminin-et-hormonal/#menopause"),
+    ("Accompagnement pendant ou après un cancer", "ado adulte senior", "homeopathie-soins-support-oncologie/"),
+    ("Insomnie, troubles du sommeil (TCC)", "ado adulte senior", "tcc-sommeil/"),
+    ("Stress, anxiété, fatigue chronique", "ado adulte senior", "mes-specialites/#complementaires"),
+    ("Migraines, vertiges, troubles neurologiques", "adulte senior", "mes-specialites/#complementaires"),
+    ("Urgence : fièvre, infection aiguë", "bebe enfant ado adulte senior", "tarifs-remboursements/"),
+    ("Autre motif", "bebe enfant ado adulte senior", ""),
+]
+
+
+def funnel(root, preset="", title="Trouvez le bon rendez-vous en 3 clics", compact=False):
+    ages = "".join(f'<button type="button" class="fn-opt" data-age="{k}">{icon(ic)}<strong>{t}</strong><small>{r}</small></button>'
+                   for k, ic, t, r in AGES)
+    motifs = "".join(f'<button type="button" class="fn-opt fn-motif" data-ages="{a}" data-href="{h}">{t}</button>'
+                     for t, a, h in MOTIFS)
+    cabs = (f'<button type="button" class="fn-opt" data-cab="pully">{icon("pin")}<strong>Pully – Lausanne</strong><small>Lun, mar, mer, ven</small></button>'
+            f'<button type="button" class="fn-opt" data-cab="fribourg">{icon("pin")}<strong>Fribourg</strong><small>Tous les jeudis</small></button>'
+            f'<button type="button" class="fn-opt" data-cab="visio">{icon("video")}<strong>En visio</strong><small>Selon les circonstances</small></button>')
+    types = ('<button type="button" class="fn-opt fn-type" data-type="premiere"><strong>Première consultation</strong></button>'
+             '<button type="button" class="fn-opt fn-type" data-type="suivi"><strong>Consultation de suivi</strong></button>'
+             '<button type="button" class="fn-opt fn-type" data-type="urgence"><strong>Urgence homéo</strong></button>')
+    return f"""<div class="funnel{' compact' if compact else ''}" data-funnel data-preset="{preset}" data-root="{root}" data-phone="{PHONE}" data-tel="{PHONE_LINK}" data-wa="{WHATSAPP}" data-mail="{EMAIL}">
+  <div class="fn-head">
+    <span class="eyebrow">Rendez-vous express</span>
+    <h2 class="fn-title">{title}</h2>
+    <ol class="fn-progress" aria-hidden="true"><li class="on">Pour qui</li><li>Motif</li><li>Cabinet</li></ol>
+  </div>
+  <div class="fn-step" data-step="1">
+    <p class="fn-q">Pour qui est la consultation&nbsp;?</p>
+    <div class="fn-grid ages">{ages}</div>
+  </div>
+  <div class="fn-step" data-step="2" hidden>
+    <p class="fn-q">Pour quel motif&nbsp;?</p>
+    <div class="fn-grid motifs">{motifs}</div>
+  </div>
+  <div class="fn-step" data-step="3" hidden>
+    <p class="fn-q">Où souhaitez-vous consulter&nbsp;?</p>
+    <div class="fn-grid cabs">{cabs}</div>
+    <p class="fn-q fn-q2">Type de rendez-vous</p>
+    <div class="fn-grid types">{types}</div>
+  </div>
+  <div class="fn-step fn-result" data-step="4" hidden>
+    <div class="fn-summary"></div>
+    <div class="btn-row fn-actions"></div>
+    <p class="small muted fn-note">Reconnue ASCA · RME · Visana · EGK — remboursé par la plupart des assurances complémentaires.</p>
+  </div>
+  <div class="fn-foot"><button type="button" class="fn-back" hidden>{icon("arrow-left")}Retour</button><span class="fn-count">Étape 1 sur 3</span></div>
+  <noscript><p>{rdv_btn(root)}</p></noscript>
+</div>"""
+
+
+def funnel_section(root, preset="", title="Trouvez le bon rendez-vous en 3 clics"):
+    return f"""<section class="section funnel-section" id="rdv-express">
+  <div class="container fn-wrap">
+    {funnel(root, preset, title)}
+  </div>
+</section>"""
 
 
 def header(root, nav, path=""):
@@ -710,6 +786,12 @@ def expand(body, root):
             return reviews_block()
         if key.startswith("include:"):
             return (ROOT / "src" / "partials" / f"{key[8:]}.html").read_text(encoding="utf-8")
+        if key == "funnel" or key.startswith("funnel:"):
+            preset = key.split(":", 1)[1] if ":" in key else ""
+            return funnel_section(root, preset)
+        if key == "funnel-card" or key.startswith("funnel-card:"):
+            preset = key.split(":", 1)[1] if ":" in key else ""
+            return funnel(root, preset, "Votre rendez-vous en 3 clics", compact=True)
         if key == "svc-filter":
             return svc_filter(root)
         if key == "svc-tiles":
