@@ -1,0 +1,59 @@
+<!--meta {"title": "Book an appointment – Homeopath in Pully/Lausanne & Fribourg | HOMEOMED", "description": "Book online 24/7 via OneDoc with Paola Orlando, homeopath in Pully/Lausanne and Fribourg, or by phone on +41 (0)21 566 18 15. Consultations in English.", "path": "en/book-an-appointment/", "nav": "rdv"} -->
+
+<section class="page-hero simple">
+  <div class="container narrow">
+    <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="{{root}}">Home</a></li><li aria-current="page">Book an appointment</li></ol></nav>
+    <span class="eyebrow center">Book an appointment</span>
+    <h1 class="balance">In Pully/Lausanne <em>or</em> Fribourg</h1>
+    <p class="lead">Online via OneDoc, available 24/7 — quick, convenient and secure. Select the location that suits you in the calendar below.</p>
+  </div>
+</section>
+
+<section class="section tight" style="padding-top:0">
+  <div class="container">
+    <div class="grid grid-3 mb-2">
+      <div class="card soft reveal"><div class="icon-badge">{{icon:calendar}}</div><h3>Online</h3><p class="muted mb-0">Via the OneDoc platform, 24/7. The calendar is just below.</p></div>
+      <div class="card soft reveal d1"><div class="icon-badge">{{icon:phone}}</div><h3>By phone</h3><p class="muted mb-0">On <a href="{{phone-link}}">{{phone}}</a>. If I’m with a patient, leave a message and I’ll call you back as soon as possible.</p></div>
+      <div class="card soft reveal d2"><div class="icon-badge">{{icon:whatsapp}}</div><h3>By WhatsApp or email</h3><p class="muted mb-0"><a href="{{whatsapp}}" target="_blank" rel="noopener">Message on WhatsApp</a> or write to <a href="mailto:{{email}}">{{email}}</a>.</p></div>
+    </div>
+
+    <div class="rdv-summary" data-rdv-summary hidden></div>
+    <div id="calendrier" class="embed booking-embed" data-embed data-autoload data-src="{{onedoc}}" data-title="OneDoc booking calendar">
+      <div class="embed-cta">
+        <div class="icon-badge" style="margin-inline:auto">{{icon:calendar}}</div>
+        <h3>Booking calendar</h3>
+        <p>The OneDoc calendar loads here (it may be displayed in French). If it doesn’t appear, open it in a new tab.</p>
+        <div class="btn-row center">
+          <button class="btn btn-primary" type="button">Show the calendar</button>
+          <a class="btn btn-ghost" href="{{onedoc}}" target="_blank" rel="noopener">Open OneDoc</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-white">
+  <div class="container">
+    <div class="grid grid-2">
+      <article class="card loc-card reveal">
+        <div class="img"><img src="{{root}}assets/img/pully-1.webp" alt="HOMEOMED practice in Pully" width="1400" height="1050" loading="lazy"></div>
+        <div class="body">
+          <span class="days">Monday, Tuesday, Wednesday, Friday</span>
+          <h3 class="mb-0">Pully – Lausanne</h3>
+          <address>Place Neuve 1, 1st floor (Visilab building), 1009 Pully</address>
+          <div class="btn-row"><a class="btn btn-ghost btn-sm" href="{{root}}cabinet-pully/">Info & directions</a></div>
+        </div>
+      </article>
+      <article class="card loc-card reveal d1">
+        <div class="img"><img src="{{root}}assets/img/fribourg-1.webp" alt="HOMEOMED practice in Fribourg" width="1400" height="1050" loading="lazy"></div>
+        <div class="body">
+          <span class="days">Every Thursday</span>
+          <h3 class="mb-0">Fribourg</h3>
+          <address>Centre ITS, 3rd floor – Rue de la Banque 4, 1700 Fribourg</address>
+          <div class="btn-row"><a class="btn btn-ghost btn-sm" href="{{root}}cabinet-fribourg/">Info & directions</a></div>
+        </div>
+      </article>
+    </div>
+    <div class="mt-3">{{disclaimer}}</div>
+  </div>
+</section>

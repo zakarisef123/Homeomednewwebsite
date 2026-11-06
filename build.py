@@ -18,9 +18,13 @@ import json
 import re
 from datetime import date
 from pathlib import Path
+import posixpath
+
+from i18n import EN, PATHS, PATHS_EN2FR
 
 ROOT = Path(__file__).resolve().parent
 SRC = ROOT / "src" / "pages"
+SRC_EN = ROOT / "src" / "pages-en"
 SITE_URL = "https://homeomed.ch/"
 
 PHONE = "+41 (0)21 566 18 15"
@@ -154,6 +158,7 @@ def reviews_block():
         </a>
       </div>
       <div class="pf-btns rev-filters" role="group" aria-label="Filtrer les avis">{filters}</div>
+      <p class="rev-note small muted">Avis publiés en français sur Google.</p>
       <div class="carousel-track" tabindex="0" aria-label="Avis de patients">
 {cards}
       </div>
@@ -534,7 +539,7 @@ def funnel(root, preset="", title="Trouvez le bon rendez-vous en 3 clics", compa
     types = ('<button type="button" class="fn-opt fn-type" data-type="premiere"><strong>Première consultation</strong></button>'
              '<button type="button" class="fn-opt fn-type" data-type="suivi"><strong>Consultation de suivi</strong></button>'
              '<button type="button" class="fn-opt fn-type" data-type="urgence"><strong>Urgence homéo</strong></button>')
-    return f"""<div class="funnel{' compact' if compact else ''}" data-funnel data-preset="{preset}" data-cab-preset="{cab}" data-root="{root}" data-phone="{PHONE}" data-tel="{PHONE_LINK}" data-wa="{WHATSAPP}" data-mail="{EMAIL}">
+    return f"""<div class="funnel{' compact' if compact else ''}" data-funnel data-preset="{preset}" data-cab-preset="{cab}" data-root="{root}" data-rdv="prendre-rdv/" data-phone="{PHONE}" data-tel="{PHONE_LINK}" data-wa="{WHATSAPP}" data-mail="{EMAIL}">
   <div class="fn-head">
     <span class="eyebrow">Rendez-vous express</span>
     <h2 class="fn-title">{title}</h2>
@@ -627,11 +632,13 @@ def header(root, nav, path=""):
         <li><a href="{root}blog/"{cur("blog")}>Blog</a></li>
       </ul>
       <div class="mobile-nav-cta">
+        <!--LANGSWITCH-->
         {rdv_btn(root, "Prendre rendez-vous")}
         <a class="btn btn-ghost" href="{PHONE_LINK}">{icon("phone")}{PHONE}</a>
       </div>
     </nav>
     <div class="btn-row header-actions">
+      <!--LANGSWITCH-->
       <a class="header-phone" href="{PHONE_LINK}">{icon("phone")}<span>{PHONE}</span></a>
       <a class="btn btn-primary btn-sm header-cta" href="{root}prendre-rdv/">{icon("calendar")}Prendre RDV</a>
       <button class="menu-btn" type="button" aria-controls="menu" aria-expanded="false" aria-label="Ouvrir le menu"><span></span></button>
@@ -769,6 +776,9 @@ def schema_for(kind, title, path):
 
 def page(meta, body):
     path = meta["path"]
+    lang = meta.get("lang", "fr")
+    fr_path = PATHS_EN2FR.get(path, path) if lang == "en" else path
+    en_path = PATHS.get(fr_path)
     depth = 0 if path in ("", "404.html") else path.strip("/").count("/") + 1
     root = "../" * depth
     if path == "404.html":
@@ -793,19 +803,24 @@ def page(meta, body):
             faq_schema = f'<script type="application/ld+json">{json.dumps(data, ensure_ascii=False)}</script>'
 
     robots = '\n<meta name="robots" content="noindex">' if meta.get("noindex") else ""
+    alternates = ""
+    if en_path is not None and path != "404.html" and not meta.get("noindex"):
+        alternates = (f'\n<link rel="alternate" hreflang="fr-CH" href="{SITE_URL}{fr_path}">'
+                      f'\n<link rel="alternate" hreflang="en" href="{SITE_URL}{en_path}">'
+                      f'\n<link rel="alternate" hreflang="x-default" href="{SITE_URL}{fr_path}">')
     body = expand(body, root)
-    return f"""<!doctype html>
-<html lang="fr-CH">
+    out = f"""<!doctype html>
+<html lang="{'en' if lang == 'en' else 'fr-CH'}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
-<link rel="canonical" href="{canonical}">
+<link rel="canonical" href="{canonical}">{alternates}
 <meta name="theme-color" content="#faf7f2">{robots}
 <meta property="og:type" content="website">
-<meta property="og:locale" content="fr_CH">
-<meta property="og:site_name" content="HOMEOMED – Paola Orlando, Homéopathe">
+<meta property="og:locale" content="{'en_GB' if lang == 'en' else 'fr_CH'}">
+<meta property="og:site_name" content="HOMEOMED – Paola Orlando, {'Homeopath' if lang == 'en' else 'Homéopathe'}">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{canonical}">
@@ -820,7 +835,7 @@ def page(meta, body):
 {schema}{faq_schema}
 </head>
 <body>
-{header(root, meta.get("nav", ""), path)}
+{header(root, meta.get("nav", ""), fr_path)}
 <main id="contenu">
 {body}
 </main>
@@ -829,6 +844,74 @@ def page(meta, body):
 </body>
 </html>
 """
+    if lang == "en":
+        out = translate_en(out, path)
+    # Sélecteur de langue : lien vers la même page dans l'autre langue
+    if en_path is not None and path != "404.html":
+        fr_href, en_href = root + fr_path, root + en_path
+        sw = (f'<div class="lang-switch" role="group" aria-label="{"Language" if lang == "en" else "Langue"}">'
+              f'<a href="{fr_href or "./"}" hreflang="fr" lang="fr"{" aria-current=\"true\"" if lang == "fr" else ""}>FR</a>'
+              f'<a href="{en_href}" hreflang="en" lang="en"{" aria-current=\"true\"" if lang == "en" else ""}>EN</a></div>')
+        out = out.replace("<!--LANGSWITCH-->", sw)
+    else:
+        out = out.replace("<!--LANGSWITCH-->", "")
+    return out
+
+
+_NORM = {k.replace("\u00a0", " "): v for k, v in EN.items()}
+
+
+def _tr(text):
+    """Traduit un texte s'il correspond EXACTEMENT à une entrée du dictionnaire."""
+    raw = html.unescape(text)
+    key = raw.strip().replace("\u00a0", " ")
+    if key in _NORM:
+        lead = raw[:len(raw) - len(raw.lstrip())]
+        trail = raw[len(raw.rstrip()):]
+        return lead + html.escape(_NORM[key], quote=False) + trail
+    return text
+
+
+def _map_site_path(site):
+    """Adresse française (relative à la racine) → adresse anglaise, ancre et paramètres conservés."""
+    if not site:
+        return site
+    base, sep, rest = site.partition("#")
+    base_q, qsep, query = base.partition("?")
+    if base_q in PATHS:
+        return PATHS[base_q] + (qsep + query if qsep else "") + (sep + rest if sep else "")
+    return site
+
+
+def translate_en(doc, page_path):
+    page_dir = posixpath.dirname("/" + page_path + "index.html")
+
+    def href(m):
+        attr, url = m.group(1), m.group(2)
+        if re.match(r"^(?:[a-z]+:|#|//)", url) or "assets/" in url:
+            return m.group(0)
+        base, sep, rest = url.partition("#")
+        base_q, qsep, query = base.partition("?")
+        target = posixpath.normpath(posixpath.join(page_dir, base_q or "."))
+        site = "" if target == "/" else target.lstrip("/") + "/"
+        if site in PATHS:
+            new = PATHS[site]
+            rel = posixpath.relpath("/" + new, page_dir)
+            rel = "" if rel == "." else rel + "/"
+            url = (rel or "./") + (qsep + query if qsep else "") + (sep + rest if sep else "")
+        return f'{attr}="{url}"'
+
+    # on ne traduit pas le contenu des scripts (JSON-LD)
+    parts = re.split(r"(<script\b.*?</script>)", doc, flags=re.S)
+    for i, part in enumerate(parts):
+        if part.startswith("<script"):
+            continue
+        part = re.sub(r'(href)="([^"]*)"', href, part)
+        part = re.sub(r'(data-href|data-rdv|data-preset)="([^"]*)"', lambda m: f'{m.group(1)}="{_map_site_path(m.group(2))}"', part)
+        part = re.sub(r'((?:aria-label|alt|title|placeholder)=")([^"]*)(")', lambda m: m.group(1) + _tr(m.group(2)).replace('"', "&quot;") + m.group(3), part)
+        part = re.sub(r">([^<>]+)<", lambda m: ">" + _tr(m.group(1)) + "<", part)
+        parts[i] = part
+    return "".join(parts)
 
 
 def expand(body, root):
@@ -901,12 +984,14 @@ REDIRECTS = {
 
 def main():
     pages = []
-    for f in sorted(SRC.glob("*.html")):
+    sources = [(f, "fr") for f in sorted(SRC.glob("*.html"))] + [(f, "en") for f in sorted(SRC_EN.glob("*.html"))]
+    for f, lang in sources:
         raw = f.read_text(encoding="utf-8")
         m = re.match(r"\s*<!--meta\s+(\{.*?\})\s*-->\s*", raw, re.S)
         if not m:
             raise SystemExit(f"{f.name} : bloc meta manquant")
         meta = json.loads(m.group(1))
+        meta.setdefault("lang", lang)
         out = page(meta, raw[m.end():])
         path = meta["path"]
         dest = ROOT / (path if path.endswith(".html") else path + "index.html")
@@ -930,9 +1015,16 @@ def main():
     print(f"✓ {len(REDIRECTS)} redirections")
 
     today = date.today().isoformat()
-    urls = "\n".join(f"  <url><loc>{SITE_URL}{p}</loc><lastmod>{today}</lastmod></url>" for p in pages)
+    def alt(p):
+        fr = PATHS_EN2FR.get(p, p)
+        en = PATHS.get(fr)
+        if en is None or en not in pages:
+            return ""
+        return (f'<xhtml:link rel="alternate" hreflang="fr-CH" href="{SITE_URL}{fr}"/>'
+                f'<xhtml:link rel="alternate" hreflang="en" href="{SITE_URL}{en}"/>')
+    urls = "\n".join(f"  <url><loc>{SITE_URL}{p}</loc><lastmod>{today}</lastmod>{alt(p)}</url>" for p in pages)
     (ROOT / "sitemap.xml").write_text(
-        f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n',
+        f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n{urls}\n</urlset>\n',
         encoding="utf-8")
     (ROOT / "robots.txt").write_text(f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}sitemap.xml\n", encoding="utf-8")
     print(f"✓ sitemap.xml ({len(pages)} pages)")

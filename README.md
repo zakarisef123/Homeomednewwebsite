@@ -50,3 +50,12 @@ Gabarits utilisables dans les pages : `{{rdv}}` (bouton rendez-vous), `{{cta}}`,
 2. Fiche **Fribourg** → Site web : `https://homeomed.ch/cabinet-fribourg/`
 3. Sur chaque fiche, lien de prise de rendez-vous : `https://homeomed.ch/prendre-rdv/`
 4. Vérifier que les horaires des fiches sont identiques à ceux du site.
+
+## Version anglaise (FR | EN)
+
+- Pages anglaises : `src/pages-en/*.html` → générées sous `/en/` avec des adresses anglaises (`/en/about/`, `/en/homeopath-fribourg/`…).
+- `i18n.py` : correspondance des adresses FR → EN et traductions des blocs communs (menus, pied de page, tunnel, avis…).
+  Dans les pages anglaises, on peut écrire les liens avec les adresses **françaises** (`{{root}}qui-suis-je/`) : ils sont convertis automatiquement.
+- Chaque page déclare sa version dans l’autre langue (`hreflang`), le sélecteur **FR | EN** mène à la page équivalente, le sitemap liste les deux langues.
+- Les avis Google restent dans leur langue d’origine (français), avec une mention ; les témoignages du site sont traduits avec la mention « translated from French ».
+- Pour ajouter une page : créer la version FR dans `src/pages/`, la version EN dans `src/pages-en/`, et ajouter la paire d’adresses dans `PATHS` (`i18n.py`).
