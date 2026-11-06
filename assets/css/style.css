@@ -1104,3 +1104,48 @@ html { scroll-padding-top: 150px; }
   .main-nav .m-svc ul a.all { font-weight: 700; }
   .main-nav .m-svc ul a.rel { font-size: .94rem; }
 }
+
+/* ==========================================================================
+   Accueil retenu : sélecteur « Pour qui ? » + mosaïque des services
+   ========================================================================== */
+.hero-compact .container.wide .row { padding-inline: clamp(0px, 2vw, 24px); }
+.pf-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 18px; margin-bottom: 22px; padding: 14px 18px; background: #fff; border: 1px solid var(--line); border-radius: 20px; }
+.pf-label { font-family: var(--font-serif); font-size: 1.15rem; color: var(--ink); white-space: nowrap; }
+.pf-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.pf-btn { display: inline-flex; align-items: center; gap: 7px; padding: .5em .95em; border-radius: 999px; border: 1px solid var(--line); background: var(--cream); color: var(--ink); font-weight: 600; font-size: .88rem; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+.pf-btn svg { width: 17px; height: 17px; color: var(--teal-600); }
+.pf-btn:hover { border-color: var(--teal); }
+.pf-btn[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: #fff; }
+.pf-btn[aria-pressed="true"] svg { color: #8fd3db; }
+.pf-all { background: transparent; }
+.svc-tile { transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease, opacity .3s ease; }
+.svc-tiles.filtering .svc-tile:not(.match) { opacity: .28; }
+.svc-tiles.filtering .svc-tile.match { border-color: var(--teal); box-shadow: var(--shadow); }
+@media (max-width: 900px) {
+  .pf-bar { padding: 12px; }
+  .pf-label { width: 100%; }
+  .pf-btns { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin: 0 -12px; padding: 0 12px 2px; }
+  .pf-btns::-webkit-scrollbar { display: none; }
+  .pf-btn { flex: none; }
+  /* Sur mobile, on masque les services hors profil plutôt que de les estomper */
+  .svc-tiles.filtering .svc-tile:not(.match) { display: none; }
+}
+/* Cartes compactes sur téléphone */
+@media (max-width: 580px) {
+  .svc-tiles { gap: 14px; }
+  .svc-tile { display: grid; grid-template-columns: 96px 1fr; }
+  .svc-tile-img { aspect-ratio: auto; height: 100%; min-height: 120px; }
+  .svc-tile-img .badge-new { top: 8px; left: 8px; font-size: .58rem; padding: .2em .5em; }
+  .svc-tile-body { padding: 14px 14px 16px; gap: 8px; }
+  .svc-tile h3 { font-size: 1.05rem; }
+  .svc-tile h3 svg { display: none; }
+  .svc-tile p { display: none; }
+  .svc-chips a { font-size: .76rem; padding: .28em .65em; }
+  .svc-tile .preview-link { font-size: .72rem; padding-top: 2px; }
+}
+@media (max-width: 760px) {
+  .hero-compact .side .btn-row { display: none; }
+  .hero-compact .side { grid-auto-flow: column; justify-content: start; align-items: center; gap: 12px; }
+  .hero-compact .side .trust-item { font-size: .8rem; }
+  .hero-compact { padding-bottom: 20px; }
+}

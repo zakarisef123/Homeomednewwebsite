@@ -125,3 +125,26 @@
     });
   });
 })();
+
+/* Sélecteur « Pour qui consultez-vous ? » (met en avant les services concernés) */
+(function () {
+  var bar = document.querySelector("[data-filter-bar]");
+  var grid = document.querySelector(".svc-tiles");
+  if (!bar || !grid) return;
+  var tiles = Array.prototype.slice.call(grid.querySelectorAll(".svc-tile"));
+  var btns = Array.prototype.slice.call(bar.querySelectorAll("[data-filter]"));
+  btns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      var f = b.getAttribute("data-filter");
+      var active = f !== "all" && b.getAttribute("aria-pressed") !== "true";
+      btns.forEach(function (x) { x.setAttribute("aria-pressed", "false"); });
+      (active ? b : bar.querySelector('[data-filter="all"]')).setAttribute("aria-pressed", "true");
+      grid.classList.toggle("filtering", active);
+      tiles.forEach(function (t) {
+        var on = active && (" " + t.getAttribute("data-profiles") + " ").indexOf(" " + f + " ") > -1;
+        t.classList.toggle("match", on);
+        t.classList.add("in");
+      });
+    });
+  });
+})();

@@ -371,14 +371,37 @@ def mobile_services(root):
 # --------------------------------------------------------------------------
 # Blocs « services » pour les propositions d'accueil
 # --------------------------------------------------------------------------
+SVC_PROFILES = {
+    "enfant-et-adolescent/": "bebe enfant famille",
+    "equilibre-feminin-et-hormonal/": "femme",
+    "orl-allergies-peau/": "bebe enfant adulte",
+    "homeopathie-soins-support-oncologie/": "cancer",
+    "accompagnement-tdah/": "enfant famille",
+    "tcc-sommeil/": "femme adulte cancer",
+    "bebe-allaitement-sommeil/": "bebe femme famille",
+    "mes-specialites/#complementaires": "adulte",
+}
+FILTERS = [("bebe", "child", "Mon bébé"), ("enfant", "users", "Mon enfant, mon ado"), ("femme", "flower", "Moi, femme"),
+           ("adulte", "user", "Moi, adulte"), ("cancer", "ribbon", "Parcours cancer"), ("famille", "heart", "Toute la famille")]
+
+
+def svc_filter(root):
+    btns = "".join(f'<button type="button" class="pf-btn" data-filter="{k}" aria-pressed="false">{icon(ic)}{t}</button>'
+                   for k, ic, t in FILTERS)
+    return f"""<div class="pf-bar" data-filter-bar>
+  <span class="pf-label">Pour qui consultez-vous&nbsp;?</span>
+  <div class="pf-btns">{btns}<button type="button" class="pf-btn pf-all" data-filter="all" aria-pressed="true">Tous les services</button></div>
+</div>"""
+
+
 def svc_tiles(root):
-    """Proposition A — mosaïque : chaque service en tuile photo + sous-services."""
+    """Accueil — mosaïque : chaque service en tuile photo + sous-services."""
     out = []
     for i, s in enumerate(SERVICES):
         chips = "".join(f'<li><a href="{svc_href(root, s, h)}">{t}</a></li>'
                         for t, h, _ in s["subs"] if t != "Questions fréquentes")
         new = '<span class="badge-new">Nouveau</span>' if s.get("new") else ""
-        out.append(f"""<article class="svc-tile reveal d{i % 4}">
+        out.append(f"""<article class="svc-tile reveal d{i % 4}" data-profiles="{SVC_PROFILES.get(s['path'], '')}">
   <a class="svc-tile-img" href="{root}{s['path']}" tabindex="-1" aria-hidden="true"><img src="{root}assets/img/{s['img']}" alt="" loading="lazy">{new}</a>
   <div class="svc-tile-body">
     <h3><a href="{root}{s['path']}">{icon(s['icon'])}{s['title']}</a></h3>
@@ -677,6 +700,8 @@ def expand(body, root):
             return reviews_block()
         if key.startswith("include:"):
             return (ROOT / "src" / "partials" / f"{key[8:]}.html").read_text(encoding="utf-8")
+        if key == "svc-filter":
+            return svc_filter(root)
         if key == "svc-tiles":
             return svc_tiles(root)
         if key == "svc-tabs":
