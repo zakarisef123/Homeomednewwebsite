@@ -1466,3 +1466,9 @@ a.parent-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-l); 
   .has-mega:hover > .submenu, .has-mega.open > .submenu, .has-mega:focus-within > .submenu { transform: none; }
   .main-nav .mega-links a { padding: .6em .2em; font-size: 1rem; }
 }
+/* Numéro de téléphone de l'en-tête : jamais coupé */
+.site-header .header-inner.container.wide { max-width: 1480px; }
+.header-phone { white-space: nowrap; flex: none; }
+.header-phone svg { flex: none; }
+@media (max-width: 1560px) { .header-phone span { display: none; } }
+.main-nav .mega-intro .btn { width: auto; max-width: calc(100% - 40px); }

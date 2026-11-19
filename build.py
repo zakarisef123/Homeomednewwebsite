@@ -358,6 +358,8 @@ _ALL_SERVICES = [
          subs=[("Pour qui ?", "#pour-qui", "Insomnie, réveils nocturnes, fatigue"),
                ("La méthode en 3 étapes", "#methode", "Évaluer, ajuster, apaiser le mental"),
                ("Questions fréquentes", "#faq", "")],
+         sub_icons=["users", "steps", "info"],
+         sub_desc={"#faq": "Nombre de séances, somnifères, causes médicales"},
          related=[]),
 ]
 SERVICES = [s for s in _ALL_SERVICES if not s.get("draft") or BARKLEY_LIVE]
@@ -379,9 +381,23 @@ def svc_href(root, svc, href):
 def mega_panel(root, key):
     """Menu déroulant d'un univers : présentation + photo, puis liens vers les pages."""
     u = UNIVERSES[key]
-    links = "".join(
-        f'<li><a href="{root}{s["path"]}">{icon(s["icon"])}<span><strong>{s["title"]}</strong><small>{s["tagline"]}</small></span></a></li>'
-        for s in SERVICES if s["uni"] == key)
+    items = [s for s in SERVICES if s["uni"] == key]
+    if len(items) == 1:
+        # Univers d'une seule page (Insomnie) : liens vers les sections de la page
+        s = items[0]
+        ics = s.get("sub_icons", [])
+        extra = s.get("sub_desc", {})
+        out = []
+        for i, (t, h, d) in enumerate(s["subs"]):
+            d = d or extra.get(h, "")
+            small = f"<small>{d}</small>" if d else ""
+            ic = icon(ics[i] if i < len(ics) else "arrow")
+            out.append(f'<li><a href="{svc_href(root, s, h)}">{ic}<span><strong>{t}</strong>{small}</span></a></li>')
+        links = "".join(out)
+    else:
+        links = "".join(
+            f'<li><a href="{root}{s["path"]}">{icon(s["icon"])}<span><strong>{s["title"]}</strong><small>{s["tagline"]}</small></span></a></li>'
+            for s in items)
     return f"""<div class="submenu mega" role="group" aria-label="{u['label']}">
     <div class="mega-intro">
       <img src="{root}assets/img/{u['img']}" alt="" loading="lazy" style="object-position:{u['pos']}">
@@ -683,7 +699,10 @@ def header(root, nav, path=""):
           <button class="nav-toggle-sub" type="button" aria-expanded="false">Accompagnement parental {icon("chevron")}</button>
           {mega_panel(root, "parent")}
         </li>
-        <li><a href="{root}insomnie-tcc-i/"{cur("insomnie")}>Insomnie – TCC-i</a></li>
+        <li class="has-sub has-mega{sub_cur("insomnie")}">
+          <button class="nav-toggle-sub" type="button" aria-expanded="false">Insomnie – TCC-i {icon("chevron")}</button>
+          {mega_panel(root, "insomnie")}
+        </li>
         <li><a href="{root}tarifs-remboursements/"{cur("tarifs")}>Tarifs</a></li>
         <li class="has-sub{sub_cur("cabinet")}">
           <button class="nav-toggle-sub" type="button" aria-expanded="false">Le cabinet {icon("chevron")}</button>
