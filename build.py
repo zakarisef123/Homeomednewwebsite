@@ -127,6 +127,7 @@ THEMES = {
     "tdah": dict(c600="#A8513A", c="#D9866A", c50="#FCF1EC", c100="#F6DACB", bg="#FCF0EA", soft="#F5D0BF", motif=("star", "spark")),
     "sommeil": dict(c600="#4B63A0", c="#8299CF", c50="#F0F3FB", c100="#D9E2F5", bg="#EEF2FB", soft="#D2DCF3", motif=("moon", "star")),
     "allaitement": dict(c600="#A1603A", c="#D99A6B", c50="#FDF5EC", c100="#F7E0C8", bg="#FDF4EA", soft="#F5D9BF", motif=("drop", "heart")),
+    "autres": dict(c600="#2B7D89", c="#3FA7B4", c50="#E8F5F6", c100="#D3ECEE", bg="#EAF5F6", soft="#CDE9EC", motif=("leaf", "spark")),
     "insomnie": dict(c600="#33447F", c="#6F7FC0", c50="#EFF1F9", c100="#D7DCF0", bg="#ECEFF8", soft="#CCD4EE", motif=("star", "moon")),
 }
 # Page (adresse française) → thème ; la version anglaise suit automatiquement.
@@ -140,6 +141,8 @@ PAGE_THEMES = {
     "accompagnement-parental/allaitement/": "allaitement",
     "insomnie-tcc-i/": "insomnie",
 }
+# Tuiles et cartes (accueil, page pivot) : même univers que la page de destination
+CARD_THEMES = {**PAGE_THEMES, "homeopathie/#complementaires": "autres"}
 _EXTRA_MOTIFS = {
     "star": '<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/>',
     "block": '<rect x="4" y="4" width="7" height="7" rx="2"/><circle cx="16.5" cy="16.5" r="3.5"/><path d="M15 4l4 7h-8z"/>',
@@ -163,7 +166,19 @@ def themes_css():
     for k, t in THEMES.items():
         out.append(f"""body.t-{k} main {{ --teal: {t['c']}; --teal-600: {t['c600']}; --teal-50: {t['c50']}; --teal-100: {t['c100']};
   --t-bg: {t['bg']}; --t-soft: {t['soft']}; --t-pat: {_motif_uri(t['motif'], t['c600'], .13)}; --t-pat-light: {_motif_uri(t['motif'], '#ffffff', .07)}; }}""")
+    for k, t in THEMES.items():
+        out.append(f""".th-{k} {{ --th-c600: {t['c600']}; --th-c: {t['c']}; --th-50: {t['c50']}; --th-100: {t['c100']}; --th-bg: {t['bg']}; --th-pat: {_motif_uri(t['motif'], t['c600'], .14)}; }}""")
     out.append(f"""
+/* Tuiles de l'accueil et cartes de la page pivot : couleur + motif du service */
+.svc-tile[class*="th-"], .parent-card[class*="th-"] {{ border-color: var(--th-100); }}
+.svc-tile[class*="th-"]:hover, a.parent-card[class*="th-"]:hover {{ border-color: var(--th-c); }}
+.svc-tile[class*="th-"] .svc-tile-body, .parent-card[class*="th-"] .pc-body {{ background-color: var(--th-bg); background-image: var(--th-pat); background-size: 84px 84px; }}
+.svc-tile[class*="th-"] .svc-tile-img, .parent-card[class*="th-"] .pc-img {{ border-bottom: 4px solid var(--th-c); }}
+.svc-tile[class*="th-"] h3 svg, .svc-tile[class*="th-"] .preview-link, .parent-card[class*="th-"] .preview-link, .parent-card[class*="th-"] .eyebrow {{ color: var(--th-c600); }}
+.svc-tile[class*="th-"] .svc-uni {{ color: var(--th-c600); }}
+.svc-tile[class*="th-"] .svc-chips a {{ background: #fff; border: 1px solid var(--th-100); }}
+.svc-tile[class*="th-"] .svc-chips a:hover {{ background: var(--th-c600); border-color: var(--th-c600); color: #fff; }}
+
 /* Haut de page : fond teinté + motif dessiné + forme colorée derrière la photo */
 body[class*="t-"] main .page-hero {{ background-color: var(--t-bg); background-image: var(--t-pat); background-size: 96px 96px; isolation: isolate; }}
 body[class*="t-"] main .page-hero::before {{ display: none; }}
@@ -511,9 +526,9 @@ def parent_cards(root):
   <span class="pc-body"><span class="eyebrow">{s['tagline']}</span><strong>{s['title']}</strong><span>{s['desc']}</span>
   {f'<span class="preview-link">Découvrir {icon("arrow")}</span>' if live else '<span class="small muted">Programme disponible prochainement.</span>'}</span>"""
         if live:
-            out.append(f'<a class="parent-card reveal d{i}" href="{root}{s["path"]}">{inner}</a>')
+            out.append(f'<a class="parent-card th-{CARD_THEMES.get(s["path"], "tdah")} reveal d{i}" href="{root}{s["path"]}">{inner}</a>')
         else:
-            out.append(f'<div class="parent-card is-soon reveal d{i}">{inner}</div>')
+            out.append(f'<div class="parent-card th-{CARD_THEMES.get(s["path"], "tdah")} is-soon reveal d{i}">{inner}</div>')
     return '<div class="parent-cards">' + "".join(out) + "</div>"
 
 
@@ -551,7 +566,8 @@ def svc_tiles(root):
         chips = "".join(f'<li><a href="{svc_href(root, s, h)}">{t}</a></li>'
                         for t, h, _ in s["subs"] if t != "Questions fréquentes")
         new = '<span class="badge-new">Nouveau</span>' if s.get("new") else ""
-        out.append(f"""<article class="svc-tile reveal d{i % 4}" data-profiles="{SVC_PROFILES.get(s['path'], '')}">
+        th = CARD_THEMES.get(s["path"])
+        out.append(f"""<article class="svc-tile reveal d{i % 4}{f' th-{th}' if th else ''}" data-profiles="{SVC_PROFILES.get(s['path'], '')}">
   <a class="svc-tile-img" href="{root}{s['path']}" tabindex="-1" aria-hidden="true"><img src="{root}assets/img/{s['img']}" alt="" loading="lazy" style="object-position:{s.get('pos', '50% 50%')}">{new}</a>
   <div class="svc-tile-body">
     <span class="svc-uni">{UNIVERSES[s['uni']]['label']}</span>
