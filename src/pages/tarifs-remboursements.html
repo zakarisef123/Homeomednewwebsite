@@ -5,12 +5,13 @@
     <nav class="breadcrumbs" aria-label="Fil d’Ariane"><ol><li><a href="{{root}}">Accueil</a></li><li aria-current="page">Tarifs & remboursements</li></ol></nav>
     <span class="eyebrow center">Tarifs & remboursements</span>
     <h1 class="balance">Des tarifs clairs, <em>remboursés</em> par les complémentaires</h1>
-    <p class="lead">Reconnue ASCA, RME, Visana et EGK&nbsp;: les consultations sont prises en charge par la plupart des assurances complémentaires.</p>
+    <p class="lead">Homéopathie&nbsp;: reconnue ASCA, RME, Visana et EGK, les consultations sont prises en charge par la plupart des assurances complémentaires.</p>
   </div>
 </section>
 
 <section class="section tight" style="padding-top:0">
   <div class="container">
+    <h2 class="tarif-group" id="homeopathie">Homéopathie</h2>
     <div class="grid grid-4">
       <article class="card price-card featured reveal">
         <span class="label">Pour tous</span>
@@ -45,7 +46,34 @@
         <p class="small">Toute évolution clinique (nouveaux symptômes) fait l’objet d’une nouvelle consultation.</p>
       </article>
     </div>
-    <p class="small muted center mt-2">Tarifs des nouveaux accompagnements (TDAH parents & famille, TCC du sommeil, allaitement & sommeil de bébé)&nbsp;: sur demande au {{phone}}.</p>
+  </div>
+</section>
+
+<section class="section tight" id="accompagnement-parental">
+  <div class="container">
+    <h2 class="tarif-group">Accompagnement parental &amp; insomnie</h2>
+<!--IF:barkley-->
+    <div class="grid grid-2">
+      <article class="card price-card featured reveal">
+        <span class="label">Pour les parents</span>
+        <h3>Programme Barkley® – TDAH</h3>
+        <div class="price">130.– <small>CHF / séance</small></div>
+        <div class="price-meta">{{icon:clock}} 10 séances d’une heure, sur environ cinq mois</div>
+        <p>Inclus&nbsp;: l’appel découverte (20 min, gratuit), les 10 séances, des fiches pratiques pour chaque étape, une séance de suivi offerte à six mois.</p>
+        <p class="small">À régler en fin de séance, en espèces ou par TWINT. Non pris en charge par l’assurance obligatoire (LAMal) ni par les assurances complémentaires.</p>
+        <p class="mb-0"><a class="link-arrow" href="{{root}}accompagnement-parental/tdah-methode-barkley/">Découvrir le programme</a></p>
+      </article>
+      <article class="card price-card reveal d1">
+        <span class="label">Sur demande</span>
+        <h3>Sommeil 0–3 ans · Allaitement · TCC-i</h3>
+        <p>Les tarifs de ces accompagnements vous sont communiqués sur demande au {{phone}} ou par e-mail.</p>
+        <p class="mb-0"><a class="link-arrow" href="{{root}}accompagnement-parental/">Accompagnement parental</a></p>
+      </article>
+    </div>
+<!--ENDIF:barkley-->
+<!--IFNOT:barkley-->
+    <p class="muted">Tarifs de l’accompagnement parental (<a href="{{root}}accompagnement-parental/sommeil-enfant-0-3-ans/">sommeil de l’enfant 0–3 ans</a>, <a href="{{root}}accompagnement-parental/allaitement/">allaitement</a>) et de la <a href="{{root}}insomnie-tcc-i/">TCC de l’insomnie</a>&nbsp;: sur demande au {{phone}}.</p>
+<!--ENDIFNOT:barkley-->
   </div>
 </section>
 

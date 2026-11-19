@@ -42,6 +42,13 @@ FACEBOOK = "https://www.facebook.com/profile.php?id=61577642218751"
 INSTAGRAM = "https://www.instagram.com/paolaorlando_homeopathe/"
 LINKEDIN = "https://www.linkedin.com/in/paola-orlando-560369a1/"
 
+# Programme Barkley® : passer à True une fois la formation ASPEDAH terminée.
+# → la page TDAH est alors indexée, ajoutée au menu, au pied de page, aux tarifs, et
+#   l'ancienne page /accompagnement-tdah/ est redirigée vers elle.
+BARKLEY_LIVE = False
+# Destination du bouton « Réserver mon appel découverte gratuit » (à remplacer par le lien OneDoc dédié).
+APPEL_URL = "prendre-rdv/"
+
 # --------------------------------------------------------------------------
 # Icônes (traits 1.8px, style "line")
 # --------------------------------------------------------------------------
@@ -245,26 +252,51 @@ def contact_block(root):
 </section>"""
 
 
-def disclaimer():
-    return f"""<div class="disclaimer">{icon("info")}<div><strong>Informations importantes.</strong> L’homéopathie est une médecine complémentaire. Elle ne remplace en aucun cas les traitements médicaux prescrits, ni la consultation d’un médecin ou d’un spécialiste. En cas de doute ou d’urgence, veuillez contacter votre professionnel de santé.</div></div>"""
+def disclaimer(kind="homeo"):
+    text = {
+        "homeo": "L’homéopathie est une médecine complémentaire. Elle ne remplace en aucun cas les traitements médicaux prescrits, ni la consultation d’un médecin ou d’un spécialiste. En cas de doute ou d’urgence, veuillez contacter votre professionnel de santé.",
+        "parent": "Cet accompagnement est éducatif et destiné aux parents. Il ne pose aucun diagnostic, ne relève pas de la psychothérapie et ne remplace pas le suivi par votre pédiatre, votre sage-femme, un pédopsychiatre ou un psychologue. En cas de doute ou d’urgence, contactez votre professionnel de santé.",
+        "insomnie": "La TCC de l’insomnie ne remplace pas une évaluation médicale. Toute modification d’un traitement se décide avec votre médecin. En cas de doute ou d’urgence, contactez votre professionnel de santé.",
+    }[kind]
+    return f"""<div class="disclaimer">{icon("info")}<div><strong>Informations importantes.</strong> {text}</div></div>"""
 
 
 # --------------------------------------------------------------------------
-# Navigation
+# Trois univers sous une marque ombrelle (HOMEOMED · Paola Orlando)
 # --------------------------------------------------------------------------
+# Chaque univers parle à son public : le visiteur « accompagnement parental » ne doit
+# jamais avoir l'impression d'être sur un site d'homéopathie, et inversement.
+UNIVERSES = {
+    "homeo": dict(label="Homéopathie", path="homeopathie/", icon="leaf", img="hero-granules.webp", pos="50% 50%",
+                  tagline="Homéopathie classique",
+                  desc="Une homéopathie classique, précise et structurée pour l’enfant, la femme et l’adulte, en complément de votre suivi médical.",
+                  card="Enfant, femme, ORL, allergies, peau, soins de support en oncologie.",
+                  cta="Découvrir l’homéopathie"),
+    "parent": dict(label="Accompagnement parental", path="accompagnement-parental/", icon="users", img="parental-hero.webp", pos="50% 40%",
+                   tagline="Pour les parents",
+                   desc="Des outils concrets pour apaiser le quotidien avec votre enfant&nbsp;: TDAH et opposition, sommeil du tout-petit, allaitement.",
+                   card="Des outils concrets pour apaiser le quotidien avec votre enfant.",
+                   cta="Découvrir l’accompagnement parental"),
+    "insomnie": dict(label="Insomnie – TCC-i", path="insomnie-tcc-i/", icon="moon", img="onco-apres.webp", pos="50% 30%",
+                     tagline="Thérapie comportementale et cognitive de l’insomnie",
+                     desc="Une méthode brève et structurée, reconnue comme approche de référence de l’insomnie chronique.",
+                     card="Une méthode brève et structurée pour retrouver des nuits réparatrices.",
+                     cta="Découvrir la TCC-i"),
+}
+
 # Catalogue des services : source unique pour le menu, l'accueil et le pied de page.
-# Chaque service : page, libellés, description, icône, image, sous-services (ancres
-# dans la page ou autres pages) et services liés.
-SERVICES = [
-    dict(path="enfant-et-adolescent/", short="Enfant & Ado", title="Bébé, enfant & adolescent", icon="child",
+# Chaque service : univers, page, libellés, description, icône, image, sous-services
+# (ancres dans la page ou autres pages) et services liés (toujours dans le même univers).
+_ALL_SERVICES = [
+    dict(uni="homeo", path="homeopathie/enfant-et-adolescent/", short="Enfant & Ado", title="Bébé, enfant & adolescent", icon="child",
          img="spec-enfant.webp", pos="50% 30%", panel_img="enfant-enfants.webp", panel_pos="50% 30%", tagline="Dès la naissance, jusqu’à 18 ans",
          desc="Otites à répétition, sommeil, digestion, eczéma, dentition, comportement, acné et troubles hormonaux de l’ado.",
          subs=[("Nouveau-né & bébé", "#bebe", "Coliques, reflux, sommeil, dentition"),
                ("Enfant", "#enfant", "ORL, peau, sommeil, digestion, concentration"),
                ("Adolescent", "#ado", "Acné, allergies, cycles, fatigue, émotions"),
                ("Questions fréquentes", "#faq", "")],
-         related=[("Accompagnement TDAH", "accompagnement-tdah/"), ("Bébé : allaitement & sommeil", "bebe-allaitement-sommeil/")]),
-    dict(path="equilibre-feminin-et-hormonal/", short="Femme & hormones", title="Équilibre féminin & hormonal", icon="flower",
+         related=[("Article : TDAH & homéopathie", "tdah-homeopathie-accompagnement-individualise/"), ("ORL, allergies, peau", "homeopathie/orl-allergies-peau/")]),
+    dict(uni="homeo", path="homeopathie/equilibre-feminin-et-hormonal/", short="Femme & hormones", title="Équilibre féminin & hormonal", icon="flower",
          img="spec-femme.webp", pos="50% 35%", panel_pos="50% 30%", tagline="Toutes les étapes de la vie hormonale",
          desc="Cycles douloureux, SOPK, endométriose, fertilité, grossesse, post-partum, ménopause, thyroïde.",
          subs=[("Cycles & douleurs menstruelles", "#cycles", "Règles douloureuses, SPM, cycles irréguliers"),
@@ -273,8 +305,8 @@ SERVICES = [
                ("Grossesse & post-partum", "#grossesse", "Nausées, accouchement, baby-blues"),
                ("Préménopause & ménopause", "#menopause", "Bouffées de chaleur, sommeil, humeur"),
                ("Thyroïde & métabolisme", "#thyroide", "Hypo/hyperthyroïdie, poids, fatigue")],
-         related=[("Bébé : allaitement & sommeil", "bebe-allaitement-sommeil/"), ("TCC du sommeil", "tcc-sommeil/")]),
-    dict(path="orl-allergies-peau/", short="ORL · Allergies · Peau", title="ORL, allergies, peau", icon="wind",
+         related=[("Bébé, enfant & adolescent", "homeopathie/enfant-et-adolescent/")]),
+    dict(uni="homeo", path="homeopathie/orl-allergies-peau/", short="ORL · Allergies · Peau", title="ORL, allergies, peau", icon="wind",
          img="spec-orl.webp", pos="50% 50%", panel_img="orl-allergies.webp", panel_pos="50% 35%", tagline="Chez l’enfant et l’adulte",
          desc="Eczéma, psoriasis, urticaire, rhume des foins, asthme, otites, sinusites.",
          subs=[("Peau : eczéma, psoriasis, urticaire", "#peau", "Démangeaisons, poussées, sommeil perturbé"),
@@ -282,48 +314,59 @@ SERVICES = [
                ("Infections ORL à répétition", "#infections-orl", "Otites, angines, sinusites, rhinites"),
                ("Asthme & troubles respiratoires", "#asthme", "Toux nocturne, essoufflement"),
                ("Questions fréquentes", "#faq", "")],
-         related=[("Enfant & adolescent", "enfant-et-adolescent/")]),
-    dict(path="homeopathie-soins-support-oncologie/", short="Oncologie", title="Soins de support en oncologie", icon="ribbon",
+         related=[("Bébé, enfant & adolescent", "homeopathie/enfant-et-adolescent/")]),
+    dict(uni="homeo", path="homeopathie/soins-support-oncologie/", short="Oncologie", title="Soins de support en oncologie", icon="ribbon",
          img="spec-onco.webp", pos="50% 45%", tagline="En complément de l’équipe médicale",
          desc="Pendant et après les traitements contre le cancer, pour mieux traverser les effets secondaires.",
          subs=[("Pendant les traitements", "#pendant", "Chimio, radio, hormonothérapie, immunothérapie"),
                ("Après les traitements", "#apres", "Récupération, énergie, retour au quotidien"),
                ("Formations & recherche", "#formations", "Gustave Roussy, SHISSO, publications"),
                ("Questions fréquentes", "#faq", "")],
-         related=[("Mon histoire : mon papa, mon héros", "soin-de-support-en-oncologie-histoire-personnelle/"), ("TCC du sommeil", "tcc-sommeil/")]),
-    dict(path="accompagnement-tdah/", short="TDAH", title="Accompagnement TDAH", icon="brain", new=True,
-         img="tdah-accompagnement.webp", pos="50% 12%", tagline="Enfant, parents & famille",
-         desc="Un accompagnement en trois volets : l’enfant, les parents et toute la famille.",
-         subs=[("Pour l’enfant", "#enfant", "Attention, agitation, sommeil, émotions"),
-               ("Pour les parents", "#parents", "Écoute, repères concrets, fatigue"),
-               ("Pour la famille", "#famille", "Apaiser les tensions, retrouver un rythme"),
-               ("Questions fréquentes", "#faq", "")],
-         related=[("Article : TDAH & homéopathie", "tdah-homeopathie-accompagnement-individualise/"), ("Enfant & adolescent", "enfant-et-adolescent/")]),
-    dict(path="tcc-sommeil/", short="Sommeil", title="TCC du sommeil", icon="moon", new=True,
-         img="onco-apres.webp", pos="50% 30%", tagline="Thérapie comportementale et cognitive de l’insomnie",
-         desc="Endormissement difficile, réveils nocturnes : retrouver des nuits réparatrices durablement.",
-         subs=[("Pour qui ?", "#pour-qui", "Insomnie, réveils nocturnes, fatigue"),
-               ("La méthode en 3 étapes", "#methode", "Évaluer, ajuster, apaiser le mental"),
-               ("Questions fréquentes", "#faq", "")],
-         related=[("Bébé : allaitement & sommeil", "bebe-allaitement-sommeil/"), ("Équilibre féminin & hormonal", "equilibre-feminin-et-hormonal/")]),
-    dict(path="bebe-allaitement-sommeil/", short="Bébé & allaitement", title="Bébé : allaitement & sommeil", icon="heart", new=True,
-         img="enfant-bebe.webp", pos="50% 45%", tagline="Soutien aux mamans et aux tout-petits",
-         desc="Soutenir les mamans dans l’allaitement et accompagner le sommeil du tout-petit.",
-         subs=[("Allaitement", "#allaitement", "Douleurs, production de lait, tétées, sevrage"),
-               ("Sommeil de bébé", "#sommeil-bebe", "Réveils, endormissement, rituels"),
-               ("Questions fréquentes", "#faq", "")],
-         related=[("Nouveau-né & bébé", "enfant-et-adolescent/#bebe"), ("Grossesse & post-partum", "equilibre-feminin-et-hormonal/#grossesse")]),
-    dict(path="mes-specialites/#complementaires", short="Autres troubles", title="Autres accompagnements", icon="bolt",
+         related=[("Mon histoire : mon papa, mon héros", "soin-de-support-en-oncologie-histoire-personnelle/")]),
+    dict(uni="homeo", path="homeopathie/#complementaires", short="Autres troubles", title="Autres accompagnements", icon="bolt",
          img="famille.webp", pos="50% 35%", tagline="Chronique, neurologique, urgences",
          desc="Fatigue et stress chroniques, troubles digestifs, migraines, vertiges, urgences homéopathiques.",
          subs=[("Déséquilibres métaboliques chroniques", "", "Fatigue, stress, digestion, auto-immunité"),
                ("Troubles neurologiques", "", "Migraines, vertiges, tremblements"),
                ("Urgences homéopathiques", "", "Fièvre, otites, cystites, gastro, toux")],
-         related=[("Toutes mes spécialités", "mes-specialites/"), ("Tarifs : urgence homéo", "tarifs-remboursements/")]),
+         related=[("Toutes mes spécialités", "homeopathie/"), ("Tarifs : urgence homéo", "tarifs-remboursements/")]),
+    dict(uni="parent", draft="barkley", path="accompagnement-parental/tdah-methode-barkley/", short="TDAH – Barkley®", title="TDAH – Méthode Barkley®", icon="users", new=True,
+         img="tdah-hero.webp", pos="50% 30%", tagline="Programme pour les parents · 10 séances",
+         desc="Un programme structuré pour retrouver du calme à la maison et une relation plus sereine avec votre enfant.",
+         subs=[("Le programme Barkley®", "#programme", "Un entraînement parental reconnu"),
+               ("Déroulement & dix séances", "#deroulement", "Appel découverte, 10 séances, suivi à 6 mois"),
+               ("Infos pratiques & tarif", "#infos", "Pully, Fribourg ou visio · CHF 130 la séance"),
+               ("Questions fréquentes", "#faq", "")],
+         related=[("Sommeil de l’enfant 0–3 ans", "accompagnement-parental/sommeil-enfant-0-3-ans/")]),
+    dict(uni="parent", path="accompagnement-parental/sommeil-enfant-0-3-ans/", short="Sommeil 0–3 ans", title="Sommeil de l’enfant 0–3 ans", icon="moon", new=True,
+         img="sommeil-enfant.webp", pos="50% 45%", tagline="Des nuits plus douces pour toute la famille",
+         desc="Réveils nocturnes, endormissement difficile, rituels du coucher&nbsp;: des repères adaptés à l’âge de votre tout-petit.",
+         subs=[("Vous vous reconnaissez ?", "#situations", "Réveils, endormissement, siestes"),
+               ("Comment je vous accompagne", "#accompagnement", "Bilan, plan sur mesure, suivi"),
+               ("Questions fréquentes", "#faq", "")],
+         related=[("Allaitement", "accompagnement-parental/allaitement/")]),
+    dict(uni="parent", path="accompagnement-parental/allaitement/", short="Allaitement", title="Allaitement", icon="heart", new=True,
+         img="allaitement.webp", pos="50% 35%", tagline="Soutien aux mamans",
+         desc="Douleurs, tétées difficiles, inquiétudes sur la production de lait, reprise du travail, sevrage&nbsp;: un soutien concret et sans jugement.",
+         subs=[("Vous vous reconnaissez ?", "#situations", "Douleurs, tétées, production de lait"),
+               ("Comment je vous accompagne", "#accompagnement", "Écoute, repères concrets, suivi"),
+               ("Questions fréquentes", "#faq", "")],
+         related=[("Sommeil de l’enfant 0–3 ans", "accompagnement-parental/sommeil-enfant-0-3-ans/")]),
+    dict(uni="insomnie", path="insomnie-tcc-i/", short="Insomnie – TCC-i", title="Insomnie – TCC-i", icon="moon", new=True,
+         img="onco-apres.webp", pos="50% 30%", tagline="Thérapie comportementale et cognitive de l’insomnie",
+         desc="Endormissement difficile, réveils nocturnes&nbsp;: retrouver des nuits réparatrices durablement.",
+         subs=[("Pour qui ?", "#pour-qui", "Insomnie, réveils nocturnes, fatigue"),
+               ("La méthode en 3 étapes", "#methode", "Évaluer, ajuster, apaiser le mental"),
+               ("Questions fréquentes", "#faq", "")],
+         related=[]),
 ]
+SERVICES = [s for s in _ALL_SERVICES if not s.get("draft") or BARKLEY_LIVE]
+if not BARKLEY_LIVE:
+    # Tant que le programme Barkley® n'est pas publié, l'ancienne page TDAH reste accessible depuis l'enfant.
+    SERVICES[0]["related"].insert(0, ("Accompagnement TDAH", "accompagnement-tdah/"))
 # Compatibilité (pied de page, etc.)
-SPECIALTIES = [(s["path"], s["title"], s["tagline"], s["icon"]) for s in SERVICES[:4]]
-NEW_SERVICES = [(s["path"], s["title"], s["tagline"], s["icon"]) for s in SERVICES[4:7]]
+SPECIALTIES = [(s["path"], s["title"], s["tagline"], s["icon"]) for s in SERVICES if s["uni"] == "homeo" and "#" not in s["path"]]
+NEW_SERVICES = [(s["path"], s["title"], s["tagline"], s["icon"]) for s in SERVICES if s["uni"] != "homeo"]
 
 
 def svc_href(root, svc, href):
@@ -333,68 +376,64 @@ def svc_href(root, svc, href):
     return f"{root}{href or svc['path']}"
 
 
-def services_bar(root, nav_path):
-    items = []
-    for i, s in enumerate(SERVICES):
-        cur = ' aria-current="page"' if nav_path and s["path"].split("#")[0] == nav_path else ""
-        new = '<span class="dot-new" aria-label="nouveau"></span>' if s.get("new") else ""
-        subs = "".join(
-            f'<li><a href="{svc_href(root, s, h)}"><strong>{t}</strong>{f"<span>{d}</span>" if d else ""}</a></li>'
-            for t, h, d in s["subs"])
-        rel = "".join(f'<li><a href="{root}{h}">{icon("arrow")}{t}</a></li>' for t, h in s["related"])
-        align = " right" if i >= len(SERVICES) - 3 else ""
-        items.append(f"""<li class="svc-item{align}">
-  <a class="svc-link" href="{root}{s['path']}"{cur}>{icon(s['icon'])}<span>{s['short']}</span>{new}{icon('chevron', 'chev')}</a>
-  <div class="svc-panel" role="group" aria-label="{s['title']}">
-    <div class="svc-panel-intro">
-      <img src="{root}assets/img/{s.get('panel_img', s['img'])}" alt="" loading="lazy" style="object-position:{s.get('panel_pos', s.get('pos', '50% 50%'))}">
-      <span class="eyebrow">{s['tagline']}</span>
-      <h3>{s['title']}{' <span class="badge-new">Nouveau</span>' if s.get('new') else ''}</h3>
-      <p>{s['desc']}</p>
-      <a class="btn btn-primary btn-sm" href="{root}{s['path']}">Voir la page</a>
+def mega_panel(root, key):
+    """Menu déroulant d'un univers : présentation + photo, puis liens vers les pages."""
+    u = UNIVERSES[key]
+    links = "".join(
+        f'<li><a href="{root}{s["path"]}">{icon(s["icon"])}<span><strong>{s["title"]}</strong><small>{s["tagline"]}</small></span></a></li>'
+        for s in SERVICES if s["uni"] == key)
+    return f"""<div class="submenu mega" role="group" aria-label="{u['label']}">
+    <div class="mega-intro">
+      <img src="{root}assets/img/{u['img']}" alt="" loading="lazy" style="object-position:{u['pos']}">
+      <span class="eyebrow">{u['tagline']}</span>
+      <p>{u['desc']}</p>
+      <a class="btn btn-primary btn-sm" href="{root}{u['path']}">{u['cta']}</a>
     </div>
-    <div class="svc-panel-links">
-      <p class="svc-panel-label">Ce que j’accompagne</p>
-      <ul class="svc-subs">{subs}</ul>
-      <p class="svc-panel-label">Services liés</p>
-      <ul class="svc-related">{rel}</ul>
-    </div>
-  </div>
-</li>""")
-    return f"""<div class="svc-bar">
-  <div class="container wide">
-    <ul class="svc-list" aria-label="Mes services">
-      {''.join(items)}
+    <ul class="mega-links">
+      <li class="mega-all"><a href="{root}{u['path']}">{icon('arrow')}<span><strong>{u['label']}&nbsp;: vue d’ensemble</strong></span></a></li>
+      {links}
     </ul>
-  </div>
-</div>"""
+  </div>"""
 
 
-def mobile_services(root):
+def universe_cards(root):
+    """Accueil : trois cartes d'entrée, une par univers."""
+    cards = "".join(f"""<a class="uni-card uni-{k} reveal d{i}" href="{root}{u['path']}">
+  <span class="uni-icon">{icon(u['icon'])}</span>
+  <span class="uni-body"><strong>{u['label']}</strong><span>{u['card']}</span></span>
+  <span class="uni-go">{u['cta']} {icon('arrow')}</span>
+</a>""" for i, (k, u) in enumerate(UNIVERSES.items()))
+    return f'<div class="uni-cards">{cards}</div>'
+
+
+def parent_cards(root):
+    """Page pivot « Accompagnement parental » : une carte par sous-page."""
     out = []
-    for s in SERVICES:
-        links = "".join(f'<li><a href="{svc_href(root, s, h)}">{t}</a></li>' for t, h, _ in s["subs"])
-        rel = "".join(f'<li><a class="rel" href="{root}{h}">{t}</a></li>' for t, h in s["related"])
-        new = ' <span class="badge-new">Nouveau</span>' if s.get("new") else ""
-        out.append(f"""<details class="m-svc">
-  <summary>{icon(s['icon'])}<span>{s['title']}{new}</span>{icon('chevron', 'chev')}</summary>
-  <ul><li><a class="all" href="{root}{s['path']}">Voir la page {s['title']}</a></li>{links}{rel}</ul>
-</details>""")
-    return '<div class="mobile-services"><p class="svc-panel-label">Mes services</p>' + "".join(out) + "</div>"
+    for i, s in enumerate(s for s in _ALL_SERVICES if s["uni"] == "parent"):
+        live = not s.get("draft") or BARKLEY_LIVE
+        inner = f"""<span class="pc-img"><img src="{root}assets/img/{s['img']}" alt="" loading="lazy" style="object-position:{s.get('pos', '50% 50%')}">{'' if live else '<span class="badge-new">Bientôt</span>'}</span>
+  <span class="pc-body"><span class="eyebrow">{s['tagline']}</span><strong>{s['title']}</strong><span>{s['desc']}</span>
+  {f'<span class="preview-link">Découvrir {icon("arrow")}</span>' if live else '<span class="small muted">Programme disponible prochainement.</span>'}</span>"""
+        if live:
+            out.append(f'<a class="parent-card reveal d{i}" href="{root}{s["path"]}">{inner}</a>')
+        else:
+            out.append(f'<div class="parent-card is-soon reveal d{i}">{inner}</div>')
+    return '<div class="parent-cards">' + "".join(out) + "</div>"
 
 
 # --------------------------------------------------------------------------
 # Blocs « services » pour les propositions d'accueil
 # --------------------------------------------------------------------------
 SVC_PROFILES = {
-    "enfant-et-adolescent/": "bebe enfant famille",
-    "equilibre-feminin-et-hormonal/": "femme",
-    "orl-allergies-peau/": "bebe enfant adulte",
-    "homeopathie-soins-support-oncologie/": "cancer",
-    "accompagnement-tdah/": "enfant famille",
-    "tcc-sommeil/": "femme adulte cancer",
-    "bebe-allaitement-sommeil/": "bebe femme famille",
-    "mes-specialites/#complementaires": "adulte",
+    "homeopathie/enfant-et-adolescent/": "bebe enfant famille",
+    "homeopathie/equilibre-feminin-et-hormonal/": "femme",
+    "homeopathie/orl-allergies-peau/": "bebe enfant adulte",
+    "homeopathie/soins-support-oncologie/": "cancer",
+    "homeopathie/#complementaires": "adulte",
+    "accompagnement-parental/tdah-methode-barkley/": "enfant famille",
+    "accompagnement-parental/sommeil-enfant-0-3-ans/": "bebe famille",
+    "accompagnement-parental/allaitement/": "bebe femme famille",
+    "insomnie-tcc-i/": "femme adulte cancer",
 }
 FILTERS = [("bebe", "child", "Mon bébé"), ("enfant", "users", "Mon enfant, mon ado"), ("femme", "flower", "Moi, femme"),
            ("adulte", "user", "Moi, adulte"), ("cancer", "ribbon", "Parcours cancer"), ("famille", "heart", "Toute la famille")]
@@ -419,6 +458,7 @@ def svc_tiles(root):
         out.append(f"""<article class="svc-tile reveal d{i % 4}" data-profiles="{SVC_PROFILES.get(s['path'], '')}">
   <a class="svc-tile-img" href="{root}{s['path']}" tabindex="-1" aria-hidden="true"><img src="{root}assets/img/{s['img']}" alt="" loading="lazy" style="object-position:{s.get('pos', '50% 50%')}">{new}</a>
   <div class="svc-tile-body">
+    <span class="svc-uni">{UNIVERSES[s['uni']]['label']}</span>
     <h3><a href="{root}{s['path']}">{icon(s['icon'])}{s['title']}</a></h3>
     <p>{s['desc']}</p>
     <ul class="svc-chips">{chips}</ul>
@@ -456,12 +496,12 @@ def svc_tabs(root):
 
 
 PROFILES = [
-    ("child", "Mon bébé", "0 – 2 ans", ["enfant-et-adolescent/#bebe", "bebe-allaitement-sommeil/", "orl-allergies-peau/"]),
-    ("users", "Mon enfant, mon ado", "3 – 18 ans", ["enfant-et-adolescent/", "accompagnement-tdah/", "orl-allergies-peau/"]),
-    ("flower", "Moi, en tant que femme", "Cycles, grossesse, ménopause", ["equilibre-feminin-et-hormonal/", "bebe-allaitement-sommeil/", "tcc-sommeil/"]),
-    ("user", "Moi, adulte", "Peau, allergies, sommeil, chronique", ["orl-allergies-peau/", "tcc-sommeil/", "mes-specialites/#complementaires"]),
-    ("ribbon", "Un parcours contre le cancer", "Pendant et après les traitements", ["homeopathie-soins-support-oncologie/", "tcc-sommeil/"]),
-    ("heart", "Toute la famille", "Parents, fratrie, quotidien", ["accompagnement-tdah/#famille", "enfant-et-adolescent/", "bebe-allaitement-sommeil/"]),
+    ("child", "Mon bébé", "0 – 2 ans", ["homeopathie/enfant-et-adolescent/#bebe", "accompagnement-parental/sommeil-enfant-0-3-ans/", "accompagnement-parental/allaitement/"]),
+    ("users", "Mon enfant, mon ado", "3 – 18 ans", ["homeopathie/enfant-et-adolescent/", "homeopathie/orl-allergies-peau/"]),
+    ("flower", "Moi, en tant que femme", "Cycles, grossesse, ménopause", ["homeopathie/equilibre-feminin-et-hormonal/", "accompagnement-parental/allaitement/", "insomnie-tcc-i/"]),
+    ("user", "Moi, adulte", "Peau, allergies, sommeil, chronique", ["homeopathie/orl-allergies-peau/", "insomnie-tcc-i/", "homeopathie/#complementaires"]),
+    ("ribbon", "Un parcours contre le cancer", "Pendant et après les traitements", ["homeopathie/soins-support-oncologie/", "insomnie-tcc-i/"]),
+    ("heart", "Toute la famille", "Parents, fratrie, quotidien", ["accompagnement-parental/", "homeopathie/enfant-et-adolescent/"]),
 ]
 
 
@@ -474,10 +514,10 @@ def svc_profiles(root):
         for l in links:
             sv = by_path.get(l.split("#")[0])
             label = sv["title"] if sv else l
-            if l == "enfant-et-adolescent/#bebe":
+            if l == "homeopathie/enfant-et-adolescent/#bebe":
                 label = "Nouveau-né & bébé"
-            if l == "accompagnement-tdah/#famille":
-                label = "Accompagnement TDAH – famille"
+            if l == "accompagnement-parental/":
+                label = "Accompagnement parental"
             lis.append(f'<li><a href="{root}{l}">{label}</a></li>')
         cards.append(f"""<div class="profile-card">
   <div class="icon-badge">{icon(ic)}</div>
@@ -508,21 +548,23 @@ AGES = [("bebe", "child", "Bébé", "0 – 2 ans"), ("enfant", "users", "Enfant"
         ("ado", "spark", "Adolescent", "12 – 17 ans"), ("adulte", "user", "Adulte", "18 – 64 ans"),
         ("senior", "leaf", "Senior", "65 ans et +")]
 MOTIFS = [
-    ("Coliques, reflux, sommeil, dentition", "bebe", "enfant-et-adolescent/#bebe"),
-    ("Allaitement & sommeil de bébé", "bebe", "bebe-allaitement-sommeil/"),
-    ("Sommeil, digestion, fatigue de l’enfant", "enfant", "enfant-et-adolescent/#enfant"),
-    ("TDAH, concentration, agitation", "enfant ado adulte", "accompagnement-tdah/"),
-    ("Acné, confiance, émotions de l’ado", "ado", "enfant-et-adolescent/#ado"),
-    ("Otites, rhumes, infections ORL à répétition", "bebe enfant ado adulte senior", "orl-allergies-peau/#infections-orl"),
-    ("Eczéma, psoriasis, urticaire", "bebe enfant ado adulte senior", "orl-allergies-peau/#peau"),
-    ("Allergies, asthme, rhume des foins", "enfant ado adulte senior", "orl-allergies-peau/#allergies"),
-    ("Règles douloureuses, SOPK, endométriose", "ado adulte", "equilibre-feminin-et-hormonal/#cycles"),
-    ("Désir de grossesse, grossesse, post-partum", "adulte", "equilibre-feminin-et-hormonal/#fertilite"),
-    ("Ménopause, thyroïde", "adulte senior", "equilibre-feminin-et-hormonal/#menopause"),
-    ("Accompagnement pendant ou après un cancer", "ado adulte senior", "homeopathie-soins-support-oncologie/"),
-    ("Insomnie, troubles du sommeil (TCC)", "ado adulte senior", "tcc-sommeil/"),
-    ("Stress, anxiété, fatigue chronique", "ado adulte senior", "mes-specialites/#complementaires"),
-    ("Migraines, vertiges, troubles neurologiques", "adulte senior", "mes-specialites/#complementaires"),
+    ("Coliques, reflux, sommeil, dentition", "bebe", "homeopathie/enfant-et-adolescent/#bebe"),
+    ("Sommeil du tout-petit (0 – 3 ans)", "bebe enfant", "accompagnement-parental/sommeil-enfant-0-3-ans/"),
+    ("Allaitement", "bebe", "accompagnement-parental/allaitement/"),
+    ("Sommeil, digestion, fatigue de l’enfant", "enfant", "homeopathie/enfant-et-adolescent/#enfant"),
+    (("TDAH, opposition : programme pour les parents", "enfant ado", "accompagnement-parental/tdah-methode-barkley/") if BARKLEY_LIVE
+     else ("TDAH, concentration, agitation", "enfant ado adulte", "accompagnement-tdah/")),
+    ("Acné, confiance, émotions de l’ado", "ado", "homeopathie/enfant-et-adolescent/#ado"),
+    ("Otites, rhumes, infections ORL à répétition", "bebe enfant ado adulte senior", "homeopathie/orl-allergies-peau/#infections-orl"),
+    ("Eczéma, psoriasis, urticaire", "bebe enfant ado adulte senior", "homeopathie/orl-allergies-peau/#peau"),
+    ("Allergies, asthme, rhume des foins", "enfant ado adulte senior", "homeopathie/orl-allergies-peau/#allergies"),
+    ("Règles douloureuses, SOPK, endométriose", "ado adulte", "homeopathie/equilibre-feminin-et-hormonal/#cycles"),
+    ("Désir de grossesse, grossesse, post-partum", "adulte", "homeopathie/equilibre-feminin-et-hormonal/#fertilite"),
+    ("Ménopause, thyroïde", "adulte senior", "homeopathie/equilibre-feminin-et-hormonal/#menopause"),
+    ("Accompagnement pendant ou après un cancer", "ado adulte senior", "homeopathie/soins-support-oncologie/"),
+    ("Insomnie (TCC-i)", "ado adulte senior", "insomnie-tcc-i/"),
+    ("Stress, anxiété, fatigue chronique", "ado adulte senior", "homeopathie/#complementaires"),
+    ("Migraines, vertiges, troubles neurologiques", "adulte senior", "homeopathie/#complementaires"),
     ("Urgence : fièvre, infection aiguë", "bebe enfant ado adulte senior", "tarifs-remboursements/"),
     ("Autre motif", "bebe enfant ado adulte senior", ""),
 ]
@@ -577,16 +619,18 @@ def funnel_section(root, preset="", title="Trouvez le bon rendez-vous en 3 clics
 </section>"""
 
 
-def lieux_block(root):
+def lieux_block(root, uni="homeo"):
     """Encart « Consulter à Pully ou à Fribourg » (liens croisés services → cabinets)."""
+    label = "Homéopathe à" if uni == "homeo" else "Au cabinet à"
+    visio = ("et en visio selon les circonstances" if uni == "homeo" else "et en visioconférence partout en Suisse")
     cards = "".join(f"""<a class="lieu-card" href="{root}{l['page']}">
   <img src="{root}assets/img/{l['img']}" alt="Cabinet HOMEOMED à {l['city']}" loading="lazy">
-  <span><span class="lieu-days">{l['days']}</span><strong>Homéopathe à {l['short']}</strong><small>{l['street']}, {l['zip']} {l['city']} · {l['detail']}</small></span>
+  <span><span class="lieu-days">{l['days']}</span><strong>{label} {l['short']}</strong><small>{l['street']}, {l['zip']} {l['city']} · {l['detail']}</small></span>
   <em>Infos & accès →</em>
 </a>""" for l in LOCATIONS.values())
     return f"""<section class="section tight lieux">
   <div class="container">
-    <div class="lieux-head"><span class="eyebrow">Deux cabinets</span><h2>Consulter à Pully ou à Fribourg</h2><p class="muted">Cet accompagnement est proposé dans les deux cabinets, et en visio selon les circonstances.</p></div>
+    <div class="lieux-head"><span class="eyebrow">Deux cabinets</span><h2>Consulter à Pully ou à Fribourg</h2><p class="muted">Cet accompagnement est proposé dans les deux cabinets, {visio}.</p></div>
     <div class="lieux-grid">{cards}</div>
   </div>
 </section>"""
@@ -604,31 +648,51 @@ def services_ville(root, key):
 </section>"""
 
 
+def appel_btn(root, cls="btn btn-primary btn-lg"):
+    """Bouton principal des pages parentales : appel découverte gratuit."""
+    return f'<a class="{cls}" href="{root}{APPEL_URL}">{icon("phone")}Réserver mon appel découverte gratuit</a>'
+
+
+NAV_UNIVERSE = {"homeo": "homeo", "parent": "parent", "insomnie": "insomnie"}
+
+
 def header(root, nav, path=""):
     def cur(key):
         return ' aria-current="page"' if nav == key else ""
 
-    cab_current = " is-current" if nav in ("cabinet",) else ""
+    def sub_cur(key):
+        return " is-current" if nav == key else ""
+
+    uni = NAV_UNIVERSE.get(nav)
+    sig = f'<span class="brand-sig">{UNIVERSES[uni]["label"]}</span>' if uni else ""
     return f"""<a class="skip-link" href="#contenu">Aller au contenu</a>
 <header class="site-header">
   <div class="container wide header-inner">
-    <a class="brand" href="{root}" aria-label="HOMEOMED – Paola Orlando, homéopathe – accueil">
-      <img src="{root}assets/img/logo.webp" alt="HOMEOMED – Paola Orlando Homéopathe" width="640" height="157">
+    <a class="brand" href="{root}" aria-label="HOMEOMED – Paola Orlando – accueil">
+      <img src="{root}assets/img/logo.webp" alt="HOMEOMED – Paola Orlando" width="640" height="157">{sig}
     </a>
     <nav class="main-nav" id="menu" aria-label="Navigation principale">
-      {mobile_services(root)}
       <ul>
+        <li class="nav-home"><a href="{root}"{cur("home")}>Accueil</a></li>
         <li><a href="{root}qui-suis-je/"{cur("about")}>Qui suis-je&nbsp;?</a></li>
-        <li><a href="{root}mes-specialites/"{cur("specialites") if path == "mes-specialites/" else ""}>Spécialités</a></li>
+        <li class="has-sub has-mega{sub_cur("homeo")}">
+          <button class="nav-toggle-sub" type="button" aria-expanded="false">Homéopathie {icon("chevron")}</button>
+          {mega_panel(root, "homeo")}
+        </li>
+        <li class="has-sub has-mega{sub_cur("parent")}">
+          <button class="nav-toggle-sub" type="button" aria-expanded="false">Accompagnement parental {icon("chevron")}</button>
+          {mega_panel(root, "parent")}
+        </li>
+        <li><a href="{root}insomnie-tcc-i/"{cur("insomnie")}>Insomnie – TCC-i</a></li>
         <li><a href="{root}tarifs-remboursements/"{cur("tarifs")}>Tarifs</a></li>
-        <li class="has-sub{cab_current}">
-          <button class="nav-toggle-sub" type="button" aria-expanded="false">Cabinets {icon("chevron")}</button>
+        <li class="has-sub{sub_cur("cabinet")}">
+          <button class="nav-toggle-sub" type="button" aria-expanded="false">Le cabinet {icon("chevron")}</button>
           <ul class="submenu">
             <li><a href="{root}cabinet-pully/">Pully – Lausanne<span>Place Neuve 1 · lun, mar, mer, ven</span></a></li>
             <li><a href="{root}cabinet-fribourg/">Fribourg<span>Centre ITS · tous les jeudis</span></a></li>
+            <li><a href="{root}faq/">Questions fréquentes<span>Consultations, remboursements, langues</span></a></li>
           </ul>
         </li>
-        <li><a href="{root}faq/"{cur("faq")}>FAQ</a></li>
         <li><a href="{root}blog/"{cur("blog")}>Blog</a></li>
       </ul>
       <div class="mobile-nav-cta">
@@ -639,42 +703,69 @@ def header(root, nav, path=""):
     </nav>
     <div class="btn-row header-actions">
       <!--LANGSWITCH-->
-      <a class="header-phone" href="{PHONE_LINK}">{icon("phone")}<span>{PHONE}</span></a>
+      <a class="header-phone" href="{PHONE_LINK}" aria-label="{PHONE}">{icon("phone")}<span>{PHONE}</span></a>
       <a class="btn btn-primary btn-sm header-cta" href="{root}prendre-rdv/">{icon("calendar")}Prendre RDV</a>
       <button class="menu-btn" type="button" aria-controls="menu" aria-expanded="false" aria-label="Ouvrir le menu"><span></span></button>
     </div>
   </div>
-  {services_bar(root, path)}
 </header>"""
 
 
-def footer(root):
-    spec = "".join(f'<li><a href="{root}{p}">{t}</a></li>' for p, t, _, _ in SPECIALTIES + NEW_SERVICES)
+DISCLAIMERS = {
+    "homeo": "l’homéopathie est une médecine complémentaire. Elle ne remplace en aucun cas les traitements médicaux prescrits, ni la consultation d’un médecin ou d’un spécialiste. En cas de doute ou d’urgence, veuillez contacter votre professionnel de santé.",
+    "parent": "l’accompagnement parental est un accompagnement éducatif destiné aux parents. Il ne pose aucun diagnostic, ne relève pas de la psychothérapie et ne remplace pas le suivi par votre pédiatre, un pédopsychiatre ou un psychologue.",
+    "insomnie": "la TCC de l’insomnie ne remplace pas une évaluation médicale. Toute modification d’un traitement se décide avec votre médecin ; en cas de suspicion de trouble médical du sommeil (apnée, par exemple), consultez-le.",
+}
+FOOTER_INTRO = {
+    "homeo": "Paola Orlando, homéopathe diplômée fédérale. Homéopathie classique pour enfants, femmes et adultes à Pully/Lausanne et Fribourg.",
+    "parent": "Paola Orlando – accompagnement parental à Pully/Lausanne, à Fribourg et en visioconférence partout en Suisse.",
+    "insomnie": "Paola Orlando – thérapie comportementale et cognitive de l’insomnie (TCC-i) à Pully/Lausanne, à Fribourg et en visio.",
+    None: "Paola Orlando – homéopathie, accompagnement parental et TCC de l’insomnie à Pully/Lausanne, à Fribourg et en visio.",
+}
+
+
+def footer(root, nav=""):
+    uni = NAV_UNIVERSE.get(nav)
+    homeo = "".join(f'<li><a href="{root}{p}">{t}</a></li>' for p, t, _, _ in SPECIALTIES)
+    other = "".join(f'<li><a href="{root}{p}">{t}</a></li>' for p, t, _, _ in NEW_SERVICES)
+    homeo_col = "" if uni in ("parent", "insomnie") else f"""<div>
+        <h4>Homéopathie</h4>
+        <ul>{homeo}<li><a href="{root}homeopathie/">Toutes les spécialités</a></li></ul>
+      </div>"""
+    if uni in ("parent", "insomnie"):
+        disc = DISCLAIMERS[uni]
+    elif uni == "homeo":
+        disc = DISCLAIMERS["homeo"]
+    else:
+        disc = DISCLAIMERS["homeo"] + " " + DISCLAIMERS["parent"][0].upper() + DISCLAIMERS["parent"][1:]
+    mobile_cta = (f'<a class="btn btn-primary" href="{root}{APPEL_URL}">{icon("phone")}Appel découverte</a>'
+                  if uni == "parent" else rdv_btn(root, "Prendre RDV"))
     return f"""<footer class="site-footer">
   <div class="container">
-    <div class="footer-grid">
+    <div class="footer-grid{' four' if homeo_col == '' else ''}">
       <div class="footer-brand">
-        <img src="{root}assets/img/logo.webp" alt="HOMEOMED" width="640" height="157" loading="lazy">
-        <p>Paola Orlando, homéopathe diplômée fédérale. Homéopathie classique pour enfants, femmes et adultes à Pully/Lausanne et Fribourg.</p>
+        <img src="{root}assets/img/logo.webp" alt="HOMEOMED – Paola Orlando" width="640" height="157" loading="lazy">
+        <p>{FOOTER_INTRO[uni]}</p>
         <div class="socials">
           <a href="{FACEBOOK}" target="_blank" rel="noopener" aria-label="Facebook">{icon("facebook")}</a>
           <a href="{INSTAGRAM}" target="_blank" rel="noopener" aria-label="Instagram">{icon("instagram")}</a>
           <a href="{LINKEDIN}" target="_blank" rel="noopener" aria-label="LinkedIn">{icon("linkedin")}</a>
         </div>
       </div>
+      {homeo_col}
       <div>
-        <h4>Spécialités</h4>
-        <ul>{spec}<li><a href="{root}mes-specialites/">Toutes les spécialités</a></li></ul>
+        <h4>Accompagnement parental &amp; sommeil</h4>
+        <ul><li><a href="{root}accompagnement-parental/">Accompagnement parental</a></li>{other}</ul>
       </div>
       <div>
         <h4>Le cabinet</h4>
         <ul>
           <li><a href="{root}qui-suis-je/">Qui suis-je&nbsp;?</a></li>
           <li><a href="{root}tarifs-remboursements/">Tarifs &amp; remboursements</a></li>
-          <li><a href="{root}cabinet-pully/">Homéopathe Pully – Lausanne</a></li>
-          <li><a href="{root}cabinet-fribourg/">Homéopathe Fribourg</a></li>
+          <li><a href="{root}cabinet-pully/">Cabinet de Pully – Lausanne</a></li>
+          <li><a href="{root}cabinet-fribourg/">Cabinet de Fribourg</a></li>
           <li><a href="{root}faq/">Questions fréquentes</a></li>
-          <li><a href="{root}blog/">Blog Homeo’Conseils</a></li>
+          <li><a href="{root}blog/">Blog</a></li>
         </ul>
       </div>
       <div>
@@ -688,7 +779,7 @@ def footer(root):
         <p class="mt-1">{rdv_btn(root, "Prendre rendez-vous", "btn btn-light btn-sm")}</p>
       </div>
     </div>
-    <div class="footer-disclaimer"><strong>Informations importantes&nbsp;:</strong> l’homéopathie est une médecine complémentaire. Elle ne remplace en aucun cas les traitements médicaux prescrits, ni la consultation d’un médecin ou d’un spécialiste. En cas de doute ou d’urgence, veuillez contacter votre professionnel de santé.</div>
+    <div class="footer-disclaimer"><strong>Informations importantes&nbsp;:</strong> {disc}</div>
     <div class="footer-bottom">
       <span>© <span data-year>{date.today().year}</span> HOMEOMED – Paola Orlando. Tous droits réservés.</span>
       <ul>
@@ -703,7 +794,7 @@ def footer(root):
 </div>
 <div class="mobile-bar">
   <a class="btn btn-ghost" href="{PHONE_LINK}">{icon("phone")}Appeler</a>
-  {rdv_btn(root, "Prendre RDV")}
+  {mobile_cta}
 </div>"""
 
 
@@ -755,7 +846,7 @@ def location_schema(loc):
 PERSON = {"@type": "Person", "@id": SITE_URL + "#paola", "name": "Paola Orlando",
           "jobTitle": "Homéopathe diplômée fédérale", "url": SITE_URL + "qui-suis-je/",
           "image": SITE_URL + "assets/img/paola-portrait.webp", "knowsLanguage": ["fr", "en", "it", "es"]}
-ORGANISATION = {"@type": "MedicalOrganization", "@id": SITE_URL + "#organisation", "name": "HOMEOMED – Paola Orlando, Homéopathe",
+ORGANISATION = {"@type": "MedicalOrganization", "@id": SITE_URL + "#organisation", "name": "HOMEOMED – Paola Orlando",
                 "url": SITE_URL, "logo": SITE_URL + "assets/img/logo.png", "telephone": "+41215661815", "email": EMAIL,
                 "founder": {"@id": SITE_URL + "#paola"}, "sameAs": [FACEBOOK, INSTAGRAM, LINKEDIN],
                 "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "17"},
@@ -802,13 +893,16 @@ def page(meta, body):
                 for q, a in qa]}
             faq_schema = f'<script type="application/ld+json">{json.dumps(data, ensure_ascii=False)}</script>'
 
+    if meta.get("draft") == "barkley" and not BARKLEY_LIVE:
+        meta["noindex"] = True  # page prête mais pas encore publiée
     robots = '\n<meta name="robots" content="noindex">' if meta.get("noindex") else ""
     alternates = ""
     if en_path is not None and path != "404.html" and not meta.get("noindex"):
         alternates = (f'\n<link rel="alternate" hreflang="fr-CH" href="{SITE_URL}{fr_path}">'
                       f'\n<link rel="alternate" hreflang="en" href="{SITE_URL}{en_path}">'
                       f'\n<link rel="alternate" hreflang="x-default" href="{SITE_URL}{fr_path}">')
-    body = expand(body, root)
+    body = expand(conditionals(body), root)
+    uni = NAV_UNIVERSE.get(meta.get("nav", ""))
     out = f"""<!doctype html>
 <html lang="{'en' if lang == 'en' else 'fr-CH'}">
 <head>
@@ -820,7 +914,7 @@ def page(meta, body):
 <meta name="theme-color" content="#faf7f2">{robots}
 <meta property="og:type" content="website">
 <meta property="og:locale" content="{'en_GB' if lang == 'en' else 'fr_CH'}">
-<meta property="og:site_name" content="HOMEOMED – Paola Orlando, {'Homeopath' if lang == 'en' else 'Homéopathe'}">
+<meta property="og:site_name" content="HOMEOMED – Paola Orlando">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{canonical}">
@@ -834,12 +928,12 @@ def page(meta, body):
 <link rel="stylesheet" href="{root}assets/css/style.css">
 {schema}{faq_schema}
 </head>
-<body>
+<body{f' class="u-{uni}"' if uni else ''}>
 {header(root, meta.get("nav", ""), fr_path)}
 <main id="contenu">
 {body}
 </main>
-{footer(root)}
+{footer(root, meta.get("nav", ""))}
 <script src="{root}assets/js/main.js" defer></script>
 </body>
 </html>
@@ -914,6 +1008,15 @@ def translate_en(doc, page_path):
     return "".join(parts)
 
 
+def conditionals(body):
+    """Blocs conditionnels : <!--IF:barkley-->…<!--ENDIF:barkley--> et <!--IFNOT:barkley-->…<!--ENDIFNOT:barkley-->."""
+    flags = {"barkley": BARKLEY_LIVE}
+    for name, on in flags.items():
+        body = re.sub(rf"<!--IF:{name}-->(.*?)<!--ENDIF:{name}-->", lambda m: m.group(1) if on else "", body, flags=re.S)
+        body = re.sub(rf"<!--IFNOT:{name}-->(.*?)<!--ENDIFNOT:{name}-->", lambda m: "" if on else m.group(1), body, flags=re.S)
+    return body
+
+
 def expand(body, root):
     """Remplace les gabarits {{...}} présents dans les pages."""
     def repl(m):
@@ -938,8 +1041,16 @@ def expand(body, root):
             return (ROOT / "src" / "partials" / f"{key[8:]}.html").read_text(encoding="utf-8")
         if key.startswith("funnel-cab:"):
             return funnel_section(root, "", "Votre rendez-vous à " + LOCATIONS[key[11:]]["short"], cab=key[11:])
-        if key == "lieux":
-            return lieux_block(root)
+        if key == "lieux" or key.startswith("lieux:"):
+            return lieux_block(root, key.split(":", 1)[1] if ":" in key else "homeo")
+        if key == "appel":
+            return appel_btn(root)
+        if key == "appel-light":
+            return appel_btn(root, "btn btn-light btn-lg")
+        if key == "universes":
+            return universe_cards(root)
+        if key == "parent-cards":
+            return parent_cards(root)
         if key.startswith("services-ville:"):
             return services_ville(root, key[15:])
         if key == "funnel" or key.startswith("funnel:"):
@@ -958,8 +1069,8 @@ def expand(body, root):
             return svc_profiles(root)
         if key == "svc-catalog":
             return svc_catalog(root)
-        if key == "disclaimer":
-            return disclaimer()
+        if key == "disclaimer" or key.startswith("disclaimer:"):
+            return disclaimer(key.split(":", 1)[1] if ":" in key else "homeo")
         if key == "hours":
             return hours_list()
         consts = {"phone": PHONE, "phone-link": PHONE_LINK, "email": EMAIL, "whatsapp": WHATSAPP,
@@ -976,10 +1087,36 @@ def expand(body, root):
     return body
 
 
+# Anciennes adresses → nouvelles (301). Les anciennes pages WordPress étaient à la racine ;
+# on couvre aussi /mes-specialites/<page>/ au cas où ces adresses existent encore ailleurs.
+_HOMEO_MOVES = {
+    "enfant-et-adolescent/": "homeopathie/enfant-et-adolescent/",
+    "equilibre-feminin-et-hormonal/": "homeopathie/equilibre-feminin-et-hormonal/",
+    "orl-allergies-peau/": "homeopathie/orl-allergies-peau/",
+    "homeopathie-soins-support-oncologie/": "homeopathie/soins-support-oncologie/",
+}
 REDIRECTS = {
     "declaration-de-confidentialite/": "mentions-legales/",
     "politique-de-cookies-ue/": "mentions-legales/",
+    "mes-specialites/": "homeopathie/",
+    **_HOMEO_MOVES,
+    **{"mes-specialites/" + o: n for o, n in _HOMEO_MOVES.items()},
+    "tcc-sommeil/": "insomnie-tcc-i/",
+    "bebe-allaitement-sommeil/": "accompagnement-parental/",
+    # Version anglaise
+    "en/specialties/": "en/homeopathy/",
+    "en/children-and-teens/": "en/homeopathy/children-and-teens/",
+    "en/womens-hormonal-health/": "en/homeopathy/womens-hormonal-health/",
+    "en/ent-allergies-skin/": "en/homeopathy/ent-allergies-skin/",
+    "en/supportive-cancer-care/": "en/homeopathy/supportive-cancer-care/",
+    "en/cbt-for-insomnia/": "en/insomnia-cbt-i/",
+    "en/baby-breastfeeding-sleep/": "en/parent-coaching/",
 }
+if BARKLEY_LIVE:
+    REDIRECTS.update({
+        "accompagnement-tdah/": "accompagnement-parental/tdah-methode-barkley/",
+        "en/adhd-support/": "en/parent-coaching/adhd-barkley-method/",
+    })
 
 
 def main():
@@ -992,6 +1129,8 @@ def main():
             raise SystemExit(f"{f.name} : bloc meta manquant")
         meta = json.loads(m.group(1))
         meta.setdefault("lang", lang)
+        if meta.get("retire_if") == "barkley" and BARKLEY_LIVE:
+            continue  # remplacée par la page Barkley (redirection 301)
         out = page(meta, raw[m.end():])
         path = meta["path"]
         dest = ROOT / (path if path.endswith(".html") else path + "index.html")
@@ -1005,13 +1144,15 @@ def main():
     for old, new in REDIRECTS.items():
         d = ROOT / old
         d.mkdir(parents=True, exist_ok=True)
+        up = "../" * (old.strip("/").count("/") + 1)
         (d / "index.html").write_text(
             f'<!doctype html><html lang="fr-CH"><head><meta charset="utf-8"><title>Redirection…</title>'
             f'<meta name="robots" content="noindex"><link rel="canonical" href="{SITE_URL}{new}">'
-            f'<meta http-equiv="refresh" content="0; url=../{new}"></head>'
-            f'<body><p><a href="../{new}">Cette page a été déplacée.</a></p></body></html>\n', encoding="utf-8")
+            f'<meta http-equiv="refresh" content="0; url={up}{new}"></head>'
+            f'<body><p><a href="{up}{new}">Cette page a été déplacée.</a></p></body></html>\n', encoding="utf-8")
+    # « 301! » : force la redirection même si une page de repli existe à l'ancienne adresse (Netlify)
     (ROOT / "_redirects").write_text(
-        "".join(f"/{o} /{n} 301\n/{o.rstrip('/')} /{n} 301\n" for o, n in REDIRECTS.items()), encoding="utf-8")
+        "".join(f"/{o} /{n} 301!\n/{o.rstrip('/')} /{n} 301!\n" for o, n in REDIRECTS.items()), encoding="utf-8")
     print(f"✓ {len(REDIRECTS)} redirections")
 
     today = date.today().isoformat()

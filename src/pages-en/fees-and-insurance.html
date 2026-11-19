@@ -5,12 +5,13 @@
     <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="{{root}}">Home</a></li><li aria-current="page">Fees & insurance</li></ol></nav>
     <span class="eyebrow center">Fees & insurance</span>
     <h1 class="balance">Clear fees, <em>covered</em> by supplementary insurance</h1>
-    <p class="lead">Recognised by ASCA, RME, Visana and EGK: consultations are covered by most Swiss supplementary health insurers.</p>
+    <p class="lead">Homeopathy: recognised by ASCA, RME, Visana and EGK, consultations are covered by most Swiss supplementary health insurers.</p>
   </div>
 </section>
 
 <section class="section tight" style="padding-top:0">
   <div class="container">
+    <h2 class="tarif-group" id="homeopathie">Homeopathy</h2>
     <div class="grid grid-4">
       <article class="card price-card featured reveal">
         <span class="label">For everyone</span>
@@ -45,7 +46,34 @@
         <p class="small">Any clinical change (new symptoms) requires a new consultation.</p>
       </article>
     </div>
-    <p class="small muted center mt-2">Fees for the new services (ADHD parent & family support, CBT for insomnia, breastfeeding & baby sleep): available on request at {{phone}}.</p>
+  </div>
+</section>
+
+<section class="section tight" id="accompagnement-parental">
+  <div class="container">
+    <h2 class="tarif-group">Parent coaching &amp; insomnia</h2>
+<!--IF:barkley-->
+    <div class="grid grid-2">
+      <article class="card price-card featured reveal">
+        <span class="label">For parents</span>
+        <h3>Barkley® programme – ADHD</h3>
+        <div class="price">130.– <small>CHF / session</small></div>
+        <div class="price-meta">{{icon:clock}} 10 one-hour sessions over about five months</div>
+        <p>Included: the discovery call (20 min, free), the 10 sessions, practical worksheets for each step, and a free follow-up session after six months.</p>
+        <p class="small">Payable at the end of each session, in cash or by TWINT. Not covered by compulsory health insurance (LAMal) or by supplementary insurance.</p>
+        <p class="mb-0"><a class="link-arrow" href="{{root}}accompagnement-parental/tdah-methode-barkley/">Discover the programme</a></p>
+      </article>
+      <article class="card price-card reveal d1">
+        <span class="label">On request</span>
+        <h3>Sleep 0–3 years · Breastfeeding · CBT-I</h3>
+        <p>Fees for these services are available on request at {{phone}} or by e-mail.</p>
+        <p class="mb-0"><a class="link-arrow" href="{{root}}accompagnement-parental/">Parent coaching</a></p>
+      </article>
+    </div>
+<!--ENDIF:barkley-->
+<!--IFNOT:barkley-->
+    <p class="muted">Fees for parent coaching (<a href="{{root}}accompagnement-parental/sommeil-enfant-0-3-ans/">child sleep 0–3 years</a>, <a href="{{root}}accompagnement-parental/allaitement/">breastfeeding</a>) and <a href="{{root}}insomnie-tcc-i/">CBT for insomnia</a>: available on request at {{phone}}.</p>
+<!--ENDIFNOT:barkley-->
   </div>
 </section>
 
