@@ -27,7 +27,7 @@ Gabarits utilisables dans les pages : `{{rdv}}` (bouton rendez-vous), `{{cta}}`,
 ## Points forts
 
 - Accueil au format « présentation des services » : héro plein écran, bandeau défilant, grille des accompagnements, aperçus en escalier vers chaque page.
-- Mêmes adresses (URL) que l’ancien site WordPress → pas de perte de référencement ; redirections pour les anciennes pages légales.
+- Redirections 301 depuis les anciennes adresses (ancien site WordPress et anciennes pages de ce site) → pas de perte de référencement.
 - SEO : balises title/description, Open Graph, données structurées (MedicalBusiness, FAQPage), sitemap.
 - Respect de la vie privée : aucune police Google, aucun traceur ; les cartes Google ne se chargent qu’au clic → plus besoin de bandeau cookies.
 - Responsive (barre d’action « Appeler / Prendre RDV » sur mobile), accessible (navigation clavier, contrastes, `prefers-reduced-motion`).
@@ -59,3 +59,44 @@ Gabarits utilisables dans les pages : `{{rdv}}` (bouton rendez-vous), `{{cta}}`,
 - Chaque page déclare sa version dans l’autre langue (`hreflang`), le sélecteur **FR | EN** mène à la page équivalente, le sitemap liste les deux langues.
 - Les avis Google restent dans leur langue d’origine (français), avec une mention ; les témoignages du site sont traduits avec la mention « translated from French ».
 - Pour ajouter une page : créer la version FR dans `src/pages/`, la version EN dans `src/pages-en/`, et ajouter la paire d’adresses dans `PATHS` (`i18n.py`).
+
+## Refonte 2026 : trois univers
+
+Marque ombrelle **HOMEOMED · Paola Orlando** (logo sans « Homéopathe »), trois univers bien séparés :
+
+| Univers | Adresses | Signature sous le logo |
+|---|---|---|
+| Homéopathie | `/homeopathie/` + `enfant-et-adolescent/`, `equilibre-feminin-et-hormonal/`, `orl-allergies-peau/`, `soins-support-oncologie/` | « Homéopathie » |
+| Accompagnement parental | `/accompagnement-parental/` (page pivot) + `tdah-methode-barkley/`, `sommeil-enfant-0-3-ans/`, `allaitement/` | « Accompagnement parental » (couleur d’accent chaude) |
+| Insomnie | `/insomnie-tcc-i/` | « Insomnie – TCC-i » |
+
+- Menu unique : Accueil · Qui suis-je ? · Homéopathie ▾ · Accompagnement parental ▾ · Insomnie – TCC-i · Tarifs · Le cabinet ▾ · Blog · [Prendre RDV].
+- Les pages parentales et insomnie n’affichent ni homéopathie, ni avis, ni tunnel « Rendez-vous express » ; le pied de page et l’avertissement s’adaptent à l’univers (`"nav": "parent"` / `"insomnie"` / `"homeo"` dans le bloc meta).
+- Accueil : trois cartes d’entrée sous le titre principal (`{{universes}}`).
+- Redirections 301 (`REDIRECTS` dans `build.py`, fichier `_redirects` + pages de repli) : `/mes-specialites/…`, anciennes pages à la racine, `/tcc-sommeil/`, `/bebe-allaitement-sommeil/`, et leurs équivalents anglais.
+
+### Programme Barkley® (page TDAH) : prête, pas encore publiée
+
+`BARKLEY_LIVE = False` en haut de `build.py`. Tant que la formation n’est pas terminée, la page
+`/accompagnement-parental/tdah-methode-barkley/` existe mais est en **noindex**, hors sitemap et hors menu ; la page pivot affiche « Bientôt ».
+
+Une fois la formation terminée : mettre `BARKLEY_LIVE = True`, compléter l’âge / le rythme / le contenu des séances si besoin, puis `python3 build.py`.
+La page est alors indexée et ajoutée au menu, au pied de page, au tunnel et aux tarifs ; l’ancienne page homéopathique `/accompagnement-tdah/` est redirigée (301) vers elle.
+Dans les pages, `<!--IF:barkley-->…<!--ENDIF:barkley-->` et `<!--IFNOT:barkley-->…<!--ENDIFNOT:barkley-->` affichent un contenu selon ce réglage.
+
+Bouton « Réserver mon appel découverte gratuit » : `APPEL_URL` dans `build.py` (actuellement la page Prendre RDV ; à remplacer par le lien OneDoc dédié).
+
+### Photos à remplacer (même nom de fichier, format WebP)
+
+Copies provisoires d’images existantes, à écraser par les photos définitives :
+
+- `assets/img/tdah-hero.webp` — en-tête TDAH : parent et enfant qui rient, lisent ou cuisinent ensemble, lumière naturelle.
+- `assets/img/paola-parental.webp` — photo professionnelle de Paola, souriante, au cabinet.
+- `assets/img/parental-hero.webp` — en-tête de la page pivot.
+- `assets/img/sommeil-enfant.webp`, `assets/img/allaitement.webp` — pages Sommeil 0–3 ans et Allaitement.
+- Section 2 de la page TDAH : illustration provisoire d’un tableau de motivation (SVG) ; idéalement une photo de votre propre tableau.
+
+### À faire ensuite
+
+- Textes définitifs Sommeil 0–3 ans et Allaitement (textes actuels repris de l’ancienne page, sans homéopathie).
+- Landing pages publicitaires `/lp/…` (noindex, sans menu).

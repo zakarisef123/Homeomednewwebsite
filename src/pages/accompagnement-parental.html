@@ -1,0 +1,56 @@
+<!--meta {"title": "Accompagnement parental à Lausanne, Pully & Fribourg | HOMEOMED", "description": "Accompagnement parental à Pully/Lausanne, Fribourg ou en visio : TDAH et opposition, sommeil de l’enfant 0–3 ans, allaitement. Des outils concrets, sans jugement.", "path": "accompagnement-parental/", "nav": "parent", "image": "parental-hero.webp"} -->
+<!-- Page pivot (SEO « accompagnement parental Lausanne / Fribourg ») : présentation courte, trois cartes vers les sous-pages, photo, bouton. -->
+
+<section class="page-hero">
+  <div class="container split wide-left">
+    <div>
+      <nav class="breadcrumbs" aria-label="Fil d’Ariane"><ol><li><a href="{{root}}">Accueil</a></li><li aria-current="page">Accompagnement parental</li></ol></nav>
+      <span class="eyebrow">Pour les parents</span>
+      <h1 class="balance">Accompagnement parental à Lausanne, Pully et <em>Fribourg</em></h1>
+      <p class="lead">Quand le quotidien avec votre enfant devient difficile – un enfant très agité ou opposant, des nuits hachées, un allaitement douloureux –, je vous propose des outils concrets et des repères clairs pour retrouver du calme et de la confiance. Au cabinet à Pully ou à Fribourg, ou en visioconférence partout en Suisse.</p>
+      <div class="btn-row">{{rdv:Prendre rendez-vous}}<a class="link-arrow" href="#accompagnements">Voir les accompagnements</a></div>
+    </div>
+    <div class="page-hero-img arch reveal">
+      <!-- Emplacement photo : assets/img/parental-hero.webp (image chaleureuse et calme, parents et enfants) -->
+      <img src="{{root}}assets/img/parental-hero.webp" alt="Parents et enfants assis ensemble dans le calme – accompagnement parental" width="800" height="533" fetchpriority="high">
+    </div>
+  </div>
+</section>
+
+<section class="section bg-white" id="accompagnements">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow center">Trois accompagnements</span>
+      <h2>Comment puis-je vous aider&nbsp;?</h2>
+      <p>Chaque accompagnement est réservé aux parents, avec des outils à mettre en place à la maison, dans votre réalité familiale.</p>
+    </div>
+    {{parent-cards}}
+  </div>
+</section>
+
+<section class="section">
+  <div class="container split wide-right">
+    <div class="img-rounded ratio-45 reveal">
+      <!-- Emplacement photo : assets/img/paola-parental.webp (photo professionnelle, souriante, au cabinet) -->
+      <img src="{{root}}assets/img/paola-parental.webp" alt="Paola Orlando au cabinet – accompagnement parental à Pully et Fribourg" width="1100" height="1465" loading="lazy" style="object-position:50% 20%">
+    </div>
+    <div class="reveal d1">
+      <span class="eyebrow">Mon approche</span>
+      <h2 class="balance">Vous connaissez votre enfant mieux que personne</h2>
+      <p>Je suis Paola Orlando. Depuis plusieurs années, je reçois au cabinet de nombreuses familles, des tout-petits aux enfants d’âge scolaire. Je sais combien les parents peuvent s’épuiser, et combien quelques repères clairs peuvent changer l’ambiance d’une maison.</p>
+      <ul class="checklist mt-1">
+        <li><strong>Sans jugement</strong>&nbsp;: personne ne vous demande de devenir un parent idéal.</li>
+        <li><strong>Des outils concrets</strong>, que vous pouvez appliquer dès la première semaine.</li>
+        <li><strong>En lien avec les professionnels</strong> qui vous entourent&nbsp;: pédiatre, sage-femme, psychologue.</li>
+        <li><strong>En français, en italien ou en anglais</strong>, au cabinet ou en visio.</li>
+      </ul>
+      <div class="btn-row mt-2">{{rdv:Prendre rendez-vous}}<a class="btn btn-ghost" href="{{phone-link}}">{{icon:phone}}{{phone}}</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section tight">
+  <div class="container narrow">{{disclaimer:parent}}</div>
+</section>
+
+{{lieux:parent}}
