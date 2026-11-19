@@ -1472,3 +1472,8 @@ a.parent-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-l); 
 .header-phone svg { flex: none; }
 @media (max-width: 1560px) { .header-phone span { display: none; } }
 .main-nav .mega-intro .btn { width: auto; max-width: calc(100% - 40px); }
+/* En-tête : afficher « Accueil » et le numéro dès que la place le permet */
+.site-header .header-inner.container.wide { max-width: 1560px; }
+@media (min-width: 1360px) { .nav-home { display: block; } }
+@media (min-width: 1290px) { .header-phone { display: inline-flex; } }
+@media (min-width: 1500px) { .header-phone span { display: inline; } }
