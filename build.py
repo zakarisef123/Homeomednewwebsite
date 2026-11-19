@@ -121,14 +121,14 @@ def icon(name, cls=""):
 #   motif : deux icônes répétées en fond
 THEMES = {
     "enfant": dict(c600="#8F6200", c="#E0A526", c50="#FFF7E3", c100="#FCE7B0", bg="#FFF5DC", soft="#FDE3A0", motif=("block", "star")),
-    "femme": dict(c600="#A24C6E", c="#D27E9E", c50="#FCF1F5", c100="#F5D6E2", bg="#FBEFF3", soft="#F3CCDB", motif=("flower", "moon")),
-    "orl": dict(c600="#2A7A69", c="#4FAE97", c50="#ECF6F2", c100="#CFEADF", bg="#EAF5F0", soft="#C5E6D9", motif=("leaf", "wind")),
+    "femme": dict(c600="#7A2E52", c="#C9A04F", c50="#FAF3F0", c100="#EBDCC9", bg="#F6EDF0", soft="#EAD3DE", motif=("flower", "moon")),
+    "orl": dict(c600="#1F6B5A", c="#4FAE97", c50="#ECF6F2", c100="#CFEADF", bg="#E6F2EC", soft="#C5E6D9", motif=("leaf", "wind")),
     "onco": dict(c600="#65569A", c="#9486C4", c50="#F4F1FA", c100="#E1DBF1", bg="#F2EFF8", soft="#DAD2EE", motif=("ribbon", "heart")),
     "tdah": dict(c600="#A8513A", c="#D9866A", c50="#FCF1EC", c100="#F6DACB", bg="#FCF0EA", soft="#F5D0BF", motif=("star", "spark")),
     "sommeil": dict(c600="#4B63A0", c="#8299CF", c50="#F0F3FB", c100="#D9E2F5", bg="#EEF2FB", soft="#D2DCF3", motif=("moon", "star")),
-    "allaitement": dict(c600="#A1603A", c="#D99A6B", c50="#FDF5EC", c100="#F7E0C8", bg="#FDF4EA", soft="#F5D9BF", motif=("drop", "heart")),
+    "allaitement": dict(c600="#9A5520", c="#F0A85E", c50="#FFF6EA", c100="#FBE2C4", bg="#FFF1DE", soft="#FBD9B0", motif=("drop", "heart")),
     "autres": dict(c600="#2B7D89", c="#3FA7B4", c50="#E8F5F6", c100="#D3ECEE", bg="#EAF5F6", soft="#CDE9EC", motif=("leaf", "spark")),
-    "insomnie": dict(c600="#33447F", c="#6F7FC0", c50="#EFF1F9", c100="#D7DCF0", bg="#ECEFF8", soft="#CCD4EE", motif=("star", "moon")),
+    "insomnie": dict(c600="#2A3466", c="#C9A956", c50="#EFF1F9", c100="#D7DCF0", bg="#ECEFF8", soft="#CCD4EE", motif=("star", "moon")),
 }
 # Page (adresse française) → thème ; la version anglaise suit automatiquement.
 PAGE_THEMES = {
@@ -203,6 +203,53 @@ body[class*="t-"] main .btn-primary {{ --bg: var(--teal-600); }}
 body[class*="t-"] main .btn-primary:hover {{ --bg: var(--ink); }}
 """)
     return "\n".join(out)
+
+
+# --------------------------------------------------------------------------
+# Décors des hauts de page « univers » (purement décoratifs, aria-hidden)
+# --------------------------------------------------------------------------
+_STAR = '<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/>'
+
+
+def _night_stars(n, w, h, seed):
+    import random
+    rnd = random.Random(seed)
+    out = []
+    for _ in range(n):
+        r = 2.2 if rnd.random() < .12 else 1.1
+        out.append(f'<circle cx="{rnd.uniform(0, w):.0f}" cy="{rnd.uniform(0, h):.0f}" r="{r}" opacity="{rnd.uniform(.25, .95):.2f}"/>')
+    return "".join(out)
+
+
+def deco(key):
+    if key == "enfant":
+        return f"""<div class="deco u-dots" aria-hidden="true"></div><div class="deco u-sun" aria-hidden="true"></div>
+<svg class="deco u-squiggle" viewBox="0 0 120 60" aria-hidden="true"><path d="M10 40 Q25 10 45 35 T85 30 T115 25" fill="none" stroke="#2E9BD6" stroke-width="4" stroke-linecap="round"/></svg>
+<svg class="deco u-star1" viewBox="0 0 24 24" aria-hidden="true" fill="#EF6A4F">{_STAR}</svg>
+<svg class="deco u-star2" viewBox="0 0 24 24" aria-hidden="true" fill="#3BAA6A">{_STAR}</svg>"""
+    if key == "femme":
+        return '<div class="deco u-ring1" aria-hidden="true"></div><div class="deco u-ring2" aria-hidden="true"></div>'
+    if key == "orl":
+        return """<svg class="deco u-euca" viewBox="0 0 400 400" fill="none" stroke="#7FD1B9" stroke-width="1.4" aria-hidden="true"><path d="M380 20 C300 120 260 220 120 380"/><path d="M330 90c-50-10-80 10-90 40 45 15 80-5 90-40z"/><path d="M300 150c40-30 80-25 95 0-35 30-75 25-95 0z"/><path d="M260 200c-50-5-80 20-85 50 45 10 80-15 85-50z"/><path d="M230 260c40-30 80-25 95 0-35 30-75 25-95 0z"/><path d="M190 310c-50-5-80 20-85 50 45 10 80-15 85-50z"/></svg>
+<svg class="deco u-euca2" viewBox="0 0 400 400" fill="none" stroke="#7FD1B9" stroke-width="1.4" aria-hidden="true"><path d="M20 380 C100 280 140 180 280 20"/><path d="M70 310c50 10 80-10 90-40-45-15-80 5-90 40z"/><path d="M100 250c-40 30-80 25-95 0 35-30 75-25 95 0z"/><path d="M140 200c50 5 80-20 85-50-45-10-80 15-85 50z"/></svg>"""
+    if key == "tdah":
+        return ""
+    if key == "sommeil":
+        return f"""<svg class="deco u-mobile" viewBox="0 0 480 160" fill="none" stroke="#fff" stroke-width="1.5" aria-hidden="true"><path d="M40 20H440"/><path d="M90 20v60M200 20v90M310 20v50M410 20v80"/><g fill="#FFE7A8" stroke="none"><g transform="translate(78 76)">{_STAR}</g><path d="M318 70a14 14 0 1 1-16 16 11 11 0 0 0 16-16z"/><g transform="translate(398 76)">{_STAR}</g></g><g fill="#fff" stroke="none"><ellipse cx="200" cy="120" rx="22" ry="12"/><ellipse cx="188" cy="113" rx="12" ry="10"/></g></svg>
+<div class="deco u-cloud c1" aria-hidden="true"></div><div class="deco u-cloud c2" aria-hidden="true"></div><div class="deco u-cloud c3" aria-hidden="true"></div><div class="deco u-cloud c4" aria-hidden="true"></div>
+<svg class="deco u-sky" viewBox="0 0 1280 400" preserveAspectRatio="xMidYMid slice" fill="#fff" aria-hidden="true">{_night_stars(40, 1280, 400, 6)}</svg>"""
+    if key == "allaitement":
+        return '<div class="deco u-blob1" aria-hidden="true"></div><div class="deco u-blob2" aria-hidden="true"></div>'
+    if key == "insomnie":
+        return f'<svg class="deco u-sky" viewBox="0 0 1280 700" preserveAspectRatio="xMidYMid slice" fill="#F2EBD9" aria-hidden="true">{_night_stars(110, 1280, 700, 8)}</svg>'
+    return ""
+
+
+def drop_crown():
+    """Couronne de gouttes autour de la photo (Allaitement)."""
+    d = '<path d="M280 4s14 15 14 26a14 14 0 0 1-28 0c0-11 14-26 14-26z"/>'
+    uses = "".join(f'<g transform="rotate({a} 280 280)" opacity="{.85 if a % 60 == 0 else .55}">{d}</g>' for a in range(0, 360, 30))
+    return f'<svg class="u-crown" viewBox="0 0 560 560" fill="#F0A85E" aria-hidden="true">{uses}</svg>'
 
 
 # --------------------------------------------------------------------------
@@ -1044,6 +1091,7 @@ def page(meta, body):
 <link rel="preload" href="{root}assets/fonts/nunito-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{root}assets/css/style.css">
 <link rel="stylesheet" href="{root}assets/css/themes.css">
+<link rel="stylesheet" href="{root}assets/css/univers.css">
 {schema}{faq_schema}
 </head>
 <body{f' class="{body_cls}"' if body_cls else ''}>
@@ -1165,6 +1213,10 @@ def expand(body, root):
             return appel_btn(root)
         if key == "appel-light":
             return appel_btn(root, "btn btn-light btn-lg")
+        if key.startswith("deco:"):
+            return deco(key[5:])
+        if key == "drop-crown":
+            return drop_crown()
         if key == "universes":
             return universe_cards(root)
         if key == "parent-cards":
