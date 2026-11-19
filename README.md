@@ -77,10 +77,21 @@ Marque ombrelle **HOMEOMED · Paola Orlando** (logo sans « Homéopathe »), tro
 
 ### Univers visuel de chaque page de service
 
-Chaque page de service a sa couleur et son motif dessiné en fond (piste « motif illustré ») :
-enfant (jaune, blocs et étoiles), femme (rose, pétales et lunes), ORL (vert, feuilles et souffle), oncologie (lavande, rubans et cœurs),
-TDAH (terracotta, étoiles), sommeil 0–3 ans (bleu crépuscule, lunes et étoiles), allaitement (abricot, gouttes et cœurs), insomnie (bleu nuit, étoiles et lunes).
-Couleurs, motifs et pages concernées : `THEMES` et `PAGE_THEMES` dans `build.py` ; le fichier `assets/css/themes.css` est généré automatiquement.
+Chaque page de service a sa propre identité (haut de page, formes, typographie, boutons, sections) :
+
+| Page | Univers |
+|---|---|
+| Bébé, enfant & ado | « Carnet de dessins » : jaune soleil, pois, polaroïds, titre multicolore, boutons dessinés |
+| Équilibre féminin & hormonal | « Prune & or » : prune profonde, photo pleine hauteur, cercles et boutons dorés |
+| ORL, allergies, peau | « Forêt d'eucalyptus » : vert profond, feuillage, photo et images en forme de feuille |
+| Soins de support en oncologie | « Paroles de patientes » : papier chaud, lavande, témoignage mis en avant |
+| TDAH – Méthode Barkley® | « Tableau de motivation » : papier quadrillé, tableau d'étoiles, post-it |
+| Sommeil 0–3 ans | « Berceuse » : ciel du soir, photo-lune, mobile de berceau, nuages |
+| Allaitement | « Lait & miel » : dégradé miel, couronne de gouttes autour de la photo |
+| Insomnie – TCC-i | « Silence » : toute la page en mode nuit, lune dorée |
+
+- Hauts de page : section `uhero` dans chaque page (`src/pages/…`, `src/pages-en/…`) ; décors dessinés via `{{deco:<univers>}}` (fonction `deco()` dans `build.py`).
+- Styles : `assets/css/univers.css` (à la main) ; couleurs des tuiles de l'accueil : `THEMES` dans `build.py` → `assets/css/themes.css` (généré).
 
 ### Programme Barkley® (page TDAH) : prête, pas encore publiée
 
