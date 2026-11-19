@@ -111,6 +111,86 @@ def icon(name, cls=""):
 
 
 # --------------------------------------------------------------------------
+# Univers visuel de chaque page de service (piste B « motif illustré »)
+# --------------------------------------------------------------------------
+# Chaque service a sa couleur et son motif dessiné. Le générateur écrit
+# assets/css/themes.css ; chaque page de service reçoit la classe body « t-<thème> ».
+#   c600 : couleur du texte (titres, liens, icônes) — contraste suffisant sur blanc
+#   c    : couleur vive (puces, numéros)      c50/c100 : fonds clairs
+#   bg   : fond du haut de page               soft : forme colorée derrière la photo
+#   motif : deux icônes répétées en fond
+THEMES = {
+    "enfant": dict(c600="#8F6200", c="#E0A526", c50="#FFF7E3", c100="#FCE7B0", bg="#FFF5DC", soft="#FDE3A0", motif=("block", "star")),
+    "femme": dict(c600="#A24C6E", c="#D27E9E", c50="#FCF1F5", c100="#F5D6E2", bg="#FBEFF3", soft="#F3CCDB", motif=("flower", "moon")),
+    "orl": dict(c600="#2A7A69", c="#4FAE97", c50="#ECF6F2", c100="#CFEADF", bg="#EAF5F0", soft="#C5E6D9", motif=("leaf", "wind")),
+    "onco": dict(c600="#65569A", c="#9486C4", c50="#F4F1FA", c100="#E1DBF1", bg="#F2EFF8", soft="#DAD2EE", motif=("ribbon", "heart")),
+    "tdah": dict(c600="#A8513A", c="#D9866A", c50="#FCF1EC", c100="#F6DACB", bg="#FCF0EA", soft="#F5D0BF", motif=("star", "spark")),
+    "sommeil": dict(c600="#4B63A0", c="#8299CF", c50="#F0F3FB", c100="#D9E2F5", bg="#EEF2FB", soft="#D2DCF3", motif=("moon", "star")),
+    "allaitement": dict(c600="#A1603A", c="#D99A6B", c50="#FDF5EC", c100="#F7E0C8", bg="#FDF4EA", soft="#F5D9BF", motif=("drop", "heart")),
+    "insomnie": dict(c600="#33447F", c="#6F7FC0", c50="#EFF1F9", c100="#D7DCF0", bg="#ECEFF8", soft="#CCD4EE", motif=("star", "moon")),
+}
+# Page (adresse française) → thème ; la version anglaise suit automatiquement.
+PAGE_THEMES = {
+    "homeopathie/enfant-et-adolescent/": "enfant",
+    "homeopathie/equilibre-feminin-et-hormonal/": "femme",
+    "homeopathie/orl-allergies-peau/": "orl",
+    "homeopathie/soins-support-oncologie/": "onco",
+    "accompagnement-parental/tdah-methode-barkley/": "tdah",
+    "accompagnement-parental/sommeil-enfant-0-3-ans/": "sommeil",
+    "accompagnement-parental/allaitement/": "allaitement",
+    "insomnie-tcc-i/": "insomnie",
+}
+_EXTRA_MOTIFS = {
+    "star": '<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/>',
+    "block": '<rect x="4" y="4" width="7" height="7" rx="2"/><circle cx="16.5" cy="16.5" r="3.5"/><path d="M15 4l4 7h-8z"/>',
+}
+
+
+def _motif_uri(motif, color, opacity):
+    from urllib.parse import quote
+    a, b = (_EXTRA_MOTIFS.get(m) or _P[m] for m in motif)
+    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">'
+           f'<g fill="none" stroke="{color}" stroke-opacity="{opacity}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'
+           f'<g transform="translate(8 6) rotate(-12 15 15) scale(1.3)">{a}</g>'
+           f'<g transform="translate(56 54) rotate(10 12 12)">{b}</g></g></svg>')
+    return 'url("data:image/svg+xml,' + quote(svg, safe="=:/ ") + '")'
+
+
+def themes_css():
+    check = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' "
+             "stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E")
+    out = ["/* Généré par build.py (THEMES) — ne pas modifier à la main. */"]
+    for k, t in THEMES.items():
+        out.append(f"""body.t-{k} main {{ --teal: {t['c']}; --teal-600: {t['c600']}; --teal-50: {t['c50']}; --teal-100: {t['c100']};
+  --t-bg: {t['bg']}; --t-soft: {t['soft']}; --t-pat: {_motif_uri(t['motif'], t['c600'], .13)}; --t-pat-light: {_motif_uri(t['motif'], '#ffffff', .07)}; }}""")
+    out.append(f"""
+/* Haut de page : fond teinté + motif dessiné + forme colorée derrière la photo */
+body[class*="t-"] main .page-hero {{ background-color: var(--t-bg); background-image: var(--t-pat); background-size: 96px 96px; isolation: isolate; }}
+body[class*="t-"] main .page-hero::before {{ display: none; }}
+@media (max-width: 760px) {{ body[class*="t-"] main .page-hero {{ background-size: 132px 132px; }} }}
+body[class*="t-"] main .page-hero::after {{ content: ""; position: absolute; z-index: -1; right: 4%; bottom: -90px; width: min(460px, 60vw); height: min(460px, 60vw); border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%; background: var(--t-soft); }}
+body[class*="t-"] main .page-hero-img.arch {{ border-radius: 28px; border: 6px solid #fff; transform: rotate(1.6deg); box-shadow: 0 18px 40px rgba(16, 50, 74, .16); }}
+body[class*="t-"] main .page-hero .eyebrow {{ color: var(--teal-600); }}
+/* Sections foncées et bandeau final : motif clair discret */
+body[class*="t-"] main .bg-ink, body[class*="t-"] main .cta-band {{ background-image: var(--t-pat-light); background-size: 96px 96px; }}
+body[class*="t-"] main .bg-ink .eyebrow, body[class*="t-"] main .bg-ink .step::before {{ color: var(--teal-100); }}
+body[class*="t-"] main .cta-band::before {{ background: radial-gradient(closest-side, color-mix(in srgb, var(--teal) 55%, transparent), transparent); }}
+/* Puces « coche » à la couleur du service */
+body[class*="t-"] main .checklist li::before {{ background-image: none; }}
+body[class*="t-"] main .checklist li::after {{ content: ""; position: absolute; left: 0; top: .2em; width: 22px; height: 22px;
+  background: var(--teal-600); -webkit-mask: url("{check}") center / 13px no-repeat; mask: url("{check}") center / 13px no-repeat; }}
+body[class*="t-"] main .bg-ink .checklist li::before {{ background-color: rgba(255, 255, 255, .12); }}
+body[class*="t-"] main .bg-ink .checklist li::after {{ background: var(--teal-100); }}
+/* Encadrés et blocs clairs teintés */
+body[class*="t-"] main .help-box, body[class*="t-"] main .card.soft, body[class*="t-"] main .sessions li {{ background-color: var(--teal-50); border-color: var(--teal-100); }}
+body[class*="t-"] main .faq details[open] summary {{ color: var(--teal-600); }}
+body[class*="t-"] main .btn-primary {{ --bg: var(--teal-600); }}
+body[class*="t-"] main .btn-primary:hover {{ --bg: var(--ink); }}
+""")
+    return "\n".join(out)
+
+
+# --------------------------------------------------------------------------
 # Avis Google (textes d'origine)
 # --------------------------------------------------------------------------
 REVIEWS = [
@@ -922,6 +1002,8 @@ def page(meta, body):
                       f'\n<link rel="alternate" hreflang="x-default" href="{SITE_URL}{fr_path}">')
     body = expand(conditionals(body), root)
     uni = NAV_UNIVERSE.get(meta.get("nav", ""))
+    theme = PAGE_THEMES.get(fr_path)
+    body_cls = " ".join(c for c in (f"u-{uni}" if uni else "", f"t-{theme}" if theme else "") if c)
     out = f"""<!doctype html>
 <html lang="{'en' if lang == 'en' else 'fr-CH'}">
 <head>
@@ -945,9 +1027,10 @@ def page(meta, body):
 <link rel="preload" href="{root}assets/fonts/dm-serif-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="{root}assets/fonts/nunito-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{root}assets/css/style.css">
+<link rel="stylesheet" href="{root}assets/css/themes.css">
 {schema}{faq_schema}
 </head>
-<body{f' class="u-{uni}"' if uni else ''}>
+<body{f' class="{body_cls}"' if body_cls else ''}>
 {header(root, meta.get("nav", ""), fr_path)}
 <main id="contenu">
 {body}
@@ -1173,6 +1256,9 @@ def main():
     (ROOT / "_redirects").write_text(
         "".join(f"/{o} /{n} 301!\n/{o.rstrip('/')} /{n} 301!\n" for o, n in REDIRECTS.items()), encoding="utf-8")
     print(f"✓ {len(REDIRECTS)} redirections")
+
+    (ROOT / "assets" / "css" / "themes.css").write_text(themes_css() + "\n", encoding="utf-8")
+    print(f"✓ assets/css/themes.css ({len(THEMES)} univers de service)")
 
     today = date.today().isoformat()
     def alt(p):
