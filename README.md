@@ -75,6 +75,13 @@ Marque ombrelle **HOMEOMED · Paola Orlando** (logo sans « Homéopathe »), tro
 - Accueil : trois cartes d’entrée sous le titre principal (`{{universes}}`).
 - Redirections 301 (`REDIRECTS` dans `build.py`, fichier `_redirects` + pages de repli) : `/mes-specialites/…`, anciennes pages à la racine, `/tcc-sommeil/`, `/bebe-allaitement-sommeil/`, et leurs équivalents anglais.
 
+### Univers visuel de chaque page de service
+
+Chaque page de service a sa couleur et son motif dessiné en fond (piste « motif illustré ») :
+enfant (jaune, blocs et étoiles), femme (rose, pétales et lunes), ORL (vert, feuilles et souffle), oncologie (lavande, rubans et cœurs),
+TDAH (terracotta, étoiles), sommeil 0–3 ans (bleu crépuscule, lunes et étoiles), allaitement (abricot, gouttes et cœurs), insomnie (bleu nuit, étoiles et lunes).
+Couleurs, motifs et pages concernées : `THEMES` et `PAGE_THEMES` dans `build.py` ; le fichier `assets/css/themes.css` est généré automatiquement.
+
 ### Programme Barkley® (page TDAH) : prête, pas encore publiée
 
 `BARKLEY_LIVE = False` en haut de `build.py`. Tant que la formation n’est pas terminée, la page
