@@ -399,4 +399,6 @@ EN = {
         "This is an educational service for parents. It does not diagnose, is not psychotherapy and does not replace care from your paediatrician, midwife, a child psychiatrist or a psychologist. If in doubt or in an emergency, contact your healthcare professional.",
     "La TCC de l’insomnie ne remplace pas une évaluation médicale. Toute modification d’un traitement se décide avec votre médecin. En cas de doute ou d’urgence, contactez votre professionnel de santé.":
         "CBT for insomnia does not replace a medical assessment. Any change to a treatment is decided with your doctor. If in doubt or in an emergency, contact your healthcare professional.",
+    "Insomnie – TCC-i : vue d’ensemble": "Insomnia – CBT-I: overview",
+    "Nombre de séances, somnifères, causes médicales": "Number of sessions, sleeping pills, medical causes",
 }

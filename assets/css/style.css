@@ -1471,3 +1471,4 @@ a.parent-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-l); 
 .header-phone { white-space: nowrap; flex: none; }
 .header-phone svg { flex: none; }
 @media (max-width: 1560px) { .header-phone span { display: none; } }
+.main-nav .mega-intro .btn { width: auto; max-width: calc(100% - 40px); }
