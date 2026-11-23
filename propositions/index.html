@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Refonte HOMEOMED</title>
+<link rel="icon" href="../assets/img/favicon-32.png">
+<style>
+@font-face{font-family:"Manrope";src:url("fonts/manrope-latin-wght-normal.woff2") format("woff2-variations");font-weight:200 800;font-display:swap}
+:root{
+  --blue:#1C75BB; --blue-900:#0b365a; --blue-50:#eef5fb; --teal:#69C3CB; --teal-50:#eef8f9;
+  --bg:#FAFAFA; --card:#fff; --line:#e6ebef; --ink:#313131; --muted:#666;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a24;--card:#152431;--line:#24384a;--ink:#e8eef3;--muted:#9fb0bf;--blue-900:#e8eef3;--blue-50:#1a3348;--teal-50:#163238}}
+:root[data-theme="dark"]{--bg:#0e1a24;--card:#152431;--line:#24384a;--ink:#e8eef3;--muted:#9fb0bf;--blue-900:#e8eef3;--blue-50:#1a3348;--teal-50:#163238}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;font-family:"Manrope",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:var(--blue)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+@media (min-width:700px){.wrap{padding:0 32px}}
+header.top{padding:56px 0 36px}
+.eyebrow{font-size:.75rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+h1{font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-.03em;line-height:1.08;margin:10px 0 16px;color:var(--blue-900)}
+h2{font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:-.02em;line-height:1.15;margin:0 0 10px;color:var(--blue-900)}
+h3{margin:0;letter-spacing:-.01em;color:var(--blue-900)}
+.lead{font-size:1.1rem;color:var(--muted);max-width:68ch}
+.swatches{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.sw{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px 14px 8px 8px;font-size:.85rem}
+.sw i{width:30px;height:30px;border-radius:8px;border:1px solid rgba(0,0,0,.08)}
+.sw b{display:block;font-size:.85rem}
+.sw span{color:var(--muted);font-size:.78rem}
+section{padding:36px 0}
+.props{display:grid;gap:24px}
+.prop{display:grid;grid-template-columns:1.1fr 1fr;background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.prop .shot{display:block;position:relative;background:#dfe7ee;overflow:hidden}
+.prop .shot img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s}
+.prop .shot:hover img{transform:scale(1.03)}
+.prop .shot .letter{position:absolute;left:16px;top:16px;width:44px;height:44px;border-radius:12px;background:var(--blue);color:#fff;display:grid;place-items:center;font-weight:800;font-size:1.3rem}
+.prop .in{padding:28px 28px 30px;display:flex;flex-direction:column;gap:14px}
+.prop h3{font-size:1.5rem}
+.prop .ins{font-size:.88rem;color:var(--muted)}
+.prop ul{margin:0;padding-left:1.1em;color:var(--ink);font-size:.95rem}
+.prop li{margin:4px 0}
+.meta{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:.88rem;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.meta dt{color:var(--muted)}
+.meta dd{margin:0;font-weight:600}
+.ideal{background:var(--teal-50);border-radius:12px;padding:12px 14px;font-size:.92rem}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+.btn{display:inline-flex;align-items:center;gap:8px;height:46px;padding:0 20px;border-radius:999px;font-weight:700;font-size:.92rem;text-decoration:none}
+.btn-p{background:var(--blue);color:#fff}
+.btn-g{border:1px solid var(--line);color:var(--ink)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+.box h3{font-size:1.1rem;margin-bottom:10px;display:flex;gap:10px;align-items:center}
+.box h3 span{flex:0 0 28px;height:28px;border-radius:8px;background:var(--blue-50);color:var(--blue);display:grid;place-items:center;font-size:.82rem;font-weight:800}
+.box p,.box li{color:var(--muted);font-size:.95rem}
+.box ul{padding-left:1.1em;margin:8px 0 0}
+.box b{color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:.92rem;background:var(--card);border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+.tbl{overflow-x:auto}
+.next{background:var(--blue);color:#fff;border-radius:20px;padding:28px}
+.next h2{color:#fff}
+.next p,.next li{color:rgba(255,255,255,.9)}
+footer{padding:40px 0 60px;color:var(--muted);font-size:.85rem}
+@media (max-width:860px){.prop,.grid2{grid-template-columns:1fr}.prop .shot{aspect-ratio:16/10}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">Refonte homeomed.ch · novembre 2026</div>
+  <h1>Trois directions « clinique » pour le nouveau site</h1>
+  <p class="lead">Trois maquettes complètes de la page d’accueil, inspirées des sites de cliniques suisses (Atrium Medical, Dr Djoon). La charte couleur actuelle de homeomed.ch est conservée à l’identique. Les textes, avis, tarifs, horaires et photos sont ceux du site. Chaque maquette s’adapte aux mobiles.</p>
+  <div class="swatches" aria-label="Charte couleur conservée">
+    <div class="sw"><i style="background:#1C75BB"></i><div><b>#1C75BB</b><span>Bleu principal</span></div></div>
+    <div class="sw"><i style="background:#69C3CB"></i><div><b>#69C3CB</b><span>Turquoise</span></div></div>
+    <div class="sw"><i style="background:#FFFFFF"></i><div><b>#FFFFFF</b><span>Blanc</span></div></div>
+    <div class="sw"><i style="background:#FAFAFA"></i><div><b>#FAFAFA</b><span>Gris clair</span></div></div>
+    <div class="sw"><i style="background:#313131"></i><div><b>#313131</b><span>Texte</span></div></div>
+  </div>
+</header>
+
+<section>
+  <div class="eyebrow" style="margin-bottom:8px">La forme</div>
+  <h2>Les trois propositions</h2>
+  <p class="lead" style="margin-bottom:26px">Cliquez sur une capture pour ouvrir la maquette. Toutes sont interactives (menus, avis, FAQ).</p>
+  <div class="props">
+
+    <article class="prop">
+      <a class="shot" href="a-clinique.html"><img src="img/apercu-a-clinique.webp" alt="Aperçu de la proposition A" width="960" height="600"><span class="letter">A</span></a>
+      <div class="in">
+        <h3>Clinique</h3>
+        <div class="ins">Inspiration : atriummedical.ch</div>
+        <p style="margin:0;color:var(--muted)">Un cabinet médical moderne et rassurant. La photo du cabinet occupe tout le premier écran, sous un voile bleu. Les prestations sont présentées en cartes nettes, suivies d’un parcours en 4 étapes et des infos pratiques.</p>
+        <dl class="meta"><dt>Typo</dt><dd>Manrope (sans-serif géométrique)</dd><dt>Ambiance</dt><dd>Blanc, bleu profond, arrondis doux</dd><dt>Signature</dt><dd>Bandeau défilant des garanties, note Google dès l’arrivée</dd></dl>
+        <div class="ideal"><b>Idéal si</b> vous voulez inspirer confiance tout de suite, avec un site clair et classique de cabinet suisse.</div>
+        <div class="btns"><a class="btn btn-p" href="a-clinique.html">Voir la maquette A</a></div>
+      </div>
+    </article>
+
+    <article class="prop">
+      <a class="shot" href="b-maison.html"><img src="img/apercu-b-maison.webp" alt="Aperçu de la proposition B" width="960" height="600"><span class="letter">B</span></a>
+      <div class="in">
+        <h3>Maison</h3>
+        <div class="ins">Inspiration : drdjoon-clinic.com</div>
+        <p style="margin:0;color:var(--muted)">Une clinique haut de gamme et éditoriale. Grands titres serif, petites capitales espacées, filets fins, cartes portrait des « soins phares » avec leur tarif. Un méga-menu illustré et une barre de réservation fixe en bas d’écran.</p>
+        <dl class="meta"><dt>Typo</dt><dd>Cormorant Garamond + Jost</dd><dt>Ambiance</dt><dd>Blanc, angles droits, bleu en accent</dd><dt>Signature</dt><dd>Portrait de Paola en grand, avis en citation</dd></dl>
+        <div class="ideal"><b>Idéal si</b> vous voulez une image premium et singulière, plus « maison de santé » que cabinet.</div>
+        <div class="btns"><a class="btn btn-p" href="b-maison.html">Voir la maquette B</a></div>
+      </div>
+    </article>
+
+    <article class="prop">
+      <a class="shot" href="c-centre.html"><img src="img/apercu-c-centre.webp" alt="Aperçu de la proposition C" width="960" height="600"><span class="letter">C</span></a>
+      <div class="in">
+        <h3>Centre médical</h3>
+        <div class="ins">Inspiration : sites d’hôpitaux et de centres médicaux</div>
+        <p style="margin:0;color:var(--muted)">La version la plus structurée et la plus utile au patient. La prise de rendez-vous est guidée dès le premier écran (pour qui, motif, lieu). Les soins sont organisés en « pôles ». On y trouve une recherche par symptôme, des tarifs transparents et l’indication « ouvert aujourd’hui ».</p>
+        <dl class="meta"><dt>Typo</dt><dd>Inter Tight (sans-serif médicale)</dd><dt>Ambiance</dt><dd>Fond quadrillé léger, cartes, données</dd><dt>Signature</dt><dd>Formulaire de RDV en 3 étapes + symptômes A–Z</dd></dl>
+        <div class="ideal"><b>Idéal si</b> votre priorité est la conversion (plus de rendez-vous) et le référencement par symptôme.</div>
+        <div class="btns"><a class="btn btn-p" href="c-centre.html">Voir la maquette C</a></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section>
+  <div class="eyebrow" style="margin-bottom:8px">Le fond</div>
+  <h2>Ce que je propose de changer dans le contenu</h2>
+  <p class="lead" style="margin-bottom:24px">Ces changements valent pour les trois directions. Ils sont déjà appliqués dans les maquettes.</p>
+  <div class="grid2">
+    <div class="box"><h3><span>1</span>Trois pôles clairs</h3><p><b>Homéopathie</b> · <b>Accompagnement parental</b> · <b>Insomnie – TCC-i</b>. Le menu est organisé par pôle, comme les départements d’une clinique. On voit tout de suite que ce sont trois activités distinctes.</p></div>
+    <div class="box"><h3><span>2</span>Une voix de cabinet</h3><p>Sur l’accueil et les pages de soins, on parle du <b>« cabinet HOMEOMED »</b>, comme une clinique. Le « je » de Paola est gardé là où il compte : « Qui suis-je ? », le blog et les témoignages. Plus professionnel, sans perdre l’humain.</p></div>
+    <div class="box"><h3><span>3</span>Les preuves en premier</h3><p>Diplôme fédéral, DU Gustave Roussy, remboursement ASCA/RME/Visana/EGK, 4.9/5 sur 17 avis Google : tout est visible <b>dans le premier écran</b> ou juste en dessous, et plus caché dans les pages.</p></div>
+    <div class="box"><h3><span>4</span>Tarifs transparents</h3><p>Les prix (1<sup>re</sup> consultation CHF 230, suivi adulte CHF 150, suivi enfant CHF 90, urgence CHF 150) et les durées apparaissent sur l’accueil. Les cliniques le font : c’est rassurant et cela évite des appels.</p></div>
+    <div class="box"><h3><span>5</span>Une fiche type par soin</h3><p>Même plan pour chaque page de soin : <b>Indications → Approche → Déroulement → Tarifs → Avis → FAQ → RDV</b>. Le visiteur s’y retrouve, et c’est plus simple à mettre à jour.</p></div>
+    <div class="box"><h3><span>6</span>Rendez-vous toujours à portée</h3><p>Bouton « Prendre rendez-vous » fixe dans l’en-tête, barre « Appeler / RDV » sur mobile, et un mini-formulaire qui oriente vers la bonne prestation sur OneDoc (maquette C).</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Nouvelle arborescence proposée</h2>
+  <p class="lead" style="margin-bottom:18px">Les adresses actuelles sont conservées (pas de perte de référencement). Seuls le menu et les regroupements changent.</p>
+  <div class="tbl"><table>
+    <tr><th>Menu</th><th>Contenu</th><th>Changement</th></tr>
+    <tr><td><b>Homéopathie ▾</b></td><td>Bébé, enfant & ado · Femme & hormones · ORL, allergies, peau · Oncologie · Urgences</td><td>« Urgences homéopathiques » devient une page à part entière</td></tr>
+    <tr><td><b>Parentalité ▾</b></td><td>TDAH – Barkley® · Sommeil 0–3 ans · Allaitement</td><td>Inchangé</td></tr>
+    <tr><td><b>Insomnie – TCC-i</b></td><td>Page unique</td><td>Inchangé</td></tr>
+    <tr><td><b>Le cabinet ▾</b></td><td>La praticienne · Pully · Fribourg · Avis patients</td><td>« Qui suis-je ? » passe dans « Le cabinet »</td></tr>
+    <tr><td><b>Infos patients ▾</b></td><td>Tarifs & remboursement · Déroulement d’une consultation · FAQ · Blog</td><td>Nouvelle page « Déroulement d’une consultation »</td></tr>
+    <tr><td><b>[Prendre rendez-vous]</b></td><td>Bouton toujours visible</td><td>Orientation par profil avant OneDoc</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2>Exemples de titres d’accueil</h2>
+  <div class="grid2" style="margin-top:16px">
+    <div class="box"><p style="margin:0">A · <b>« Cabinet HOMEOMED — Votre santé, entre de bonnes mains. »</b><br>Institutionnel et rassurant.</p></div>
+    <div class="box"><p style="margin:0">B · <b>« L’homéopathie, avec exigence. »</b><br>Court, haut de gamme, affirmé.</p></div>
+    <div class="box"><p style="margin:0">C · <b>« Des soins complémentaires rigoureux, coordonnés avec votre médecin. »</b><br>Médical et explicite pour Google.</p></div>
+    <div class="box"><p style="margin:0">Actuel · <b>« Retrouver équilibre et stabilité grâce à l’homéopathie »</b><br>Peut être gardé en sous-titre.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="next">
+    <h2>Prochaine étape</h2>
+    <p>Choisissez une direction (A, B ou C). Vous pouvez aussi mélanger : par exemple le style de A, avec le formulaire de RDV et la recherche par symptôme de C. Je l’appliquerai ensuite à <b>tout le site</b> (FR et EN) : accueil, pages de soins, cabinets, tarifs, FAQ, blog et pages légales.</p>
+  </div>
+</section>
+
+<footer>Maquettes non indexées par les moteurs de recherche (noindex). Polices auto-hébergées, aucun appel à Google.</footer>
+</div>
+</body>
+</html>

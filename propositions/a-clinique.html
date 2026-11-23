@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Proposition A · Clinique</title>
+<link rel="icon" href="../assets/img/favicon-32.png">
+<style>
+@font-face{font-family:"Manrope";src:url("fonts/manrope-latin-wght-normal.woff2") format("woff2-variations");font-weight:200 800;font-display:swap}
+
+/* Charte homeomed.ch : bleu #1C75BB · turquoise #69C3CB · blanc · gris #FAFAFA · texte #313131 / #666 */
+:root{
+  --blue:#1C75BB; --blue-700:#155d96; --blue-900:#0b365a; --blue-50:#eef5fb;
+  --teal:#69C3CB; --teal-600:#3fa5ae; --teal-50:#eef8f9;
+  --white:#fff; --grey:#FAFAFA; --line:#e6ebef; --ink:#313131; --muted:#666;
+  --r:14px; --r-l:22px;
+  --shadow:0 1px 2px rgba(11,54,90,.05),0 10px 30px rgba(11,54,90,.07);
+  --container:1240px; --gut:clamp(16px,4vw,40px);
+  --font:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font);color:var(--ink);background:var(--white);font-size:16.5px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.025em;line-height:1.1;color:var(--blue-900)}
+h2{font-size:clamp(1.9rem,3.6vw,2.9rem)}
+h3{font-size:1.15rem;letter-spacing:-.01em;line-height:1.3}
+p{margin:0 0 1em}
+.container{max-width:var(--container);margin:0 auto;padding:0 var(--gut)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:18px}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--teal);border-radius:2px}
+.lead{font-size:1.12rem;color:var(--muted);max-width:60ch}
+.section{padding:clamp(72px,10vw,128px) 0}
+.bg-grey{background:var(--grey)}
+.btn{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 26px;border-radius:999px;font-weight:700;font-size:.95rem;border:1.5px solid transparent;transition:.25s ease;white-space:nowrap}
+.btn svg{width:18px;height:18px}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:var(--blue-700);transform:translateY(-1px);box-shadow:0 10px 24px rgba(28,117,187,.3)}
+.btn-light{background:#fff;color:var(--blue-900)}
+.btn-light:hover{background:var(--teal-50)}
+.btn-line{border-color:rgba(255,255,255,.55);color:#fff}
+.btn-line:hover{background:rgba(255,255,255,.12);border-color:#fff}
+.btn-ghost{border-color:var(--line);color:var(--blue-900)}
+.btn-ghost:hover{border-color:var(--blue);color:var(--blue)}
+.link{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--blue)}
+.link::after{content:"→";transition:transform .2s}
+.link:hover::after{transform:translateX(4px)}
+
+/* Top bar */
+.topbar{background:var(--blue-900);color:rgba(255,255,255,.82);font-size:.82rem}
+.topbar .container{display:flex;justify-content:space-between;align-items:center;height:40px;gap:20px}
+.topbar span{display:inline-flex;align-items:center;gap:8px}
+.topbar .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(105,195,203,.2)}
+.topbar a:hover{color:#fff}
+.topbar .right{display:flex;gap:22px}
+
+/* Header */
+.header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid transparent;transition:.3s}
+.header.scrolled{border-color:var(--line);box-shadow:0 4px 20px rgba(11,54,90,.06)}
+.header .container{display:flex;align-items:center;justify-content:space-between;height:84px;gap:24px}
+.logo img{height:42px;width:auto}
+.nav{display:flex;gap:4px}
+.nav a{white-space:nowrap;padding:10px 12px;border-radius:10px;font-weight:600;font-size:.93rem;color:var(--ink)}
+.nav a:hover{background:var(--blue-50);color:var(--blue)}
+.nav a.active{color:var(--blue)}
+.head-cta{display:flex;align-items:center;gap:18px}
+.head-phone{white-space:nowrap;display:flex;flex-direction:column;line-height:1.2;font-size:.78rem;color:var(--muted)}
+.head-phone b{font-size:.98rem;color:var(--blue-900)}
+.burger{display:none;width:46px;height:46px;border-radius:12px;border:1px solid var(--line);background:#fff;align-items:center;justify-content:center}
+
+/* Hero */
+.hero{position:relative;min-height:min(88vh,820px);display:flex;align-items:flex-end;color:#fff;overflow:hidden}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 55%;transform:scale(1.04);animation:zoom 14s ease-out forwards}
+@keyframes zoom{to{transform:scale(1)}}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(11,54,90,.94) 0%,rgba(11,54,90,.82) 40%,rgba(21,93,150,.45) 75%,rgba(28,117,187,.3) 100%)}
+.hero .container{position:relative;width:100%;padding-bottom:clamp(56px,8vw,96px);padding-top:120px}
+.hero .kicker{font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:var(--teal);margin-bottom:22px}
+.hero h1{color:#fff;font-size:clamp(2.6rem,6.4vw,5.2rem);font-weight:700;letter-spacing:-.035em;max-width:13ch}
+.hero h1 span{display:block;font-weight:300;color:rgba(255,255,255,.9)}
+.hero p{font-size:1.15rem;color:rgba(255,255,255,.86);max-width:54ch;margin:26px 0 34px}
+.hero .btns{display:flex;flex-wrap:wrap;gap:14px}
+.hero-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:56px}
+.rating{display:flex;align-items:center;gap:14px;padding:12px 18px 12px 12px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:16px;backdrop-filter:blur(10px)}
+.rating .g{width:40px;height:40px;border-radius:10px;background:#fff;display:grid;place-items:center;font-weight:800;color:var(--blue);font-size:1.2rem}
+.rating b{font-size:1.1rem}
+.stars{color:#f5c04a;letter-spacing:2px}
+.scroll{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:12px}
+.scroll i{width:1px;height:46px;background:linear-gradient(#fff,transparent);display:block;animation:drip 2s infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* Ticker */
+.ticker{background:var(--blue);color:#fff;overflow:hidden;white-space:nowrap}
+.ticker .track{display:inline-flex;animation:tick 38s linear infinite;padding:18px 0}
+.ticker span{display:inline-flex;align-items:center;gap:18px;padding-right:18px;font-weight:600;font-size:.95rem}
+.ticker span::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--teal)}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* About */
+.about{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(40px,7vw,110px);align-items:center}
+.about-media{position:relative}
+.about-media .main{border-radius:var(--r-l);aspect-ratio:4/5;object-fit:cover;width:100%;object-position:50% 20%}
+.about-media .side{position:absolute;right:-28px;bottom:48px;width:46%;border-radius:var(--r);border:6px solid #fff;box-shadow:var(--shadow);aspect-ratio:4/3;object-fit:cover}
+.stat-card{position:absolute;left:-24px;top:40px;background:#fff;border-radius:var(--r);padding:22px 24px;box-shadow:var(--shadow);min-width:200px}
+.stat-card b{display:block;font-size:2.8rem;line-height:1;color:var(--blue);letter-spacing:-.04em}
+.stat-card span{font-size:.85rem;color:var(--muted)}
+.checks{list-style:none;padding:0;margin:28px 0 32px;display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
+.checks li{display:flex;gap:12px;font-weight:600;font-size:.95rem;line-height:1.4}
+.checks li::before{content:"";flex:0 0 22px;height:22px;border-radius:50%;background:var(--teal-50) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231C75BB' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/13px no-repeat}
+
+/* Services */
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:52px}
+.sec-head .lead{margin:16px 0 0}
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r-l);padding:30px 30px 28px;display:flex;flex-direction:column;gap:14px;transition:.3s ease;overflow:hidden}
+.svc:hover{border-color:transparent;box-shadow:var(--shadow);transform:translateY(-4px)}
+.svc .ic{width:54px;height:54px;border-radius:16px;background:var(--blue-50);display:grid;place-items:center;color:var(--blue);transition:.3s}
+.svc:hover .ic{background:var(--blue);color:#fff}
+.svc .ic svg{width:26px;height:26px}
+.svc p{color:var(--muted);font-size:.95rem;margin:0;flex:1}
+.svc .tag{position:absolute;top:26px;right:26px;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-600);background:var(--teal-50);padding:5px 10px;border-radius:999px}
+.svc .more{display:flex;justify-content:space-between;align-items:center;padding-top:18px;border-top:1px solid var(--line);font-weight:700;font-size:.9rem;color:var(--blue)}
+.svc .more i{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-style:normal;transition:.3s}
+.svc:hover .more i{background:var(--blue);color:#fff;border-color:var(--blue)}
+.svc.feature{grid-row:span 2;padding:0;border:0;color:#fff;min-height:460px;justify-content:flex-end}
+.svc.feature img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.svc.feature::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,54,90,0) 30%,rgba(11,54,90,.92) 100%);z-index:1}
+.svc.feature .in{position:relative;z-index:2;padding:30px}
+.svc.feature h3{color:#fff;font-size:1.5rem;margin-bottom:10px}
+.svc.feature p{color:rgba(255,255,255,.85)}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;counter-reset:s;position:relative;margin-top:56px}
+.steps::before{content:"";position:absolute;top:27px;left:28px;right:28px;height:1px;background:repeating-linear-gradient(90deg,var(--teal) 0 6px,transparent 6px 12px)}
+.step{position:relative;counter-increment:s}
+.step::before{content:"0" counter(s);display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:#fff;border:1.5px solid var(--blue);color:var(--blue);font-weight:800;margin-bottom:24px;position:relative}
+.step:first-child::before{background:var(--blue);color:#fff}
+.step h3{margin-bottom:8px}
+.step p{color:var(--muted);font-size:.95rem}
+.step small{display:inline-block;font-weight:700;color:var(--teal-600);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase}
+
+/* Reviews */
+.reviews-top{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:40px;flex-wrap:wrap}
+.score{display:flex;align-items:center;gap:18px}
+.score b{font-size:3.4rem;line-height:1;color:var(--blue-900);letter-spacing:-.04em}
+.score small{display:block;color:var(--muted)}
+.rev-track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 48px)/3);gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px;scrollbar-width:thin}
+.rev{scroll-snap-align:start;background:#fff;border-radius:var(--r-l);padding:30px;border:1px solid var(--line);display:flex;flex-direction:column;gap:16px}
+.rev p{color:#444;font-size:.97rem;flex:1;margin:0}
+.rev .who{display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--line)}
+.rev .av{width:42px;height:42px;border-radius:50%;background:var(--teal-50);color:var(--blue);display:grid;place-items:center;font-weight:800}
+.rev .who b{display:block;font-size:.95rem;color:var(--blue-900)}
+.rev .who span{font-size:.8rem;color:var(--muted)}
+.rev .cat{align-self:flex-start;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);background:var(--blue-50);border-radius:999px;padding:5px 11px}
+.arrows{display:flex;gap:10px}
+.arrows button{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:1.1rem;color:var(--blue-900)}
+.arrows button:hover{background:var(--blue);color:#fff;border-color:var(--blue)}
+
+/* Practitioner band */
+.team{display:grid;grid-template-columns:1.1fr 1fr;border-radius:28px;overflow:hidden;background:var(--blue-900);color:#fff}
+.team img{width:100%;height:100%;object-fit:cover;min-height:460px}
+.team .in{padding:clamp(36px,5vw,72px)}
+.team h2{color:#fff}
+.team .eyebrow{color:var(--teal)}
+.team p{color:rgba(255,255,255,.8)}
+.creds{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.12);border-radius:16px;overflow:hidden;margin:30px 0}
+.creds div{background:var(--blue-900);padding:18px 20px}
+.creds b{display:block;font-size:1.5rem;color:var(--teal);letter-spacing:-.02em}
+.creds span{font-size:.85rem;color:rgba(255,255,255,.75)}
+
+/* Locations */
+.locs{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.loc{border-radius:var(--r-l);overflow:hidden;background:#fff;border:1px solid var(--line)}
+.loc img{aspect-ratio:16/9;object-fit:cover;width:100%}
+.loc .in{padding:28px 30px 30px}
+.loc .tag{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-600)}
+.loc h3{font-size:1.5rem;margin:6px 0 4px}
+.loc address{font-style:normal;color:var(--muted);margin-bottom:18px}
+.hours{width:100%;border-collapse:collapse;font-size:.93rem;margin-bottom:22px}
+.hours td{padding:9px 0;border-top:1px solid var(--line)}
+.hours td:last-child{text-align:right;font-weight:600}
+.hours tr.off td:last-child{color:#aaa;font-weight:500}
+.loc .btns{display:flex;gap:10px;flex-wrap:wrap}
+.loc .btn{height:46px;padding:0 20px;font-size:.88rem}
+
+/* FAQ */
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(32px,6vw,90px)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:24px 0;font-weight:700;font-size:1.07rem;color:var(--blue-900)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:0 0 34px;height:34px;border-radius:50%;background:var(--blue-50);color:var(--blue);display:grid;place-items:center;font-size:1.3rem;font-weight:500;transition:.3s}
+.faq details[open] summary::after{transform:rotate(45deg);background:var(--blue);color:#fff}
+.faq details p{color:var(--muted);padding-bottom:24px;margin:0;max-width:62ch}
+
+/* CTA */
+.cta{position:relative;border-radius:32px;overflow:hidden;background:linear-gradient(120deg,var(--blue) 0%,#2a8cc2 55%,var(--teal) 100%);color:#fff;padding:clamp(44px,7vw,88px);display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:center}
+.cta::after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;border:70px solid rgba(255,255,255,.08)}
+.cta h2{color:#fff;font-size:clamp(2rem,4vw,3.2rem)}
+.cta p{color:rgba(255,255,255,.88);margin:16px 0 0;font-size:1.1rem}
+.cta .actions{display:flex;flex-direction:column;gap:14px;align-items:flex-start;position:relative;z-index:1}
+.cta .tel{font-size:1.5rem;font-weight:800;letter-spacing:-.02em}
+.cta .tel small{display:block;font-size:.8rem;font-weight:600;opacity:.75;letter-spacing:.08em;text-transform:uppercase}
+
+/* Logos */
+.logos{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:22px 48px;margin-top:22px}
+.logos img{height:44px;width:auto;filter:grayscale(1);opacity:.6;transition:.3s}
+.logos img:hover{filter:none;opacity:1}
+
+/* Footer */
+.footer{background:var(--blue-900);color:rgba(255,255,255,.72);padding:80px 0 30px;margin-top:clamp(72px,10vw,128px);font-size:.93rem}
+.footer .grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+.footer h4{color:#fff;font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;margin:0 0 18px}
+.footer ul{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.footer a:hover{color:#fff}
+.footer .logo img{height:40px;margin-bottom:20px}
+.footer .legal{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.12);margin-top:60px;padding-top:26px;font-size:.82rem}
+.disclaimer{font-size:.82rem;color:rgba(255,255,255,.55);max-width:46ch;margin-top:16px}
+
+/* Mobile bar */
+.mbar{display:none}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:1320px){.head-phone{display:none}}
+@media (max-width:1100px){
+  .nav,.head-phone{display:none}
+  .burger{display:flex}
+  .services{grid-template-columns:1fr 1fr}
+  .svc.feature{grid-column:span 2;grid-row:auto;min-height:340px}
+  .steps{grid-template-columns:1fr 1fr;row-gap:44px}
+  .steps::before{display:none}
+  .rev-track{grid-auto-columns:calc((100% - 24px)/2)}
+}
+@media (max-width:860px){
+  .topbar .right span:not(:last-child){display:none}
+  .about,.team,.faq-grid,.cta,.locs{grid-template-columns:1fr}
+  .about-media{max-width:520px}
+  .about-media .side{right:-10px}
+  .stat-card{left:-8px}
+  .sec-head{flex-direction:column;align-items:flex-start}
+  .footer .grid{grid-template-columns:1fr 1fr}
+  .team img{min-height:340px}
+}
+@media (max-width:600px){
+  body{font-size:16px;padding-bottom:72px}
+  .topbar{display:none}
+  .header .container{height:68px}
+  .logo img{height:34px}
+  .head-cta .btn{display:none}
+  .hero{min-height:auto}
+  .hero .container{padding-top:80px}
+  .hero-foot{flex-direction:column;align-items:flex-start;margin-top:36px}
+  .scroll{display:none}
+  .services{grid-template-columns:1fr}
+  .svc.feature{grid-column:auto}
+  .steps{grid-template-columns:1fr}
+  .checks{grid-template-columns:1fr}
+  .rev-track{grid-auto-columns:88%}
+  .creds b{font-size:1.15rem}
+  .hero::before{background:linear-gradient(180deg,rgba(11,54,90,.7),rgba(11,54,90,.92))}
+  .footer .grid{grid-template-columns:1fr}
+  .mbar{display:grid;grid-template-columns:1fr 1.4fr;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 24px rgba(11,54,90,.08)}
+  .mbar .btn{height:50px;justify-content:center;padding:0 12px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <span><i class="dot"></i>Cabinets ouverts · Pully – Lausanne & Fribourg</span>
+    <div class="right">
+      <span>Lun – Ven · sur rendez-vous</span>
+      <a href="mailto:secretariat@homeomed.ch">secretariat@homeomed.ch</a>
+      <span><b>FR</b>&nbsp;|&nbsp;EN</span>
+    </div>
+  </div>
+</div>
+
+<header class="header" id="header">
+  <div class="container">
+    <a class="logo" href="#"><img src="../assets/img/logo.webp" alt="HOMEOMED · Paola Orlando" width="640" height="157"></a>
+    <nav class="nav" aria-label="Menu principal">
+      <a class="active" href="#">Accueil</a>
+      <a href="#soins">Nos soins</a>
+      <a href="#cabinet">Le cabinet</a>
+      <a href="#parcours">Votre parcours</a>
+      <a href="#lieux">Pully · Fribourg</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="head-cta">
+      <a class="head-phone" href="tel:+41215661815">Secrétariat<b>021 566 18 15</b></a>
+      <a class="btn btn-primary" href="#rdv">Prendre rendez-vous</a>
+      <button class="burger" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <img class="bg" src="../assets/img/pully-3.webp" alt="" width="1400" height="1050">
+  <div class="container">
+    <div class="kicker">Pully · Lausanne · Fribourg — Suisse</div>
+    <h1>Cabinet HOMEOMED <span>Votre santé, entre de bonnes mains.</span></h1>
+    <p>Homéopathie classique, accompagnement parental et thérapie de l’insomnie. Une prise en charge rigoureuse et personnalisée, en complément de votre suivi médical.</p>
+    <div class="btns">
+      <a class="btn btn-light" href="#rdv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Prendre rendez-vous</a>
+      <a class="btn btn-line" href="#soins">Découvrir nos soins</a>
+    </div>
+    <div class="hero-foot">
+      <div class="rating"><span class="g">G</span><div><b>4.9 / 5</b> <span class="stars">★★★★★</span><br><small style="opacity:.8">17 avis Google vérifiés</small></div></div>
+      <div class="scroll"><i></i>Défiler</div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true"><div class="track">
+  <span>Homéopathe diplômée fédérale</span><span>Remboursé par les complémentaires</span><span>Reconnue ASCA · RME</span><span>Dès la naissance</span><span>Consultations FR · EN · IT</span><span>Visio possible</span><span>Réservation en ligne 24h/24</span><span>Formée à Gustave Roussy</span>
+  <span>Homéopathe diplômée fédérale</span><span>Remboursé par les complémentaires</span><span>Reconnue ASCA · RME</span><span>Dès la naissance</span><span>Consultations FR · EN · IT</span><span>Visio possible</span><span>Réservation en ligne 24h/24</span><span>Formée à Gustave Roussy</span>
+</div></div>
+
+<section class="section" id="cabinet">
+  <div class="container about">
+    <div class="about-media reveal">
+      <img class="main" src="../assets/img/pully-1.webp" alt="Salle de consultation du cabinet de Pully" width="1400" height="1050" style="object-position:40% 50%">
+      <img class="side" src="../assets/img/pully-place.webp" alt="Place Neuve, Pully" width="1400" height="1050" loading="lazy">
+      <div class="stat-card"><b>4.9</b><span><span class="stars">★★★★★</span><br>17 avis Google</span></div>
+    </div>
+    <div class="reveal">
+      <div class="eyebrow">Qui sommes-nous</div>
+      <h2>Une médecine complémentaire, exigeante et humaine.</h2>
+      <p class="lead" style="margin-top:22px">Le cabinet HOMEOMED est dirigé par Paola Orlando, homéopathe diplômée fédérale. Chaque prise en charge repose sur une anamnèse approfondie, un protocole individualisé et un suivi régulier.</p>
+      <p style="color:var(--muted)">Nous travaillons en complément de votre médecin, pédiatre, gynécologue ou oncologue — jamais à leur place.</p>
+      <ul class="checks">
+        <li>Diplôme fédéral d’homéopathe</li>
+        <li>Soins de support en oncologie (Gustave Roussy)</li>
+        <li>Bébés, enfants & adolescents</li>
+        <li>Santé hormonale de la femme</li>
+        <li>Remboursé ASCA · RME · Visana · EGK</li>
+        <li>Pully, Fribourg ou visioconsultation</li>
+      </ul>
+      <a class="link" href="#">Découvrir le parcours de Paola</a>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-grey" id="soins">
+  <div class="container">
+    <div class="sec-head">
+      <div><div class="eyebrow">Nos prestations</div><h2>Nos soins en un coup d’œil</h2><p class="lead">Trois pôles d’expertise, une même exigence : comprendre la personne dans sa globalité.</p></div>
+      <a class="btn btn-ghost" href="#">Toutes les prestations</a>
+    </div>
+    <div class="services">
+      <a class="svc feature reveal" href="#"><img src="../assets/img/hero-granules.webp" alt="" loading="lazy"><div class="in"><div class="eyebrow" style="color:var(--teal)">Pôle 1</div><h3>Homéopathie classique</h3><p>Une approche précise et structurée pour l’enfant, la femme et l’adulte, en complément de votre suivi médical.</p></div></a>
+      <a class="svc reveal" href="#"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><path d="M8 21v-5l-2-4 4-2h4l4 2-2 4v5"/></svg></span><h3>Bébé, enfant & adolescent</h3><p>Otites à répétition, sommeil, digestion, eczéma, dentition, comportement.</p><span class="more">En savoir plus<i>→</i></span></a>
+      <a class="svc reveal" href="#"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M12 14v7M9 18h6"/></svg></span><h3>Équilibre féminin & hormonal</h3><p>Cycles douloureux, SOPK, endométriose, fertilité, grossesse, ménopause.</p><span class="more">En savoir plus<i>→</i></span></a>
+      <a class="svc reveal" href="#"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h11a3 3 0 1 0-3-3M3 12h15a3 3 0 1 1-3 3M3 16h7"/></svg></span><h3>ORL, allergies, peau</h3><p>Eczéma, psoriasis, urticaire, rhume des foins, asthme, sinusites.</p><span class="more">En savoir plus<i>→</i></span></a>
+      <a class="svc reveal" href="#"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-2.5 0-4 2-4 4.5 0 3 4 8 4 8s4-5 4-8C16 5 14.5 3 12 3zM9 14l-4 7M15 14l4 7"/></svg></span><h3>Soins de support en oncologie</h3><p>Pendant et après les traitements, pour mieux traverser les effets secondaires.</p><span class="more">En savoir plus<i>→</i></span></a>
+      <a class="svc reveal" href="#"><span class="tag">Pôle 2</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="7" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M3 20v-2a5 5 0 0 1 10 0v2M14 20v-1.5a3.5 3.5 0 0 1 7 0V20"/></svg></span><h3>Accompagnement parental</h3><p>TDAH et opposition, sommeil du tout-petit, allaitement : des outils concrets.</p><span class="more">En savoir plus<i>→</i></span></a>
+      <a class="svc reveal" href="#"><span class="tag">Pôle 3</span><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></span><h3>Insomnie – TCC-i</h3><p>La méthode de référence de l’insomnie chronique, brève et structurée.</p><span class="more">En savoir plus<i>→</i></span></a>
+      <a class="svc reveal" href="#"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span><h3>Urgences & autres troubles</h3><p>Fatigue chronique, digestion, migraines, vertiges, urgences homéopathiques.</p><span class="more">En savoir plus<i>→</i></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="parcours">
+  <div class="container">
+    <div class="eyebrow">Comment ça marche</div>
+    <h2>Votre parcours en 4 étapes</h2>
+    <div class="steps">
+      <div class="step reveal"><small>2 minutes</small><h3>Réservez en ligne</h3><p>Sur OneDoc 24h/24 ou par téléphone. Choisissez Pully, Fribourg ou la visio.</p></div>
+      <div class="step reveal"><small>75 – 90 min</small><h3>Première consultation</h3><p>Anamnèse complète : votre histoire, vos symptômes, votre terrain.</p></div>
+      <div class="step reveal"><small>Sur mesure</small><h3>Protocole individualisé</h3><p>Un traitement adapté, expliqué et coordonné avec votre suivi médical.</p></div>
+      <div class="step reveal"><small>Toutes les 4 – 6 sem.</small><h3>Suivi régulier</h3><p>Nous ajustons ensemble jusqu’à l’amélioration durable.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-grey" style="padding-top:clamp(72px,10vw,128px)">
+  <div class="container">
+    <div class="reviews-top">
+      <div><div class="eyebrow">Témoignages</div><h2>Ce que disent nos patients</h2></div>
+      <div class="score"><b>4.9</b><div><span class="stars">★★★★★</span><small>17 avis Google</small></div><div class="arrows" style="margin-left:18px"><button data-dir="-1" aria-label="Précédent">←</button><button data-dir="1" aria-label="Suivant">→</button></div></div>
+    </div>
+    <div class="rev-track" id="revs">
+      <article class="rev"><span class="cat">Bébé prématuré</span><p>« Mme Orlando a pris en charge la santé de mon bébé, un grand prématuré né à 29 semaines, avec beaucoup de bienveillance, d’écoute et de sérieux. Elle a su le guérir de maux de ventre dont il souffrait depuis la naissance. »</p><div class="who"><span class="av">M</span><div><b>Mallika N.</b><span>Avis Google · il y a 12 mois</span></div></div></article>
+      <article class="rev"><span class="cat">Oncologie</span><p>« J’ai eu la grande chance d’être suivie avant de devoir débuter une chimiothérapie. Cet accompagnement, basé sur une anamnèse complète et détaillée, a fait pour moi toute la différence. »</p><div class="who"><span class="av">S</span><div><b>Sophie C.</b><span>Avis Google · il y a 12 mois</span></div></div></article>
+      <article class="rev"><span class="cat">Enfant</span><p>« Bienveillante, à l’écoute, passionnée et investie. Très à l’aise avec les enfants, elle permet un complément parfait au suivi pédiatrique. Je ne peux que la recommander ! »</p><div class="who"><span class="av">J</span><div><b>Julian S.</b><span>Avis Google · il y a 11 mois</span></div></div></article>
+      <article class="rev"><span class="cat">Santé de la femme</span><p>« Une praticienne exceptionnelle, à l’écoute et bienveillante. Ses conseils m’ont énormément aidée à retrouver un équilibre dans ma santé de femme. »</p><div class="who"><span class="av">L</span><div><b>Laurianne D.</b><span>Avis Google · il y a 1 an</span></div></div></article>
+      <article class="rev"><span class="cat">Stress & angoisses</span><p>« Elle me suit depuis un an et demi et je vois une nette amélioration sur mes angoisses et mon stress. Elle trouve le traitement parfait pour chaque besoin. »</p><div class="who"><span class="av">S</span><div><b>Solene M.</b><span>Avis Google · il y a 11 mois</span></div></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="team reveal">
+      <img src="../assets/img/paola-portrait.webp" alt="Paola Orlando, homéopathe diplômée fédérale" loading="lazy" style="object-position:50% 25%">
+      <div class="in">
+        <div class="eyebrow">Votre praticienne</div>
+        <h2>Paola Orlando</h2>
+        <p style="margin-top:14px;font-size:1.1rem">Homéopathe diplômée fédérale, spécialisée en pédiatrie, santé hormonale de la femme et soins de support en oncologie.</p>
+        <div class="creds">
+          <div><b>Dipl. féd.</b><span>Diplôme fédéral suisse en homéopathie</span></div>
+          <div><b>DU Oncologie</b><span>Gustave Roussy · Paris-Saclay</span></div>
+          <div><b>Inde</b><span>Formation continue chaque année</span></div>
+          <div><b>Micronutrition</b><span>DU Université de Dijon · SSM</span></div>
+        </div>
+        <a class="btn btn-light" href="#">Son parcours</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-grey" id="lieux">
+  <div class="container">
+    <div class="sec-head"><div><div class="eyebrow">Infos pratiques</div><h2>Deux cabinets, horaires & accès</h2></div></div>
+    <div class="locs">
+      <article class="loc reveal">
+        <img src="../assets/img/pully-1.webp" alt="Cabinet de Pully" loading="lazy">
+        <div class="in">
+          <span class="tag">Cabinet principal</span>
+          <h3>Pully – Lausanne</h3>
+          <address>Place Neuve 1 · 1009 Pully</address>
+          <table class="hours"><tr><td>Lundi – Mercredi</td><td>8h00 – 18h00</td></tr><tr class="off"><td>Jeudi</td><td>à Fribourg</td></tr><tr><td>Vendredi</td><td>8h00 – 13h00</td></tr><tr class="off"><td>Samedi – Dimanche</td><td>Fermé</td></tr></table>
+          <div class="btns"><a class="btn btn-primary" href="#rdv">Réserver à Pully</a><a class="btn btn-ghost" href="#">Itinéraire</a></div>
+        </div>
+      </article>
+      <article class="loc reveal">
+        <img src="../assets/img/fribourg-1.webp" alt="Cabinet de Fribourg" loading="lazy">
+        <div class="in">
+          <span class="tag">Centre ITS</span>
+          <h3>Fribourg</h3>
+          <address>Rue de la Banque 4 · 1700 Fribourg</address>
+          <table class="hours"><tr class="off"><td>Lundi – Mercredi</td><td>à Pully</td></tr><tr><td>Jeudi</td><td>9h00 – 18h00</td></tr><tr class="off"><td>Vendredi</td><td>à Pully</td></tr><tr class="off"><td>Samedi – Dimanche</td><td>Fermé</td></tr></table>
+          <div class="btns"><a class="btn btn-primary" href="#rdv">Réserver à Fribourg</a><a class="btn btn-ghost" href="#">Itinéraire</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="container faq-grid">
+    <div>
+      <div class="eyebrow">Questions fréquentes</div>
+      <h2>Vous avez des questions ?</h2>
+      <p class="lead" style="margin-top:18px">Les réponses aux questions qu’on nous pose le plus avant un premier rendez-vous.</p>
+      <a class="btn btn-ghost" href="#" style="margin-top:10px">Toutes les questions</a>
+    </div>
+    <div class="faq">
+      <details open><summary>Est-ce remboursé par mon assurance ?</summary><p>Oui, par la plupart des assurances complémentaires. Paola Orlando est reconnue ASCA, RME, Visana et EGK.</p></details>
+      <details><summary>Dois-je arrêter mes traitements médicaux ?</summary><p>Non. L’homéopathie est complémentaire et n’interfère pas avec vos médicaments. Nous travaillons en lien avec votre médecin.</p></details>
+      <details><summary>Est-ce adapté aux bébés et aux enfants ?</summary><p>Oui, dès la naissance, y compris pour les bébés prématurés.</p></details>
+      <details><summary>Combien de temps dure une consultation ?</summary><p>75 à 90 minutes pour la première, puis 30 à 60 minutes pour les suivis.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="container" id="rdv">
+  <div class="cta reveal">
+    <div>
+      <h2>Prenez rendez-vous dès aujourd’hui</h2>
+      <p>Réservation en ligne 24h/24 · Pully, Fribourg ou en visio.</p>
+    </div>
+    <div class="actions">
+      <a class="btn btn-light" href="#">Réserver en ligne</a>
+      <a class="tel" href="tel:+41215661815"><small>Ou appelez le secrétariat</small>+41 21 566 18 15</a>
+    </div>
+  </div>
+  <p class="center" style="text-align:center;color:var(--muted);font-size:.85rem;margin-top:56px;letter-spacing:.06em;text-transform:uppercase;font-weight:700">Reconnue par les assurances complémentaires · Formée auprès de</p>
+  <div class="logos">
+    <img src="../assets/img/logos/asca.webp" alt="ASCA" loading="lazy"><img src="../assets/img/logos/rme.webp" alt="RME" loading="lazy"><img src="../assets/img/logos/visana.webp" alt="Visana" loading="lazy"><img src="../assets/img/logos/egk.webp" alt="EGK" loading="lazy"><img src="../assets/img/logos/gustave-roussy.webp" alt="Gustave Roussy" loading="lazy"><img src="../assets/img/logos/shisso.webp" alt="SHISSO" loading="lazy">
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="grid">
+      <div><a class="logo" href="#"><img src="img/logo-blanc.webp" alt="HOMEOMED"></a><p>Cabinet HOMEOMED · Paola Orlando<br>Homéopathe diplômée fédérale</p><p class="disclaimer">L’homéopathie est une médecine complémentaire. Elle ne remplace pas un traitement prescrit par votre médecin.</p></div>
+      <div><h4>Nos soins</h4><ul><li><a href="#">Homéopathie</a></li><li><a href="#">Enfant & adolescent</a></li><li><a href="#">Santé de la femme</a></li><li><a href="#">Oncologie</a></li><li><a href="#">Accompagnement parental</a></li><li><a href="#">Insomnie – TCC-i</a></li></ul></div>
+      <div><h4>Contact</h4><ul><li><a href="tel:+41215661815">+41 21 566 18 15</a></li><li><a href="mailto:secretariat@homeomed.ch">secretariat@homeomed.ch</a></li><li>Place Neuve 1, 1009 Pully</li><li>Rue de la Banque 4, 1700 Fribourg</li></ul></div>
+      <div><h4>Horaires</h4><ul><li>Lun – Mer · 8h – 18h (Pully)</li><li>Jeu · 9h – 18h (Fribourg)</li><li>Ven · 8h – 13h (Pully)</li><li>Sam – Dim · fermé</li></ul></div>
+    </div>
+    <div class="legal"><span>© 2021 – 2026 Cabinet HOMEOMED · Paola Orlando</span><span>Mentions légales · Confidentialité · CGU</span></div>
+  </div>
+</footer>
+
+<div class="mbar"><a class="btn btn-ghost" href="tel:+41215661815">Appeler</a><a class="btn btn-primary" href="#rdv">Prendre rendez-vous</a></div>
+
+<script>
+const h=document.getElementById('header');addEventListener('scroll',()=>h.classList.toggle('scrolled',scrollY>10),{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const t=document.getElementById('revs');document.querySelectorAll('.arrows button').forEach(b=>b.onclick=()=>t.scrollBy({left:b.dataset.dir*t.clientWidth*.9,behavior:'smooth'}));
+</script>
+</body>
+</html>

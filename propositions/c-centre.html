@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Proposition C · Centre</title>
+<link rel="icon" href="../assets/img/favicon-32.png">
+<style>
+@font-face{font-family:"Inter Tight";src:url("fonts/inter-tight-latin-wght-normal.woff2") format("woff2-variations");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Inter Tight";src:url("fonts/inter-tight-latin-wght-italic.woff2") format("woff2-variations");font-weight:100 900;font-style:italic;font-display:swap}
+
+/* Charte homeomed.ch : bleu #1C75BB · turquoise #69C3CB · blanc · gris #FAFAFA · texte #313131 / #666 */
+:root{
+  --blue:#1C75BB; --blue-700:#165f99; --blue-900:#0e3556; --blue-50:#edf4fa; --blue-100:#d7e7f4;
+  --teal:#69C3CB; --teal-700:#2f8f98; --teal-50:#ecf7f8;
+  --white:#fff; --grey:#FAFAFA; --grey-2:#f3f5f7; --line:#e3e8ed; --ink:#313131; --muted:#666;
+  --ok:#2e9b6a;
+  --r:10px; --r-l:16px;
+  --shadow:0 1px 2px rgba(14,53,86,.06),0 8px 28px rgba(14,53,86,.08);
+  --shadow-l:0 24px 60px rgba(14,53,86,.16);
+  --container:1260px; --gut:clamp(16px,4vw,36px);
+  --font:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font);color:var(--ink);background:#fff;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+p{margin:0 0 1em}
+h1,h2,h3,h4{margin:0;color:var(--blue-900);letter-spacing:-.02em;line-height:1.12;font-weight:650}
+h2{font-size:clamp(1.8rem,3.2vw,2.6rem)}
+h3{font-size:1.2rem}
+.container{max-width:var(--container);margin:0 auto;padding:0 var(--gut)}
+.section{padding:clamp(64px,9vw,112px) 0}
+.bg-grey{background:var(--grey)}
+.kicker{display:inline-block;font-size:.8rem;font-weight:600;color:var(--blue);background:var(--blue-50);padding:6px 12px;border-radius:6px;margin-bottom:16px;letter-spacing:.02em}
+.muted{color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:48px;padding:0 22px;border-radius:var(--r);font-weight:600;font-size:.95rem;border:1px solid transparent;transition:.2s;white-space:nowrap;cursor:pointer;font-family:inherit}
+.btn svg{width:18px;height:18px}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:var(--blue-700)}
+.btn-outline{border-color:var(--line);background:#fff;color:var(--blue-900)}
+.btn-outline:hover{border-color:var(--blue);color:var(--blue)}
+.btn-teal{background:var(--teal);color:var(--blue-900)}
+.btn-teal:hover{background:#7fcdd4}
+.arrow{display:inline-flex;gap:6px;align-items:center;font-weight:600;color:var(--blue)}
+.arrow::after{content:"→";transition:.2s}
+.arrow:hover::after{transform:translateX(3px)}
+
+/* Utility bar */
+.util{background:var(--grey-2);border-bottom:1px solid var(--line);font-size:.83rem;color:var(--muted)}
+.util .container{display:flex;justify-content:space-between;align-items:center;height:38px;gap:16px}
+.util .l,.util .r{display:flex;gap:22px;align-items:center}
+.util b{color:var(--blue-900);font-weight:600}
+.util .urg{color:var(--blue);font-weight:600}
+.util svg{width:14px;height:14px;vertical-align:-2px;margin-right:6px}
+
+/* Header */
+.header{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--line)}
+.header .container{display:flex;align-items:center;gap:36px;height:76px}
+.logo img{height:38px;width:auto}
+.nav{display:flex;gap:2px;flex:1}
+.nav a{padding:9px 13px;border-radius:8px;font-weight:550;font-size:.94rem;color:#3c4650;white-space:nowrap}
+.nav a:hover{background:var(--blue-50);color:var(--blue)}
+.nav a .chev{display:inline-block;margin-left:4px;font-size:.7em;opacity:.6}
+.burger{display:none;margin-left:auto;width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:#fff;place-items:center}
+
+/* Hero */
+.hero{position:relative;background:linear-gradient(180deg,var(--blue-50),#fff 85%);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--blue-100) 1px,transparent 1px),linear-gradient(90deg,var(--blue-100) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse 70% 70% at 20% 30%,#000 10%,transparent 70%);opacity:.55}
+.hero .container{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(32px,5vw,72px);padding-top:clamp(48px,7vw,88px);padding-bottom:clamp(56px,7vw,96px);align-items:center}
+.cred-pill{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 14px 6px 6px;font-size:.85rem;font-weight:550;box-shadow:var(--shadow);margin-bottom:26px}
+.cred-pill img{width:30px;height:30px;border-radius:50%;object-fit:cover;object-position:50% 20%}
+.cred-pill i{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px rgba(46,155,106,.15);font-style:normal}
+.hero h1{font-size:clamp(2.3rem,4.8vw,3.9rem);letter-spacing:-.035em;line-height:1.04;font-weight:650}
+.hero h1 span{color:var(--blue)}
+.hero .intro{font-size:1.13rem;color:#555;max-width:52ch;margin:22px 0 30px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:620px}
+.fact{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+.fact b{display:block;color:var(--blue-900);font-size:1.05rem}
+.fact span{font-size:.84rem;color:var(--muted)}
+
+/* Booking widget */
+.book{background:#fff;border-radius:20px;box-shadow:var(--shadow-l);border:1px solid var(--line);overflow:hidden}
+.book .top{background:var(--blue);color:#fff;padding:20px 24px;display:flex;justify-content:space-between;align-items:center}
+.book .top h3{color:#fff;font-size:1.15rem}
+.book .top span{font-size:.8rem;opacity:.85}
+.book form{padding:22px 24px 24px;display:grid;gap:18px}
+.book label.t{display:flex;align-items:center;gap:10px;font-size:.8rem;font-weight:650;color:var(--blue-900);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.book label.t em{font-style:normal;width:22px;height:22px;border-radius:50%;background:var(--blue-50);color:var(--blue);display:grid;place-items:center;font-size:.75rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips label{padding:9px 14px;border:1px solid var(--line);border-radius:8px;font-size:.9rem;font-weight:550;cursor:pointer;transition:.15s;color:#444}
+.chips label:hover{border-color:var(--blue)}
+.chips input:checked + label{background:var(--blue);border-color:var(--blue);color:#fff}
+.chips input:focus-visible + label{outline:2px solid var(--teal);outline-offset:2px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);background:var(--grey-2);border-radius:10px;padding:4px}
+.seg label{text-align:center;padding:9px 6px;border-radius:7px;font-size:.9rem;font-weight:550;cursor:pointer;color:#555}
+.seg input{position:absolute;opacity:0}
+.seg input:checked + label{background:#fff;color:var(--blue);box-shadow:0 1px 4px rgba(14,53,86,.12)}
+select{width:100%;height:46px;border:1px solid var(--line);border-radius:8px;padding:0 14px;font:inherit;font-size:.95rem;color:var(--ink);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right 12px center/16px no-repeat;appearance:none}
+.book .summary{font-size:.85rem;color:var(--muted);background:var(--teal-50);border-radius:8px;padding:10px 14px}
+.book .summary b{color:var(--blue-900)}
+.book .btn{width:100%;height:52px}
+.book .alt{text-align:center;font-size:.85rem;color:var(--muted);margin-top:-6px}
+.book .alt a{color:var(--blue);font-weight:600}
+
+/* Trust strip */
+.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
+.trust .container{display:flex;align-items:center;gap:40px;height:96px;overflow:hidden}
+.trust p{margin:0;font-size:.82rem;color:var(--muted);font-weight:600;white-space:nowrap;text-transform:uppercase;letter-spacing:.08em}
+.trust .logos{display:flex;gap:44px;align-items:center;flex:1;justify-content:space-between}
+.trust img{height:36px;width:auto;filter:grayscale(1);opacity:.65}
+
+/* Poles */
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;margin-bottom:44px}
+.sec-head p{max-width:56ch;margin:14px 0 0}
+.poles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pole{background:#fff;border:1px solid var(--line);border-radius:var(--r-l);overflow:hidden;display:flex;flex-direction:column;transition:.25s}
+.pole:hover{box-shadow:var(--shadow);transform:translateY(-3px)}
+.pole .ph{position:relative;aspect-ratio:16/9;overflow:hidden}
+.pole .ph img{width:100%;height:100%;object-fit:cover}
+.pole .ph .num{position:absolute;left:16px;top:16px;background:#fff;color:var(--blue-900);font-weight:700;font-size:.78rem;padding:5px 10px;border-radius:6px;letter-spacing:.04em}
+.pole .bar{height:4px;background:var(--blue)}
+.pole:nth-child(2) .bar{background:var(--teal)}
+.pole:nth-child(3) .bar{background:var(--blue-900)}
+.pole .in{padding:24px 24px 26px;display:flex;flex-direction:column;flex:1}
+.pole h3{font-size:1.4rem;margin-bottom:8px}
+.pole .in > p{color:var(--muted);font-size:.95rem}
+.pole ul{list-style:none;padding:0;margin:6px 0 22px;border-top:1px solid var(--line);flex:1}
+.pole li a{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--line);font-weight:550;font-size:.95rem}
+.pole li a::after{content:"›";color:var(--blue);font-size:1.2rem}
+.pole li a:hover{color:var(--blue)}
+
+/* Symptom finder */
+.finder{background:var(--blue-900);border-radius:24px;color:#fff;padding:clamp(32px,5vw,64px);display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,64px);align-items:start}
+.finder h2{color:#fff}
+.finder p{color:rgba(255,255,255,.75)}
+.search{position:relative;margin-bottom:18px}
+.search input{width:100%;height:56px;border-radius:12px;border:0;padding:0 18px 0 50px;font:inherit;font-size:1.02rem;color:var(--ink)}
+.search svg{position:absolute;left:18px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.tags a{display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:8px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);font-size:.9rem;transition:.15s}
+.tags a small{font-size:.72rem;color:var(--teal);font-weight:600}
+.tags a:hover{background:var(--teal);color:var(--blue-900);border-color:var(--teal)}
+.tags a:hover small{color:var(--blue-900)}
+.tags a[hidden]{display:none}
+.noresult{display:none;font-size:.92rem;color:rgba(255,255,255,.75);margin-top:10px}
+
+/* Practitioner */
+.prac{display:grid;grid-template-columns:400px 1fr;gap:clamp(32px,5vw,72px);align-items:start}
+.prac-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-l);overflow:hidden;position:sticky;top:100px}
+.prac-card img{aspect-ratio:4/4.3;object-fit:cover;object-position:50% 20%;width:100%}
+.prac-card .in{padding:22px 24px}
+.prac-card h3{font-size:1.35rem}
+.prac-card .role{color:var(--blue);font-weight:600;font-size:.92rem;margin:4px 0 16px}
+.kv{width:100%;border-collapse:collapse;font-size:.9rem}
+.kv td{padding:9px 0;border-top:1px solid var(--line);vertical-align:top}
+.kv td:first-child{color:var(--muted);width:42%}
+.kv td:last-child{font-weight:550}
+.timeline{list-style:none;padding:0;margin:30px 0 0;position:relative}
+.timeline::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:var(--blue-100)}
+.timeline li{position:relative;padding:0 0 28px 44px}
+.timeline li::before{content:"";position:absolute;left:4px;top:5px;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--blue)}
+.timeline li:nth-child(2)::before{border-color:var(--teal)}
+.timeline .where{font-size:.78rem;font-weight:650;color:var(--teal-700);text-transform:uppercase;letter-spacing:.08em}
+.timeline h4{font-size:1.1rem;margin:4px 0}
+.timeline p{color:var(--muted);font-size:.95rem;margin:0}
+.quote{border-left:3px solid var(--teal);padding:6px 0 6px 22px;margin:8px 0 0;font-size:1.25rem;color:var(--blue-900);font-weight:500;line-height:1.45}
+
+/* Care path + pricing */
+.path{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.pstep{background:#fff;border:1px solid var(--line);border-radius:var(--r-l);padding:24px;display:flex;flex-direction:column;position:relative}
+.pstep .n{font-size:.8rem;font-weight:700;color:var(--blue);letter-spacing:.06em}
+.pstep h3{margin:10px 0 8px}
+.pstep p{color:var(--muted);font-size:.93rem;flex:1}
+.pstep .meta{display:flex;justify-content:space-between;align-items:center;padding-top:14px;border-top:1px dashed var(--line);font-size:.88rem}
+.pstep .meta b{font-size:1.15rem;color:var(--blue-900)}
+.pstep.hl{background:var(--blue);border-color:var(--blue);color:#fff}
+.pstep.hl h3,.pstep.hl .meta b{color:#fff}
+.pstep.hl p,.pstep.hl .meta{color:rgba(255,255,255,.85)}
+.pstep.hl .n{color:var(--teal)}
+.pstep.hl .meta{border-color:rgba(255,255,255,.3)}
+.reimb{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:20px;background:var(--teal-50);border-radius:var(--r-l);padding:18px 24px;flex-wrap:wrap}
+.reimb b{color:var(--blue-900)}
+.reimb .logos{display:flex;gap:28px;align-items:center}
+.reimb img{height:30px;width:auto}
+
+/* Reviews */
+.rev-wrap{display:grid;grid-template-columns:320px 1fr;gap:24px}
+.summary-card{background:#fff;border:1px solid var(--line);border-radius:var(--r-l);padding:28px}
+.summary-card .big{font-size:4rem;font-weight:700;color:var(--blue-900);line-height:1;letter-spacing:-.04em}
+.stars{color:#f2b33d;letter-spacing:2px}
+.bars{margin:20px 0;display:grid;gap:8px;font-size:.82rem;color:var(--muted)}
+.bars div{display:grid;grid-template-columns:14px 1fr 24px;gap:10px;align-items:center}
+.bars i{height:6px;border-radius:3px;background:var(--grey-2);overflow:hidden;display:block}
+.bars i::before{content:"";display:block;height:100%;width:var(--w);background:var(--blue)}
+.revs{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.rv{background:#fff;border:1px solid var(--line);border-radius:var(--r-l);padding:22px}
+.rv header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.rv header b{color:var(--blue-900)}
+.rv .tag{font-size:.75rem;font-weight:600;color:var(--teal-700);background:var(--teal-50);padding:3px 9px;border-radius:5px}
+.rv p{font-size:.94rem;color:#4a4a4a;margin:8px 0 0}
+
+/* Locations */
+.locs{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.loc{display:grid;grid-template-columns:200px 1fr;background:#fff;border:1px solid var(--line);border-radius:var(--r-l);overflow:hidden}
+.loc img{width:100%;height:100%;object-fit:cover}
+.loc .in{padding:22px 24px}
+.loc h3{font-size:1.3rem}
+.loc .addr{color:var(--muted);font-size:.93rem;margin:4px 0 12px}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:.82rem;font-weight:650;padding:5px 10px;border-radius:6px;background:var(--grey-2);color:var(--muted);margin-bottom:12px}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:#aaa}
+.status.open{background:rgba(46,155,106,.1);color:var(--ok)}
+.status.open::before{background:var(--ok)}
+.loc .h{font-size:.9rem;color:#444;margin-bottom:14px}
+.loc .btns{display:flex;gap:8px;flex-wrap:wrap}
+.loc .btn{height:42px;padding:0 16px;font-size:.88rem}
+
+/* FAQ */
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px;margin-top:36px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:0 20px}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;font-weight:600;color:var(--blue-900)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:0 0 10px;height:10px;border-right:2px solid var(--blue);border-bottom:2px solid var(--blue);transform:rotate(45deg) translateY(-3px);transition:.2s}
+.faq details[open] summary::after{transform:rotate(-135deg)}
+.faq details p{color:var(--muted);font-size:.95rem;padding-bottom:18px;margin:0}
+
+/* CTA + Footer */
+.cta{display:flex;justify-content:space-between;align-items:center;gap:28px;background:var(--blue);border-radius:20px;padding:clamp(28px,4vw,48px);color:#fff;flex-wrap:wrap}
+.cta h2{color:#fff;font-size:clamp(1.6rem,2.8vw,2.2rem)}
+.cta p{margin:8px 0 0;color:rgba(255,255,255,.85)}
+.cta .b{display:flex;gap:10px;flex-wrap:wrap}
+.cta .btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.5)}
+.cta .btn-outline:hover{border-color:#fff;color:#fff}
+.footer{background:var(--grey-2);border-top:1px solid var(--line);margin-top:clamp(64px,9vw,112px);padding:56px 0 28px;font-size:.92rem;color:var(--muted)}
+.footer .g{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:36px}
+.footer h4{font-size:.85rem;margin-bottom:14px;color:var(--blue-900)}
+.footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.footer a:hover{color:var(--blue)}
+.footer .warn{margin-top:40px;padding:16px 18px;border-radius:10px;background:#fff;border:1px solid var(--line);font-size:.85rem}
+.footer .fine{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:22px;font-size:.82rem}
+.mbar{display:none}
+
+@media (max-width:1100px){
+  .nav{display:none}
+  .burger{display:grid}
+  .header .btn{display:none}
+  .hero .container{grid-template-columns:1fr}
+  .book{max-width:560px}
+  .poles{grid-template-columns:1fr 1fr}
+  .poles .pole:last-child{grid-column:span 2}
+  .path{grid-template-columns:1fr 1fr}
+  .prac{grid-template-columns:1fr}
+  .prac-card{position:static;display:grid;grid-template-columns:260px 1fr}
+  .prac-card img{height:100%;aspect-ratio:auto}
+}
+@media (max-width:820px){
+  .util .l span:not(:first-child){display:none}
+  .finder,.rev-wrap,.locs,.faq-grid{grid-template-columns:1fr}
+  .trust .logos img:nth-child(n+5){display:none}
+  .trust p{display:none}
+  .sec-head{flex-direction:column;align-items:flex-start}
+  .footer .g{grid-template-columns:1fr 1fr}
+}
+@media (max-width:600px){
+  body{padding-bottom:74px}
+  .util{display:none}
+  .header .container{height:64px}
+  .logo img{height:32px}
+  .facts{gap:8px}
+  .fact{padding:10px}
+  .fact b{font-size:.92rem}
+  .fact span{font-size:.75rem}
+  .fact .stars{display:none}
+  .tags:not(.searching) a:nth-child(n+13){display:none}
+  .poles,.path,.revs{grid-template-columns:1fr}
+  .poles .pole:last-child{grid-column:auto}
+  .prac-card{grid-template-columns:1fr}
+  .prac-card img{aspect-ratio:4/3.4}
+  .loc{grid-template-columns:1fr}
+  .loc img{aspect-ratio:16/8}
+  .trust .container{height:76px;gap:20px}
+  .trust .logos{gap:22px}
+  .trust img{height:26px}
+  .footer .g{grid-template-columns:1fr}
+  .mbar{display:grid;grid-template-columns:1fr 1.5fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:50;background:#fff;border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="util"><div class="container">
+  <div class="l"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Pully – Lausanne · Fribourg · Visio</span><span>Consultations en <b>FR · EN · IT</b></span></div>
+  <div class="r"><a class="urg" href="tel:+41215661815">Urgence homéopathique&nbsp;? <b style="color:var(--blue)">021 566 18 15</b></a><span><b>FR</b> | EN</span></div>
+</div></div>
+
+<header class="header"><div class="container">
+  <a class="logo" href="#"><img src="../assets/img/logo.webp" alt="HOMEOMED · Paola Orlando" width="640" height="157"></a>
+  <nav class="nav" aria-label="Menu principal">
+    <a href="#poles">Pôles de soins<span class="chev">▼</span></a>
+    <a href="#trouver">Symptômes A–Z</a>
+    <a href="#praticienne">Praticienne</a>
+    <a href="#parcours">Tarifs & remboursement</a>
+    <a href="#cabinets">Cabinets</a>
+    <a href="#faq">Infos patients</a>
+  </nav>
+  <a class="btn btn-primary" href="#rdv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Prendre rendez-vous</a>
+  <button class="burger" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
+
+<section class="hero" id="rdv">
+  <div class="container">
+    <div>
+      <div class="cred-pill"><img src="../assets/img/paola-portrait.webp" alt="">Paola Orlando · Homéopathe diplômée fédérale <i></i></div>
+      <h1>Des soins complémentaires <span>rigoureux</span>, coordonnés avec votre médecin.</h1>
+      <p class="intro">Homéopathie classique, accompagnement parental et thérapie de l’insomnie (TCC-i) — pour les bébés, les enfants, les femmes et les adultes, à Pully, Fribourg ou en visio.</p>
+      <div class="facts">
+        <div class="fact"><b>75 – 90 min</b><span>pour la 1<sup>re</sup> consultation</span></div>
+        <div class="fact"><b>Remboursé</b><span>ASCA · RME · Visana · EGK</span></div>
+        <div class="fact"><b>4.9 / 5 <span class="stars" style="font-size:.8rem">★★★★★</span></b><span>17 avis Google</span></div>
+      </div>
+    </div>
+
+    <aside class="book" aria-label="Prendre rendez-vous">
+      <div class="top"><h3>Prendre rendez-vous</h3><span>En ligne · 24h/24</span></div>
+      <form onsubmit="return false">
+        <div><label class="t"><em>1</em>Pour qui&nbsp;?</label>
+          <div class="chips">
+            <input type="radio" name="who" id="w1" value="un bébé"><label for="w1">Bébé</label>
+            <input type="radio" name="who" id="w2" value="un enfant / ado" checked><label for="w2">Enfant / ado</label>
+            <input type="radio" name="who" id="w3" value="une femme"><label for="w3">Femme</label>
+            <input type="radio" name="who" id="w4" value="un adulte"><label for="w4">Adulte</label>
+          </div></div>
+        <div><label class="t" for="motif"><em>2</em>Motif</label>
+          <select id="motif"><option>Homéopathie · 1re consultation</option><option>Homéopathie · suivi</option><option>Urgence homéopathique</option><option>Accompagnement parental</option><option>Insomnie – TCC-i</option></select></div>
+        <div><label class="t"><em>3</em>Lieu</label>
+          <div class="seg">
+            <input type="radio" name="where" id="l1" value="Pully" checked><label for="l1">Pully</label>
+            <input type="radio" name="where" id="l2" value="Fribourg"><label for="l2">Fribourg</label>
+            <input type="radio" name="where" id="l3" value="en visio"><label for="l3">Visio</label>
+          </div></div>
+        <div class="summary" id="sum">Rendez-vous pour <b>un enfant / ado</b> · <b>Pully</b></div>
+        <a class="btn btn-primary" href="#">Voir les disponibilités <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <p class="alt">ou par téléphone&nbsp;: <a href="tel:+41215661815">+41 21 566 18 15</a></p>
+      </form>
+    </aside>
+  </div>
+</section>
+
+<div class="trust"><div class="container">
+  <p>Reconnue & formée auprès de</p>
+  <div class="logos">
+    <img src="../assets/img/logos/asca.webp" alt="ASCA"><img src="../assets/img/logos/rme.webp" alt="RME"><img src="../assets/img/logos/visana.webp" alt="Visana"><img src="../assets/img/logos/egk.webp" alt="EGK"><img src="../assets/img/logos/gustave-roussy.webp" alt="Gustave Roussy"><img src="../assets/img/logos/shisso.webp" alt="SHISSO"><img src="../assets/img/logos/aspedah.webp" alt="ASPEDAH">
+  </div>
+</div></div>
+
+<section class="section" id="poles">
+  <div class="container">
+    <div class="sec-head">
+      <div><span class="kicker">Nos pôles de soins</span><h2>Trois pôles, un même suivi structuré</h2><p class="muted">Chaque pôle a sa méthode, ses indications et son déroulement. Choisissez celui qui correspond à votre situation.</p></div>
+      <a class="btn btn-outline" href="#">Toutes les prestations</a>
+    </div>
+    <div class="poles">
+      <article class="pole"><div class="ph"><img src="../assets/img/hero-granules.webp" alt="" loading="lazy"><span class="num">PÔLE 01</span></div><div class="bar"></div><div class="in">
+        <h3>Homéopathie classique</h3><p>Une approche individualisée pour les troubles aigus, chroniques ou récurrents.</p>
+        <ul><li><a href="#">Bébé, enfant & adolescent</a></li><li><a href="#">Équilibre féminin & hormonal</a></li><li><a href="#">ORL, allergies, peau</a></li><li><a href="#">Soins de support en oncologie</a></li><li><a href="#">Urgences homéopathiques</a></li></ul>
+        <a class="arrow" href="#">Découvrir le pôle</a></div></article>
+      <article class="pole"><div class="ph"><img src="../assets/img/parental-hero.webp" alt="" loading="lazy" style="object-position:50% 40%"><span class="num">PÔLE 02</span></div><div class="bar"></div><div class="in">
+        <h3>Accompagnement parental</h3><p>Des outils concrets et éprouvés pour apaiser le quotidien en famille.</p>
+        <ul><li><a href="#">TDAH & opposition · Méthode Barkley®</a></li><li><a href="#">Sommeil de l’enfant 0 – 3 ans</a></li><li><a href="#">Allaitement</a></li></ul>
+        <a class="arrow" href="#">Découvrir le pôle</a></div></article>
+      <article class="pole"><div class="ph"><img src="../assets/img/onco-apres.webp" alt="" loading="lazy" style="object-position:50% 30%"><span class="num">PÔLE 03</span></div><div class="bar"></div><div class="in">
+        <h3>Insomnie – TCC-i</h3><p>La thérapie comportementale et cognitive, approche de référence de l’insomnie chronique.</p>
+        <ul><li><a href="#">Difficultés d’endormissement</a></li><li><a href="#">Réveils nocturnes</a></li><li><a href="#">La méthode en 3 étapes</a></li></ul>
+        <a class="arrow" href="#">Découvrir le pôle</a></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="container" id="trouver">
+  <div class="finder">
+    <div>
+      <span class="kicker" style="background:rgba(105,195,203,.15);color:var(--teal)">Orientation</span>
+      <h2>Quel accompagnement pour vous&nbsp;?</h2>
+      <p style="margin-top:14px">Tapez un symptôme ou une situation : nous vous orientons vers la bonne page et le bon type de consultation.</p>
+      <p style="font-size:.85rem;margin-top:22px;opacity:.7">En cas d’urgence vitale, appelez le 144.</p>
+    </div>
+    <div>
+      <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="q" type="search" placeholder="Ex. otite, eczéma, ménopause, insomnie…" aria-label="Rechercher un symptôme"></div>
+      <div class="tags" id="tags">
+        <a href="#">Allaitement <small>Parental</small></a><a href="#">Acné <small>Ado</small></a><a href="#">Allergies saisonnières <small>ORL</small></a><a href="#">Angoisses & stress <small>Adulte</small></a><a href="#">Asthme <small>ORL</small></a><a href="#">Bouffées de chaleur <small>Femme</small></a><a href="#">Chimiothérapie <small>Oncologie</small></a><a href="#">Coliques du nourrisson <small>Bébé</small></a><a href="#">Cycles douloureux <small>Femme</small></a><a href="#">Dentition <small>Bébé</small></a><a href="#">Eczéma <small>Peau</small></a><a href="#">Endométriose <small>Femme</small></a><a href="#">Fatigue chronique <small>Adulte</small></a><a href="#">Fertilité <small>Femme</small></a><a href="#">Grossesse <small>Femme</small></a><a href="#">Insomnie <small>TCC-i</small></a><a href="#">Migraines <small>Adulte</small></a><a href="#">Ménopause <small>Femme</small></a><a href="#">Opposition, TDAH <small>Parental</small></a><a href="#">Otites à répétition <small>Enfant</small></a><a href="#">Psoriasis <small>Peau</small></a><a href="#">Radiothérapie <small>Oncologie</small></a><a href="#">Réveils nocturnes <small>Sommeil</small></a><a href="#">Sinusites <small>ORL</small></a><a href="#">SOPK <small>Femme</small></a><a href="#">Sommeil du tout-petit <small>Parental</small></a><a href="#">Thyroïde <small>Femme</small></a><a href="#">Urticaire <small>Peau</small></a>
+      </div>
+      <p class="noresult" id="nores">Pas de résultat ? Appelez-nous au 021 566 18 15 : nous vous orientons.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="praticienne">
+  <div class="container prac">
+    <div class="prac-card">
+      <img src="../assets/img/paola-portrait.webp" alt="Paola Orlando" loading="lazy">
+      <div class="in">
+        <h3>Paola Orlando</h3><div class="role">Homéopathe diplômée fédérale</div>
+        <table class="kv">
+          <tr><td>Spécialités</td><td>Pédiatrie, santé de la femme, oncologie de support</td></tr>
+          <tr><td>Langues</td><td>Français, English, Italiano</td></tr>
+          <tr><td>Cabinets</td><td>Pully – Lausanne, Fribourg</td></tr>
+          <tr><td>Remboursement</td><td>ASCA · RME · Visana · EGK</td></tr>
+        </table>
+      </div>
+    </div>
+    <div>
+      <span class="kicker">Votre praticienne</span>
+      <h2>Formation, méthode et engagement</h2>
+      <p class="quote">« Comprendre avant de soigner : comprendre pourquoi un déséquilibre s’installe, et comment rétablir la cohérence du fonctionnement global. »</p>
+      <ol class="timeline">
+        <li><span class="where">Suisse</span><h4>Diplôme fédéral suisse en homéopathie</h4><p>La formation la plus exigeante et complète, pour s’appuyer sur des bases médicales solides.</p></li>
+        <li><span class="where">France · Gustave Roussy</span><h4>Diplôme Universitaire en soins en cancérologie</h4><p>École des Sciences du Cancer Gustave Roussy & Faculté de Médecine, Université Paris-Saclay.</p></li>
+        <li><span class="where">France · Suisse</span><h4>Micronutrition</h4><p>DU Alimentation, Santé et Micronutrition (Université de Dijon) · Diplôme de la Société Suisse de Micronutrition.</p></li>
+        <li><span class="where">Inde · chaque année</span><h4>Formation continue clinique</h4><p>Auprès des grands praticiens de l’homéopathie classique, notamment à la clinique du Dr Gaurang Gaikwad (Mumbai).</p></li>
+      </ol>
+      <a class="btn btn-outline" href="#">Lire le parcours complet</a>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-grey" id="parcours">
+  <div class="container">
+    <div class="sec-head"><div><span class="kicker">Déroulement & tarifs</span><h2>Une prise en charge transparente</h2><p class="muted">Homéopathie : tarifs par séance, analyse et conseil thérapeutique inclus.</p></div><a class="btn btn-outline" href="#">Tous les tarifs</a></div>
+    <div class="path">
+      <div class="pstep hl"><span class="n">ÉTAPE 01</span><h3>Première consultation</h3><p>Anamnèse complète : votre histoire, vos symptômes, votre terrain. Mise en place du protocole.</p><div class="meta"><span>75 – 90 min</span><b>CHF 230</b></div></div>
+      <div class="pstep"><span class="n">ÉTAPE 02 · ADULTE</span><h3>Consultation de suivi</h3><p>Évaluation de l’évolution et ajustement du traitement, toutes les 4 à 6 semaines.</p><div class="meta"><span>45 – 60 min</span><b>CHF 150</b></div></div>
+      <div class="pstep"><span class="n">ÉTAPE 02 · –18 ANS</span><h3>Suivi enfant & ado</h3><p>Un suivi adapté au rythme de l’enfant, en complément du pédiatre.</p><div class="meta"><span>30 min</span><b>CHF 90</b></div></div>
+      <div class="pstep"><span class="n">SI BESOIN</span><h3>Urgence homéo</h3><p>Prise en charge rapide d’un trouble aigu : fièvre, otite, cystite, gastro, toux.</p><div class="meta"><span>Forfait</span><b>CHF 150</b></div></div>
+    </div>
+    <div class="reimb"><span><b>Remboursé</b> par la plupart des assurances complémentaires</span><div class="logos"><img src="../assets/img/logos/asca.webp" alt="ASCA" loading="lazy"><img src="../assets/img/logos/rme.webp" alt="RME" loading="lazy"><img src="../assets/img/logos/visana.webp" alt="Visana" loading="lazy"><img src="../assets/img/logos/egk.webp" alt="EGK" loading="lazy"></div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="sec-head"><div><span class="kicker">Avis patients</span><h2>Ce que disent nos patients</h2></div><a class="btn btn-outline" href="#">Voir sur Google</a></div>
+    <div class="rev-wrap">
+      <div class="summary-card">
+        <div class="big">4.9</div><div class="stars" style="font-size:1.2rem;margin-top:6px">★★★★★</div><p class="muted" style="margin:6px 0 0">Note moyenne sur 17 avis Google</p>
+        <ul class="muted" style="font-size:.9rem;padding-left:1.1em;margin:18px 0 22px"><li>Enfants & bébés</li><li>Santé de la femme</li><li>Soins de support en oncologie</li><li>Stress & émotions</li></ul>
+        <a class="btn btn-primary" style="width:100%" href="#">Laisser un avis</a>
+      </div>
+      <div class="revs">
+        <article class="rv"><header><b>Mallika N.</b><span class="tag">Bébé prématuré</span></header><span class="stars">★★★★★</span><p>« Elle a pris en charge la santé de mon bébé, un grand prématuré né à 29 semaines, avec beaucoup de bienveillance, d’écoute et de sérieux. »</p></article>
+        <article class="rv"><header><b>Sophie C.</b><span class="tag">Oncologie</span></header><span class="stars">★★★★★</span><p>« Cet accompagnement, sur la base d’une anamnèse complète et détaillée, a fait pour moi toute la différence. »</p></article>
+        <article class="rv"><header><b>Julian S.</b><span class="tag">Enfant</span></header><span class="stars">★★★★★</span><p>« Très à l’aise avec les enfants, elle permet un complément parfait au suivi pédiatrique. »</p></article>
+        <article class="rv"><header><b>Solene M.</b><span class="tag">Stress & angoisses</span></header><span class="stars">★★★★★</span><p>« Je vois une nette amélioration sur mes angoisses et mon stress, qui étaient très présents. »</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-grey" id="cabinets">
+  <div class="container">
+    <div class="sec-head"><div><span class="kicker">Nos cabinets</span><h2>Horaires & accès</h2></div></div>
+    <div class="locs">
+      <article class="loc"><img src="../assets/img/pully-entree.webp" alt="Entrée du cabinet, Place Neuve 1, Pully" loading="lazy"><div class="in">
+        <span class="status" data-days="1,2,3,5">—</span>
+        <h3>Pully – Lausanne</h3><div class="addr">Place Neuve 1 · 1009 Pully</div>
+        <div class="h">Lun, mar, mer · 8h – 18h<br>Ven · 8h – 13h</div>
+        <div class="btns"><a class="btn btn-primary" href="#rdv">Réserver</a><a class="btn btn-outline" href="#">Itinéraire</a></div></div></article>
+      <article class="loc"><img src="../assets/img/fribourg-batiment.webp" alt="Centre ITS, Fribourg" loading="lazy"><div class="in">
+        <span class="status" data-days="4">—</span>
+        <h3>Fribourg</h3><div class="addr">Centre ITS · Rue de la Banque 4 · 1700 Fribourg</div>
+        <div class="h">Jeudi · 9h – 18h</div>
+        <div class="btns"><a class="btn btn-primary" href="#rdv">Réserver</a><a class="btn btn-outline" href="#">Itinéraire</a></div></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="container">
+    <span class="kicker">Informations patients</span><h2>Questions fréquentes</h2>
+    <div class="faq faq-grid">
+      <details><summary>Est-ce remboursé par mon assurance&nbsp;?</summary><p>Oui, par la plupart des assurances complémentaires (reconnaissance ASCA, RME, Visana, EGK).</p></details>
+      <details><summary>Dois-je arrêter mes traitements&nbsp;?</summary><p>Non. L’homéopathie est complémentaire et n’interfère pas avec vos médicaments.</p></details>
+      <details><summary>Est-ce adapté aux bébés&nbsp;?</summary><p>Oui, dès la naissance, y compris pour les bébés prématurés.</p></details>
+      <details><summary>Combien de temps dure une consultation&nbsp;?</summary><p>75 à 90 minutes pour la première, puis 30 à 60 minutes pour les suivis.</p></details>
+      <details><summary>Puis-je consulter en visio&nbsp;?</summary><p>Oui, la consultation peut se faire au cabinet ou en visioconsultation.</p></details>
+      <details><summary>Que préparer pour la première consultation&nbsp;?</summary><p>Vos derniers examens, comptes rendus médicaux et la liste de vos traitements en cours.</p></details>
+    </div>
+    <div class="cta" style="margin-top:56px">
+      <div><h2>Prêt·e à prendre rendez-vous&nbsp;?</h2><p>En ligne 24h/24, ou par téléphone au secrétariat.</p></div>
+      <div class="b"><a class="btn btn-teal" href="#rdv">Prendre rendez-vous</a><a class="btn btn-outline" href="tel:+41215661815">+41 21 566 18 15</a></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer"><div class="container">
+  <div class="g">
+    <div><img src="../assets/img/logo.webp" alt="HOMEOMED" style="height:38px;width:auto;margin-bottom:16px"><p>Cabinet HOMEOMED · Paola Orlando<br>Homéopathe diplômée fédérale</p></div>
+    <div><h4>Pôles de soins</h4><ul><li><a href="#">Homéopathie classique</a></li><li><a href="#">Accompagnement parental</a></li><li><a href="#">Insomnie – TCC-i</a></li></ul></div>
+    <div><h4>Informations</h4><ul><li><a href="#">Tarifs & remboursement</a></li><li><a href="#">Questions fréquentes</a></li><li><a href="#">Blog</a></li><li><a href="#">Qui suis-je ?</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li><a href="tel:+41215661815">+41 21 566 18 15</a></li><li><a href="mailto:secretariat@homeomed.ch">secretariat@homeomed.ch</a></li><li>Place Neuve 1, 1009 Pully</li><li>Rue de la Banque 4, 1700 Fribourg</li></ul></div>
+  </div>
+  <div class="warn"><b style="color:var(--blue-900)">Information importante —</b> L’homéopathie est une médecine complémentaire. Elle ne remplace pas un traitement prescrit par votre médecin. En cas d’urgence vitale, appelez le 144.</div>
+  <div class="fine"><span>© 2021 – 2026 Cabinet HOMEOMED · Paola Orlando</span><span>Mentions légales · Confidentialité · CGU</span></div>
+</div></footer>
+
+<div class="mbar"><a class="btn btn-outline" href="tel:+41215661815">Appeler</a><a class="btn btn-primary" href="#rdv">Prendre rendez-vous</a></div>
+
+<script>
+// Résumé du formulaire de réservation
+const f=document.querySelector('.book form'),sum=document.getElementById('sum');
+f.addEventListener('change',()=>{const w=f.who.value,l=f.where.value;sum.innerHTML='Rendez-vous pour <b>'+w+'</b> · <b>'+(l==='en visio'?'en visio':l)+'</b>'});
+// Recherche par symptôme
+const q=document.getElementById('q'),tags=[...document.querySelectorAll('#tags a')],nores=document.getElementById('nores');
+const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+q.addEventListener('input',()=>{const v=norm(q.value.trim());document.getElementById('tags').classList.toggle('searching',!!v);let n=0;tags.forEach(t=>{const m=!v||norm(t.textContent).includes(v);t.hidden=!m;if(m)n++});nores.style.display=n?'none':'block'});
+// Ouvert aujourd'hui ?
+const d=new Date().getDay();document.querySelectorAll('.status').forEach(s=>{const open=s.dataset.days.split(',').map(Number).includes(d);s.classList.toggle('open',open);s.textContent=open?'Ouvert aujourd’hui':'Fermé aujourd’hui'});
+</script>
+</body>
+</html>
