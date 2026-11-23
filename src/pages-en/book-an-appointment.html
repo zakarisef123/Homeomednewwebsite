@@ -11,13 +11,7 @@
 
 <section class="section tight" style="padding-top:0">
   <div class="container">
-    <div class="grid grid-3 mb-2">
-      <div class="card soft reveal"><div class="icon-badge">{{icon:calendar}}</div><h3>Online</h3><p class="muted mb-0">Via the OneDoc platform, 24/7. The calendar is just below.</p></div>
-      <div class="card soft reveal d1"><div class="icon-badge">{{icon:phone}}</div><h3>By phone</h3><p class="muted mb-0">On <a href="{{phone-link}}">{{phone}}</a>. If I’m with a patient, leave a message and I’ll call you back as soon as possible.</p></div>
-      <div class="card soft reveal d2"><div class="icon-badge">{{icon:whatsapp}}</div><h3>By WhatsApp or email</h3><p class="muted mb-0"><a href="{{whatsapp}}" target="_blank" rel="noopener">Message on WhatsApp</a> or write to <a href="mailto:{{email}}">{{email}}</a>.</p></div>
-    </div>
 
-    <div class="rdv-summary" data-rdv-summary hidden></div>
     <div id="calendrier" class="embed booking-embed" data-embed data-autoload data-src="{{onedoc}}" data-title="OneDoc booking calendar">
       <div class="embed-cta">
         <div class="icon-badge" style="margin-inline:auto">{{icon:calendar}}</div>
@@ -29,6 +23,7 @@
         </div>
       </div>
     </div>
+    <p class="center muted mt-1 small">Prefer to call? Phone our reception on <a href="{{phone-link}}">{{phone}}</a> or write to <a href="mailto:{{email}}">{{email}}</a>.</p>
   </div>
 </section>
 
