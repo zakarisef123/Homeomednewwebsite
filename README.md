@@ -12,7 +12,7 @@ build.py             ← en-tête, menu, pied de page, avis Google, blocs réuti
 assets/css/style.css ← design (couleurs, typographies, composants)
 assets/js/main.js    ← menu mobile, carrousel, animations, cartes au clic
 assets/img/          ← photos optimisées (WebP) et logos
-assets/fonts/        ← polices auto-hébergées (DM Serif Display, Nunito Sans — licence OFL)
+assets/fonts/        ← police auto-hébergée (Manrope — licence OFL)
 index.html, */index.html, sitemap.xml, robots.txt, _redirects  ← fichiers générés
 ```
 
@@ -54,7 +54,7 @@ Gabarits utilisables dans les pages : `{{rdv}}` (bouton rendez-vous), `{{cta}}`,
 ## Version anglaise (FR | EN)
 
 - Pages anglaises : `src/pages-en/*.html` → générées sous `/en/` avec des adresses anglaises (`/en/about/`, `/en/homeopath-fribourg/`…).
-- `i18n.py` : correspondance des adresses FR → EN et traductions des blocs communs (menus, pied de page, tunnel, avis…).
+- `i18n.py` : correspondance des adresses FR → EN et traductions des blocs communs (menus, pied de page, bandeaux, avis…).
   Dans les pages anglaises, on peut écrire les liens avec les adresses **françaises** (`{{root}}qui-suis-je/`) : ils sont convertis automatiquement.
 - Chaque page déclare sa version dans l’autre langue (`hreflang`), le sélecteur **FR | EN** mène à la page équivalente, le sitemap liste les deux langues.
 - Les avis Google restent dans leur langue d’origine (français), avec une mention ; les témoignages du site sont traduits avec la mention « translated from French ».
@@ -71,27 +71,29 @@ Marque ombrelle **HOMEOMED · Paola Orlando** (logo sans « Homéopathe »), tro
 | Insomnie | `/insomnie-tcc-i/` | « Insomnie – TCC-i » |
 
 - Menu unique : Accueil · Qui suis-je ? · Homéopathie ▾ · Accompagnement parental ▾ · Insomnie – TCC-i · Tarifs · Le cabinet ▾ · Blog · [Prendre RDV].
-- Les pages parentales et insomnie n’affichent ni homéopathie, ni avis, ni tunnel « Rendez-vous express » ; le pied de page et l’avertissement s’adaptent à l’univers (`"nav": "parent"` / `"insomnie"` / `"homeo"` dans le bloc meta).
+- Les pages parentales et insomnie n’affichent ni homéopathie, ni avis ; le pied de page et l’avertissement s’adaptent à l’univers (`"nav": "parent"` / `"insomnie"` / `"homeo"` dans le bloc meta).
 - Accueil : trois cartes d’entrée sous le titre principal (`{{universes}}`).
 - Redirections 301 (`REDIRECTS` dans `build.py`, fichier `_redirects` + pages de repli) : `/mes-specialites/…`, anciennes pages à la racine, `/tcc-sommeil/`, `/bebe-allaitement-sommeil/`, et leurs équivalents anglais.
 
-### Univers visuel de chaque page de service
+### Style « Clinique » (refonte de novembre 2026)
 
-Chaque page de service a sa propre identité (haut de page, formes, typographie, boutons, sections) :
+Direction **A · Clinique** retenue parmi les trois maquettes du dossier `propositions/` (non indexé).
 
-| Page | Univers |
-|---|---|
-| Bébé, enfant & ado | « Carnet de dessins » : jaune soleil, pois, polaroïds, titre multicolore, boutons dessinés |
-| Équilibre féminin & hormonal | « Prune & or » : prune profonde, photo pleine hauteur, cercles et boutons dorés |
-| ORL, allergies, peau | « Forêt d'eucalyptus » : vert profond, feuillage, photo et images en forme de feuille |
-| Soins de support en oncologie | « Paroles de patientes » : papier chaud, lavande, témoignage mis en avant |
-| TDAH – Méthode Barkley® | « Tableau de motivation » : papier quadrillé, tableau d'étoiles, post-it |
-| Sommeil 0–3 ans | « Berceuse » : ciel du soir, photo-lune, mobile de berceau, nuages |
-| Allaitement | « Lait & miel » : dégradé miel, couronne de gouttes autour de la photo |
-| Insomnie – TCC-i | « Silence » : toute la page en mode nuit, lune dorée |
+- **Charte homeomed.ch conservée** : bleu `#1C75BB`, turquoise `#69C3CB`, blanc, gris clair `#FAFAFA`, texte `#313131`
+  (+ bleu nuit `#0b365a` dérivé du bleu pour les titres et les fonds sombres). Tokens en tête de `assets/css/style.css`.
+- **Typographie** : Manrope (titres et texte), auto-hébergée.
+- **Barre d'information** en haut (cabinets, horaires, e-mail, FR | EN), en-tête blanc avec « Secrétariat » et bouton « Prendre rendez-vous ».
+- **Accueil** : photo du cabinet plein écran sous voile bleu, bandeau défilant des garanties, « Qui sommes-nous », grille des soins,
+  parcours en 4 étapes, avis, praticienne, deux cabinets avec horaires, FAQ, bandeau RDV et logos.
+- **Pages de soins** : un seul en-tête `phero` (photo plein cadre + voile bleu, texte blanc) pour toutes les pages ;
+  la photo est celle indiquée dans `<img class="phero-bg">` en tête de chaque page.
+- Les styles de la refonte sont regroupés à la fin de `style.css` (« REFONTE 2026 · CLINIQUE » et « Accueil Clinique »).
 
-- Hauts de page : section `uhero` dans chaque page (`src/pages/…`, `src/pages-en/…`) ; décors dessinés via `{{deco:<univers>}}` (fonction `deco()` dans `build.py`).
-- Styles : `assets/css/univers.css` (à la main) ; couleurs des tuiles de l'accueil : `THEMES` dans `build.py` → `assets/css/themes.css` (généré).
+### Prise de rendez-vous : uniquement OneDoc
+
+- Tous les boutons « Prendre rendez-vous » mènent à `/prendre-rdv/`, qui affiche directement le calendrier OneDoc (`ONEDOC` dans `build.py`).
+- Plus de formulaire : l'ancien tunnel « Rendez-vous express » est supprimé. Les marqueurs `{{funnel…}}` encore présents
+  dans les pages affichent désormais le bandeau d'appel à l'action (`cta_band`).
 
 ### Programme Barkley® (page TDAH) : prête, pas encore publiée
 
@@ -99,7 +101,7 @@ Chaque page de service a sa propre identité (haut de page, formes, typographie,
 `/accompagnement-parental/tdah-methode-barkley/` existe mais est en **noindex**, hors sitemap et hors menu ; la page pivot affiche « Bientôt ».
 
 Une fois la formation terminée : mettre `BARKLEY_LIVE = True`, compléter l’âge / le rythme / le contenu des séances si besoin, puis `python3 build.py`.
-La page est alors indexée et ajoutée au menu, au pied de page, au tunnel et aux tarifs ; l’ancienne page homéopathique `/accompagnement-tdah/` est redirigée (301) vers elle.
+La page est alors indexée et ajoutée au menu, au pied de page et aux tarifs ; l’ancienne page homéopathique `/accompagnement-tdah/` est redirigée (301) vers elle.
 Dans les pages, `<!--IF:barkley-->…<!--ENDIF:barkley-->` et `<!--IFNOT:barkley-->…<!--ENDIFNOT:barkley-->` affichent un contenu selon ce réglage.
 
 Bouton « Réserver mon appel découverte gratuit » : `APPEL_URL` dans `build.py` (actuellement la page Prendre RDV ; à remplacer par le lien OneDoc dédié).

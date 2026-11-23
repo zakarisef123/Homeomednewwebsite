@@ -11,13 +11,7 @@
 
 <section class="section tight" style="padding-top:0">
   <div class="container">
-    <div class="grid grid-3 mb-2">
-      <div class="card soft reveal"><div class="icon-badge">{{icon:calendar}}</div><h3>En ligne</h3><p class="muted mb-0">Via la plateforme OneDoc, 24h/24. Le calendrier se trouve juste ci-dessous.</p></div>
-      <div class="card soft reveal d1"><div class="icon-badge">{{icon:phone}}</div><h3>Par téléphone</h3><p class="muted mb-0">Au <a href="{{phone-link}}">{{phone}}</a>. Si je suis en consultation, laissez un message&nbsp;: je vous rappelle dès que possible.</p></div>
-      <div class="card soft reveal d2"><div class="icon-badge">{{icon:whatsapp}}</div><h3>Par WhatsApp ou e-mail</h3><p class="muted mb-0"><a href="{{whatsapp}}" target="_blank" rel="noopener">Écrire sur WhatsApp</a> ou à <a href="mailto:{{email}}">{{email}}</a>.</p></div>
-    </div>
 
-    <div class="rdv-summary" data-rdv-summary hidden></div>
     <div id="calendrier" class="embed booking-embed" data-embed data-autoload data-src="{{onedoc}}" data-title="Calendrier de réservation OneDoc">
       <div class="embed-cta">
         <div class="icon-badge" style="margin-inline:auto">{{icon:calendar}}</div>
@@ -29,6 +23,7 @@
         </div>
       </div>
     </div>
+    <p class="center muted mt-1 small">Vous préférez téléphoner&nbsp;? Appelez le secrétariat au <a href="{{phone-link}}">{{phone}}</a> ou écrivez à <a href="mailto:{{email}}">{{email}}</a>.</p>
   </div>
 </section>
 

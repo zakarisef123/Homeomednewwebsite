@@ -1,103 +1,202 @@
-<!--meta {"title": "Homeopath in Pully/Lausanne & Fribourg – HOMEOMED, Paola Orlando", "description": "Paola Orlando, Swiss federally certified homeopath in Pully/Lausanne and Fribourg. Classical homeopathy (children, women, ENT, allergies, skin, cancer care), parent coaching and CBT for insomnia. Consultations in English.", "path": "en/", "nav": "home", "schema": true} -->
-<!-- 1. Hero with Paola's portrait -->
-<section class="hero-full hero-home">
-  <img class="hero-bg" src="{{root}}assets/img/hero-granules.webp" alt="" width="1800" height="1200" fetchpriority="high">
+<!--meta {"title": "Homeopath in Pully/Lausanne & Fribourg – HOMEOMED, Paola Orlando", "description": "HOMEOMED practice in Pully/Lausanne and Fribourg: classical homeopathy (children, women, ENT, allergies, skin, cancer care), parent coaching and CBT for insomnia. Paola Orlando, Swiss federally certified homeopath. Consultations in English.", "path": "en/", "nav": "home", "schema": true} -->
+<!-- 1. Hero: full-width photo of the practice under a blue veil -->
+<section class="home-hero">
+  <img class="home-hero-bg" src="{{root}}assets/img/pully-3.webp" alt="" width="1400" height="1050" fetchpriority="high">
   <div class="container">
-    <div class="hero-content">
-      <span class="eyebrow">Swiss federally certified homeopath · Pully/Lausanne & Fribourg</span>
-      <h1 class="balance">Restore balance and stability with <em>homeopathy</em></h1>
-      <p class="lead">Classical, precise and structured homeopathy for children, women and adults — always alongside your medical care.</p>
-      <div class="btn-row">{{rdv}}<a class="btn btn-outline-light" href="#services">See my services</a></div>
+    <p class="home-kicker">Pully · Lausanne · Fribourg — Switzerland</p>
+    <h1>HOMEOMED practice <span>Your health, in good hands.</span></h1>
+    <p class="home-lead">Classical homeopathy, parent coaching and therapy for insomnia. Rigorous, personalised care that works alongside your medical treatment.</p>
+    <div class="btn-row">
+      {{rdv:Prendre rendez-vous}}
+      <a class="btn btn-outline-light" href="#soins">Explore our services</a>
     </div>
-  </div>
-  <div class="hello-card">
-    <img src="{{root}}assets/img/paola-portrait.webp" alt="Paola Orlando, homeopath" width="1100" height="1465">
-    <div>
-      <strong>Hello, I’m Paola</strong>
-      <span>Swiss federally certified homeopath, trained in supportive cancer care (Gustave Roussy) and micronutrition.</span>
-      <a href="{{root}}qui-suis-je/">My background →</a>
+    <div class="home-hero-foot">
+      <a class="home-rating" href="{{google-reviews}}" target="_blank" rel="noopener"><span class="g">G</span><span><b>4.9 / 5</b> <span class="stars">★★★★★</span><small>17 Google reviews</small></span></a>
+      <span class="home-scroll" aria-hidden="true"><i></i>Scroll</span>
     </div>
   </div>
 </section>
 
-<!-- 2. Key figures -->
-<section class="uni-section" aria-label="Choose your service">
-  <div class="container wide">
-    {{universes}}
+<!-- 2. Scrolling ribbon -->
+<div class="ticker" aria-label="Our commitments">
+  <div class="ticker-track">
+    <ul><li>Swiss federally certified homeopath</li><li>Covered by supplementary insurance</li><li>Recognised by ASCA · RME · Visana · EGK</li><li>From birth</li><li>Consultations in EN · FR · IT</li><li>In person or by video call</li><li>Online booking 24/7</li><li>University diploma · Gustave Roussy</li></ul>
+    <ul aria-hidden="true"><li>Swiss federally certified homeopath</li><li>Covered by supplementary insurance</li><li>Recognised by ASCA · RME · Visana · EGK</li><li>From birth</li><li>Consultations in EN · FR · IT</li><li>In person or by video call</li><li>Online booking 24/7</li><li>University diploma · Gustave Roussy</li></ul>
   </div>
-</section>
+</div>
 
-<section class="stats-strip">
-  <div class="container wide">
-    <div class="stat"><b>4.9<small>/5</small></b><span><span class="stars">★★★★★</span> 17 Google reviews</span></div>
-    <div class="stat"><b>Federal dipl.</b><span>Swiss federally certified homeopath</span></div>
-    <div class="stat"><b>2</b><span>practices · Pully & Fribourg</span></div>
-    <div class="stat"><b>Covered</b><span>ASCA · RME · Visana · EGK</span></div>
-    <div class="stat"><b>EN · FR · IT</b><span>consultation languages</span></div>
-  </div>
-</section>
-
-<section class="section tight" style="padding-top:28px" id="services" aria-label="My services">
-  <div class="container wide">
-    {{svc-filter}}
-    {{svc-tiles}}
-    <p class="pf-empty small muted center" hidden>No service for this profile.</p>
-  </div>
-</section>
-
-<!-- 3. First appointment + practice choice -->
-<section class="section" id="premier-rdv">
-  <div class="container split top">
-    <div>
-      <span class="eyebrow">Your first appointment</span>
-      <h2 class="balance">How does it work?</h2>
-      <div class="steps" style="grid-template-columns:1fr;gap:26px;margin-top:24px">
-        <div class="step"><h3>Book online</h3><p>On OneDoc, 24/7, or by phone. Choose Pully or Fribourg, in person or by video call.</p></div>
-        <div class="step"><h3>First consultation (75 – 90 min)</h3><p>We take the time to understand your story, your symptoms and your overall constitution.</p></div>
-        <div class="step"><h3>Tailored follow-up</h3><p>A personalised treatment, then a follow-up every 4 to 6 weeks. Covered by most supplementary insurers.</p></div>
-      </div>
+<!-- 3. The practice -->
+<section class="section bg-white" id="cabinet">
+  <div class="container home-about">
+    <div class="home-about-media reveal">
+      <img class="main" src="{{root}}assets/img/pully-1.webp" alt="Consultation room at the HOMEOMED practice in Pully" width="1400" height="1050" loading="lazy">
+      <img class="side" src="{{root}}assets/img/pully-place.webp" alt="Place Neuve in Pully" width="1200" height="899" loading="lazy">
+      <a class="stat-card" href="{{google-reviews}}" target="_blank" rel="noopener"><b>4.9</b><span class="stars">★★★★★</span><span>17 Google reviews</span></a>
     </div>
-    <div class="reveal">{{funnel-card}}</div>
+    <div class="reveal d1">
+      <span class="eyebrow">About us</span>
+      <h2 class="balance">Complementary medicine — rigorous and human.</h2>
+      <p class="lead">The HOMEOMED practice is run by Paola Orlando, a Swiss federally certified homeopath. Every treatment is based on an in-depth case history, an individual protocol and regular follow-up.</p>
+      <p class="muted">We work alongside your doctor, paediatrician, gynaecologist or oncologist — never in their place.</p>
+      <ul class="checklist home-checks">
+        <li>Swiss federal diploma in homeopathy</li>
+        <li>Supportive cancer care (Gustave Roussy)</li>
+        <li>Babies, children &amp; teenagers</li>
+        <li>Women’s hormonal health</li>
+        <li>Covered: ASCA · RME · Visana · EGK</li>
+        <li>Pully, Fribourg or video consultation</li>
+      </ul>
+      <a class="link-arrow" href="{{root}}qui-suis-je/">Read Paola’s story</a>
+    </div>
   </div>
 </section>
 
-<!-- 4. Reviews -->
+<!-- 4. Our services -->
+<section class="section" id="soins">
+  <div class="container">
+    <div class="home-head">
+      <div><span class="eyebrow">Our services</span><h2 class="mb-0">Our care at a glance</h2><p class="lead mb-0">Three areas of expertise, one standard: understanding the whole person.</p></div>
+      <a class="btn btn-ghost" href="{{root}}homeopathie/">All services</a>
+    </div>
+    <div class="care-grid">
+      <a class="care care-feature reveal" href="{{root}}homeopathie/"><img src="{{root}}assets/img/hero-granules.webp" alt="" loading="lazy"><span class="care-in"><span class="eyebrow">Area 1</span><strong>Classical homeopathy</strong><span>A precise, structured approach for children, women and adults, alongside your medical care.</span><span class="care-more">Explore this area <i>→</i></span></span></a>
+      <a class="care reveal" href="{{root}}homeopathie/enfant-et-adolescent/"><span class="care-ic">{{icon:child}}</span><strong>Babies, children &amp; teens</strong><span>Recurrent ear infections, sleep, digestion, eczema, teething, behaviour.</span><span class="care-more">Learn more <i>→</i></span></a>
+      <a class="care reveal d1" href="{{root}}homeopathie/equilibre-feminin-et-hormonal/"><span class="care-ic">{{icon:flower}}</span><strong>Women’s hormonal health</strong><span>Painful periods, PCOS, endometriosis, fertility, pregnancy, menopause.</span><span class="care-more">Learn more <i>→</i></span></a>
+      <a class="care reveal" href="{{root}}homeopathie/orl-allergies-peau/"><span class="care-ic">{{icon:wind}}</span><strong>ENT, allergies, skin</strong><span>Eczema, psoriasis, hives, hay fever, asthma, sinusitis.</span><span class="care-more">Learn more <i>→</i></span></a>
+      <a class="care reveal d1" href="{{root}}homeopathie/soins-support-oncologie/"><span class="care-ic">{{icon:ribbon}}</span><strong>Supportive cancer care</strong><span>During and after treatment, to cope better with side effects.</span><span class="care-more">Learn more <i>→</i></span></a>
+      <a class="care reveal" href="{{root}}accompagnement-parental/"><span class="care-tag">Area 2</span><span class="care-ic">{{icon:users}}</span><strong>Parent coaching</strong><span>ADHD and defiance, toddler sleep, breastfeeding: practical tools.</span><span class="care-more">Learn more <i>→</i></span></a>
+      <a class="care reveal d1" href="{{root}}insomnie-tcc-i/"><span class="care-tag">Area 3</span><span class="care-ic">{{icon:moon}}</span><strong>Insomnia – CBT-I</strong><span>The reference approach for chronic insomnia: short and structured.</span><span class="care-more">Learn more <i>→</i></span></a>
+      <a class="care reveal d2" href="{{root}}homeopathie/#complementaires"><span class="care-ic">{{icon:bolt}}</span><strong>Acute care &amp; other conditions</strong><span>Chronic fatigue, digestion, migraines, dizziness, acute homeopathic care.</span><span class="care-more">Learn more <i>→</i></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Four steps -->
+<section class="section bg-white" id="parcours">
+  <div class="container">
+    <span class="eyebrow">How it works</span>
+    <h2>Your care in 4 steps</h2>
+    <div class="steps home-steps">
+      <div class="step reveal"><small>2 minutes</small><h3>Book online</h3><p>On OneDoc 24/7 or by phone. Choose Pully, Fribourg or a video call.</p></div>
+      <div class="step reveal d1"><small>75 – 90 min</small><h3>First consultation</h3><p>A full case history: your story, your symptoms, your constitution.</p></div>
+      <div class="step reveal d2"><small>Tailored</small><h3>Individual protocol</h3><p>A treatment adapted to you, explained and coordinated with your medical care.</p></div>
+      <div class="step reveal d3"><small>Every 4 – 6 weeks</small><h3>Regular follow-up</h3><p>We adjust together until the improvement lasts.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Reviews -->
 {{reviews}}
 
-<!-- 5. Mini FAQ -->
+<!-- 7. Your practitioner -->
+<section class="section bg-white">
+  <div class="container">
+    <div class="team-band reveal">
+      <img src="{{root}}assets/img/paola-portrait.webp" alt="Paola Orlando, Swiss federally certified homeopath" width="1100" height="1465" loading="lazy">
+      <div class="team-in">
+        <span class="eyebrow">Your practitioner</span>
+        <h2>Paola Orlando</h2>
+        <p class="lead">Swiss federally certified homeopath, specialised in paediatrics, women’s hormonal health and supportive cancer care.</p>
+        <div class="creds">
+          <div><b>Federal dipl.</b><span>Swiss federal diploma in homeopathy</span></div>
+          <div><b>Oncology</b><span>University diploma · Gustave Roussy, Paris-Saclay</span></div>
+          <div><b>India</b><span>Further training every year</span></div>
+          <div><b>Micronutrition</b><span>University of Dijon · Swiss Society of Micronutrition</span></div>
+        </div>
+        <a class="btn btn-light" href="{{root}}qui-suis-je/">Her background</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Two practices -->
+<section class="section" id="lieux">
+  <div class="container">
+    <span class="eyebrow">Practical information</span>
+    <h2>Two practices, opening hours &amp; access</h2>
+    <div class="locs mt-2">
+      <article class="loc reveal">
+        <a href="{{root}}cabinet-pully/" tabindex="-1" aria-hidden="true"><img src="{{root}}assets/img/pully-4.webp" alt="" width="1400" height="1050" loading="lazy"></a>
+        <div class="loc-in">
+          <span class="loc-tag">Main practice</span>
+          <h3><a href="{{root}}cabinet-pully/">Pully – Lausanne</a></h3>
+          <address>Place Neuve 1 · 1009 Pully</address>
+          <table class="loc-hours">
+            <tr><td>Monday – Wednesday</td><td>8:00 – 18:00</td></tr>
+            <tr class="off"><td>Thursday</td><td>in Fribourg</td></tr>
+            <tr><td>Friday</td><td>8:00 – 13:00</td></tr>
+            <tr class="off"><td>Saturday – Sunday</td><td>Closed</td></tr>
+          </table>
+          <div class="btn-row">{{rdv:Book in Pully}}<a class="btn btn-ghost" href="{{gmaps-pully}}" target="_blank" rel="noopener">Directions</a></div>
+        </div>
+      </article>
+      <article class="loc reveal d1">
+        <a href="{{root}}cabinet-fribourg/" tabindex="-1" aria-hidden="true"><img src="{{root}}assets/img/fribourg-1.webp" alt="" width="1400" height="1050" loading="lazy"></a>
+        <div class="loc-in">
+          <span class="loc-tag">Centre ITS</span>
+          <h3><a href="{{root}}cabinet-fribourg/">Fribourg</a></h3>
+          <address>Rue de la Banque 4 · 1700 Fribourg</address>
+          <table class="loc-hours">
+            <tr class="off"><td>Monday – Wednesday</td><td>in Pully</td></tr>
+            <tr><td>Thursday</td><td>9:00 – 18:00</td></tr>
+            <tr class="off"><td>Friday</td><td>in Pully</td></tr>
+            <tr class="off"><td>Saturday – Sunday</td><td>Closed</td></tr>
+          </table>
+          <div class="btn-row">{{rdv:Book in Fribourg}}<a class="btn btn-ghost" href="{{gmaps-fribourg}}" target="_blank" rel="noopener">Directions</a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 9. FAQ -->
 <section class="section bg-white" id="questions">
   <div class="container split top">
-    <div><span class="eyebrow">Your questions</span><h2 class="balance">The 4 questions I’m asked most often</h2><p class="muted">To clear up any doubts before your first appointment.</p><a class="btn btn-ghost mt-1" href="{{root}}faq/">All questions</a></div>
+    <div>
+      <span class="eyebrow">Frequently asked questions</span>
+      <h2 class="balance">Any questions?</h2>
+      <p class="lead">Answers to the questions we hear most often before a first appointment.</p>
+      <a class="btn btn-ghost mt-1" href="{{root}}faq/">All questions</a>
+    </div>
     <div class="faq">
-      <details open><summary>Is it covered by my insurance?</summary><div class="answer"><p>Yes, by most Swiss supplementary health insurers. I am recognised by ASCA, RME, Visana and EGK.</p></div></details>
-      <details><summary>Do I need to stop my medical treatment?</summary><div class="answer"><p>No. Homeopathy is complementary and does not interfere with your medication.</p></div></details>
+      <details open><summary>Is it covered by my insurance?</summary><div class="answer"><p>Yes, by most Swiss supplementary health insurers. Paola Orlando is recognised by ASCA, RME, Visana and EGK.</p></div></details>
+      <details><summary>Do I need to stop my medical treatment?</summary><div class="answer"><p>No. Homeopathy is complementary and does not interfere with your medication. We work alongside your doctor.</p></div></details>
       <details><summary>Is it suitable for babies and children?</summary><div class="answer"><p>Yes, from birth, including premature babies.</p></div></details>
       <details><summary>How long does a consultation last?</summary><div class="answer"><p>75 to 90 minutes for the first one, then 30 to 60 minutes for follow-ups.</p></div></details>
     </div>
   </div>
 </section>
 
-<!-- 6. Latest blog posts -->
+<!-- 10. Latest articles -->
 <section class="section">
   <div class="container">
-    <div class="reviews-head"><div><span class="eyebrow">Homeo’Conseils blog</span><h2 class="mb-0">Latest articles</h2></div><a class="btn btn-ghost" href="{{root}}blog/">All articles</a></div>
+    <div class="home-head">
+      <div><span class="eyebrow">Homeo’Conseils blog</span><h2 class="mb-0">Latest articles</h2></div>
+      <a class="btn btn-ghost" href="{{root}}blog/">All articles</a>
+    </div>
     <div class="grid grid-2">
-      <a class="spec-card post-card" href="{{root}}tdah-homeopathie-accompagnement-individualise/"><div class="img"><img src="{{root}}assets/img/tdah.webp" alt="" loading="lazy"></div><div class="body"><div class="meta">16 October 2025 · ADHD</div><h3>ADHD & homeopathy: understanding each person to help them better</h3><span class="link-arrow">Read the article</span></div></a>
+      <a class="spec-card post-card" href="{{root}}tdah-homeopathie-accompagnement-individualise/"><div class="img"><img src="{{root}}assets/img/tdah.webp" alt="" loading="lazy"></div><div class="body"><div class="meta">16 October 2025 · ADHD</div><h3>ADHD &amp; homeopathy: understanding each person to help them better</h3><span class="link-arrow">Read the article</span></div></a>
       <a class="spec-card post-card" href="{{root}}soin-de-support-en-oncologie-histoire-personnelle/"><div class="img"><img src="{{root}}assets/img/papa.webp" alt="" loading="lazy" style="object-position:50% 35%"></div><div class="body"><div class="meta">22 September 2025 · Oncology</div><h3>Why I chose to support people with cancer: the story of my father</h3><span class="link-arrow">Read the article</span></div></a>
     </div>
   </div>
 </section>
 
-<!-- 7. Insurers & affiliations -->
-<section class="section tight bg-white">
+<!-- 11. Booking -->
+<section class="section tight bg-white" id="rdv">
   <div class="container">
-    <p class="center small muted mb-2">Recognised by Swiss supplementary insurers · Member of & trained with</p>
+    <div class="home-cta reveal">
+      <div>
+        <h2>Book your appointment today</h2>
+        <p>Online booking 24/7 on OneDoc · Pully, Fribourg or by video call.</p>
+      </div>
+      <div class="home-cta-actions">
+        {{rdv:Book online|btn btn-light}}
+        <a class="tel" href="{{phone-link}}"><small>Or call our reception</small>{{phone}}</a>
+      </div>
+    </div>
+    <p class="home-logos-title">Recognised by Swiss supplementary insurers · Trained with</p>
     <div class="logo-strip">
       <img src="{{root}}assets/img/logos/asca.webp" alt="ASCA" loading="lazy"><img src="{{root}}assets/img/logos/rme.webp" alt="RME" loading="lazy"><img src="{{root}}assets/img/logos/visana.webp" alt="Visana" loading="lazy"><img src="{{root}}assets/img/logos/egk.webp" alt="EGK" loading="lazy"><img src="{{root}}assets/img/logos/gustave-roussy.webp" alt="Gustave Roussy" loading="lazy"><img src="{{root}}assets/img/logos/shisso.webp" alt="SHISSO" loading="lazy"><img src="{{root}}assets/img/logos/aspedah.webp" alt="ASPEDAH" loading="lazy">
     </div>
   </div>
 </section>
-
-{{cta}}
-
-{{contact}}

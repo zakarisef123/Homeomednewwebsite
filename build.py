@@ -110,151 +110,6 @@ def icon(name, cls=""):
             f'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">{_P[name]}</svg>')
 
 
-# --------------------------------------------------------------------------
-# Univers visuel de chaque page de service (piste B « motif illustré »)
-# --------------------------------------------------------------------------
-# Chaque service a sa couleur et son motif dessiné. Le générateur écrit
-# assets/css/themes.css ; chaque page de service reçoit la classe body « t-<thème> ».
-#   c600 : couleur du texte (titres, liens, icônes) — contraste suffisant sur blanc
-#   c    : couleur vive (puces, numéros)      c50/c100 : fonds clairs
-#   bg   : fond du haut de page               soft : forme colorée derrière la photo
-#   motif : deux icônes répétées en fond
-THEMES = {
-    "enfant": dict(c600="#8F6200", c="#E0A526", c50="#FFF7E3", c100="#FCE7B0", bg="#FFF5DC", soft="#FDE3A0", motif=("block", "star")),
-    "femme": dict(c600="#7A2E52", c="#C9A04F", c50="#FAF3F0", c100="#EBDCC9", bg="#F6EDF0", soft="#EAD3DE", motif=("flower", "moon")),
-    "orl": dict(c600="#1F6B5A", c="#4FAE97", c50="#ECF6F2", c100="#CFEADF", bg="#E6F2EC", soft="#C5E6D9", motif=("leaf", "wind")),
-    "onco": dict(c600="#65569A", c="#9486C4", c50="#F4F1FA", c100="#E1DBF1", bg="#F2EFF8", soft="#DAD2EE", motif=("ribbon", "heart")),
-    "tdah": dict(c600="#A8513A", c="#D9866A", c50="#FCF1EC", c100="#F6DACB", bg="#FCF0EA", soft="#F5D0BF", motif=("star", "spark")),
-    "sommeil": dict(c600="#4B63A0", c="#8299CF", c50="#F0F3FB", c100="#D9E2F5", bg="#EEF2FB", soft="#D2DCF3", motif=("moon", "star")),
-    "allaitement": dict(c600="#9A5520", c="#F0A85E", c50="#FFF6EA", c100="#FBE2C4", bg="#FFF1DE", soft="#FBD9B0", motif=("drop", "heart")),
-    "autres": dict(c600="#2B7D89", c="#3FA7B4", c50="#E8F5F6", c100="#D3ECEE", bg="#EAF5F6", soft="#CDE9EC", motif=("leaf", "spark")),
-    "insomnie": dict(c600="#2A3466", c="#C9A956", c50="#EFF1F9", c100="#D7DCF0", bg="#ECEFF8", soft="#CCD4EE", motif=("star", "moon")),
-}
-# Page (adresse française) → thème ; la version anglaise suit automatiquement.
-PAGE_THEMES = {
-    "homeopathie/enfant-et-adolescent/": "enfant",
-    "homeopathie/equilibre-feminin-et-hormonal/": "femme",
-    "homeopathie/orl-allergies-peau/": "orl",
-    "homeopathie/soins-support-oncologie/": "onco",
-    "accompagnement-parental/tdah-methode-barkley/": "tdah",
-    "accompagnement-parental/sommeil-enfant-0-3-ans/": "sommeil",
-    "accompagnement-parental/allaitement/": "allaitement",
-    "insomnie-tcc-i/": "insomnie",
-}
-# Tuiles et cartes (accueil, page pivot) : même univers que la page de destination
-CARD_THEMES = {**PAGE_THEMES, "homeopathie/#complementaires": "autres"}
-_EXTRA_MOTIFS = {
-    "star": '<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/>',
-    "block": '<rect x="4" y="4" width="7" height="7" rx="2"/><circle cx="16.5" cy="16.5" r="3.5"/><path d="M15 4l4 7h-8z"/>',
-}
-
-
-def _motif_uri(motif, color, opacity):
-    from urllib.parse import quote
-    a, b = (_EXTRA_MOTIFS.get(m) or _P[m] for m in motif)
-    svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">'
-           f'<g fill="none" stroke="{color}" stroke-opacity="{opacity}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'
-           f'<g transform="translate(8 6) rotate(-12 15 15) scale(1.3)">{a}</g>'
-           f'<g transform="translate(56 54) rotate(10 12 12)">{b}</g></g></svg>')
-    return 'url("data:image/svg+xml,' + quote(svg, safe="=:/ ") + '")'
-
-
-def themes_css():
-    check = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' "
-             "stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E")
-    out = ["/* Généré par build.py (THEMES) — ne pas modifier à la main. */"]
-    for k, t in THEMES.items():
-        out.append(f"""body.t-{k} main {{ --teal: {t['c']}; --teal-600: {t['c600']}; --teal-50: {t['c50']}; --teal-100: {t['c100']};
-  --t-bg: {t['bg']}; --t-soft: {t['soft']}; --t-pat: {_motif_uri(t['motif'], t['c600'], .13)}; --t-pat-light: {_motif_uri(t['motif'], '#ffffff', .07)}; }}""")
-    for k, t in THEMES.items():
-        out.append(f""".th-{k} {{ --th-c600: {t['c600']}; --th-c: {t['c']}; --th-50: {t['c50']}; --th-100: {t['c100']}; --th-bg: {t['bg']}; --th-pat: {_motif_uri(t['motif'], t['c600'], .14)}; }}""")
-    out.append(f"""
-/* Tuiles de l'accueil et cartes de la page pivot : couleur + motif du service */
-.svc-tile[class*="th-"], .parent-card[class*="th-"] {{ border-color: var(--th-100); }}
-.svc-tile[class*="th-"]:hover, a.parent-card[class*="th-"]:hover {{ border-color: var(--th-c); }}
-.svc-tile[class*="th-"] .svc-tile-body, .parent-card[class*="th-"] .pc-body {{ background-color: var(--th-bg); background-image: var(--th-pat); background-size: 84px 84px; }}
-.svc-tile[class*="th-"] .svc-tile-img, .parent-card[class*="th-"] .pc-img {{ border-bottom: 4px solid var(--th-c); }}
-.svc-tile[class*="th-"] h3 svg, .svc-tile[class*="th-"] .preview-link, .parent-card[class*="th-"] .preview-link, .parent-card[class*="th-"] .eyebrow {{ color: var(--th-c600); }}
-.svc-tile[class*="th-"] .svc-uni {{ color: var(--th-c600); }}
-.svc-tile[class*="th-"] .svc-chips a {{ background: #fff; border: 1px solid var(--th-100); }}
-.svc-tile[class*="th-"] .svc-chips a:hover {{ background: var(--th-c600); border-color: var(--th-c600); color: #fff; }}
-
-/* Haut de page : fond teinté + motif dessiné + forme colorée derrière la photo */
-body[class*="t-"] main .page-hero {{ background-color: var(--t-bg); background-image: var(--t-pat); background-size: 96px 96px; isolation: isolate; }}
-body[class*="t-"] main .page-hero::before {{ display: none; }}
-@media (max-width: 760px) {{ body[class*="t-"] main .page-hero {{ background-size: 132px 132px; }} }}
-body[class*="t-"] main .page-hero::after {{ content: ""; position: absolute; z-index: -1; right: 4%; bottom: -90px; width: min(460px, 60vw); height: min(460px, 60vw); border-radius: 42% 58% 55% 45% / 48% 42% 58% 52%; background: var(--t-soft); }}
-body[class*="t-"] main .page-hero-img.arch {{ border-radius: 28px; border: 6px solid #fff; transform: rotate(1.6deg); box-shadow: 0 18px 40px rgba(16, 50, 74, .16); }}
-body[class*="t-"] main .page-hero .eyebrow {{ color: var(--teal-600); }}
-/* Sections foncées et bandeau final : motif clair discret */
-body[class*="t-"] main .bg-ink, body[class*="t-"] main .cta-band {{ background-image: var(--t-pat-light); background-size: 96px 96px; }}
-body[class*="t-"] main .bg-ink .eyebrow, body[class*="t-"] main .bg-ink .step::before {{ color: var(--teal-100); }}
-body[class*="t-"] main .cta-band::before {{ background: radial-gradient(closest-side, color-mix(in srgb, var(--teal) 55%, transparent), transparent); }}
-/* Puces « coche » à la couleur du service */
-body[class*="t-"] main .checklist li::before {{ background-image: none; }}
-body[class*="t-"] main .checklist li::after {{ content: ""; position: absolute; left: 0; top: .2em; width: 22px; height: 22px;
-  background: var(--teal-600); -webkit-mask: url("{check}") center / 13px no-repeat; mask: url("{check}") center / 13px no-repeat; }}
-body[class*="t-"] main .bg-ink .checklist li::before {{ background-color: rgba(255, 255, 255, .12); }}
-body[class*="t-"] main .bg-ink .checklist li::after {{ background: var(--teal-100); }}
-/* Encadrés et blocs clairs teintés */
-body[class*="t-"] main .help-box, body[class*="t-"] main .card.soft, body[class*="t-"] main .sessions li {{ background-color: var(--teal-50); border-color: var(--teal-100); }}
-body[class*="t-"] main .faq details[open] summary {{ color: var(--teal-600); }}
-body[class*="t-"] main .btn-primary {{ --bg: var(--teal-600); }}
-body[class*="t-"] main .btn-primary:hover {{ --bg: var(--ink); }}
-""")
-    return "\n".join(out)
-
-
-# --------------------------------------------------------------------------
-# Décors des hauts de page « univers » (purement décoratifs, aria-hidden)
-# --------------------------------------------------------------------------
-_STAR = '<path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7z"/>'
-
-
-def _night_stars(n, w, h, seed):
-    import random
-    rnd = random.Random(seed)
-    out = []
-    for _ in range(n):
-        r = 2.2 if rnd.random() < .12 else 1.1
-        out.append(f'<circle cx="{rnd.uniform(0, w):.0f}" cy="{rnd.uniform(0, h):.0f}" r="{r}" opacity="{rnd.uniform(.25, .95):.2f}"/>')
-    return "".join(out)
-
-
-def deco(key):
-    if key == "enfant":
-        return f"""<div class="deco u-dots" aria-hidden="true"></div><div class="deco u-sun" aria-hidden="true"></div>
-<svg class="deco u-squiggle" viewBox="0 0 120 60" aria-hidden="true"><path d="M10 40 Q25 10 45 35 T85 30 T115 25" fill="none" stroke="#2E9BD6" stroke-width="4" stroke-linecap="round"/></svg>
-<svg class="deco u-star1" viewBox="0 0 24 24" aria-hidden="true" fill="#EF6A4F">{_STAR}</svg>
-<svg class="deco u-star2" viewBox="0 0 24 24" aria-hidden="true" fill="#3BAA6A">{_STAR}</svg>"""
-    if key == "femme":
-        return '<div class="deco u-ring1" aria-hidden="true"></div><div class="deco u-ring2" aria-hidden="true"></div>'
-    if key == "orl":
-        return """<svg class="deco u-euca" viewBox="0 0 400 400" fill="none" stroke="#7FD1B9" stroke-width="1.4" aria-hidden="true"><path d="M380 20 C300 120 260 220 120 380"/><path d="M330 90c-50-10-80 10-90 40 45 15 80-5 90-40z"/><path d="M300 150c40-30 80-25 95 0-35 30-75 25-95 0z"/><path d="M260 200c-50-5-80 20-85 50 45 10 80-15 85-50z"/><path d="M230 260c40-30 80-25 95 0-35 30-75 25-95 0z"/><path d="M190 310c-50-5-80 20-85 50 45 10 80-15 85-50z"/></svg>
-<svg class="deco u-euca2" viewBox="0 0 400 400" fill="none" stroke="#7FD1B9" stroke-width="1.4" aria-hidden="true"><path d="M20 380 C100 280 140 180 280 20"/><path d="M70 310c50 10 80-10 90-40-45-15-80 5-90 40z"/><path d="M100 250c-40 30-80 25-95 0 35-30 75-25 95 0z"/><path d="M140 200c50 5 80-20 85-50-45-10-80 15-85 50z"/></svg>"""
-    if key == "tdah":
-        return ""
-    if key == "sommeil":
-        return f"""<svg class="deco u-mobile" viewBox="0 0 480 160" fill="none" stroke="#fff" stroke-width="1.5" aria-hidden="true"><path d="M40 20H440"/><path d="M90 20v60M200 20v90M310 20v50M410 20v80"/><g fill="#FFE7A8" stroke="none"><g transform="translate(78 76)">{_STAR}</g><path d="M318 70a14 14 0 1 1-16 16 11 11 0 0 0 16-16z"/><g transform="translate(398 76)">{_STAR}</g></g><g fill="#fff" stroke="none"><ellipse cx="200" cy="120" rx="22" ry="12"/><ellipse cx="188" cy="113" rx="12" ry="10"/></g></svg>
-<div class="deco u-cloud c1" aria-hidden="true"></div><div class="deco u-cloud c2" aria-hidden="true"></div><div class="deco u-cloud c3" aria-hidden="true"></div><div class="deco u-cloud c4" aria-hidden="true"></div>
-<svg class="deco u-sky" viewBox="0 0 1280 400" preserveAspectRatio="xMidYMid slice" fill="#fff" aria-hidden="true">{_night_stars(40, 1280, 400, 6)}</svg>"""
-    if key == "allaitement":
-        return '<div class="deco u-blob1" aria-hidden="true"></div><div class="deco u-blob2" aria-hidden="true"></div>'
-    if key == "insomnie":
-        return f'<svg class="deco u-sky" viewBox="0 0 1280 700" preserveAspectRatio="xMidYMid slice" fill="#F2EBD9" aria-hidden="true">{_night_stars(110, 1280, 700, 8)}</svg>'
-    return ""
-
-
-def drop_crown():
-    """Couronne de gouttes autour de la photo (Allaitement)."""
-    d = '<path d="M280 4s14 15 14 26a14 14 0 0 1-28 0c0-11 14-26 14-26z"/>'
-    uses = "".join(f'<g transform="rotate({a} 280 280)" opacity="{.85 if a % 60 == 0 else .55}">{d}</g>' for a in range(0, 360, 30))
-    return f'<svg class="u-crown" viewBox="0 0 560 560" fill="#F0A85E" aria-hidden="true">{uses}</svg>'
-
-
-# --------------------------------------------------------------------------
-# Avis Google (textes d'origine)
-# --------------------------------------------------------------------------
 REVIEWS = [
     ("Nicole Klaus", "Oncologie", "onco", "il y a 1 an", "Madame Paola Orlando, homéopathe, me suit depuis plusieurs années. Au mois de février de cette année 2025, on m’a diagnostiqué un cancer du sein. Madame Orlando a dressé un protocole précis et essentiel ciblé sur mon cancer. Au fur et à mesure que j’avance dans un traitement chimiothérapeutique, elle réadapte mon protocole afin que les médicaments qu’elle me prescrit correspondent à l’état sans cesse en mouvement de mon corps physique mais aussi de mon état psychique. Sur ce parcours, Madame Orlando ne m’a jamais dissuadée de suivre le protocole allopathique classique ; au contraire, elle m’y a encouragée et continue de le faire. Aujourd’hui je tiens vraiment et de tout mon cœur à remercier Madame Orlando de son professionnalisme, de ses formidables compétences, mais aussi de sa disponibilité, de sa générosité d’écoute, de son attention profonde et sincère. Elle est passionnée par son métier."),
     ("Isabelle Blatter", "Enfant", "enfant", "il y a 10 mois", "Arrivée chez Madame Orlando tout par hasard et on dit : le hasard fait bien les choses. Je ne peux que confirmer cela. J’ai été curieuse de voir ce que l’homéopathie pourrait apporter à notre fille de 7 ans. Madame Orlando s’est montrée très à l’écoute, toujours disponible et très professionnelle. On connaît tous l’arnica ;-), mais l’homéopathie est bien plus complexe que cela, surtout personnalisée pour chacun d’entre nous et EFFICACE ! Enfin, une adresse que je vais précieusement garder. Merci Madame Orlando d’être d’une bienveillance rare et de vos conseils !"),
@@ -298,7 +153,7 @@ def reviews_block():
       <div class="reviews-head">
         <div>
           <span class="eyebrow">Témoignages</span>
-          <h2 id="avis-title" class="mb-0">Ils m’ont fait confiance</h2>
+          <h2 id="avis-title" class="mb-0">Ce que disent nos patients</h2>
         </div>
         <a class="rating-box" href="{GOOGLE_REVIEWS}" target="_blank" rel="noopener" style="text-decoration:none">
           {icon("google", "g-logo")}
@@ -573,9 +428,9 @@ def parent_cards(root):
   <span class="pc-body"><span class="eyebrow">{s['tagline']}</span><strong>{s['title']}</strong><span>{s['desc']}</span>
   {f'<span class="preview-link">Découvrir {icon("arrow")}</span>' if live else '<span class="small muted">Programme disponible prochainement.</span>'}</span>"""
         if live:
-            out.append(f'<a class="parent-card th-{CARD_THEMES.get(s["path"], "tdah")} reveal d{i}" href="{root}{s["path"]}">{inner}</a>')
+            out.append(f'<a class="parent-card reveal d{i}" href="{root}{s["path"]}">{inner}</a>')
         else:
-            out.append(f'<div class="parent-card th-{CARD_THEMES.get(s["path"], "tdah")} is-soon reveal d{i}">{inner}</div>')
+            out.append(f'<div class="parent-card is-soon reveal d{i}">{inner}</div>')
     return '<div class="parent-cards">' + "".join(out) + "</div>"
 
 
@@ -613,8 +468,7 @@ def svc_tiles(root):
         chips = "".join(f'<li><a href="{svc_href(root, s, h)}">{t}</a></li>'
                         for t, h, _ in s["subs"] if t != "Questions fréquentes")
         new = '<span class="badge-new">Nouveau</span>' if s.get("new") else ""
-        th = CARD_THEMES.get(s["path"])
-        out.append(f"""<article class="svc-tile reveal d{i % 4}{f' th-{th}' if th else ''}" data-profiles="{SVC_PROFILES.get(s['path'], '')}">
+        out.append(f"""<article class="svc-tile reveal d{i % 4}" data-profiles="{SVC_PROFILES.get(s['path'], '')}">
   <a class="svc-tile-img" href="{root}{s['path']}" tabindex="-1" aria-hidden="true"><img src="{root}assets/img/{s['img']}" alt="" loading="lazy" style="object-position:{s.get('pos', '50% 50%')}">{new}</a>
   <div class="svc-tile-body">
     <span class="svc-uni">{UNIVERSES[s['uni']]['label']}</span>
@@ -703,79 +557,8 @@ def svc_catalog(root):
 # --------------------------------------------------------------------------
 # Tunnel de conversion « Rendez-vous express » (3 étapes)
 # --------------------------------------------------------------------------
-AGES = [("bebe", "child", "Bébé", "0 – 2 ans"), ("enfant", "users", "Enfant", "3 – 11 ans"),
-        ("ado", "spark", "Adolescent", "12 – 17 ans"), ("adulte", "user", "Adulte", "18 – 64 ans"),
-        ("senior", "leaf", "Senior", "65 ans et +")]
-MOTIFS = [
-    ("Coliques, reflux, sommeil, dentition", "bebe", "homeopathie/enfant-et-adolescent/#bebe"),
-    ("Sommeil du tout-petit (0 – 3 ans)", "bebe enfant", "accompagnement-parental/sommeil-enfant-0-3-ans/"),
-    ("Allaitement", "bebe", "accompagnement-parental/allaitement/"),
-    ("Sommeil, digestion, fatigue de l’enfant", "enfant", "homeopathie/enfant-et-adolescent/#enfant"),
-    (("TDAH, opposition : programme pour les parents", "enfant ado", "accompagnement-parental/tdah-methode-barkley/") if BARKLEY_LIVE
-     else ("TDAH, concentration, agitation", "enfant ado adulte", "accompagnement-tdah/")),
-    ("Acné, confiance, émotions de l’ado", "ado", "homeopathie/enfant-et-adolescent/#ado"),
-    ("Otites, rhumes, infections ORL à répétition", "bebe enfant ado adulte senior", "homeopathie/orl-allergies-peau/#infections-orl"),
-    ("Eczéma, psoriasis, urticaire", "bebe enfant ado adulte senior", "homeopathie/orl-allergies-peau/#peau"),
-    ("Allergies, asthme, rhume des foins", "enfant ado adulte senior", "homeopathie/orl-allergies-peau/#allergies"),
-    ("Règles douloureuses, SOPK, endométriose", "ado adulte", "homeopathie/equilibre-feminin-et-hormonal/#cycles"),
-    ("Désir de grossesse, grossesse, post-partum", "adulte", "homeopathie/equilibre-feminin-et-hormonal/#fertilite"),
-    ("Ménopause, thyroïde", "adulte senior", "homeopathie/equilibre-feminin-et-hormonal/#menopause"),
-    ("Accompagnement pendant ou après un cancer", "ado adulte senior", "homeopathie/soins-support-oncologie/"),
-    ("Insomnie (TCC-i)", "ado adulte senior", "insomnie-tcc-i/"),
-    ("Stress, anxiété, fatigue chronique", "ado adulte senior", "homeopathie/#complementaires"),
-    ("Migraines, vertiges, troubles neurologiques", "adulte senior", "homeopathie/#complementaires"),
-    ("Urgence : fièvre, infection aiguë", "bebe enfant ado adulte senior", "tarifs-remboursements/"),
-    ("Autre motif", "bebe enfant ado adulte senior", ""),
-]
-
-
-def funnel(root, preset="", title="Trouvez le bon rendez-vous en 3 clics", compact=False, cab=""):
-    ages = "".join(f'<button type="button" class="fn-opt" data-age="{k}">{icon(ic)}<strong>{t}</strong><small>{r}</small></button>'
-                   for k, ic, t, r in AGES)
-    motifs = "".join(f'<button type="button" class="fn-opt fn-motif" data-ages="{a}" data-href="{h}">{t}</button>'
-                     for t, a, h in MOTIFS)
-    cabs = (f'<button type="button" class="fn-opt" data-cab="pully">{icon("pin")}<strong>Pully – Lausanne</strong><small>Lun, mar, mer, ven</small></button>'
-            f'<button type="button" class="fn-opt" data-cab="fribourg">{icon("pin")}<strong>Fribourg</strong><small>Tous les jeudis</small></button>'
-            f'<button type="button" class="fn-opt" data-cab="visio">{icon("video")}<strong>En visio</strong><small>Selon les circonstances</small></button>')
-    types = ('<button type="button" class="fn-opt fn-type" data-type="premiere"><strong>Première consultation</strong></button>'
-             '<button type="button" class="fn-opt fn-type" data-type="suivi"><strong>Consultation de suivi</strong></button>'
-             '<button type="button" class="fn-opt fn-type" data-type="urgence"><strong>Urgence homéo</strong></button>')
-    return f"""<div class="funnel{' compact' if compact else ''}" data-funnel data-preset="{preset}" data-cab-preset="{cab}" data-root="{root}" data-rdv="prendre-rdv/" data-phone="{PHONE}" data-tel="{PHONE_LINK}" data-wa="{WHATSAPP}" data-mail="{EMAIL}">
-  <div class="fn-head">
-    <span class="eyebrow">Rendez-vous express</span>
-    <h2 class="fn-title">{title}</h2>
-    <ol class="fn-progress" aria-hidden="true"><li class="on">Pour qui</li><li>Motif</li><li>Cabinet</li></ol>
-  </div>
-  <div class="fn-step" data-step="1">
-    <p class="fn-q">Pour qui est la consultation&nbsp;?</p>
-    <div class="fn-grid ages">{ages}</div>
-  </div>
-  <div class="fn-step" data-step="2" hidden>
-    <p class="fn-q">Pour quel motif&nbsp;?</p>
-    <div class="fn-grid motifs">{motifs}</div>
-  </div>
-  <div class="fn-step" data-step="3" hidden>
-    <p class="fn-q">Où souhaitez-vous consulter&nbsp;?</p>
-    <div class="fn-grid cabs">{cabs}</div>
-    <p class="fn-q fn-q2">Type de rendez-vous</p>
-    <div class="fn-grid types">{types}</div>
-  </div>
-  <div class="fn-step fn-result" data-step="4" hidden>
-    <div class="fn-summary"></div>
-    <div class="btn-row fn-actions"></div>
-    <p class="small muted fn-note">Reconnue ASCA · RME · Visana · EGK — remboursé par la plupart des assurances complémentaires.</p>
-  </div>
-  <div class="fn-foot"><button type="button" class="fn-back" hidden>{icon("arrow-left")}Retour</button><span class="fn-count">Étape 1 sur 3</span></div>
-  <noscript><p>{rdv_btn(root)}</p></noscript>
-</div>"""
-
-
-def funnel_section(root, preset="", title="Trouvez le bon rendez-vous en 3 clics", cab=""):
-    return f"""<section class="section funnel-section" id="rdv-express">
-  <div class="container fn-wrap">
-    {funnel(root, preset, title, cab=cab)}
-  </div>
-</section>"""
+# Prise de rendez-vous : uniquement OneDoc (page « Prendre RDV » avec le calendrier).
+# Les anciens emplacements du tunnel « Rendez-vous express » affichent le bandeau d'appel à l'action.
 
 
 def lieux_block(root, uni="homeo"):
@@ -825,6 +608,16 @@ def header(root, nav, path=""):
     uni = NAV_UNIVERSE.get(nav)
     sig = f'<span class="brand-sig">{UNIVERSES[uni]["label"]}</span>' if uni else ""
     return f"""<a class="skip-link" href="#contenu">Aller au contenu</a>
+<div class="topbar">
+  <div class="container wide topbar-in">
+    <span class="tb-status"><i aria-hidden="true"></i>Cabinets à Pully – Lausanne &amp; Fribourg · visio possible</span>
+    <div class="tb-right">
+      <span class="tb-hours">Lun – ven · sur rendez-vous</span>
+      <a href="mailto:{EMAIL}">{EMAIL}</a>
+      <!--LANGSWITCH-->
+    </div>
+  </div>
+</div>
 <header class="site-header">
   <div class="container wide header-inner">
     <a class="brand" href="{root}" aria-label="HOMEOMED – Paola Orlando – accueil">
@@ -864,9 +657,8 @@ def header(root, nav, path=""):
       </div>
     </nav>
     <div class="btn-row header-actions">
-      <!--LANGSWITCH-->
-      <a class="header-phone" href="{PHONE_LINK}" aria-label="{PHONE}">{icon("phone")}<span>{PHONE}</span></a>
-      <a class="btn btn-primary btn-sm header-cta" href="{root}prendre-rdv/">{icon("calendar")}Prendre RDV</a>
+      <a class="header-phone" href="{PHONE_LINK}"><small>Secrétariat</small><b>{PHONE}</b></a>
+      <a class="btn btn-primary header-cta" href="{root}prendre-rdv/">{icon("calendar")}Prendre rendez-vous</a>
       <button class="menu-btn" type="button" aria-controls="menu" aria-expanded="false" aria-label="Ouvrir le menu"><span></span></button>
     </div>
   </div>
@@ -1065,8 +857,7 @@ def page(meta, body):
                       f'\n<link rel="alternate" hreflang="x-default" href="{SITE_URL}{fr_path}">')
     body = expand(conditionals(body), root)
     uni = NAV_UNIVERSE.get(meta.get("nav", ""))
-    theme = PAGE_THEMES.get(fr_path)
-    body_cls = " ".join(c for c in (f"u-{uni}" if uni else "", f"t-{theme}" if theme else "") if c)
+    body_cls = f"u-{uni}" if uni else ""
     out = f"""<!doctype html>
 <html lang="{'en' if lang == 'en' else 'fr-CH'}">
 <head>
@@ -1075,7 +866,7 @@ def page(meta, body):
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{canonical}">{alternates}
-<meta name="theme-color" content="#faf7f2">{robots}
+<meta name="theme-color" content="#0b365a">{robots}
 <meta property="og:type" content="website">
 <meta property="og:locale" content="{'en_GB' if lang == 'en' else 'fr_CH'}">
 <meta property="og:site_name" content="HOMEOMED – Paola Orlando">
@@ -1087,11 +878,8 @@ def page(meta, body):
 <link rel="icon" type="image/png" sizes="32x32" href="{root}assets/img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="{root}assets/img/favicon-192.png">
 <link rel="apple-touch-icon" href="{root}assets/img/apple-touch-icon.png">
-<link rel="preload" href="{root}assets/fonts/dm-serif-display-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="{root}assets/fonts/nunito-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{root}assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{root}assets/css/style.css">
-<link rel="stylesheet" href="{root}assets/css/themes.css">
-<link rel="stylesheet" href="{root}assets/css/univers.css">
 {schema}{faq_schema}
 </head>
 <body{f' class="{body_cls}"' if body_cls else ''}>
@@ -1194,7 +982,8 @@ def expand(body, root):
         if key == "rdv":
             return rdv_btn(root)
         if key.startswith("rdv:"):
-            return rdv_btn(root, key[4:])
+            label, _, cls = key[4:].partition("|")  # {{rdv:Libellé}} ou {{rdv:Libellé|classes}}
+            return rdv_btn(root, label, cls or "btn btn-primary")
         if key == "rdv-teal":
             return rdv_btn(root, cls="btn btn-teal")
         if key == "cta":
@@ -1206,17 +995,14 @@ def expand(body, root):
         if key.startswith("include:"):
             return (ROOT / "src" / "partials" / f"{key[8:]}.html").read_text(encoding="utf-8")
         if key.startswith("funnel-cab:"):
-            return funnel_section(root, "", "Votre rendez-vous à " + LOCATIONS[key[11:]]["short"], cab=key[11:])
+            return cta_band(root, "Votre rendez-vous à " + LOCATIONS[key[11:]]["short"],
+                            "Réservez en ligne 24h/24 sur OneDoc, ou appelez le secrétariat.")
         if key == "lieux" or key.startswith("lieux:"):
             return lieux_block(root, key.split(":", 1)[1] if ":" in key else "homeo")
         if key == "appel":
             return appel_btn(root)
         if key == "appel-light":
             return appel_btn(root, "btn btn-light btn-lg")
-        if key.startswith("deco:"):
-            return deco(key[5:])
-        if key == "drop-crown":
-            return drop_crown()
         if key == "universes":
             return universe_cards(root)
         if key == "parent-cards":
@@ -1224,11 +1010,9 @@ def expand(body, root):
         if key.startswith("services-ville:"):
             return services_ville(root, key[15:])
         if key == "funnel" or key.startswith("funnel:"):
-            preset = key.split(":", 1)[1] if ":" in key else ""
-            return funnel_section(root, preset)
+            return cta_band(root)
         if key == "funnel-card" or key.startswith("funnel-card:"):
-            preset = key.split(":", 1)[1] if ":" in key else ""
-            return funnel(root, preset, "Votre rendez-vous en 3 clics", compact=True)
+            return ""
         if key == "svc-filter":
             return svc_filter(root)
         if key == "svc-tiles":
@@ -1325,8 +1109,6 @@ def main():
         "".join(f"/{o} /{n} 301!\n/{o.rstrip('/')} /{n} 301!\n" for o, n in REDIRECTS.items()), encoding="utf-8")
     print(f"✓ {len(REDIRECTS)} redirections")
 
-    (ROOT / "assets" / "css" / "themes.css").write_text(themes_css() + "\n", encoding="utf-8")
-    print(f"✓ assets/css/themes.css ({len(THEMES)} univers de service)")
 
     today = date.today().isoformat()
     def alt(p):
