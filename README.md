@@ -120,3 +120,14 @@ Copies provisoires d’images existantes, à écraser par les photos définitive
 
 - Textes définitifs Sommeil 0–3 ans et Allaitement (textes actuels repris de l’ancienne page, sans homéopathie).
 - Landing pages publicitaires `/lp/…` (noindex, sans menu).
+
+### Améliorations de novembre 2026 (audit design)
+
+- **Accueil** : nouvel en-tête « La praticienne » (portrait de Paola, titre « Homéopathe diplômée fédérale à Pully, Lausanne et Fribourg »),
+  bandeau de garanties fixe (plus de défilement), note Google affichée une seule fois, encadré « Votre praticienne » sans photo en double.
+- **Prendre RDV** : en-tête réduit, prix / remboursement / annulation et les trois lieux affichés juste au-dessus du calendrier OneDoc.
+- **Mobile** : WhatsApp intégré à la barre du bas (Appeler · WhatsApp · Prendre RDV), plus de bulle flottante qui cache le texte.
+- **Accessibilité** : turquoise foncé `#257880` pour le texte (5,1:1), badges bleus plus foncés, cibles FR | EN et liens du pied de page agrandis,
+  niveaux de titres corrigés (pied de page en `h2`, bloc contact en `h3`), contenu toujours visible même avant l'animation d'apparition.
+- **SEO** : H1, titres et méta-descriptions de l'accueil, Homéopathie, Qui suis-je ? et Insomnie réécrits avec le métier et les villes (FR + EN).
+- **À vérifier par Paola** : l'adresse de Fribourg sur OneDoc (« Avenue de la Gare 1 » ?) doit être identique à celle du site (« Rue de la Banque 4 »).

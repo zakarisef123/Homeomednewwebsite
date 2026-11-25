@@ -187,6 +187,8 @@ EN = {
     "Témoignages": "Testimonials",
     "Ce que disent nos patients": "What our patients say",
     "Cabinets à Pully – Lausanne & Fribourg · visio possible": "Practices in Pully – Lausanne & Fribourg · video calls available",
+    "Cabinets à Pully – Lausanne & Fribourg": "Practices in Pully – Lausanne & Fribourg",
+    "· visio possible": "· video calls available",
     "Lun – ven · sur rendez-vous": "Mon – Fri · by appointment",
     "Secrétariat": "Reception",
     "Réservez en ligne 24h/24 sur OneDoc, ou appelez le secrétariat.": "Book online 24/7 on OneDoc, or call our reception.",
