@@ -226,22 +226,22 @@ def contact_block(root):
     <div class="contact-grid">
       <div class="contact-item reveal">
         <div class="icon-badge">{icon("phone")}</div>
-        <h4>Téléphone</h4>
+        <h3>Téléphone</h3>
         <p><a href="{PHONE_LINK}">{PHONE}</a></p>
       </div>
       <div class="contact-item reveal d1">
         <div class="icon-badge">{icon("mail")}</div>
-        <h4>E-mail</h4>
+        <h3>E-mail</h3>
         <p><a href="mailto:{EMAIL}">{EMAIL}</a></p>
       </div>
       <div class="contact-item reveal d2">
         <div class="icon-badge">{icon("pin")}</div>
-        <h4>Cabinets</h4>
+        <h3>Cabinets</h3>
         <p><a href="{root}cabinet-pully/">Place Neuve 1, 1009 Pully</a><br><a href="{root}cabinet-fribourg/">Centre ITS – Rue de la Banque 4, 1700 Fribourg</a></p>
       </div>
       <div class="contact-item reveal d3">
         <div class="icon-badge">{icon("clock")}</div>
-        <h4>Horaires</h4>
+        <h3>Horaires</h3>
         <p>Pully&nbsp;: lun – mer 8h – 18h, ven 8h – 13h<br>Fribourg&nbsp;: jeudi 9h – 18h<br><span class="muted">Sur rendez-vous uniquement</span></p>
       </div>
     </div>
@@ -610,7 +610,7 @@ def header(root, nav, path=""):
     return f"""<a class="skip-link" href="#contenu">Aller au contenu</a>
 <div class="topbar">
   <div class="container wide topbar-in">
-    <span class="tb-status"><i aria-hidden="true"></i>Cabinets à Pully – Lausanne &amp; Fribourg · visio possible</span>
+    <span class="tb-status"><i aria-hidden="true"></i>Cabinets à Pully – Lausanne &amp; Fribourg<span class="tb-extra">&nbsp;· visio possible</span></span>
     <div class="tb-right">
       <span class="tb-hours">Lun – ven · sur rendez-vous</span>
       <a href="mailto:{EMAIL}">{EMAIL}</a>
@@ -683,7 +683,7 @@ def footer(root, nav=""):
     homeo = "".join(f'<li><a href="{root}{p}">{t}</a></li>' for p, t, _, _ in SPECIALTIES)
     other = "".join(f'<li><a href="{root}{p}">{t}</a></li>' for p, t, _, _ in NEW_SERVICES)
     homeo_col = "" if uni in ("parent", "insomnie") else f"""<div>
-        <h4>Homéopathie</h4>
+        <h2 class="footer-h">Homéopathie</h2>
         <ul>{homeo}<li><a href="{root}homeopathie/">Toutes les spécialités</a></li></ul>
       </div>"""
     if uni in ("parent", "insomnie"):
@@ -708,11 +708,11 @@ def footer(root, nav=""):
       </div>
       {homeo_col}
       <div>
-        <h4>Accompagnement parental &amp; sommeil</h4>
+        <h2 class="footer-h">Accompagnement parental &amp; sommeil</h2>
         <ul><li><a href="{root}accompagnement-parental/">Accompagnement parental</a></li>{other}</ul>
       </div>
       <div>
-        <h4>Le cabinet</h4>
+        <h2 class="footer-h">Le cabinet</h2>
         <ul>
           <li><a href="{root}qui-suis-je/">Qui suis-je&nbsp;?</a></li>
           <li><a href="{root}tarifs-remboursements/">Tarifs &amp; remboursements</a></li>
@@ -723,7 +723,7 @@ def footer(root, nav=""):
         </ul>
       </div>
       <div>
-        <h4>Contact</h4>
+        <h2 class="footer-h">Contact</h2>
         <ul>
           <li><a href="{PHONE_LINK}">{PHONE}</a></li>
           <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
@@ -748,6 +748,7 @@ def footer(root, nav=""):
 </div>
 <div class="mobile-bar">
   <a class="btn btn-ghost" href="{PHONE_LINK}">{icon("phone")}Appeler</a>
+  <a class="btn btn-ghost btn-wa" href="{WHATSAPP}" target="_blank" rel="noopener" aria-label="Écrire sur WhatsApp">{icon("whatsapp")}</a>
   {mobile_cta}
 </div>"""
 

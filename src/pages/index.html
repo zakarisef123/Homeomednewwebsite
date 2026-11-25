@@ -1,28 +1,36 @@
-<!--meta {"title": "Homéopathe à Pully/Lausanne & Fribourg – HOMEOMED, Paola Orlando", "description": "Cabinet HOMEOMED à Pully/Lausanne et Fribourg : homéopathie classique (enfant, femme, ORL, allergies, peau, oncologie), accompagnement parental et TCC de l’insomnie. Paola Orlando, homéopathe diplômée fédérale.", "path": "", "nav": "home", "schema": true} -->
-<!-- 1. Héro : photo du cabinet plein écran sous voile bleu -->
-<section class="home-hero">
-  <img class="home-hero-bg" src="{{root}}assets/img/pully-3.webp" alt="" width="1400" height="1050" fetchpriority="high">
-  <div class="container">
-    <p class="home-kicker">Pully · Lausanne · Fribourg — Suisse</p>
-    <h1>Cabinet HOMEOMED <span>Votre santé, entre de bonnes mains.</span></h1>
-    <p class="home-lead">Homéopathie classique, accompagnement parental et thérapie de l’insomnie. Une prise en charge rigoureuse et personnalisée, en complément de votre suivi médical.</p>
-    <div class="btn-row">
-      {{rdv:Prendre rendez-vous}}
-      <a class="btn btn-outline-light" href="#soins">Découvrir nos soins</a>
+<!--meta {"title": "Homéopathe à Pully, Lausanne & Fribourg | HOMEOMED – Paola Orlando", "description": "Paola Orlando, homéopathe diplômée fédérale à Pully et Fribourg : bébés, enfants, femmes, adultes. Remboursé ASCA, RME. Réservez en ligne 24h/24.", "path": "", "nav": "home", "schema": true} -->
+<!-- 1. Héro « La praticienne » : Paola en premier -->
+<section class="hero-pro">
+  <div class="container hero-pro-in">
+    <div>
+      <p class="home-kicker">Pully · Lausanne · Fribourg · visio</p>
+      <h1>Homéopathe diplômée fédérale à <em>Pully</em>, Lausanne et <em>Fribourg</em></h1>
+      <p class="home-lead">Paola Orlando reçoit bébés, enfants, femmes et adultes en homéopathie classique, et propose aussi un accompagnement parental et une thérapie de l’insomnie (TCC-i). Toujours en complément de votre suivi médical.</p>
+      <div class="btn-row">
+        {{rdv:Prendre rendez-vous}}
+        <a class="btn btn-ghost" href="#soins">Voir les consultations</a>
+      </div>
+      <ul class="hero-proofs">
+        <li><a href="{{google-reviews}}" target="_blank" rel="noopener"><span class="stars" aria-hidden="true">★★★★★</span>4.9/5 · 17 avis Google</a></li>
+        <li>{{icon:shield}}Remboursé ASCA · RME</li>
+        <li>{{icon:globe}}FR · EN · IT</li>
+      </ul>
     </div>
-    <div class="home-hero-foot">
-      <a class="home-rating" href="{{google-reviews}}" target="_blank" rel="noopener"><span class="g">G</span><span><b>4.9 / 5</b> <span class="stars">★★★★★</span><small>17 avis Google</small></span></a>
-      <span class="home-scroll" aria-hidden="true"><i></i>Défiler</span>
-    </div>
+    <figure class="hero-photo">
+      <img src="{{root}}assets/img/paola-portrait.webp" alt="Paola Orlando dans son cabinet de Pully, devant ses diplômes" width="1100" height="1465" fetchpriority="high">
+      <figcaption><b>Paola Orlando</b><span>Homéopathe dipl. féd. · DU Gustave Roussy</span></figcaption>
+    </figure>
   </div>
 </section>
 
-<!-- 2. Bandeau défilant des garanties -->
-<div class="ticker" aria-label="Nos garanties">
-  <div class="ticker-track">
-    <ul><li>Homéopathe diplômée fédérale</li><li>Remboursé par les complémentaires</li><li>Reconnue ASCA · RME · Visana · EGK</li><li>Dès la naissance</li><li>Consultations FR · EN · IT</li><li>Au cabinet ou en visio</li><li>Réservation en ligne 24h/24</li><li>DU Gustave Roussy · Paris-Saclay</li></ul>
-    <ul aria-hidden="true"><li>Homéopathe diplômée fédérale</li><li>Remboursé par les complémentaires</li><li>Reconnue ASCA · RME · Visana · EGK</li><li>Dès la naissance</li><li>Consultations FR · EN · IT</li><li>Au cabinet ou en visio</li><li>Réservation en ligne 24h/24</li><li>DU Gustave Roussy · Paris-Saclay</li></ul>
-  </div>
+<!-- 2. Garanties (bandeau fixe) -->
+<div class="trust-strip" aria-label="Nos garanties">
+  <ul class="container">
+    <li>{{icon:check}}Diplôme fédéral d’homéopathe</li>
+    <li>{{icon:child}}Dès la naissance</li>
+    <li>{{icon:video}}Au cabinet ou en visio</li>
+    <li>{{icon:calendar}}Réservation en ligne 24h/24</li>
+  </ul>
 </div>
 
 <!-- 3. Le cabinet -->
@@ -31,10 +39,9 @@
     <div class="home-about-media reveal">
       <img class="main" src="{{root}}assets/img/pully-1.webp" alt="Salle de consultation du cabinet HOMEOMED à Pully" width="1400" height="1050" loading="lazy">
       <img class="side" src="{{root}}assets/img/pully-place.webp" alt="Place Neuve à Pully" width="1200" height="899" loading="lazy">
-      <a class="stat-card" href="{{google-reviews}}" target="_blank" rel="noopener"><b>4.9</b><span class="stars">★★★★★</span><span>17 avis Google</span></a>
     </div>
     <div class="reveal d1">
-      <span class="eyebrow">Qui sommes-nous</span>
+      <span class="eyebrow">Le cabinet</span>
       <h2 class="balance">Une médecine complémentaire, exigeante et humaine.</h2>
       <p class="lead">Le cabinet HOMEOMED est dirigé par Paola Orlando, homéopathe diplômée fédérale. Chaque prise en charge repose sur une anamnèse approfondie, un protocole individualisé et un suivi régulier.</p>
       <p class="muted">Nous travaillons en complément de votre médecin, pédiatre, gynécologue ou oncologue — jamais à leur place.</p>
@@ -91,19 +98,20 @@
 <!-- 7. Votre praticienne -->
 <section class="section bg-white">
   <div class="container">
-    <div class="team-band reveal">
-      <img src="{{root}}assets/img/paola-portrait.webp" alt="Paola Orlando, homéopathe diplômée fédérale" width="1100" height="1465" loading="lazy">
+    <div class="team-band no-photo reveal">
       <div class="team-in">
+        <div>
         <span class="eyebrow">Votre praticienne</span>
         <h2>Paola Orlando</h2>
         <p class="lead">Homéopathe diplômée fédérale, spécialisée en pédiatrie, santé hormonale de la femme et soins de support en oncologie.</p>
+        <a class="btn btn-light mt-1" href="{{root}}qui-suis-je/">Lire le parcours de Paola</a>
+        </div>
         <div class="creds">
           <div><b>Dipl. féd.</b><span>Diplôme fédéral suisse en homéopathie</span></div>
           <div><b>DU Oncologie</b><span>Gustave Roussy · Paris-Saclay</span></div>
           <div><b>Inde</b><span>Formation continue chaque année</span></div>
           <div><b>Micronutrition</b><span>DU Université de Dijon · SSM</span></div>
         </div>
-        <a class="btn btn-light" href="{{root}}qui-suis-je/">Son parcours</a>
       </div>
     </div>
   </div>

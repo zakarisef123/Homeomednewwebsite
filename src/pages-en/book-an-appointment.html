@@ -1,21 +1,29 @@
 <!--meta {"title": "Book an appointment – Homeopath in Pully/Lausanne & Fribourg | HOMEOMED", "description": "Book online 24/7 via OneDoc with Paola Orlando, homeopath in Pully/Lausanne and Fribourg, or by phone on +41 (0)21 566 18 15. Consultations in English.", "path": "en/book-an-appointment/", "nav": "rdv"} -->
 
-<section class="page-hero simple">
-  <div class="container narrow">
+<section class="rdv-hero">
+  <div class="container">
     <nav class="breadcrumbs" aria-label="Breadcrumb"><ol><li><a href="{{root}}">Home</a></li><li aria-current="page">Book an appointment</li></ol></nav>
-    <span class="eyebrow center">Book an appointment</span>
-    <h1 class="balance">In Pully/Lausanne <em>or</em> Fribourg</h1>
-    <p class="lead">Online via OneDoc, available 24/7 — quick, convenient and secure. Select the location that suits you in the calendar below.</p>
+    <h1 class="balance">Book an appointment with Paola Orlando</h1>
+    <p class="lead">Book online 24/7 in the OneDoc calendar below (it may be displayed in French) and choose the location that suits you.</p>
+    <ul class="rdv-facts">
+      <li>{{icon:clock}}First homeopathy consultation: 75–90 min · CHF 230</li>
+      <li>{{icon:shield}}Covered by most supplementary insurers</li>
+      <li>{{icon:info}}Free cancellation up to 24 h before</li>
+    </ul>
+    <div class="rdv-places">
+      <div class="rdv-place"><strong>Pully – Lausanne</strong><span>Monday, Tuesday, Wednesday, Friday<br>Place Neuve 1, 1st floor (Visilab building)</span><a href="{{root}}cabinet-pully/">Info &amp; directions</a></div>
+      <div class="rdv-place"><strong>Fribourg</strong><span>Every Thursday<br>Centre ITS, 3rd floor – Rue de la Banque 4</span><a href="{{root}}cabinet-fribourg/">Info &amp; directions</a></div>
+      <div class="rdv-place"><strong>By video call</strong><span>Depending on circumstances<br>Online sessions are paid in advance</span><a href="{{root}}faq/">Frequently asked questions</a></div>
+    </div>
   </div>
 </section>
 
 <section class="section tight" style="padding-top:0">
   <div class="container">
-
     <div id="calendrier" class="embed booking-embed" data-embed data-autoload data-src="{{onedoc}}" data-title="OneDoc booking calendar">
       <div class="embed-cta">
         <div class="icon-badge" style="margin-inline:auto">{{icon:calendar}}</div>
-        <h3>Booking calendar</h3>
+        <h2 class="embed-title">Booking calendar</h2>
         <p>The OneDoc calendar loads here (it may be displayed in French). If it doesn’t appear, open it in a new tab.</p>
         <div class="btn-row center">
           <button class="btn btn-primary" type="button">Show the calendar</button>
@@ -24,31 +32,6 @@
       </div>
     </div>
     <p class="center muted mt-1 small">Prefer to call? Phone our reception on <a href="{{phone-link}}">{{phone}}</a> or write to <a href="mailto:{{email}}">{{email}}</a>.</p>
-  </div>
-</section>
-
-<section class="section bg-white">
-  <div class="container">
-    <div class="grid grid-2">
-      <article class="card loc-card reveal">
-        <div class="img"><img src="{{root}}assets/img/pully-1.webp" alt="HOMEOMED practice in Pully" width="1400" height="1050" loading="lazy"></div>
-        <div class="body">
-          <span class="days">Monday, Tuesday, Wednesday, Friday</span>
-          <h3 class="mb-0">Pully – Lausanne</h3>
-          <address>Place Neuve 1, 1st floor (Visilab building), 1009 Pully</address>
-          <div class="btn-row"><a class="btn btn-ghost btn-sm" href="{{root}}cabinet-pully/">Info & directions</a></div>
-        </div>
-      </article>
-      <article class="card loc-card reveal d1">
-        <div class="img"><img src="{{root}}assets/img/fribourg-1.webp" alt="HOMEOMED practice in Fribourg" width="1400" height="1050" loading="lazy"></div>
-        <div class="body">
-          <span class="days">Every Thursday</span>
-          <h3 class="mb-0">Fribourg</h3>
-          <address>Centre ITS, 3rd floor – Rue de la Banque 4, 1700 Fribourg</address>
-          <div class="btn-row"><a class="btn btn-ghost btn-sm" href="{{root}}cabinet-fribourg/">Info & directions</a></div>
-        </div>
-      </article>
-    </div>
     <div class="mt-3">{{disclaimer}}</div>
   </div>
 </section>
